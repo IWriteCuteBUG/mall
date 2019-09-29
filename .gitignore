@@ -1,3 +1,15 @@
+#idea
+.idea/
+target/
+*.iml
+.gitignore
+*.cmd
+mvnw
+
+#maven
+.mvn/
+
+
 # Compiled class file
 *.class
 
