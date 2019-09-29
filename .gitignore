@@ -7,7 +7,6 @@ target/
 *.iml
 mvnw
 *.cmd
-.git/
 
 # Compiled class file
 *.class
