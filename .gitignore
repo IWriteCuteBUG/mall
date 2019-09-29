@@ -1,5 +1,4 @@
 #idea
-.idea/
 target/
 .gitignore
 .mvn/
