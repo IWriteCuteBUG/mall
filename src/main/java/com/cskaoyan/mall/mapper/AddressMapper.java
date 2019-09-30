@@ -2,8 +2,9 @@ package com.cskaoyan.mall.mapper;
 
 import com.cskaoyan.mall.bean.Address;
 import com.cskaoyan.mall.bean.AddressExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface AddressMapper {
     long countByExample(AddressExample example);

@@ -2,8 +2,9 @@ package com.cskaoyan.mall.mapper;
 
 import com.cskaoyan.mall.bean.UserFormid;
 import com.cskaoyan.mall.bean.UserFormidExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface UserFormidMapper {
     long countByExample(UserFormidExample example);

@@ -2,8 +2,9 @@ package com.cskaoyan.mall.mapper;
 
 import com.cskaoyan.mall.bean.System;
 import com.cskaoyan.mall.bean.SystemExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface SystemMapper {
     long countByExample(SystemExample example);

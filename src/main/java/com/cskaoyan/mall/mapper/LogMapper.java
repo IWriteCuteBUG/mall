@@ -2,8 +2,9 @@ package com.cskaoyan.mall.mapper;
 
 import com.cskaoyan.mall.bean.Log;
 import com.cskaoyan.mall.bean.LogExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface LogMapper {
     long countByExample(LogExample example);

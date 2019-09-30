@@ -2,8 +2,9 @@ package com.cskaoyan.mall.mapper;
 
 import com.cskaoyan.mall.bean.Feedback;
 import com.cskaoyan.mall.bean.FeedbackExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface FeedbackMapper {
     long countByExample(FeedbackExample example);

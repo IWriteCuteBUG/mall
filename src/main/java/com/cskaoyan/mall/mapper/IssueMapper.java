@@ -2,8 +2,9 @@ package com.cskaoyan.mall.mapper;
 
 import com.cskaoyan.mall.bean.Issue;
 import com.cskaoyan.mall.bean.IssueExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface IssueMapper {
     long countByExample(IssueExample example);
