@@ -1,4 +1,4 @@
-package main.java.com.cskaoyan.mall.bean;
+package com.cskaoyan.mall.bean;
 
 public class cskaoyan_mall_region {
     /**

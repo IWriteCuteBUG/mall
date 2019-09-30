@@ -41,6 +41,6 @@ public class BaseRespVo<T> {
         BaseRespVo<InfoVo> baseRespVo = new BaseRespVo<>();
         baseRespVo.setData(infoVo);
         baseRespVo.setErrmsg("成功");
-        return null;
+        return baseRespVo;
     }
 }
