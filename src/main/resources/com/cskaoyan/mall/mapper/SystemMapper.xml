@@ -85,7 +85,7 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from cskaoyan_mall_system
     where id = #{id,jdbcType=INTEGER}
@@ -101,10 +101,10 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.cskaoyan.mall.bean.System">
-    insert into cskaoyan_mall_system (id, key_name, key_value, 
+    insert into cskaoyan_mall_system (id, key_name, key_value,
       add_time, update_time, deleted
       )
-    values (#{id,jdbcType=INTEGER}, #{keyName,jdbcType=VARCHAR}, #{keyValue,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=INTEGER}, #{keyName,jdbcType=VARCHAR}, #{keyValue,jdbcType=VARCHAR},
       #{addTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{deleted,jdbcType=BIT}
       )
   </insert>
@@ -224,5 +224,35 @@
       update_time = #{updateTime,jdbcType=TIMESTAMP},
       deleted = #{deleted,jdbcType=BIT}
     where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="queryMallConfigOfNameById" resultType="string">
+    select key_value from cskaoyan_mall_system where id = #{id}
+  </select>
+  <select id="queryMallConfigOfQQById" resultType="string">
+    select key_value from cskaoyan_mall_system where id = #{id}
+  </select>
+  <select id="queryMallConfigOfAdressById" resultType="string">
+    select key_value from cskaoyan_mall_system where id = #{id}
+  </select>
+
+  <select id="queryMallConfigOfPhoneById" resultType="string">
+    select key_value from cskaoyan_mall_system where id = #{id}
+  </select>
+
+  <update id="updateMallConfigOfQQ" parameterType="string">
+    update cskaoyan_mall_system set key_value = #{qq} where id = 8
+  </update>
+
+  <update id="updateMallConfigOfName" parameterType="string">
+    update cskaoyan_mall_system set key_value = #{name} where id = 6
+  </update>
+
+  <update id="updateMallConfigOfPhone" parameterType="string">
+    update cskaoyan_mall_system set key_value = #{phone} where id = 12
+  </update>
+
+  <update id="updateMallConfigOfAdress" parameterType="string">
+    update cskaoyan_mall_system set key_value = #{adress} where id = 14
   </update>
 </mapper>
