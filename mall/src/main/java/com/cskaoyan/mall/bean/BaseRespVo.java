@@ -35,4 +35,10 @@ public class BaseRespVo<T> {
         baseRespVo.setErrmsg("成功");
         return baseRespVo;
     }
+    public static BaseRespVo info(InfoVo infoVo) {
+        BaseRespVo<InfoVo> baseRespVo = new BaseRespVo<>();
+        baseRespVo.setData(infoVo);
+        baseRespVo.setErrmsg("成功");
+        return baseRespVo;
+    }
 }
