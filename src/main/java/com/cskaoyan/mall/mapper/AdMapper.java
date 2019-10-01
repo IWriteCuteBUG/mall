@@ -4,6 +4,7 @@ import com.cskaoyan.mall.bean.Ad;
 import com.cskaoyan.mall.bean.AdExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 
 public interface AdMapper {
     long countByExample(AdExample example);
@@ -27,4 +28,7 @@ public interface AdMapper {
     int updateByPrimaryKeySelective(Ad record);
 
     int updateByPrimaryKey(Ad record);
+
+    @Select("select id,name,link,url,position,content,enabled,add_time,update_time,deleted from cskaoyan_mall_ad")
+    List<Ad> queryAds();
 }

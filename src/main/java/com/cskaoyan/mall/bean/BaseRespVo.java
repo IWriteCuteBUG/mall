@@ -1,10 +1,14 @@
 package com.cskaoyan.mall.bean;
 
+import com.cskaoyan.mall.vo.extensionvo.AdvertList;
+
 public class BaseRespVo<T> {
 
     private T data;
     private String errmsg;
     private int errno;
+
+
 
     public T getData() {
         return data;
@@ -40,6 +44,13 @@ public class BaseRespVo<T> {
     public static BaseRespVo info(InfoVo infoVo) {
         BaseRespVo<InfoVo> baseRespVo = new BaseRespVo<>();
         baseRespVo.setData(infoVo);
+        baseRespVo.setErrmsg("成功");
+        return baseRespVo;
+    }
+
+    public static BaseRespVo baseRespOk(Object object) {
+        BaseRespVo<Object> baseRespVo = new BaseRespVo<>();
+        baseRespVo.setData(object);
         baseRespVo.setErrmsg("成功");
         return baseRespVo;
     }
