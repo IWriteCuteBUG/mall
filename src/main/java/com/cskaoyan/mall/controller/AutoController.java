@@ -119,13 +119,5 @@ public class AutoController {
         return objectBaseRespVo;
     }
 
-    /*@RequestMapping(value = "/admin/stat/user", method = {RequestMethod.GET})
-    public BaseRespVo countUserLoginInfo(){
-        ConfigerVoWx configerVoWx = configerService.queryMallConfigWx();
-        BaseRespVo<Object> objectBaseRespVo = new BaseRespVo<>();
-        objectBaseRespVo.setErrno(0);
-        objectBaseRespVo.setData(configerVoWx);
-        objectBaseRespVo.setErrmsg("成功");
-        return objectBaseRespVo;
-    }*/
+
 }

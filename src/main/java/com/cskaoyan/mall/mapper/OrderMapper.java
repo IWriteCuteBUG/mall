@@ -27,4 +27,14 @@ public interface OrderMapper {
     int updateByPrimaryKeySelective(Order record);
 
     int updateByPrimaryKey(Order record);
+
+    List<String> queryDateOfOrderCreate();
+
+    int countOrderOrdersByDate(@Param("orders") String s);
+
+    int countOrderCustomersByDate(@Param("customer") String s);
+
+    int countOrderAmountByDate(@Param("amount") String s);
+
+    int queryOrdersTotal();
 }

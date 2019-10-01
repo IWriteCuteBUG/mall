@@ -27,4 +27,11 @@ public interface UserMapper {
     int updateByPrimaryKeySelective(User record);
 
     int updateByPrimaryKey(User record);
+
+    List<String> queryDateOfUserLogin();
+
+    int countUsersOfDay(@Param("logindate") String logindate);
+
+    int queryUserTotal();
+
 }
