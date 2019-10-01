@@ -1,4 +1,4 @@
-package com.cskaoyan.mall.vo.uservo;
+package com.cskaoyan.mall.vo.voSJB;
 
 import com.cskaoyan.mall.bean.User;
 
@@ -11,6 +11,9 @@ public class DataForUserListVo {
     public DataForUserListVo(int total, List<User> items) {
         this.total = total;
         this.items = items;
+    }
+
+    public DataForUserListVo() {
     }
 
     @Override

@@ -1,4 +1,4 @@
-package com.cskaoyan.mall.vo.uservo;
+package com.cskaoyan.mall.vo.voSJB;
 
 public class UserListVo {
     private int errno;
