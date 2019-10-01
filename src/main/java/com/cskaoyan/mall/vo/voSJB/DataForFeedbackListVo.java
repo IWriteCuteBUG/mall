@@ -6,7 +6,7 @@ import java.util.List;
 
 public class DataForFeedbackListVo {
     private int total;//total代表收藏总数
-    private List<Feedback> items;
+    private List<FeedbackReplaceVo> items;
 
     public int getTotal() {
         return total;
@@ -16,11 +16,11 @@ public class DataForFeedbackListVo {
         this.total = total;
     }
 
-    public List<Feedback> getItems() {
+    public List<FeedbackReplaceVo> getItems() {
         return items;
     }
 
-    public void setItems(List<Feedback> items) {
+    public void setItems(List<FeedbackReplaceVo> items) {
         this.items = items;
     }
 
@@ -32,7 +32,7 @@ public class DataForFeedbackListVo {
                 '}';
     }
 
-    public DataForFeedbackListVo(int total, List<Feedback> items) {
+    public DataForFeedbackListVo(int total, List<FeedbackReplaceVo> items) {
         this.total = total;
         this.items = items;
     }

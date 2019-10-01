@@ -18,4 +18,5 @@ public class AddressController {
     public AddressListVo list(int page, int limit, String name, String userId, String sort, String order){
         AddressListAndTotalVo vo = addressService.queryAddressesByPage(page, limit, name, userId, sort, order);
         return new AddressListVo(0, new DataForAddressListVo(vo.getTotal(), vo.getAddressList()), "no error");
-    }}
+    }
+}

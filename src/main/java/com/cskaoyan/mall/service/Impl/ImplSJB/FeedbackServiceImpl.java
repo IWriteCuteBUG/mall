@@ -5,10 +5,13 @@ import com.cskaoyan.mall.bean.FeedbackExample;
 import com.cskaoyan.mall.mapper.FeedbackMapper;
 import com.cskaoyan.mall.service.serviceSJB.FeedbackService;
 import com.cskaoyan.mall.vo.voSJB.FeedbackListAndTotalVo;
+import com.cskaoyan.mall.vo.voSJB.FeedbackReplaceVo;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -38,8 +41,31 @@ public class FeedbackServiceImpl implements FeedbackService {
             criteria.andUsernameLike("%" + username + "%");
         }
         feedbackList = feedbackMapper.selectByExample(example);
+        List<FeedbackReplaceVo> feedbackReplaceVoList = new ArrayList<>();
+        for (Feedback feedback : feedbackList) {
+            FeedbackReplaceVo replaceVo = new FeedbackReplaceVo();
+            String[] urls = feedback.getPicUrls().split(",");
+            System.out.println(urls);
+            FeedbackServiceImpl.feedbackReplace(replaceVo, feedback);
+            replaceVo.setPicUrls(urls);
+            feedbackReplaceVoList.add(replaceVo);
+        }
         total = (int) feedbackMapper.countByExample(example);
-        return new FeedbackListAndTotalVo(feedbackList, total);
+        return new FeedbackListAndTotalVo(feedbackReplaceVoList, total);
+    }
+
+    public static void feedbackReplace(FeedbackReplaceVo replaceVo, Feedback feedback){
+        replaceVo.setId(feedback.getId());
+        replaceVo.setUserId(feedback.getUserId());
+        replaceVo.setUsername(feedback.getUsername());
+        replaceVo.setMobile(feedback.getMobile());
+        replaceVo.setFeedType(feedback.getFeedType());
+        replaceVo.setContent(feedback.getContent());
+        replaceVo.setStatus(feedback.getStatus());
+        replaceVo.setHasPicture(feedback.getHasPicture());
+        replaceVo.setAddTime(feedback.getAddTime());
+        replaceVo.setUpdateTime(feedback.getUpdateTime());
+        replaceVo.setDeleted(feedback.getDeleted());
     }
 
     @Override
