@@ -2,8 +2,10 @@
 .idea/
 target/
 
-.gitignore
+#maven
 .mvn/
+
+.gitignore
 *.md
 *.iml
 mvnw

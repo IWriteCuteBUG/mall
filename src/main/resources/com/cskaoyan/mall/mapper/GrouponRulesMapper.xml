@@ -73,6 +73,7 @@
   </sql>
   <sql id="Base_Column_List">
     id, goods_id, goods_name, pic_url, discount, discount_member, add_time, update_time,
+    expire_time, deleted
   </sql>
   <select id="selectByExample" parameterType="com.cskaoyan.mall.bean.GrouponRulesExample" resultMap="BaseResultMap">
     select
@@ -114,7 +115,7 @@
       #{addTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{expireTime,jdbcType=TIMESTAMP},
       #{deleted,jdbcType=BIT})
   </insert>
-  <insert id="insertSelective" parameterType="com.cskaoyan.mall.bean.GrouponRules" keyColumn="id" useGeneratedKeys="true" keyProperty="id" >
+  <insert id="insertSelective" parameterType="com.cskaoyan.mall.bean.GrouponRules" keyColumn="ID" useGeneratedKeys="true" keyProperty="id" >
     insert into cskaoyan_mall_groupon_rules
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">

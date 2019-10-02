@@ -383,4 +383,16 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
 
+  <select id="queryDateOfUserLogin" resultType="string">
+    select last_login_time from cskaoyan_mall_user
+  </select>
+
+  <select id="countUsersOfDay" resultType="int" parameterType="string">
+    select count(id) from  cskaoyan_mall_user where last_login_time like "%"#{logindate}"%"
+  </select>
+
+  <select id="queryUserTotal" resultType="int">
+    select count(id) from  cskaoyan_mall_user
+  </select>
+
 </mapper>

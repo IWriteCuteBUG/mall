@@ -31,11 +31,8 @@ public class ExtensionGrouponServiceImpl implements ExtensionGrouponService {
         GrouponRulesExample.Criteria criteria = grouponRulesExample.createCriteria();
         if (goodsId != null) {
             criteria.andGoodsIdEqualTo(goodsId);
-            grouponRules = grouponRulesMapper.selectByExample(grouponRulesExample);
         }
-        if (goodsId == null) {
-            grouponRules = grouponRulesMapper.selectByExample(grouponRulesExample);
-        }
+        grouponRules = grouponRulesMapper.selectByExample(grouponRulesExample);
         PageInfo<GrouponRules> pageInfo = new PageInfo<>(grouponRules);
         int total = (int) pageInfo.getTotal();
         AdvertList advertList = new AdvertList();
