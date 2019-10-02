@@ -10,6 +10,7 @@
     <result column="content" jdbcType="VARCHAR" property="content" />
     <result column="status" jdbcType="INTEGER" property="status" />
     <result column="has_picture" jdbcType="BIT" property="hasPicture" />
+    <!--注意测试-->
     <result column="pic_urls" jdbcType="VARCHAR" property="picUrls" />
     <result column="add_time" jdbcType="TIMESTAMP" property="addTime" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
@@ -74,7 +75,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, user_id, username, mobile, feed_type, content, status, has_picture, pic_urls, 
+    id, user_id, username, mobile, feed_type, content, status, has_picture, pic_urls,
     add_time, update_time, deleted
   </sql>
   <select id="selectByExample" parameterType="com.cskaoyan.mall.bean.FeedbackExample" resultMap="BaseResultMap">
@@ -92,7 +93,7 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from cskaoyan_mall_feedback
     where id = #{id,jdbcType=INTEGER}
@@ -108,14 +109,14 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.cskaoyan.mall.bean.Feedback">
-    insert into cskaoyan_mall_feedback (id, user_id, username, 
-      mobile, feed_type, content, 
-      status, has_picture, pic_urls, 
+    insert into cskaoyan_mall_feedback (id, user_id, username,
+      mobile, feed_type, content,
+      status, has_picture, pic_urls,
       add_time, update_time, deleted
       )
-    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, 
-      #{mobile,jdbcType=VARCHAR}, #{feedType,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, 
-      #{status,jdbcType=INTEGER}, #{hasPicture,jdbcType=BIT}, #{picUrls,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR},
+      #{mobile,jdbcType=VARCHAR}, #{feedType,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR},
+      #{status,jdbcType=INTEGER}, #{hasPicture,jdbcType=BIT}, #{picUrls,jdbcType=VARCHAR},
       #{addTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{deleted,jdbcType=BIT}
       )
   </insert>

@@ -2,6 +2,8 @@ package com.cskaoyan.mall.controller;
 
 import com.cskaoyan.mall.bean.BaseRespVo;
 import com.cskaoyan.mall.bean.InfoVo;
+import com.cskaoyan.mall.vo.voSJB.DashBoardDataVo;
+import com.cskaoyan.mall.vo.voSJB.DashBoardVo;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -28,5 +30,18 @@ public class AutoController {
         infoVo.setRoles(roles);
         BaseRespVo info = BaseRespVo.info(infoVo);
         return info;
+    }
+
+    @RequestMapping("admin/dashboard")
+    public DashBoardVo dashboard() {
+        DashBoardVo dashBoardVo = new DashBoardVo();
+        DashBoardDataVo dashBoardDataVo = new DashBoardDataVo();
+        dashBoardDataVo.setOrderTotal(100);
+        dashBoardDataVo.setProductTotal(200);
+        dashBoardDataVo.setUserTotal(300);
+        dashBoardVo.setDataVo(dashBoardDataVo);
+        dashBoardVo.setErrno(0);
+        dashBoardVo.setErrmsg("no error");
+        return dashBoardVo;
     }
 }

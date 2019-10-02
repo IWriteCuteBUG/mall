@@ -1,10 +1,9 @@
-package com.cskaoyan.mall.bean;
+package com.cskaoyan.mall.vo.voSJB;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
+import java.util.Arrays;
 import java.util.Date;
 
-public class Feedback {
+public class FeedbackReplaceVo {
     private Integer id;
 
     private Integer userId;
@@ -23,12 +22,29 @@ public class Feedback {
 
     private String[] picUrls;
 
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date addTime;
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+
     private Date updateTime;
 
     private Boolean deleted;
+
+    @Override
+    public String toString() {
+        return "FeedbackReplaceVo{" +
+                "id=" + id +
+                ", userId=" + userId +
+                ", username='" + username + '\'' +
+                ", mobile='" + mobile + '\'' +
+                ", feedType='" + feedType + '\'' +
+                ", content='" + content + '\'' +
+                ", status=" + status +
+                ", hasPicture=" + hasPicture +
+                ", picUrls=" + Arrays.toString(picUrls) +
+                ", addTime=" + addTime +
+                ", updateTime=" + updateTime +
+                ", deleted=" + deleted +
+                '}';
+    }
 
     public Integer getId() {
         return id;
@@ -51,7 +67,7 @@ public class Feedback {
     }
 
     public void setUsername(String username) {
-        this.username = username == null ? null : username.trim();
+        this.username = username;
     }
 
     public String getMobile() {
@@ -59,7 +75,7 @@ public class Feedback {
     }
 
     public void setMobile(String mobile) {
-        this.mobile = mobile == null ? null : mobile.trim();
+        this.mobile = mobile;
     }
 
     public String getFeedType() {
@@ -67,7 +83,7 @@ public class Feedback {
     }
 
     public void setFeedType(String feedType) {
-        this.feedType = feedType == null ? null : feedType.trim();
+        this.feedType = feedType;
     }
 
     public String getContent() {
@@ -75,7 +91,7 @@ public class Feedback {
     }
 
     public void setContent(String content) {
-        this.content = content == null ? null : content.trim();
+        this.content = content;
     }
 
     public Integer getStatus() {
@@ -124,5 +140,23 @@ public class Feedback {
 
     public void setDeleted(Boolean deleted) {
         this.deleted = deleted;
+    }
+
+    public FeedbackReplaceVo(Integer id, Integer userId, String username, String mobile, String feedType, String content, Integer status, Boolean hasPicture, String[] picUrls, Date addTime, Date updateTime, Boolean deleted) {
+        this.id = id;
+        this.userId = userId;
+        this.username = username;
+        this.mobile = mobile;
+        this.feedType = feedType;
+        this.content = content;
+        this.status = status;
+        this.hasPicture = hasPicture;
+        this.picUrls = picUrls;
+        this.addTime = addTime;
+        this.updateTime = updateTime;
+        this.deleted = deleted;
+    }
+
+    public FeedbackReplaceVo() {
     }
 }
