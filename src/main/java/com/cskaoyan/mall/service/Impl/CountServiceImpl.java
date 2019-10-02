@@ -1,6 +1,5 @@
 package com.cskaoyan.mall.service.Impl;
 
-import com.cskaoyan.mall.bean.Goods;
 import com.cskaoyan.mall.mapper.*;
 import com.cskaoyan.mall.service.CountService;
 import com.cskaoyan.mall.vo.tvo.*;
@@ -9,9 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class CountServiceImpl implements CountService {
