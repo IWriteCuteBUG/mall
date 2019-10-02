@@ -3,6 +3,8 @@ package com.cskaoyan.mall.mapper;
 import com.cskaoyan.mall.bean.Goods;
 import com.cskaoyan.mall.bean.GoodsExample;
 import java.util.List;
+
+import com.cskaoyan.mall.bean.Goodss;
 import org.apache.ibatis.annotations.Param;
 
 public interface GoodsMapper {
@@ -33,4 +35,6 @@ public interface GoodsMapper {
     int updateByPrimaryKeyWithBLOBs(Goods record);
 
     int updateByPrimaryKey(Goods record);
+
+    Goodss queryGoodsContainsGallery(@Param("goodsId") Integer goodsId);
 }

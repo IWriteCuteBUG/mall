@@ -85,8 +85,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, goods_sn, name, category_id, brand_id, gallery, keywords, brief, is_on_sale, 
-    sort_order, pic_url, share_url, is_new, is_hot, unit, counter_price, retail_price, 
+    id, goods_sn, name, category_id, brand_id, gallery, keywords, brief, is_on_sale,
+    sort_order, pic_url, share_url, is_new, is_hot, unit, counter_price, retail_price,
     add_time, update_time, deleted
   </sql>
   <sql id="Blob_Column_List">
@@ -123,7 +123,7 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
-    select 
+    select
     <include refid="Base_Column_List" />
     ,
     <include refid="Blob_Column_List" />
@@ -141,19 +141,19 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.cskaoyan.mall.bean.Goods">
-    insert into cskaoyan_mall_goods (id, goods_sn, name, 
-      category_id, brand_id, gallery, 
-      keywords, brief, is_on_sale, 
-      sort_order, pic_url, share_url, 
-      is_new, is_hot, unit, counter_price, 
-      retail_price, add_time, update_time, 
+    insert into cskaoyan_mall_goods (id, goods_sn, name,
+      category_id, brand_id, gallery,
+      keywords, brief, is_on_sale,
+      sort_order, pic_url, share_url,
+      is_new, is_hot, unit, counter_price,
+      retail_price, add_time, update_time,
       deleted, detail)
-    values (#{id,jdbcType=INTEGER}, #{goodsSn,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
-      #{categoryId,jdbcType=INTEGER}, #{brandId,jdbcType=INTEGER}, #{gallery,jdbcType=VARCHAR}, 
-      #{keywords,jdbcType=VARCHAR}, #{brief,jdbcType=VARCHAR}, #{isOnSale,jdbcType=BIT}, 
-      #{sortOrder,jdbcType=SMALLINT}, #{picUrl,jdbcType=VARCHAR}, #{shareUrl,jdbcType=VARCHAR}, 
-      #{isNew,jdbcType=BIT}, #{isHot,jdbcType=BIT}, #{unit,jdbcType=VARCHAR}, #{counterPrice,jdbcType=DECIMAL}, 
-      #{retailPrice,jdbcType=DECIMAL}, #{addTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
+    values (#{id,jdbcType=INTEGER}, #{goodsSn,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR},
+      #{categoryId,jdbcType=INTEGER}, #{brandId,jdbcType=INTEGER}, #{gallery,jdbcType=VARCHAR},
+      #{keywords,jdbcType=VARCHAR}, #{brief,jdbcType=VARCHAR}, #{isOnSale,jdbcType=BIT},
+      #{sortOrder,jdbcType=SMALLINT}, #{picUrl,jdbcType=VARCHAR}, #{shareUrl,jdbcType=VARCHAR},
+      #{isNew,jdbcType=BIT}, #{isHot,jdbcType=BIT}, #{unit,jdbcType=VARCHAR}, #{counterPrice,jdbcType=DECIMAL},
+      #{retailPrice,jdbcType=DECIMAL}, #{addTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP},
       #{deleted,jdbcType=BIT}, #{detail,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.cskaoyan.mall.bean.Goods">
@@ -532,4 +532,33 @@
       deleted = #{deleted,jdbcType=BIT}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <resultMap id="GrouponsResultMap" type="com.cskaoyan.mall.bean.Goodss">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="goods_sn" jdbcType="VARCHAR" property="goodsSn" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="category_id" jdbcType="INTEGER" property="categoryId" />
+    <result column="brand_id" jdbcType="INTEGER" property="brandId" />
+    <result column="gallery" jdbcType="VARCHAR" property="gallery" typeHandler="com.cskaoyan.mall.handler.String2ArrayHandler" />
+    <result column="keywords" jdbcType="VARCHAR" property="keywords" />
+    <result column="brief" jdbcType="VARCHAR" property="brief" />
+    <result column="is_on_sale" jdbcType="BIT" property="isOnSale" />
+    <result column="sort_order" jdbcType="SMALLINT" property="sortOrder" />
+    <result column="pic_url" jdbcType="VARCHAR" property="picUrl" />
+    <result column="share_url" jdbcType="VARCHAR" property="shareUrl" />
+    <result column="is_new" jdbcType="BIT" property="isisNew" />
+    <result column="is_hot" jdbcType="BIT" property="isisHot" />
+    <result column="unit" jdbcType="VARCHAR" property="unit" />
+    <result column="counter_price" jdbcType="DECIMAL" property="counterPrice" />
+    <result column="retail_price" jdbcType="DECIMAL" property="retailPrice" />
+    <result column="add_time" jdbcType="TIMESTAMP" property="addTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="deleted" jdbcType="BIT" property="deleted" />
+  </resultMap>
+  <resultMap extends="GrouponsResultMap" id="GrouponsResultMapss" type="com.cskaoyan.mall.bean.Goodss">
+    <result column="detail" jdbcType="LONGVARCHAR" property="detail" />
+  </resultMap>
+  <select id="queryGoodsContainsGallery" resultMap="GrouponsResultMap" parameterType="Integer" resultType="com.cskaoyan.mall.bean.Goodss">
+    select <include refid="Base_Column_List"/>,<include refid="Blob_Column_List"/> from cskaoyan_mall_goods where id = #{goodsId}
+  </select>
 </mapper>
