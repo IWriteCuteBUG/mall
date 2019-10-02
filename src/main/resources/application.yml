@@ -16,7 +16,7 @@ logging:
       cskaoyan:
         mall:
           mapper: debug
-mybatis:
-  type-handlers-package: com.cskaoyan.mall.mybatis
 pagehelper:
   helper-dialect: mysql
+mybatis:
+  type-handlers-package: com.cskaoyan.mall.mybatis

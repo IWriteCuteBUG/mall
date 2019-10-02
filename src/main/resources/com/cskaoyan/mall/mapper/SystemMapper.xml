@@ -85,7 +85,7 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from cskaoyan_mall_system
     where id = #{id,jdbcType=INTEGER}
@@ -101,10 +101,10 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.cskaoyan.mall.bean.System">
-    insert into cskaoyan_mall_system (id, key_name, key_value, 
+    insert into cskaoyan_mall_system (id, key_name, key_value,
       add_time, update_time, deleted
       )
-    values (#{id,jdbcType=INTEGER}, #{keyName,jdbcType=VARCHAR}, #{keyValue,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=INTEGER}, #{keyName,jdbcType=VARCHAR}, #{keyValue,jdbcType=VARCHAR},
       #{addTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{deleted,jdbcType=BIT}
       )
   </insert>
@@ -224,5 +224,131 @@
       update_time = #{updateTime,jdbcType=TIMESTAMP},
       deleted = #{deleted,jdbcType=BIT}
     where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="queryMallConfigOfNameById" resultType="string">
+    select key_value from cskaoyan_mall_system where id = #{id}
+  </select>
+  <select id="queryMallConfigOfQQById" resultType="string">
+    select key_value from cskaoyan_mall_system where id = #{id}
+  </select>
+  <select id="queryMallConfigOfAdressById" resultType="string">
+    select key_value from cskaoyan_mall_system where id = #{id}
+  </select>
+
+  <select id="queryMallConfigOfPhoneById" resultType="string">
+    select key_value from cskaoyan_mall_system where id = #{id}
+  </select>
+
+  <update id="updateMallConfigOfQQ" parameterType="string">
+    update cskaoyan_mall_system set key_value = #{qq} where id = 8
+  </update>
+
+  <update id="updateMallConfigOfName" parameterType="string">
+    update cskaoyan_mall_system set key_value = #{name} where id = 6
+  </update>
+
+  <update id="updateMallConfigOfPhone" parameterType="string">
+    update cskaoyan_mall_system set key_value = #{phone} where id = 12
+  </update>
+
+  <update id="updateMallConfigOfAdress" parameterType="string">
+    update cskaoyan_mall_system set key_value = #{adress} where id = 14
+  </update>
+
+  <select id="queryLitemall_express_freight_min" resultType="string">
+    select key_value from cskaoyan_mall_system where id = #{id}
+  </select>
+
+  <select id="queryLitemall_express_freight_value" resultType="string">
+    select key_value from cskaoyan_mall_system where id = #{id}
+  </select>
+
+  <update id="updateMallConfigExpressForMin" parameterType="string">
+    update cskaoyan_mall_system set key_value = #{min} where id = 5
+  </update>
+
+  <update id="updateMallConfigExpressForValue" parameterType="string">
+    update cskaoyan_mall_system set key_value = #{value} where id = 7
+  </update>
+
+  <select id="queryMallConfigOfCommentById" resultType="string">
+    select key_value from cskaoyan_mall_system where id = #{id}
+  </select>
+
+  <select id="queryMallConfigOfUnpaidById" resultType="string">
+    select key_value from cskaoyan_mall_system where id = #{id}
+  </select>
+
+  <select id="queryMallConfigOfUnconfirmById" resultType="string">
+    select key_value from cskaoyan_mall_system where id = #{id}
+  </select>
+
+  <update id="updateMallConfigOrderOfComment" parameterType="string">
+    update cskaoyan_mall_system set key_value = #{comment} where id = 10
+  </update>
+
+  <update id="updateMallConfigOrderOfUnconfirm" parameterType="string">
+    update cskaoyan_mall_system set key_value = #{unconfirm} where id = 3
+  </update>
+
+  <update id="updateMallConfigOrderOfUnpaid" parameterType="string">
+    update cskaoyan_mall_system set key_value = #{unipaid} where id = 1
+  </update>
+
+  <select id="queryMallConfigWxOfNew" resultType="string">
+    select key_value from cskaoyan_mall_system where id = #{id}
+  </select>
+
+  <select id="queryMallConfigWxOfShare" resultType="string">
+    select key_value from cskaoyan_mall_system where id = #{id}
+  </select>
+
+  <select id="queryMallConfigWxOfHot" resultType="string">
+    select key_value from cskaoyan_mall_system where id = #{id}
+  </select>
+
+  <select id="queryMallConfigWxOfGoods" resultType="string">
+    select key_value from cskaoyan_mall_system where id = #{id}
+  </select>
+
+  <select id="queryMallConfigWxOfList" resultType="string">
+    select key_value from cskaoyan_mall_system where id = #{id}
+  </select>
+
+  <select id="queryMallConfigWxOfBrand" resultType="string">
+    select key_value from cskaoyan_mall_system where id = #{id}
+  </select>
+
+  <select id="queryMallConfigWxOfTopic" resultType="string">
+    select key_value from cskaoyan_mall_system where id = #{id}
+  </select>
+
+  <update id="updateMallConfigWxOfGoods" parameterType="string">
+    update cskaoyan_mall_system set key_value = #{goods} where id = 11
+  </update>
+
+  <update id="updateMallConfigWxOfList" parameterType="string">
+    update cskaoyan_mall_system set key_value = #{list} where id = 4
+  </update>
+
+  <update id="updateMallConfigWxOfBrand" parameterType="string">
+    update cskaoyan_mall_system set key_value = #{brand} where id = 15
+  </update>
+
+  <update id="updateMallConfigWxOfHot" parameterType="string">
+    update cskaoyan_mall_system set key_value = #{hot} where id = 9
+  </update>
+
+  <update id="updateMallConfigWxOfNew" parameterType="string">
+    update cskaoyan_mall_system set key_value = #{new} where id = 2
+  </update>
+
+  <update id="updateMallConfigWxOfTopic" parameterType="string">
+    update cskaoyan_mall_system set key_value = #{topic} where id = 16
+  </update>
+
+  <update id="updateMallConfigWxOfShare" parameterType="string">
+    update cskaoyan_mall_system set key_value = #{share} where id = 4
   </update>
 </mapper>
