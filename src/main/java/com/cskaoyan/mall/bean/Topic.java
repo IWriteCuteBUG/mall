@@ -18,7 +18,7 @@ public class Topic {
 
     private Integer sortOrder;
 
-    private String goods;
+    private String[] goods;
 
     private Date addTime;
 
@@ -84,12 +84,12 @@ public class Topic {
         this.sortOrder = sortOrder;
     }
 
-    public String getGoods() {
+    public String[] getGoods() {
         return goods;
     }
 
-    public void setGoods(String goods) {
-        this.goods = goods == null ? null : goods.trim();
+    public void setGoods(String[] goods) {
+        this.goods = goods;
     }
 
     public Date getAddTime() {

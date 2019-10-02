@@ -7,6 +7,8 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://localhost:3306/mymall?useUnicode=true&characterEncoding=utf-8
     type: com.alibaba.druid.pool.DruidDataSource
+  resources:
+    static-locations: file:C:/static
 logging:
   path: /spring/log
   level:
