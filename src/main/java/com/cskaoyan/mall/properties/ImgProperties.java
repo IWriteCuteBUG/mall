@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @ConfigurationProperties(prefix = "mall.http")
-@PropertySource(value = "advert.properties")
+@PropertySource(value = "classpath:advert.properties")
 public class ImgProperties {
     private String advert;
 

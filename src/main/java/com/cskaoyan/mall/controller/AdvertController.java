@@ -1,11 +1,12 @@
 package com.cskaoyan.mall.controller;
 
+import com.cskaoyan.mall.bean.Ad;
 import com.cskaoyan.mall.bean.BaseRespVo;
 import com.cskaoyan.mall.service.AdvertService;
 import com.cskaoyan.mall.vo.extensionvo.AdvertList;
-import com.cskaoyan.mall.vo.extensionvo.AdvertUploadPic;
-import com.cskaoyan.mall.vo.extensionvo.ForAdvert;
+import com.cskaoyan.mall.vo.extensionvo.FromAdvert;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,7 +23,7 @@ public class AdvertController {
 
 //    广告列表显示
     @RequestMapping("ad/list")
-    public BaseRespVo AdvertList(ForAdvert forAdvert) {
+    public BaseRespVo AdvertList(FromAdvert forAdvert) {
         AdvertList advertListVo = advertService.queryAdverts(forAdvert);
         BaseRespVo baseRespVo = BaseRespVo.baseRespOk(advertListVo);
         return baseRespVo;
@@ -30,18 +31,23 @@ public class AdvertController {
 
 //    广告删除
     @RequestMapping("ad/delete")
-    public BaseRespVo AdvertDelete(ForAdvert forAdvert) {
-        /*AdvertList advertListVo = advertService.queryAdverts(page, limit, add_time, order);
-        BaseRespVo baseRespVo = BaseRespVo.baseRespOk(advertListVo);*/
-        return null;
-    }
-    @RequestMapping("ad/update")
-    public BaseRespVo AdvertUpdate(ForAdvert forAdvert) {
-        /*AdvertList advertListVo = advertService.queryAdverts(page, limit, add_time, order);
-        BaseRespVo baseRespVo = BaseRespVo.baseRespOk(advertListVo);*/
-        return null;
+    public BaseRespVo AdvertDelete(@RequestBody Ad ad) {
+        BaseRespVo baseRespVo = advertService.deleteAdvert(ad);
+        return baseRespVo;
     }
 
+//    广告修改
+    @RequestMapping("ad/update")
+    public BaseRespVo AdvertUpdate(@RequestBody Ad ad) {
+        BaseRespVo baseRespVo = advertService.updateAdvert(ad);
+        return baseRespVo;
+    }
+//    添加广告
+    @RequestMapping("ad/create")
+    public BaseRespVo AdvertAdd(@RequestBody Ad ad) {
+        BaseRespVo baseRespVo = advertService.insertAd(ad);
+        return baseRespVo;
+    }
 
 //    文件上传
     @RequestMapping("storage/create")

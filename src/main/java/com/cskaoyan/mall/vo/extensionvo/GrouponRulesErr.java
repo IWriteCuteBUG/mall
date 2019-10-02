@@ -1,11 +1,10 @@
-package com.cskaoyan.mall.bean;
+package com.cskaoyan.mall.vo.extensionvo;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-import java.math.BigDecimal;
 import java.util.Date;
 
-public class GrouponRules {
+public class GrouponRulesErr<T> {
     private Integer id;
 
     private Integer goodsId;
@@ -14,9 +13,9 @@ public class GrouponRules {
 
     private String picUrl;
 
-    private BigDecimal discount;
+    private T discount;
 
-    private Integer discountMember;
+    private T discountMember;
 
     private Date addTime;
 
@@ -48,7 +47,7 @@ public class GrouponRules {
     }
 
     public void setGoodsName(String goodsName) {
-        this.goodsName = goodsName == null ? null : goodsName.trim();
+        this.goodsName = goodsName;
     }
 
     public String getPicUrl() {
@@ -56,22 +55,22 @@ public class GrouponRules {
     }
 
     public void setPicUrl(String picUrl) {
-        this.picUrl = picUrl == null ? null : picUrl.trim();
+        this.picUrl = picUrl;
     }
 
-    public BigDecimal getDiscount() {
+    public T getDiscount() {
         return discount;
     }
 
-    public void setDiscount(BigDecimal discount) {
+    public void setDiscount(T discount) {
         this.discount = discount;
     }
 
-    public Integer getDiscountMember() {
+    public T getDiscountMember() {
         return discountMember;
     }
 
-    public void setDiscountMember(Integer discountMember) {
+    public void setDiscountMember(T discountMember) {
         this.discountMember = discountMember;
     }
 

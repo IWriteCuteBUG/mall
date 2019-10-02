@@ -6,12 +6,10 @@ import com.cskaoyan.mall.bean.BaseRespVo;
 import com.cskaoyan.mall.bean.Storage;
 import com.cskaoyan.mall.mapper.AdMapper;
 import com.cskaoyan.mall.mapper.StorageMapper;
-import com.cskaoyan.mall.properties.ImgProperties;
 import com.cskaoyan.mall.service.AdvertService;
 import com.cskaoyan.mall.util.AdvertUploadUtils;
 import com.cskaoyan.mall.vo.extensionvo.AdvertList;
-import com.cskaoyan.mall.vo.extensionvo.AdvertUploadPic;
-import com.cskaoyan.mall.vo.extensionvo.ForAdvert;
+import com.cskaoyan.mall.vo.extensionvo.FromAdvert;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,11 +30,12 @@ public class AdvertServiceImpl implements AdvertService {
     @Autowired
     StorageMapper storageMapper;
 
-    @Autowired
-    ImgProperties imgProperties;
+    /*@Autowired
+    ImgProperties imgProperties;*/
 
+//    显示广告
     @Override
-    public AdvertList queryAdverts(ForAdvert forAdvert) {
+    public AdvertList queryAdverts(FromAdvert forAdvert) {
         PageHelper.startPage(forAdvert.getPage(), forAdvert.getLimit());
         String name = forAdvert.getName();
         String content = forAdvert.getContent();
@@ -56,7 +55,7 @@ public class AdvertServiceImpl implements AdvertService {
             criteria.andContentLike("%"+content+"%");
         }
         ads = adMapper.selectByExample(adExample);
-        PageInfo<Ad> adPageInfo = new PageInfo<>();
+        PageInfo<Ad> adPageInfo = new PageInfo<>(ads);
         long total = adPageInfo.getTotal();
         AdvertList advertList = new AdvertList();
         advertList.setTotal(total);
@@ -66,11 +65,8 @@ public class AdvertServiceImpl implements AdvertService {
 
     /**
      * 图片上传
-     *
      * @param request
-     * @param name
-     * @param filename
-     * @param myfile
+     * @param file
      * @return
      * @throws IOException
      */
@@ -78,30 +74,64 @@ public class AdvertServiceImpl implements AdvertService {
     public BaseRespVo uploadPic(HttpServletRequest request, MultipartFile file) throws IOException {
 //       获取当前服务器下的文件夹
 //        String localUpload = request.getServletContext().getRealPath("/static/img/");
-        String localUpload = "D:/static/img/";
+        String localUpload = "C:/static/img/";
 //        进行文件上传，并返回文件的部分路径
         String uploadName = AdvertUploadUtils.upload(file, localUpload);
 //      获取本机IP
-//        String advert = InetAddress.getLocalHost().toString();
-        String advert = imgProperties.getAdvert();
+        String myIp = InetAddress.getLocalHost().toString();
+        int iIP = myIp.lastIndexOf("/");
+        String ipSubstring = myIp.substring(0, iIP + 1);
+        myIp = myIp.replace(ipSubstring, "");
+//        String advert = imgProperties.getAdvert();
 //        生成Storage对象
         Storage storage = new Storage();
 //        获取现在的日期
         Date date = new Date();
 //        获取文件大小
         int size = (int) file.getSize();
-//      key
-        storage.setKey("mykey");
+//      获取文件key值
+        int i = uploadName.lastIndexOf("/");
+        String substring = uploadName.substring(0, i + 1);
+        String key = uploadName.replace(substring, "");
+        storage.setKey(key);
         storage.setName(file.getOriginalFilename());
-//      type
-        storage.setType("jpg");
+//      获取文件类型
+        String contentType = file.getContentType();
+        storage.setType(contentType);
         storage.setSize(size);
-        storage.setUrl(advert + "/img" + uploadName);
+        storage.setUrl("http://" + myIp + "/img" + uploadName);
         storage.setAddTime(date);
         storage.setUpdateTime(date);
         storage.setDeleted(false);
         int insert = storageMapper.insertSelective(storage);
         BaseRespVo baseRespVo = BaseRespVo.baseRespOk(storage);
+        return baseRespVo;
+    }
+
+//  添加广告
+    @Override
+    public BaseRespVo insertAd(Ad ad) {
+        Date date = new Date();
+        ad.setAddTime(date);
+        ad.setUpdateTime(date);
+        int i = adMapper.insertSelective(ad);
+        BaseRespVo baseRespVo = BaseRespVo.baseRespOk(ad);
+        return baseRespVo;
+    }
+
+//    修改广告信息
+    @Override
+    public BaseRespVo updateAdvert(Ad ad) {
+        int update = adMapper.updateByPrimaryKey(ad);
+        BaseRespVo baseRespVo = BaseRespVo.baseRespOk(ad);
+        return baseRespVo;
+    }
+
+//  删除广告
+    @Override
+    public BaseRespVo deleteAdvert(Ad ad) {
+        int i = adMapper.deleteByPrimaryKey(ad.getId());
+        BaseRespVo baseRespVo = BaseRespVo.baseRespOk("");
         return baseRespVo;
     }
 

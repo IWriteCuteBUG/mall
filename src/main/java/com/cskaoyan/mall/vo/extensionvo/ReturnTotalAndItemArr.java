@@ -1,13 +1,8 @@
 package com.cskaoyan.mall.vo.extensionvo;
 
-import com.cskaoyan.mall.bean.Ad;
-
-import java.util.List;
-import java.util.Objects;
-
-public class AdvertList<T> {
-   private long total;
-   private List<T> items;
+public class ReturnTotalAndItemArr<T> {
+    private long total;
+    private T[] items;
 
     public long getTotal() {
         return total;
@@ -17,11 +12,11 @@ public class AdvertList<T> {
         this.total = total;
     }
 
-    public List<T> getItems() {
+    public T[] getItems() {
         return items;
     }
 
-    public void setItems(List<T> items) {
+    public void setItems(T[] items) {
         this.items = items;
     }
 }

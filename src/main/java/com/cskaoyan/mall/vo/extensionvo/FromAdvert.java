@@ -1,6 +1,6 @@
 package com.cskaoyan.mall.vo.extensionvo;
 
-public class ForAdvert {
+public class FromAdvert {
     private int page;
     private int limit;
     private String name;
