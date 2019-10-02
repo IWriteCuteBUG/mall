@@ -16,3 +16,5 @@ logging:
           mapper: debug
 pagehelper:
   helper-dialect: mysql
+mybatis:
+  type-handlers-package: com.cskaoyan.mall.mybatis

@@ -1,25 +1,27 @@
 package com.cskaoyan.mall.vo.voSJB;
 
 
+import com.cskaoyan.mall.bean.Feedback;
+
 import java.util.List;
 
 public class FeedbackListAndTotalVo {
-    private List<FeedbackReplaceVo> feedbackList;
+    private List<Feedback> feedbackList;
     private int total;
 
     public FeedbackListAndTotalVo() {
     }
 
-    public FeedbackListAndTotalVo(List<FeedbackReplaceVo> feedbackList, int total) {
+    public FeedbackListAndTotalVo(List<Feedback> feedbackList, int total) {
         this.feedbackList = feedbackList;
         this.total = total;
     }
 
-    public List<FeedbackReplaceVo> getFeedbackList() {
+    public List<Feedback> getFeedbackList() {
         return feedbackList;
     }
 
-    public void setFeedbackList(List<FeedbackReplaceVo> feedbackList) {
+    public void setFeedbackList(List<Feedback> feedbackList) {
         this.feedbackList = feedbackList;
     }
 

@@ -41,17 +41,8 @@ public class FeedbackServiceImpl implements FeedbackService {
             criteria.andUsernameLike("%" + username + "%");
         }
         feedbackList = feedbackMapper.selectByExample(example);
-        List<FeedbackReplaceVo> feedbackReplaceVoList = new ArrayList<>();
-        for (Feedback feedback : feedbackList) {
-            FeedbackReplaceVo replaceVo = new FeedbackReplaceVo();
-            String[] urls = feedback.getPicUrls().split(",");
-            System.out.println(urls);
-            FeedbackServiceImpl.feedbackReplace(replaceVo, feedback);
-            replaceVo.setPicUrls(urls);
-            feedbackReplaceVoList.add(replaceVo);
-        }
         total = (int) feedbackMapper.countByExample(example);
-        return new FeedbackListAndTotalVo(feedbackReplaceVoList, total);
+        return new FeedbackListAndTotalVo(feedbackList, total);
     }
 
     public static void feedbackReplace(FeedbackReplaceVo replaceVo, Feedback feedback){
