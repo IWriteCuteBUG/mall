@@ -1,18 +1,25 @@
-package com.cskaoyan.mall.vo.voSJB;
+package com.cskaoyan.mall.vo;
 
-
-import com.cskaoyan.mall.vo.DashBoardDataVo;
-
+//{
+//	"errno": 0,
+//	"data": {
+//		"goodsTotal": 256,
+//		"userTotal": 22,
+//		"productTotal": 261,
+//		"orderTotal": 207
+//	},
+//	"errmsg": "成功"
+//}
 public class DashBoardVo {
     private int errno;
-    private DashBoardDataVo data;
+    private DashBoardDataVo dataVo;
     private String errmsg;
 
     @Override
     public String toString() {
         return "DashBoardVo{" +
                 "errno=" + errno +
-                ", data=" + data +
+                ", dataVo=" + dataVo +
                 ", errmsg='" + errmsg + '\'' +
                 '}';
     }
@@ -25,12 +32,12 @@ public class DashBoardVo {
         this.errno = errno;
     }
 
-    public DashBoardDataVo getData() {
-        return data;
+    public DashBoardDataVo getDataVo() {
+        return dataVo;
     }
 
-    public void setData(DashBoardDataVo data) {
-        this.data = data;
+    public void setDataVo(DashBoardDataVo dataVo) {
+        this.dataVo = dataVo;
     }
 
     public String getErrmsg() {

@@ -2,9 +2,8 @@ package com.cskaoyan.mall.mapper;
 
 import com.cskaoyan.mall.bean.Ad;
 import com.cskaoyan.mall.bean.AdExample;
-import org.apache.ibatis.annotations.Param;
-
 import java.util.List;
+import org.apache.ibatis.annotations.Param;
 
 public interface AdMapper {
     long countByExample(AdExample example);

@@ -2,9 +2,8 @@ package com.cskaoyan.mall.mapper;
 
 import com.cskaoyan.mall.bean.CouponUser;
 import com.cskaoyan.mall.bean.CouponUserExample;
-import org.apache.ibatis.annotations.Param;
-
 import java.util.List;
+import org.apache.ibatis.annotations.Param;
 
 public interface CouponUserMapper {
     long countByExample(CouponUserExample example);

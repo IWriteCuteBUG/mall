@@ -2,9 +2,8 @@ package com.cskaoyan.mall.mapper;
 
 import com.cskaoyan.mall.bean.GoodsSpecification;
 import com.cskaoyan.mall.bean.GoodsSpecificationExample;
-import org.apache.ibatis.annotations.Param;
-
 import java.util.List;
+import org.apache.ibatis.annotations.Param;
 
 public interface GoodsSpecificationMapper {
     long countByExample(GoodsSpecificationExample example);

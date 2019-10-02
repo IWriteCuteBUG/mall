@@ -1,4 +1,4 @@
-package com.cskaoyan.mall.vo.voSJB;
+package com.cskaoyan.mall.vo;
 //"goodsTotal": 256,
 ////		"userTotal": 22,
 ////		"productTotal": 261,

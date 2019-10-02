@@ -2,9 +2,8 @@ package com.cskaoyan.mall.mapper;
 
 import com.cskaoyan.mall.bean.OrderGoods;
 import com.cskaoyan.mall.bean.OrderGoodsExample;
-import org.apache.ibatis.annotations.Param;
-
 import java.util.List;
+import org.apache.ibatis.annotations.Param;
 
 public interface OrderGoodsMapper {
     long countByExample(OrderGoodsExample example);

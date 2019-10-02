@@ -2,9 +2,8 @@ package com.cskaoyan.mall.mapper;
 
 import com.cskaoyan.mall.bean.Region;
 import com.cskaoyan.mall.bean.RegionExample;
-import org.apache.ibatis.annotations.Param;
-
 import java.util.List;
+import org.apache.ibatis.annotations.Param;
 
 public interface RegionMapper {
     long countByExample(RegionExample example);
