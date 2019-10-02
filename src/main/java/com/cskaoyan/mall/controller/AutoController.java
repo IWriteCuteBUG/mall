@@ -3,6 +3,8 @@ package com.cskaoyan.mall.controller;
 import com.cskaoyan.mall.bean.BaseRespVo;
 import com.cskaoyan.mall.bean.InfoVo;
 import com.cskaoyan.mall.service.ConfigerService;
+import com.cskaoyan.mall.vo.voSJB.DashBoardVo;
+import com.cskaoyan.mall.vo.DashBoardDataVo;
 import com.cskaoyan.mall.vo.tvo.ConfigerVo;
 import com.cskaoyan.mall.vo.tvo.ConfigerVoExpress;
 import com.cskaoyan.mall.vo.tvo.ConfigerVoOrder;
@@ -42,6 +44,21 @@ public class AutoController {
         BaseRespVo info = BaseRespVo.info(infoVo);
         return info;
     }
+
+
+    @RequestMapping("admin/dashboard")
+    public DashBoardVo dashboard() {
+        DashBoardVo dashBoardVo = new DashBoardVo();
+        DashBoardDataVo dashBoardDataVo = new DashBoardDataVo();
+        dashBoardDataVo.setOrderTotal(100);
+        dashBoardDataVo.setProductTotal(200);
+        dashBoardDataVo.setUserTotal(300);
+        dashBoardVo.setData(dashBoardDataVo);
+        dashBoardVo.setErrno(0);
+        dashBoardVo.setErrmsg("no error");
+        return dashBoardVo;
+    }
+
     @RequestMapping(value = "/admin/config/mall", method = {RequestMethod.GET})
     public BaseRespVo queryMallConfig(){
         ConfigerVo configerVo = configerService.queryMallConfig();
@@ -118,6 +135,4 @@ public class AutoController {
         objectBaseRespVo.setErrmsg("成功");
         return objectBaseRespVo;
     }
-
-
 }

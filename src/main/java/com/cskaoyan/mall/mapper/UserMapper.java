@@ -33,5 +33,4 @@ public interface UserMapper {
     int countUsersOfDay(@Param("logindate") String logindate);
 
     int queryUserTotal();
-
 }
