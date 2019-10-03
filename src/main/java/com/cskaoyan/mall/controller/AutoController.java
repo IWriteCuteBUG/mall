@@ -29,4 +29,5 @@ public class AutoController {
         BaseRespVo info = BaseRespVo.info(infoVo);
         return info;
     }
+
 }
