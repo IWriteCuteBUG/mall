@@ -10,6 +10,8 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.lang.System;
 import java.util.ArrayList;
@@ -39,6 +41,7 @@ public class GoodsServiceImpl implements GoodsService {
     @Autowired
     BrandMapper brandMapper;
 
+
     @Override
     public void addGoods(GoodsDetail goodsDetail) throws InsertException {
         //逻辑校验
@@ -63,11 +66,12 @@ public class GoodsServiceImpl implements GoodsService {
             throw new InsertException("error","请选择商品所属品牌商");
         }
 
-        //插入后 同时获取Id
+        //给 addtime/updatetime/deleted 字段赋值
         Date date = new Date();
         good.setAddTime(date);
         good.setUpdateTime(date);
         good.setDeleted(false);
+        //插入商品后，同时获取最近插入商品的 Id
         goodsMapper.insert(good);
         System.out.println(good.getId());
         Integer goodsId = goodsDetail.getGoods().getId();
@@ -89,7 +93,6 @@ public class GoodsServiceImpl implements GoodsService {
             product.setUpdateTime(date);
             product.setDeleted(false);
             goodsProductMapper.insert(product);
-
         }
 
         List<GoodsSpecification> specifications = goodsDetail.getSpecifications();
@@ -172,7 +175,6 @@ public class GoodsServiceImpl implements GoodsService {
         }
     }
 
-
     @Override
     public BaseRespVo<GoodsListVo<Goods>> queryGoodsList(int page, int limit, String sort, String order, String goodsSn, String name) {
         PageHelper.startPage(page, limit);
@@ -237,13 +239,29 @@ public class GoodsServiceImpl implements GoodsService {
         return count;
     }
 
-
     @Override
-    public int deleteGoods(Integer id) {
-        Goods goods = new Goods();
-        goods.setId(id);
-        goods.setDeleted(true);
-        int count = goodsMapper.updateByPrimaryKeySelective(goods);
-        return count;
+    @Transactional
+    public void deleteGood(Integer id) {
+        goodsMapper.deleteByPrimaryKey(id);
+
+        CommentExample commentExample = new CommentExample();
+        CommentExample.Criteria criteria = commentExample.createCriteria();
+        criteria.andValueIdEqualTo(id);
+        commentMapper.selectByExample(commentExample);
+
+        GoodsProductExample goodsProductExample = new GoodsProductExample();
+        GoodsProductExample.Criteria criteriaP = goodsProductExample.createCriteria();
+        criteriaP.andGoodsIdEqualTo(id);
+        goodsProductMapper.deleteByExample(goodsProductExample);
+
+        GoodsAttributeExample goodsAttributeExample = new GoodsAttributeExample();
+        GoodsAttributeExample.Criteria criteriaA = goodsAttributeExample.createCriteria();
+        criteriaA.andGoodsIdEqualTo(id);
+        goodsAttributeMapper.deleteByExample(goodsAttributeExample);
+
+        GoodsSpecificationExample goodsSpecificationExample = new GoodsSpecificationExample();
+        GoodsSpecificationExample.Criteria criteriaS = goodsSpecificationExample.createCriteria();
+        criteriaS.andGoodsIdEqualTo(id);
+        goodsSpecificationMapper.deleteByExample(goodsSpecificationExample);
     }
 }

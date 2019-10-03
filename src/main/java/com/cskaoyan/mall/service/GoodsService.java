@@ -14,7 +14,7 @@ public interface GoodsService {
 
     BaseRespVo<CatAndBrand> queryCatAndBrand();
 
-    int deleteGoods(Integer id);
+    void deleteGood(Integer id);
 
     BaseRespVo<CommentListVo<Comment>> queryCommentList(int page, int limit, String sort, String order, Integer userId, Integer valueId);
 
@@ -25,4 +25,5 @@ public interface GoodsService {
     void addGoods(GoodsDetail goodsDetail) throws InsertException;
 
     void updateGoods(GoodsDetail goodsDetail);
+
 }

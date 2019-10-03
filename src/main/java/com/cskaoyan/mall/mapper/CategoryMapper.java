@@ -33,7 +33,6 @@ public interface CategoryMapper {
 
     List<ForCatList> queryCatList();
 
-
     Category selectIds(@Param("categoryId") Integer categoryId);
 
 }

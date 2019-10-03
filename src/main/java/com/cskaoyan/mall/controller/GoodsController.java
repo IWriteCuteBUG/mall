@@ -64,6 +64,7 @@ public class GoodsController {
 
 
     /**
+     * 分页按条件查询商品评论
      * @param page
      * @param limit
      * @param sort
@@ -96,25 +97,13 @@ public class GoodsController {
 
     /**
      * 删除指定 ID 商品
-     * 用事务
-     * 还是用逻辑判断
-     * ？？？
      * @param goods
      * @return
      */
     @RequestMapping("admin/goods/delete")
-    public BaseRespVo deleteGoods(@RequestBody Goods goods){
-        int count = goodsService.deleteGoods(goods.getId());
-        BaseRespVo<Object> baseRespVo = new BaseRespVo<>();
-        if(count == 1){
-            baseRespVo.setErrmsg("成功");
-            baseRespVo.setErrno(0);
-            return baseRespVo;
-        }else{
-            baseRespVo.setErrmsg("删除失败，请确认数据库中是否存在该商品");
-            baseRespVo.setErrno(5000);
-            return baseRespVo;
-        }
+    public BaseRespVo deleteGood(@RequestBody Goods goods){
+        goodsService.deleteGood(goods.getId());
+        return ReturnUtils.ok(null, "成功");
     }
 
     /**
@@ -129,7 +118,8 @@ public class GoodsController {
     }
 
     /**
-     *编辑商品信息前 获得商品当前信息
+     *编辑商品信息前
+     * 获得商品当前信息
      * @param id
      * @return
      */
