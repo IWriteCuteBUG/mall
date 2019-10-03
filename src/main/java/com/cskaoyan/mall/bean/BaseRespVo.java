@@ -42,6 +42,13 @@ public class BaseRespVo<T> {
         return baseRespVo;
     }
 
+    public static BaseRespVo ok(Object s) {
+        BaseRespVo<Object> baseRespVo = new BaseRespVo<>();
+        baseRespVo.setData(s);
+        baseRespVo.setErrmsg("成功");
+        return baseRespVo;
+    }
+
     public static BaseRespVo info(InfoVo infoVo) {
         BaseRespVo<InfoVo> baseRespVo = new BaseRespVo<>();
         baseRespVo.setData(infoVo);
