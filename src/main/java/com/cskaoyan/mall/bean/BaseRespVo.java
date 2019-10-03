@@ -43,4 +43,5 @@ public class BaseRespVo<T> {
         baseRespVo.setErrmsg("成功");
         return baseRespVo;
     }
+
 }

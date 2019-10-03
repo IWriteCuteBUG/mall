@@ -3,6 +3,9 @@ package com.cskaoyan.mall.mapper;
 import com.cskaoyan.mall.bean.Category;
 import com.cskaoyan.mall.bean.CategoryExample;
 import java.util.List;
+
+import com.cskaoyan.mall.vo.goodsmanagervo.ForBrandList;
+import com.cskaoyan.mall.vo.goodsmanagervo.ForCatList;
 import org.apache.ibatis.annotations.Param;
 
 public interface CategoryMapper {
@@ -27,4 +30,10 @@ public interface CategoryMapper {
     int updateByPrimaryKeySelective(Category record);
 
     int updateByPrimaryKey(Category record);
+
+    List<ForCatList> queryCatList();
+
+
+    Category selectIds(@Param("categoryId") Integer categoryId);
+
 }
