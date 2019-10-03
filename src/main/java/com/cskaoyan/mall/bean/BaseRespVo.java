@@ -35,15 +35,15 @@ public class BaseRespVo<T> {
         this.errno = errno;
     }
 
-    public static BaseRespVo ok(String s) {
-        BaseRespVo<String> baseRespVo = new BaseRespVo<>();
+    public static BaseRespVo ok(Object s) {
+        BaseRespVo baseRespVo = new BaseRespVo<>();
         baseRespVo.setData(s);
         baseRespVo.setErrmsg("成功");
         return baseRespVo;
     }
 
-    public static BaseRespVo info(InfoVo infoVo) {
-        BaseRespVo<InfoVo> baseRespVo = new BaseRespVo<>();
+    public static BaseRespVo info(Object infoVo) {
+        BaseRespVo baseRespVo = new BaseRespVo<>();
         baseRespVo.setData(infoVo);
         baseRespVo.setErrmsg("成功");
         return baseRespVo;

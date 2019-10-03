@@ -46,6 +46,7 @@ public class AutoController {
     }
 
 
+
     @RequestMapping("admin/dashboard")
     public DashBoardVo dashboard() {
         DashBoardVo dashBoardVo = new DashBoardVo();
@@ -135,4 +136,5 @@ public class AutoController {
         objectBaseRespVo.setErrmsg("成功");
         return objectBaseRespVo;
     }
+
 }
