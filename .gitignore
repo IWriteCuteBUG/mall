@@ -1,23 +1,15 @@
 #idea
 .idea/
 target/
-<<<<<<< HEAD
-*.iml
-.gitignore
-*.cmd
-mvnw
 
 #maven
 .mvn/
 
-=======
 .gitignore
-.mvn/
 *.md
 *.iml
 mvnw
 *.cmd
->>>>>>> 3884abc45887f5d3ebbb2853e98caf46d68e9df6
 
 # Compiled class file
 *.class

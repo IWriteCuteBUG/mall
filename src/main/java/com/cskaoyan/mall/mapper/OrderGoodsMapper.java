@@ -27,4 +27,6 @@ public interface OrderGoodsMapper {
     int updateByPrimaryKeySelective(OrderGoods record);
 
     int updateByPrimaryKey(OrderGoods record);
+
+    int countGoodsByDate(@Param("date") String s);
 }
