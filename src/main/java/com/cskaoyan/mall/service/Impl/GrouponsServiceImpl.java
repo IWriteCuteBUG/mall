@@ -30,6 +30,8 @@ public class GrouponsServiceImpl implements GrouponsService {
     public GrouponsVo getGrouponActive(int page, int limit, String sort, String order) {
         GrouponRulesExample grouponRulesExample = new GrouponRulesExample();
         grouponRulesExample.createCriteria().andIdIsNotNull();
+        String orderby = sort + " " +order;
+        PageHelper.startPage(page, limit, orderby);
         List<GrouponRules> grouponRules = grouponRulesMapper.selectByExample(grouponRulesExample);
         GrouponsVo grouponsVo = new GrouponsVo();
         grouponsVo.setTotal(grouponRules.size());

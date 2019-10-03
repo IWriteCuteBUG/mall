@@ -18,7 +18,6 @@ public class GrouponsController {
 
     @RequestMapping("/admin/groupon/listRecord")
     public BaseRespVo getGrouponActive(int page, int limit, String sort, String order){
-        PageHelper.startPage(page, limit);
         GrouponsVo grouponsVo = grouponsService.getGrouponActive(page, limit, sort, order);
         BaseRespVo<Object> objectBaseRespVo = new BaseRespVo<>();
         objectBaseRespVo.setErrno(0);
