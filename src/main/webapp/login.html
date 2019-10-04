@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+<div id="weixin"></div>
+<!--foot-->
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<!--微信登录，生成二维码，修改了谷歌浏览器不能使用的bug-->
+<script src="js/wxlogin.js"></script>
+<!--	微信提供的js，可以生成二维码，测试谷歌浏览器不好使，需要添加属性
+    <script src="http://res.wx.qq.com/connect/zh_CN/htmledition/js/wxLogin.js"></script>
+-->
+<script>
+    $(function () {
+        // 生成微信二维码，工具类，不是我提供，从腾讯下载的
+        // 127.0.0.1/loginServlet
+        var obj = new WxLogin({
+            id: "weixin",
+            appid: "wx7287a60bb700fd21",
+            scope: "snsapi_login",
+            redirect_uri: "http://www.txjava.cn/loginServlet"
+        });
+
+    })
+
+</script>
+</body>
+
+</html>

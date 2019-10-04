@@ -6,7 +6,9 @@ import java.util.List;
 
 import com.cskaoyan.mall.bean.Goodss;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Component;
 
+@Component
 public interface GoodsMapper {
     long countByExample(GoodsExample example);
 
@@ -37,4 +39,5 @@ public interface GoodsMapper {
     int updateByPrimaryKey(Goods record);
 
     Goodss queryGoodsContainsGallery(@Param("goodsId") Integer goodsId);
+
 }
