@@ -8,6 +8,7 @@ import com.cskaoyan.mall.service.GrouponsService;
 import com.cskaoyan.mall.vo.tvo.GrouponsVo;
 import com.cskaoyan.mall.vo.tvo.GrouponsVoInfo;
 import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,9 +28,13 @@ public class GrouponsServiceImpl implements GrouponsService {
     GoodsMapper goodsMapper;
 
     @Override
-    public GrouponsVo getGrouponActive(int page, int limit, String sort, String order) {
+    public GrouponsVo getGrouponActive(int page, int limit, String sort, String order, int goodsIds) {
         GrouponRulesExample grouponRulesExample = new GrouponRulesExample();
-        grouponRulesExample.createCriteria().andIdIsNotNull();
+        if (goodsIds == 0) {
+            grouponRulesExample.createCriteria().andIdIsNotNull();
+        }else {
+            grouponRulesExample.createCriteria().andIdIsNotNull().andGoodsIdEqualTo(goodsIds);
+        }
         String orderby = sort + " " +order;
         PageHelper.startPage(page, limit, orderby);
         List<GrouponRules> grouponRules = grouponRulesMapper.selectByExample(grouponRulesExample);

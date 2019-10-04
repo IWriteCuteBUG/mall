@@ -5,14 +5,15 @@ import com.cskaoyan.mall.bean.Admin;
 import com.cskaoyan.mall.bean.BaseRespVo;
 import com.cskaoyan.mall.bean.Role;
 import com.cskaoyan.mall.bean.Storage;
+import com.cskaoyan.mall.service.AdminService;
 import com.cskaoyan.mall.service.admin.*;
+<<<<<<< HEAD
 import com.cskaoyan.mall.vo.dhd.util.CreateBean;
+=======
+import com.cskaoyan.mall.vo.dhd.util.PermissionsUpdateBean;
+>>>>>>> 6a7f2c238993f9138dcc178a3c080323a0557e7f
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class AdminController {
@@ -106,5 +107,19 @@ public class AdminController {
     public BaseRespVo adminDeleteInfo(@RequestBody Admin admin){
         BaseRespVo baseRespVo=adminDeleteService.deleteAdmin(admin);
         return baseRespVo;
+    }
+    @Autowired
+    AdminPermissionsService adminPermissionsService;
+    @RequestMapping(value = "/admin/role/permissions",method = RequestMethod.GET)
+    public BaseRespVo adminPermissonInfo(int roleId){
+        BaseRespVo baseRespVo=adminPermissionsService.permissionList(roleId);
+        return baseRespVo;
+    }
+    @Autowired
+    AdminPermissionUpdateService adminPermissionUpdateService;
+    @RequestMapping(value = "/admin/role/permissions",method = RequestMethod.POST)
+    public BaseRespVo adminPermissionUpdateInfo(@RequestBody PermissionsUpdateBean permissionsUpdateBean){
+        BaseRespVo baseRespVo=adminPermissionUpdateService.updateRolePermission( permissionsUpdateBean);
+         return baseRespVo;
     }
 }

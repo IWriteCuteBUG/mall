@@ -1,4 +1,4 @@
-package com.cskaoyan.mall.service.Impl;
+package com.cskaoyan.mall.service.admin;
 
 import com.cskaoyan.mall.bean.*;
 import com.cskaoyan.mall.exception.InsertException;
@@ -175,16 +175,16 @@ public class GoodsServiceImpl implements GoodsService {
     }
 
     @Override
-    public BaseRespVo<GoodsListVo<Goods>> queryGoodsList(int page, int limit, String sort, String order, String goodsSn, String name) {
-        PageHelper.startPage(page, limit);
+    public BaseRespVo<GoodsListVo<Goods>> queryGoodsList(ForQueryGoods forQueryGoods) {
+        PageHelper.startPage(forQueryGoods.getPage(), forQueryGoods.getLimit());
         GoodsExample goodsExample = new GoodsExample();
-        goodsExample.setOrderByClause(sort + " " + order);
+        goodsExample.setOrderByClause(forQueryGoods.getSort() + " " + forQueryGoods.getOrder());
         GoodsExample.Criteria criteria = goodsExample.createCriteria();
-        if (goodsSn != null && !("".equals(goodsSn.trim()))) {
-            criteria.andGoodsSnEqualTo(goodsSn);
+        if (forQueryGoods.getGoodsSn() != null && !("".equals(forQueryGoods.getGoodsSn().trim()))) {
+            criteria.andGoodsSnEqualTo(forQueryGoods.getGoodsSn());
         }
-        if (name != null && !("".equals(name.trim()))) {
-            criteria.andNameLike("%" + name + "%");
+        if (forQueryGoods.getName() != null && !("".equals(forQueryGoods.getName().trim()))) {
+            criteria.andNameLike("%" + forQueryGoods.getName() + "%");
         }
         criteria.andDeletedEqualTo(false);
         List<Goods> goods = goodsMapper.selectByExample(goodsExample);
@@ -197,16 +197,16 @@ public class GoodsServiceImpl implements GoodsService {
     }
 
     @Override
-    public BaseRespVo<CommentListVo<Comment>> queryCommentList(int page, int limit, String sort, String order, Integer userId, Integer valueId) {
-        PageHelper.startPage(page, limit);
+    public BaseRespVo<CommentListVo<Comment>> queryCommentList(ForQueryComments forQueryComments) {
+        PageHelper.startPage(forQueryComments.getPage(), forQueryComments.getLimit());
         CommentExample commentExample = new CommentExample();
-        commentExample.setOrderByClause(sort + " " + order);
+        commentExample.setOrderByClause(forQueryComments.getSort() + " " + forQueryComments.getOrder());
         CommentExample.Criteria criteria = commentExample.createCriteria();
-        if(userId != null){
-            criteria.andUserIdEqualTo(userId);
+        if(forQueryComments.getUserId() != null){
+            criteria.andUserIdEqualTo(forQueryComments.getUserId());
         }
-        if(valueId != null){
-            criteria.andValueIdEqualTo(valueId);
+        if(forQueryComments.getValueId() != null){
+            criteria.andValueIdEqualTo(forQueryComments.getValueId());
         }
         criteria.andDeletedEqualTo(false);
         List<Comment> comments = commentMapper.selectByExample(commentExample);

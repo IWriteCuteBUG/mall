@@ -24,8 +24,11 @@ public class ExtensionGrouponServiceImpl implements ExtensionGrouponService {
     @Autowired
     GoodsMapper goodsMapper;
     @Override
-    public BaseRespVo queryGrouponListByGoodsId(FromRequestKey fromRequestKey, Integer goodsId) {
-        PageHelper.startPage(fromRequestKey.getPage(), fromRequestKey.getLimit());
+    public BaseRespVo queryGrouponListByGoodsId(FromRequestKey fromRequestKey) {
+        String order = fromRequestKey.getOrder();
+        String orderBy = fromRequestKey.getSort() + "  " + order;
+        Integer goodsId = fromRequestKey.getGoodsId();
+        PageHelper.startPage(fromRequestKey.getPage(), fromRequestKey.getLimit(), orderBy);
         List<GrouponRules> grouponRules = null;
         GrouponRulesExample grouponRulesExample = new GrouponRulesExample();
         GrouponRulesExample.Criteria criteria = grouponRulesExample.createCriteria();
@@ -54,7 +57,6 @@ public class ExtensionGrouponServiceImpl implements ExtensionGrouponService {
             grouponRules.setPicUrl(goods.getPicUrl());
             Date addTime = new Date();
             grouponRules.setAddTime(addTime);
-            grouponRules.setUpdateTime(addTime);
             grouponRules.setDeleted(false);
             int i = grouponRulesMapper.insertSelective(grouponRules);
             baseRespVo = BaseRespVo.baseRespOk(grouponRules);
@@ -82,6 +84,8 @@ public class ExtensionGrouponServiceImpl implements ExtensionGrouponService {
         if (goods == null) {
             return BaseRespVo.baseRespErr(402, "参数值不对");
         }
+        Date date = new Date();
+        grouponRules.setUpdateTime(date);
         int update = grouponRulesMapper.updateByPrimaryKey(grouponRules);
         return BaseRespVo.baseRespOk(grouponRules);
     }

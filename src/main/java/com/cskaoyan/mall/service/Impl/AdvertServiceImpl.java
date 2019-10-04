@@ -7,8 +7,7 @@ import com.cskaoyan.mall.bean.Storage;
 import com.cskaoyan.mall.mapper.AdMapper;
 import com.cskaoyan.mall.mapper.StorageMapper;
 import com.cskaoyan.mall.service.AdvertService;
-import com.cskaoyan.mall.util.AdvertUploadUtils;
-import com.cskaoyan.mall.vo.extensionvo.AdvertList;
+import com.cskaoyan.mall.utils.AdvertUploadUtils;
 import com.cskaoyan.mall.vo.extensionvo.FromAdvert;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -35,32 +34,27 @@ public class AdvertServiceImpl implements AdvertService {
 
 //    显示广告
     @Override
-    public AdvertList queryAdverts(FromAdvert forAdvert) {
-        PageHelper.startPage(forAdvert.getPage(), forAdvert.getLimit());
+    public BaseRespVo queryAdverts(FromAdvert forAdvert) {
+        String order = forAdvert.getOrder();
+        String orderBy = forAdvert.getSort() + "  " + order;
+        PageHelper.startPage(forAdvert.getPage(), forAdvert.getLimit(), orderBy);
         String name = forAdvert.getName();
         String content = forAdvert.getContent();
         List<Ad> ads;
         AdExample adExample = new AdExample();
         AdExample.Criteria criteria = adExample.createCriteria();
-        if (name == null && content == null) {
+        /*if (name == null && content == null) {
             ads = adMapper.queryAds();
-        }
+        }*/
         if(name != null){
-            if (content != null) {
-                criteria = criteria.andContentLike("%"+content+"%");
-            }
-            criteria.andNameLike("%"+name+"%");
+            criteria = criteria.andNameLike("%" + name + "%");
         }
-        if (content != null && name == null) {
+        if (content != null) {
             criteria.andContentLike("%"+content+"%");
         }
         ads = adMapper.selectByExample(adExample);
         PageInfo<Ad> adPageInfo = new PageInfo<>(ads);
-        long total = adPageInfo.getTotal();
-        AdvertList advertList = new AdvertList();
-        advertList.setTotal(total);
-        advertList.setItems(ads);
-        return advertList;
+        return BaseRespVo.baseRespListOk((int) adPageInfo.getTotal(),ads);
     }
 
     /**

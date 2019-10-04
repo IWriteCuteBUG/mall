@@ -22,8 +22,8 @@ public class ExtensionGrouponController {
 
 //    查询显示团购活动
     @RequestMapping("list")
-    public BaseRespVo grouponList(FromRequestKey fromRequestKey,Integer goodsId) {
-        BaseRespVo baseRespVo = extensionGrouponService.queryGrouponListByGoodsId(fromRequestKey,goodsId);
+    public BaseRespVo grouponList(FromRequestKey fromRequestKey) {
+        BaseRespVo baseRespVo = extensionGrouponService.queryGrouponListByGoodsId(fromRequestKey);
         return baseRespVo;
     }
 

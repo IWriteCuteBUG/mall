@@ -6,7 +6,7 @@ import com.cskaoyan.mall.vo.extensionvo.FromRequestKey;
 
 public interface ExtensionGrouponService {
 
-    BaseRespVo queryGrouponListByGoodsId(FromRequestKey fromRequestKey,Integer goodsId);
+    BaseRespVo queryGrouponListByGoodsId(FromRequestKey fromRequestKey);
 
     BaseRespVo queryGrouponCreate(GrouponRules grouponRules);
 

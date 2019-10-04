@@ -3,7 +3,7 @@ package com.cskaoyan.mall.service.Impl;
 import com.cskaoyan.mall.mapper.*;
 import com.cskaoyan.mall.service.CountService;
 import com.cskaoyan.mall.vo.tvo.*;
-import com.cskaoyan.utils.CountUtil;
+import com.cskaoyan.mall.utils.CountUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

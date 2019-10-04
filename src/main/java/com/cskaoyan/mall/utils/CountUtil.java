@@ -1,4 +1,4 @@
-package com.cskaoyan.utils;
+package com.cskaoyan.mall.utils;
 
 import java.util.ArrayList;
 import java.util.List;

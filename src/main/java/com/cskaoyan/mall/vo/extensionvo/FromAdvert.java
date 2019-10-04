@@ -5,8 +5,8 @@ public class FromAdvert {
     private int limit;
     private String name;
     private String content;
-    private String add_time;
-    private String desc;
+    private String sort;
+    private String order;
 
     public int getPage() {
         return page;
@@ -40,19 +40,19 @@ public class FromAdvert {
         this.content = content;
     }
 
-    public String getAdd_time() {
-        return add_time;
+    public String getSort() {
+        return sort;
     }
 
-    public void setAdd_time(String add_time) {
-        this.add_time = add_time;
+    public void setSort(String sort) {
+        this.sort = sort;
     }
 
-    public String getDesc() {
-        return desc;
+    public String getOrder() {
+        return order;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc;
+    public void setOrder(String order) {
+        this.order = order;
     }
 }

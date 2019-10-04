@@ -1,4 +1,4 @@
-package com.cskaoyan.mall.util;
+package com.cskaoyan.mall.utils;
 
 import org.springframework.web.multipart.MultipartFile;
 
