@@ -6,14 +6,15 @@ import com.cskaoyan.mall.bean.Goods;
 import com.cskaoyan.mall.exception.InsertException;
 import com.cskaoyan.mall.service.GoodsService;
 import com.cskaoyan.mall.util.fffUtils.ReturnUtils;
-import com.cskaoyan.mall.vo.goodsmanagervo.CatAndBrand;
-import com.cskaoyan.mall.vo.goodsmanagervo.CommentListVo;
-import com.cskaoyan.mall.vo.goodsmanagervo.GoodsDetail;
-import com.cskaoyan.mall.vo.goodsmanagervo.GoodsListVo;
+import com.cskaoyan.mall.vo.goodsmanagervo.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.validation.Valid;
 
 @RestController
 public class GoodsController {
@@ -50,32 +51,27 @@ public class GoodsController {
 
     /**
      * 分页按条件查询商品信息
-     * @param page
-     * @param limit
-     * @param sort
-     * @param order
      * @return goodsListVoBaseRespVo
      */
     @RequestMapping("admin/goods/list")
-    public BaseRespVo<GoodsListVo<Goods>> queryGoodsList(int page, int limit, String sort, String order, String goodsSn, String name){
-        BaseRespVo<GoodsListVo<Goods>> goodsListVoBaseRespVo = goodsService.queryGoodsList(page, limit, sort, order, goodsSn, name);
+    public BaseRespVo<GoodsListVo<Goods>> queryGoodsList( ForQueryGoods forQueryGoods){
+        BaseRespVo<GoodsListVo<Goods>> goodsListVoBaseRespVo = goodsService.queryGoodsList(forQueryGoods);
         return goodsListVoBaseRespVo;
     }
 
-
     /**
      * 分页按条件查询商品评论
-     * @param page
-     * @param limit
-     * @param sort
-     * @param order
-     * @param userId
-     * @param valueId
      * @return
      */
     @RequestMapping("admin/comment/list")
-    public BaseRespVo<CommentListVo<Comment>> queryCommentList(int page, int limit, String sort, String order, Integer userId, Integer valueId){
-        BaseRespVo<CommentListVo<Comment>> commentListVoBaseRespVo = goodsService.queryCommentList(page, limit, sort, order, userId, valueId);
+    public BaseRespVo<CommentListVo<Comment>> queryCommentList(@Valid ForQueryComments forQueryComments,
+                                                               BindingResult bindingResult){
+        if(bindingResult.hasErrors()){
+            FieldError fieldError = bindingResult.getFieldError();
+            String defaultMessage = fieldError.getDefaultMessage();
+            return ReturnUtils.fail(null,defaultMessage);
+        }
+        BaseRespVo<CommentListVo<Comment>> commentListVoBaseRespVo = goodsService.queryCommentList(forQueryComments);
         return commentListVoBaseRespVo;
     }
 

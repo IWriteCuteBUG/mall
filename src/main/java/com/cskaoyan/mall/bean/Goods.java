@@ -7,7 +7,7 @@ import java.util.Date;
 
 public class Goods {
     private Integer id;
-
+    
     private String goodsSn;
 
     private String name;
