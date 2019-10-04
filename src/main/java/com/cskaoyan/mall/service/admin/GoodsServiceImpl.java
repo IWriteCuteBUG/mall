@@ -1,4 +1,4 @@
-package com.cskaoyan.mall.service.Impl;
+package com.cskaoyan.mall.service.admin;
 
 import com.cskaoyan.mall.bean.*;
 import com.cskaoyan.mall.exception.InsertException;
