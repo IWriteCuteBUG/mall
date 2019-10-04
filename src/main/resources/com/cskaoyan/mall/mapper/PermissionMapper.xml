@@ -225,4 +225,21 @@
       deleted = #{deleted,jdbcType=BIT}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <select id="selectPermissionByRoleId" resultType="string">
+    select permission from cskaoyan_mall_permission where role_id = #{id}
+  </select>
+
+
+  <select id="selectAdminPermission_details" resultType="com.cskaoyan.mall.vo.dhd.util.SystemPermission">
+    select pid,label,parent_id,api,id from cskaoyan_mall_permission_details where parent_id = #{id}
+  </select>
+  <select id="selectAdminPermission_detailsParent" resultType="com.cskaoyan.mall.vo.dhd.util.SystemPermission">
+    select pid,label,parent_id,api,id from cskaoyan_mall_permission_details where pid &lt; 9
+  </select>
+  <delete id="deletePermission">
+    delete from cskaoyan_mall_permission where role_id = #{id}
+  </delete>
+  <insert id="insertPermission">
+    insert into cskaoyan_mall_permission(role_id,permission) values (#{id},#{permission})
+  </insert>
 </mapper>
