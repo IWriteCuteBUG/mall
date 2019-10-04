@@ -3,6 +3,10 @@ package com.cskaoyan.mall.mapper;
 import com.cskaoyan.mall.bean.Permission;
 import com.cskaoyan.mall.bean.PermissionExample;
 import java.util.List;
+
+import com.cskaoyan.mall.bean.System;
+import com.cskaoyan.mall.vo.dhd.util.PermissionsUpdateBean;
+import com.cskaoyan.mall.vo.dhd.util.SystemPermission;
 import org.apache.ibatis.annotations.Param;
 
 public interface PermissionMapper {
@@ -31,4 +35,14 @@ public interface PermissionMapper {
     List<String> queryPermissionsByRoleIds(@Param("roleIds") int[] roleIds);
 
     List<String> queryPerms(@Param("perms") List<String> perms);
+
+    String[]  selectPermissionByRoleId(@Param("id") int id);
+
+    List<SystemPermission> selectAdminPermission_details(@Param("id") int id);
+
+    List<SystemPermission> selectAdminPermission_detailsParent();
+
+    void deletePermission(@Param("id") int id);
+
+    int insertPermission(@Param("id")int roleid,@Param("permission") String permission);
 }

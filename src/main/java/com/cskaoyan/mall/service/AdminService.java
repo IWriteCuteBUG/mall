@@ -9,4 +9,6 @@ public interface AdminService {
     BaseRespVo updatePassword(PasswordVo passwordVo);
 
     boolean queryUsername(String username);
+
+    BaseRespVo adminListInfo(int page, int limit, String username);
 }

@@ -75,6 +75,10 @@
     id, username, password, last_login_ip, last_login_time, avatar, add_time, update_time,
     deleted, role_ids
   </sql>
+  <sql id="Base_Column_List2">
+    id, username, password, last_login_ip, last_login_time, avatar, add_time, update_time,
+    deleted, role_ids as roleIds
+  </sql>
   <select id="selectByExample" parameterType="com.cskaoyan.mall.bean.AdminExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
@@ -288,7 +292,6 @@
       role_ids = #{roleIds,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
-
   <select id="queryPasswordByUsername" parameterType="string" resultType="string">
     select password from cskaoyan_mall_admin where username = #{password}
   </select>
@@ -301,4 +304,12 @@
   <update id="updateByUsername" parameterType="string">
     update cskaoyan_mall_admin set password = #{newPassword} where id = 1
   </update>
+  <select id="selectAdminListByUser" resultType="com.cskaoyan.mall.bean.Admin">
+    select <include refid="Base_Column_List2"/> from cskaoyan_mall_admin
+     <where>
+       <if test="username != null">
+         username like "%"#{username}"%"
+       </if>
+     </where>
+  </select>
 </mapper>

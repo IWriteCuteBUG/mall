@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class CustomExceptionHandler {
     @ExceptionHandler(AuthorizationException.class)
     @ResponseBody
-    public BaseRespVo authorizationExceptionHanle(AuthorizationException e){
+    public BaseRespVo authorizationExceptionHandler(AuthorizationException e){
         BaseRespVo<String> stringBaseRespVo = new BaseRespVo<>();
         stringBaseRespVo.setErrno(605);
         stringBaseRespVo.setErrmsg("账号或密码输入错误");

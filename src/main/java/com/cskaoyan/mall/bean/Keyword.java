@@ -1,5 +1,7 @@
 package com.cskaoyan.mall.bean;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 
 public class Keyword {
@@ -14,7 +16,7 @@ public class Keyword {
     private Boolean isDefault;
 
     private Integer sortOrder;
-
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date addTime;
 
     private Date updateTime;
@@ -34,7 +36,7 @@ public class Keyword {
     }
 
     public void setKeyword(String keyword) {
-        this.keyword = keyword == null ? null : keyword.trim();
+        this.keyword = keyword;
     }
 
     public String getUrl() {
@@ -42,23 +44,23 @@ public class Keyword {
     }
 
     public void setUrl(String url) {
-        this.url = url == null ? null : url.trim();
+        this.url = url;
     }
 
-    public Boolean getIsHot() {
+    public Boolean getisHot() {
         return isHot;
     }
 
-    public void setIsHot(Boolean isHot) {
-        this.isHot = isHot;
+    public void setisHot(Boolean hot) {
+       this.isHot = hot;
     }
 
-    public Boolean getIsDefault() {
+    public Boolean getisDefault() {
         return isDefault;
     }
 
-    public void setIsDefault(Boolean isDefault) {
-        this.isDefault = isDefault;
+    public void setisDefault(Boolean aDefault) {
+        this.isDefault = aDefault;
     }
 
     public Integer getSortOrder() {

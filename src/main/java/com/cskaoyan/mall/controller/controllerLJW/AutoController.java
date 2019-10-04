@@ -1,4 +1,4 @@
-package com.cskaoyan.mall.controller;
+package com.cskaoyan.mall.controller.controllerLJW;
 
 import com.cskaoyan.mall.bean.BaseRespVo;
 import com.cskaoyan.mall.service.AdminService;
@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.Serializable;
+
 
 @RestController
 @RequestMapping("admin")
@@ -56,4 +57,5 @@ public class AutoController {
         BaseRespVo baseRespVo = adminService.updatePassword(passwordVo);
         return baseRespVo;
     }
+
 }

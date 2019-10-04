@@ -29,6 +29,7 @@ public class CoreConfig implements WebMvcConfigurer {
         return corsFilter;
     }
 
+
     private CorsConfiguration buildCorsConfiguration() {
         CorsConfiguration corsConfiguration = new CorsConfiguration();
         corsConfiguration.addAllowedOrigin("*");
@@ -36,6 +37,7 @@ public class CoreConfig implements WebMvcConfigurer {
         corsConfiguration.addAllowedHeader("*");
         return corsConfiguration;
     }
+
 
 
 }

@@ -35,4 +35,6 @@ public interface AdminMapper {
     ResourceVo queryRoleIdsByUsername(@Param("username") String primaryPrincipal);
 
     void updateByUsername(@Param("newPassword") String newPassword);
+
+    List<Admin> selectAdminListByUser(@Param("username") String username);
 }

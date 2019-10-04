@@ -7,6 +7,8 @@ import com.cskaoyan.mall.mapper.RoleMapper;
 import com.cskaoyan.mall.service.AdminService;
 import com.cskaoyan.mall.vo.tvo.PasswordVo;
 import com.cskaoyan.mall.vo.tvo.ResourceVo;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,7 +61,7 @@ public class AdminServiceImpl implements AdminService {
         Subject subject = SecurityUtils.getSubject();
         String principal = (String) subject.getPrincipal();
         String s = adminMapper.queryPasswordByUsername(principal);
-        BaseRespVo baseRespVo = null;
+        BaseRespVo baseRespVo   ;
         if (s.equals(oldPassword)){
             if (passwordVo.getNewPassword().equals(passwordVo.getNewPassword2())) {
                 //修改密码
@@ -84,5 +86,19 @@ public class AdminServiceImpl implements AdminService {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public BaseRespVo adminListInfo(int page, int limit, String username) {
+        com.cskaoyan.mall.Vo.dhd.AllVo objectAllVo = new com.cskaoyan.mall.Vo.dhd.AllVo();
+        String orderby=" add_time desc";
+        PageHelper.startPage(page,limit,orderby);
+        List<Admin> admins = adminMapper.selectAdminListByUser(username);
+        PageInfo<Admin> adminPageInfo = new PageInfo<>(admins);
+        long total = adminPageInfo.getTotal();
+        objectAllVo.setItems(admins);
+        objectAllVo.setTotal((int)total);
+        BaseRespVo ok = BaseRespVo.ok(objectAllVo);
+        return ok;
     }
 }

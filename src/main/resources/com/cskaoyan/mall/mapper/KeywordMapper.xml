@@ -88,7 +88,7 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from cskaoyan_mall_keyword
     where id = #{id,jdbcType=INTEGER}
@@ -103,13 +103,13 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.cskaoyan.mall.bean.Keyword">
-    insert into cskaoyan_mall_keyword (id, keyword, url, 
-      is_hot, is_default, sort_order, 
+  <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="com.cskaoyan.mall.bean.Keyword">
+    insert into cskaoyan_mall_keyword (id, keyword, url,
+      is_hot, is_default, sort_order,
       add_time, update_time, deleted
       )
-    values (#{id,jdbcType=INTEGER}, #{keyword,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, 
-      #{isHot,jdbcType=BIT}, #{isDefault,jdbcType=BIT}, #{sortOrder,jdbcType=INTEGER}, 
+    values (#{id,jdbcType=INTEGER}, #{keyword,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR},
+      #{isHot,jdbcType=BIT}, #{isDefault,jdbcType=BIT}, #{sortOrder,jdbcType=INTEGER},
       #{addTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{deleted,jdbcType=BIT}
       )
   </insert>
