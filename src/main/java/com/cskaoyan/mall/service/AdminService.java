@@ -7,4 +7,6 @@ public interface AdminService {
     BaseRespVo queryInfo(String token);
 
     BaseRespVo updatePassword(PasswordVo passwordVo);
+
+    boolean queryUsername(String username);
 }

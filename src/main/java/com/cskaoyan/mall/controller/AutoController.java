@@ -24,6 +24,14 @@ public class AutoController {
     public BaseRespVo login(@RequestBody LoginVo loginVo) {
         String username = loginVo.getUsername();
         String password = loginVo.getPassword();
+        //先判断是否存在该用户
+        boolean flag = adminService.queryUsername(username);
+        if (!flag) {
+            BaseRespVo<String> stringBaseRespVo = new BaseRespVo<>();
+            stringBaseRespVo.setErrno(605);
+            stringBaseRespVo.setErrmsg("账号或密码输入错误");
+            return stringBaseRespVo;
+        }
         UsernamePasswordToken usernamePasswordToken = new UsernamePasswordToken(username, password);
         Subject subject = SecurityUtils.getSubject();
         subject.login(usernamePasswordToken);

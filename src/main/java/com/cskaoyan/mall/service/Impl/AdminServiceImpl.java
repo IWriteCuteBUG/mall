@@ -1,10 +1,8 @@
 package com.cskaoyan.mall.service.Impl;
 
-import com.cskaoyan.mall.bean.Admin;
-import com.cskaoyan.mall.bean.AdminExample;
-import com.cskaoyan.mall.bean.BaseRespVo;
-import com.cskaoyan.mall.bean.InfoVo;
+import com.cskaoyan.mall.bean.*;
 import com.cskaoyan.mall.mapper.AdminMapper;
+import com.cskaoyan.mall.mapper.PermissionMapper;
 import com.cskaoyan.mall.mapper.RoleMapper;
 import com.cskaoyan.mall.service.AdminService;
 import com.cskaoyan.mall.vo.tvo.PasswordVo;
@@ -14,7 +12,6 @@ import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -25,6 +22,9 @@ public class AdminServiceImpl implements AdminService {
 
     @Autowired
     RoleMapper roleMapper;
+
+    @Autowired
+    PermissionMapper permissionMapper;
 
     @Override
     public BaseRespVo queryInfo(String token) {
@@ -37,11 +37,17 @@ public class AdminServiceImpl implements AdminService {
         Admin admin = admins.get(0);
         infoVo.setAvatar(admin.getAvatar());
         infoVo.setName(principal);
-        ArrayList<String> Perms = new ArrayList<>();
-        Perms.add("*");
-        infoVo.setPerms(Perms);
+        //查权限ids
         ResourceVo resourceVo = adminMapper.queryRoleIdsByUsername(principal);
         List<String> roles = roleMapper.queryRoleByIds(resourceVo.getRoleIds());
+        //查询权限List
+        List<String> perms = permissionMapper.queryPermissionsByRoleIds(resourceVo.getRoleIds());
+        if (perms.size() == 1 && "*".equals(perms.get(0))) {
+            infoVo.setPerms(perms);
+        } else {
+            List<String> permsList = permissionMapper.queryPerms(perms);
+            infoVo.setPerms(permsList);
+        }
         infoVo.setRoles(roles);
         BaseRespVo info = BaseRespVo.info(infoVo);
         return info;
@@ -60,12 +66,23 @@ public class AdminServiceImpl implements AdminService {
                 adminMapper.updateByUsername(passwordVo.getNewPassword());
                 baseRespVo = BaseRespVo.baseRespErr(0, "成功");
             }else {
-                baseRespVo = BaseRespVo.baseRespErr(605, "账号密码不对");
+                baseRespVo = BaseRespVo.baseRespErr(605, "账号或密码输入错误");
             }
 
         }else {
-            baseRespVo = BaseRespVo.baseRespErr(605, "账号密码不对");
+            baseRespVo = BaseRespVo.baseRespErr(605, "账号或密码输入错误");
         }
         return baseRespVo;
+    }
+
+    @Override
+    public boolean queryUsername(String username) {
+        AdminExample adminExample = new AdminExample();
+        adminExample.createCriteria().andUsernameEqualTo(username);
+        List<Admin> admins = adminMapper.selectByExample(adminExample);
+        if (admins.size() == 0) {
+            return false;
+        }
+        return true;
     }
 }

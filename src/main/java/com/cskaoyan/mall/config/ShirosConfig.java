@@ -7,9 +7,11 @@ import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.handler.SimpleMappingExceptionResolver;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.Properties;
 
 @Configuration
 public class ShirosConfig {
@@ -44,5 +46,13 @@ public class ShirosConfig {
         MySessionManager mySessionManager = new MySessionManager();
         return mySessionManager;
     }
+    /*@Bean
+    public SimpleMappingExceptionResolver simpleMappingExceptionResolver(){
+        SimpleMappingExceptionResolver simpleMappingExceptionResolver = new SimpleMappingExceptionResolver();
+        Properties mappings = new Properties();
+        mappings.setProperty("org.apache.shiro.authz.AuthorizationException","admin/auth/login");
+        simpleMappingExceptionResolver.setExceptionMappings(mappings);
+        return simpleMappingExceptionResolver;
+    }*/
 
 }

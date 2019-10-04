@@ -35,7 +35,7 @@ public class MyRealm extends AuthorizingRealm {
         //先从数据库中取出roleids
         ResourceVo resourceVo = adminMapper.queryRoleIdsByUsername(primaryPrincipal);
         //根据int数组查询权限
-       List<String> permissions = roleMapper.queryRoleByIds(resourceVo.getRoleIds());
+        List<String> permissions = roleMapper.queryRoleByIds(resourceVo.getRoleIds());
         simpleAuthorizationInfo.addStringPermissions(permissions);
         return simpleAuthorizationInfo;
     }
