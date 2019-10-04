@@ -14,3 +14,9 @@ logging:
       cskaoyan:
         mall:
           mapper: debug
+pagegelper:
+  helper-dialect: mysql
+
+
+mybatis:
+  type-handlers-package: com.cskaoyan.mall.mybatis

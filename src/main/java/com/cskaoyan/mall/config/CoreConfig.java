@@ -16,6 +16,7 @@ public class CoreConfig {
         return corsFilter;
     }
 
+
     private CorsConfiguration buildCorsConfiguration() {
         CorsConfiguration corsConfiguration = new CorsConfiguration();
         corsConfiguration.addAllowedOrigin("*");
@@ -23,6 +24,7 @@ public class CoreConfig {
         corsConfiguration.addAllowedHeader("*");
         return corsConfiguration;
     }
+
 
 
 }
