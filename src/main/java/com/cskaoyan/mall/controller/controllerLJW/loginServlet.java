@@ -1,15 +1,10 @@
 package com.cskaoyan.mall.controller.controllerLJW;
-
-
 import com.alibaba.fastjson.JSON;
-
 import com.cskaoyan.mall.util.utiLJW.HttpClient;
 import com.cskaoyan.mall.vo.voLJW.Token;
-
 import com.cskaoyan.mall.vo.voLJW.WxUser;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 

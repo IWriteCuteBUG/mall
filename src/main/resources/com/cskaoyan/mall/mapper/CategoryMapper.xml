@@ -100,8 +100,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, name, keywords, `desc`, pid, icon_url, pic_url, level, sort_order, add_time, update_time,
-    deleted
+ id, name, keywords, `desc`, pid, icon_url, pic_url, level, sort_order, add_time, update_time,
+  deleted
   </sql>
 
 
@@ -164,7 +164,9 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
+
   <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="com.cskaoyan.mall.bean.Category">
+
     insert into cskaoyan_mall_category (id, name, keywords,
       desc, pid, icon_url,
       pic_url, level, sort_order,
@@ -377,4 +379,28 @@
       deleted = #{deleted,jdbcType=BIT}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+
+  <resultMap id="catListMap" type="com.cskaoyan.mall.vo.goodsmanagervo.ForCatList">
+    <result column="id" property="value"/>
+    <result column="name" property="label"/>
+    <collection property="children" column="id" select="com.cskaoyan.mall.mapper.CategoryMapper.queryChildren"/>
+  </resultMap>
+  <!--第一次查询-->
+  <select id="queryCatList" resultMap="catListMap">
+    select id,name from cskaoyan_mall_category where pid = 0
+  </select>
+  <!--第二次查询-->
+  <select id="queryChildren" resultMap="childrenMap">
+    select id,name from cskaoyan_mall_category where pid = #{id}
+  </select>
+  <resultMap id="childrenMap" type="com.cskaoyan.mall.vo.goodsmanagervo.ForCatChildren">
+    <result column="id" property="value"/>
+    <result column="name" property="label"/>
+  </resultMap>
+
+  <select id="selectIds" resultType="com.cskaoyan.mall.bean.Category">
+    select pid,id from cskaoyan_mall_category where id=#{categoryId}
+  </select>
+
 </mapper>

@@ -76,7 +76,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, title, subtitle, price, read_count, pic_url, sort_order, goods, add_time, update_time, 
+    id, title, subtitle, price, read_count, pic_url, sort_order, goods, add_time, update_time,
     deleted
   </sql>
   <sql id="Blob_Column_List">
@@ -113,7 +113,7 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
-    select 
+    select
     <include refid="Base_Column_List" />
     ,
     <include refid="Blob_Column_List" />
@@ -131,18 +131,18 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.cskaoyan.mall.bean.Topic">
-    insert into cskaoyan_mall_topic (id, title, subtitle, 
-      price, read_count, pic_url, 
-      sort_order, goods, add_time, 
+    insert into cskaoyan_mall_topic (id, title, subtitle,
+      price, read_count, pic_url,
+      sort_order, goods, add_time,
       update_time, deleted, content
       )
-    values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{subtitle,jdbcType=VARCHAR}, 
-      #{price,jdbcType=DECIMAL}, #{readCount,jdbcType=VARCHAR}, #{picUrl,jdbcType=VARCHAR}, 
-      #{sortOrder,jdbcType=INTEGER}, #{goods,jdbcType=VARCHAR}, #{addTime,jdbcType=TIMESTAMP}, 
+    values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{subtitle,jdbcType=VARCHAR},
+      #{price,jdbcType=DECIMAL}, #{readCount,jdbcType=VARCHAR}, #{picUrl,jdbcType=VARCHAR},
+      #{sortOrder,jdbcType=INTEGER}, #{goods,jdbcType=VARCHAR}, #{addTime,jdbcType=TIMESTAMP},
       #{updateTime,jdbcType=TIMESTAMP}, #{deleted,jdbcType=BIT}, #{content,jdbcType=LONGVARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.cskaoyan.mall.bean.Topic">
+  <insert id="insertSelective" parameterType="com.cskaoyan.mall.bean.Topic"   keyColumn="id" useGeneratedKeys="true" keyProperty="id" >
     insert into cskaoyan_mall_topic
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">

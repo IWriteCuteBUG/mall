@@ -4,6 +4,8 @@ import com.cskaoyan.mall.bean.Brand;
 import com.cskaoyan.mall.bean.BrandExample;
 import java.util.List;
 
+
+import com.cskaoyan.mall.vo.goodsmanagervo.ForBrandList;
 import com.cskaoyan.mall.vo.voLJW.BrandModify;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Param;
@@ -38,4 +40,6 @@ public interface BrandMapper {
     int updateByPrimaryKeySelective(Brand record);
 
     int updateByPrimaryKey(Brand record);
+    List<ForBrandList> queryBrandList();
+
 }

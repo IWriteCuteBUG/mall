@@ -4,6 +4,7 @@ import com.cskaoyan.mall.bean.*;
 
 import com.cskaoyan.mall.mapper.*;
 import com.cskaoyan.mall.util.utiLJW.PhotoUploadUtils;
+import com.cskaoyan.mall.util.utiLJW.ReturnUtils;
 import com.cskaoyan.mall.vo.voLJW.*;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -44,10 +45,10 @@ public class MallManagerServiceImply implements MallManagerService {
         BrandExample brandExample = new BrandExample();
         BrandExample.Criteria criteria = brandExample.createCriteria();
         criteria.andIdIsNotNull();
-        if (id != null) {
+        if (id != null&&!"".equals(id.trim())) {
             criteria.andIdEqualTo(Integer.valueOf(id));
         }
-        if (name != null) {
+        if (name != null&&!"".equals(name.trim())) {
             criteria.andNameLike("%" + name + "%");
         }
         brandExample.setOrderByClause(sort + " " + order);
@@ -71,29 +72,49 @@ public class MallManagerServiceImply implements MallManagerService {
 
     @Autowired
     GoodsMapper goodsMapper;
-    @Override
-    public boolean deleteBrand(int id) {
-        GoodsExample goodsExample=new GoodsExample();
-        GoodsExample.Criteria criteria=goodsExample.createCriteria();
-        criteria.andBrandIdEqualTo(id);
-        List<Goods> goodsList=goodsMapper.selectByExample(goodsExample);
-        for (Goods goods:goodsList){
-//            goodsMapper.deleteByPrimaryKey(goods.getId());
-        }
 
-        if (brandMapper.deleteByPrimaryKey(id) == 1) {
-            return true;
+    @Override
+    public BaseRespVo deleteBrand(int id) {
+        GoodsExample goodsExample = new GoodsExample();
+        GoodsExample.Criteria criteria = goodsExample.createCriteria();
+        criteria.andGoodsSnEqualTo(String.valueOf(id));
+        List<Goods> goodsList = goodsMapper.selectByExample(goodsExample);
+        //删除品牌所属商品
+        StringBuilder goodsname =new StringBuilder("");
+
+        if (!goodsList.isEmpty()) {
+            int goodsnum = goodsList.size();
+            goodsname.append("旗下" + goodsnum + "件商品：");
+            for (Goods goods : goodsList) {
+                goodsname.append(goods.getName() + "  ");
+                goodsMapper.deleteByPrimaryKey(goods.getId());
+            }
+            goodsname.append("都已删除");
+            brandMapper.deleteByPrimaryKey(id);
+            System.out.println(goodsname.toString());
+            return ReturnUtils.ok(null, goodsname+"");
+
+        } else {
+            goodsname.append("旗下无上架商品");
+            brandMapper.deleteByPrimaryKey(id);
+            System.out.println(goodsname.toString());
+            return ReturnUtils.ok(null, goodsname.toString());
         }
-        return false;
 
 
     }
 
+
+
+
+
     @Override
     public Brand createBrand(Brand brand) {
-        brandMapper.insert(brand);
+        brand.setDeleted(false);
         brand.setAddTime(new Date());
         brand.setUpdateTime(new Date());
+
+        brandMapper.insert(brand);
 
         return brand;
     }

@@ -12,13 +12,13 @@ public interface MallManagerService {
    //获取type为1的区域
     List<Region> getAllRegions();
     //获取品牌制造商
-    BrandManufacturer getBrandManufacturer(int page, int limit, String sort , String order, String id, String name);
+    BrandManufacturer getBrandManufacturer(int page, int limit, String sort, String order, String id, String name);
 
     Brand updateBrand(Brand brand);
 
 
 
-    boolean deleteBrand(int id);
+    BaseRespVo deleteBrand(int id);
 
  Brand createBrand(Brand brand);
 

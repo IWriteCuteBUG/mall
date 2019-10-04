@@ -103,6 +103,7 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
+
   <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="com.cskaoyan.mall.bean.Brand">
     insert into cskaoyan_mall_brand (id, name, `desc`,
       pic_url, sort_order, floor_price,
@@ -276,4 +277,13 @@
       deleted = #{deleted,jdbcType=BIT}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <select id="queryBrandList" resultMap="brandMap">
+    select id,name from cskaoyan_mall_brand
+  </select>
+  <resultMap id="brandMap" type="com.cskaoyan.mall.vo.goodsmanagervo.ForBrandList">
+    <result column="id" property="value"/>
+    <result column="name" property="label"/>
+  </resultMap>
+
 </mapper>

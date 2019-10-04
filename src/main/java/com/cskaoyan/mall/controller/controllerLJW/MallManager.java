@@ -21,6 +21,8 @@ import java.util.Map;
 import java.util.UUID;
 
 @RestController
+//@RequestBody 接受json
+//@ResponseBody 返回json,如果前端没有任何处理会直接显示json字符串在网页
 public class MallManager {
     @Autowired
     MallManagerServiceImply mallManager;
@@ -52,7 +54,7 @@ public class MallManager {
     @RequestMapping("admin/brand/list")
     public BaseRespVo getBrandManufacturer(int page, int limit, String sort, String order, String id, String name) {
 
-
+        System.out.println(name);
         BaseRespVo<BrandManufacturer> brandManufacturerBaseRespVo = new BaseRespVo<>();
         brandManufacturerBaseRespVo.setErrmsg("成功");
         brandManufacturerBaseRespVo.setErrno(0);
@@ -73,10 +75,9 @@ public class MallManager {
     //删除品牌
     @RequestMapping("admin/brand/delete")
     public BaseRespVo deleteBrand(@RequestBody Brand brand) {
-
-        return mallManager.deleteBrand(brand.getId()) ? ReturnUtils.ok(null, "删除成功") : ReturnUtils.fail(null, "数据库异常，请联系后台管理人员核对后再试");
-
-
+      BaseRespVo baseRespVo=  mallManager.deleteBrand(brand.getId());
+        System.out.println(baseRespVo.getErrmsg());
+        return baseRespVo ;
     }
 
     //新增商品品牌
@@ -89,11 +90,11 @@ public class MallManager {
 
     }
 
-    //上传图片
-    @RequestMapping("/admin/storage/create")
-    public BaseRespVo uplaod(HttpServletRequest req, @RequestParam("file") MultipartFile file) {
-        return ReturnUtils.ok(mallManager.uploadPhoto(file), "上传成功");
-    }
+//    //上传图片
+//    @RequestMapping("/admin/storage/create")
+//    public BaseRespVo uplaod(HttpServletRequest req, @RequestParam("file") MultipartFile file) {
+//        return ReturnUtils.ok(mallManager.uploadPhoto(file), "上传成功");
+//    }
 
 
     //获取商品种类列表

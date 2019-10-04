@@ -17,7 +17,7 @@ public interface StorageMapper {
     int insertSelective(Storage record);
 
     List<Storage> selectByExample(StorageExample example);
-
+    List<Storage> selectStorageListByKeyAndName(@Param("key") String key, @Param("name") String name);
     Storage selectByPrimaryKey(Integer id);
 
     int updateByExampleSelective(@Param("record") Storage record, @Param("example") StorageExample example);
