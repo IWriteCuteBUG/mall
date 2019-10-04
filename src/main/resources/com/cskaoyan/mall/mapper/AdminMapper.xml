@@ -72,8 +72,12 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, username, password, last_login_ip, last_login_time, avatar, add_time, update_time, 
+    id, username, password, last_login_ip, last_login_time, avatar, add_time, update_time,
     deleted, role_ids
+  </sql>
+  <sql id="Base_Column_List2">
+    id, username, password, last_login_ip, last_login_time, avatar, add_time, update_time,
+    deleted, role_ids as roleIds
   </sql>
   <select id="selectByExample" parameterType="com.cskaoyan.mall.bean.AdminExample" resultMap="BaseResultMap">
     select
@@ -90,7 +94,7 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from cskaoyan_mall_admin
     where id = #{id,jdbcType=INTEGER}
@@ -106,13 +110,13 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.cskaoyan.mall.bean.Admin">
-    insert into cskaoyan_mall_admin (id, username, password, 
-      last_login_ip, last_login_time, avatar, 
-      add_time, update_time, deleted, 
+    insert into cskaoyan_mall_admin (id, username, password,
+      last_login_ip, last_login_time, avatar,
+      add_time, update_time, deleted,
       role_ids)
-    values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-      #{lastLoginIp,jdbcType=VARCHAR}, #{lastLoginTime,jdbcType=TIMESTAMP}, #{avatar,jdbcType=VARCHAR}, 
-      #{addTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{deleted,jdbcType=BIT}, 
+    values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
+      #{lastLoginIp,jdbcType=VARCHAR}, #{lastLoginTime,jdbcType=TIMESTAMP}, #{avatar,jdbcType=VARCHAR},
+      #{addTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{deleted,jdbcType=BIT},
       #{roleIds,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.cskaoyan.mall.bean.Admin">
@@ -288,4 +292,24 @@
       role_ids = #{roleIds,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <select id="queryPasswordByUsername" parameterType="string" resultType="string">
+    select password from cskaoyan_mall_admin where username = #{password}
+  </select>
+  <resultMap id="resourcesMap" type="com.cskaoyan.mall.vo.tvo.ResourceVo">
+    <result column="role_ids" property="roleIds" typeHandler="com.cskaoyan.mall.handler.String2IntArrayHandler"/>
+  </resultMap>
+  <select id="queryRoleIdsByUsername" resultMap="resourcesMap" parameterType="string">
+    select role_ids from cskaoyan_mall_admin where username = #{username}
+  </select>
+  <update id="updateByUsername" parameterType="string">
+    update cskaoyan_mall_admin set password = #{newPassword} where id = 1
+  </update>
+  <select id="selectAdminListByUser" resultType="com.cskaoyan.mall.bean.Admin">
+    select <include refid="Base_Column_List2"/> from cskaoyan_mall_admin
+     <where>
+       <if test="username != null">
+         username like "%"#{username}"%"
+       </if>
+     </where>
+  </select>
 </mapper>

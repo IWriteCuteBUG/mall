@@ -28,9 +28,15 @@ public class GrouponsServiceImpl implements GrouponsService {
     GoodsMapper goodsMapper;
 
     @Override
-    public GrouponsVo getGrouponActive(int page, int limit, String sort, String order) {
+    public GrouponsVo getGrouponActive(int page, int limit, String sort, String order, int goodsIds) {
         GrouponRulesExample grouponRulesExample = new GrouponRulesExample();
-        grouponRulesExample.createCriteria().andIdIsNotNull();
+        if (goodsIds == 0) {
+            grouponRulesExample.createCriteria().andIdIsNotNull();
+        }else {
+            grouponRulesExample.createCriteria().andIdIsNotNull().andGoodsIdEqualTo(goodsIds);
+        }
+        String orderby = sort + " " +order;
+        PageHelper.startPage(page, limit, orderby);
         List<GrouponRules> grouponRules = grouponRulesMapper.selectByExample(grouponRulesExample);
         GrouponsVo grouponsVo = new GrouponsVo();
         grouponsVo.setTotal(grouponRules.size());

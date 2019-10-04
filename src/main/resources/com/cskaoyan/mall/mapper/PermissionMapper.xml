@@ -85,7 +85,7 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from cskaoyan_mall_permission
     where id = #{id,jdbcType=INTEGER}
@@ -101,10 +101,10 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.cskaoyan.mall.bean.Permission">
-    insert into cskaoyan_mall_permission (id, role_id, permission, 
+    insert into cskaoyan_mall_permission (id, role_id, permission,
       add_time, update_time, deleted
       )
-    values (#{id,jdbcType=INTEGER}, #{roleId,jdbcType=INTEGER}, #{permission,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=INTEGER}, #{roleId,jdbcType=INTEGER}, #{permission,jdbcType=VARCHAR},
       #{addTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{deleted,jdbcType=BIT}
       )
   </insert>
@@ -225,4 +225,32 @@
       deleted = #{deleted,jdbcType=BIT}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <select id="queryPermissionsByRoleIds" resultType="string">
+    select permission from cskaoyan_mall_permission where role_id in
+    <foreach collection="roleIds" item="id" open="(" close=")" separator=",">
+      #{id}
+    </foreach>
+  </select>
+
+  <select id="queryPerms" resultType="string">
+    select api from cskaoyan_mall_permission_details where id in
+    <foreach collection="perms" item="id" open="(" close=")" separator=",">
+      #{id}
+    </foreach>
+  </select>
+  <select id="selectPermissionByRoleId" resultType="string">
+    select permission from cskaoyan_mall_permission where role_id = #{id}
+  </select>
+  <select id="selectAdminPermission_details" resultType="com.cskaoyan.mall.vo.dhd.util.SystemPermission">
+    select pid,label,parent_id,api,id from cskaoyan_mall_permission_details where parent_id = #{id}
+  </select>
+  <select id="selectAdminPermission_detailsParent" resultType="com.cskaoyan.mall.vo.dhd.util.SystemPermission">
+    select pid,label,parent_id,api,id from cskaoyan_mall_permission_details where pid &lt; 9
+  </select>
+  <delete id="deletePermission">
+    delete from cskaoyan_mall_permission where role_id = #{id}
+  </delete>
+  <insert id="insertPermission">
+    insert into cskaoyan_mall_permission(role_id,permission) values (#{id},#{permission})
+  </insert>
 </mapper>

@@ -1,5 +1,7 @@
 package com.cskaoyan.mall.bean;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 
 public class Admin {
@@ -14,14 +16,14 @@ public class Admin {
     private Date lastLoginTime;
 
     private String avatar;
-
+@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date addTime;
-
+@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date updateTime;
 
     private Boolean deleted;
 
-    private String roleIds;
+    private Integer[] roleIds;
 
     public Integer getId() {
         return id;
@@ -95,11 +97,11 @@ public class Admin {
         this.deleted = deleted;
     }
 
-    public String getRoleIds() {
+    public Integer[] getRoleIds() {
         return roleIds;
     }
 
-    public void setRoleIds(String roleIds) {
-        this.roleIds = roleIds == null ? null : roleIds.trim();
+    public void setRoleIds(Integer[] roleIds) {
+        this.roleIds = roleIds;
     }
 }
