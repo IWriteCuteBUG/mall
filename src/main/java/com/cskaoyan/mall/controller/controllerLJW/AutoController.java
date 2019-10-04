@@ -1,4 +1,4 @@
-package com.cskaoyan.mall.controller;
+package com.cskaoyan.mall.controller.controllerLJW;
 
 import com.cskaoyan.mall.bean.BaseRespVo;
 import com.cskaoyan.mall.bean.InfoVo;
@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
+
 
 @RestController
 public class AutoController {
