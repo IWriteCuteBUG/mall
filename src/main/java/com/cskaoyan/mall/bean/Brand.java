@@ -1,9 +1,45 @@
 package com.cskaoyan.mall.bean;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.math.BigDecimal;
 import java.util.Date;
 
 public class Brand {
+    @Override
+    public String toString() {
+        return "Brand{" +
+                "name='" + name + '\'' +
+                ", desc='" + desc + '\'' +
+                ", picUrl='" + picUrl + '\'' +
+                ", floorPrice=" + floorPrice +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Brand brand = (Brand) o;
+
+        if (id != null ? !id.equals(brand.id) : brand.id != null) return false;
+        if (name != null ? !name.equals(brand.name) : brand.name != null) return false;
+        if (desc != null ? !desc.equals(brand.desc) : brand.desc != null) return false;
+        if (picUrl != null ? !picUrl.equals(brand.picUrl) : brand.picUrl != null) return false;
+        return floorPrice != null ? floorPrice.equals(brand.floorPrice) : brand.floorPrice == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (desc != null ? desc.hashCode() : 0);
+        result = 31 * result + (picUrl != null ? picUrl.hashCode() : 0);
+        result = 31 * result + (floorPrice != null ? floorPrice.hashCode() : 0);
+        return result;
+    }
+
     private Integer id;
 
     private String name;
@@ -15,9 +51,9 @@ public class Brand {
     private Byte sortOrder;
 
     private BigDecimal floorPrice;
-
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date addTime;
-
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date updateTime;
 
     private Boolean deleted;
@@ -90,7 +126,11 @@ public class Brand {
         return deleted;
     }
 
+
     public void setDeleted(Boolean deleted) {
         this.deleted = deleted;
     }
+
+
+
 }

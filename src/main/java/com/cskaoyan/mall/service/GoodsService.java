@@ -14,8 +14,6 @@ public interface GoodsService {
 
     BaseRespVo<CatAndBrand> queryCatAndBrand();
 
-    void deleteGood(Integer id);
-
     BaseRespVo<CommentListVo<Comment>> queryCommentList(int page, int limit, String sort, String order, Integer userId, Integer valueId);
 
     int deleteComment(Integer id);
@@ -26,4 +24,5 @@ public interface GoodsService {
 
     void updateGoods(GoodsDetail goodsDetail);
 
+    void deleteGood(Integer id);
 }
