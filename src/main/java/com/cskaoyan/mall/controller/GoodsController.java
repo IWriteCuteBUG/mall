@@ -69,10 +69,7 @@ public class GoodsController {
         if(bindingResult.hasErrors()){
             FieldError fieldError = bindingResult.getFieldError();
             String defaultMessage = fieldError.getDefaultMessage();
-            BaseRespVo<CommentListVo<Comment>> baseRespVo = new BaseRespVo<>();
-            baseRespVo.setErrmsg(defaultMessage);
-            baseRespVo.setErrno(402);
-            return baseRespVo;
+            return ReturnUtils.fail(null,defaultMessage);
         }
         BaseRespVo<CommentListVo<Comment>> commentListVoBaseRespVo = goodsService.queryCommentList(forQueryComments);
         return commentListVoBaseRespVo;
