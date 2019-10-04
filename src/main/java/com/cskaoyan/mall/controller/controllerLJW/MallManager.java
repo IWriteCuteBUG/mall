@@ -21,6 +21,8 @@ import java.util.Map;
 import java.util.UUID;
 
 @RestController
+//@RequestBody 接受json
+//@ResponseBody 返回json,如果前端没有任何处理会直接显示json字符串在网页
 public class MallManager {
     @Autowired
     MallManagerServiceImply mallManager;
@@ -52,7 +54,7 @@ public class MallManager {
     @RequestMapping("admin/brand/list")
     public BaseRespVo getBrandManufacturer(int page, int limit, String sort, String order, String id, String name) {
 
-
+        System.out.println(name);
         BaseRespVo<BrandManufacturer> brandManufacturerBaseRespVo = new BaseRespVo<>();
         brandManufacturerBaseRespVo.setErrmsg("成功");
         brandManufacturerBaseRespVo.setErrno(0);

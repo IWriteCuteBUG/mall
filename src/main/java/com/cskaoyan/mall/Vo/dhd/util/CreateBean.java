@@ -1,4 +1,4 @@
-package com.cskaoyan.mall.Vo.dhd.util;
+package com.cskaoyan.mall.vo.dhd.util;
 
 public class CreateBean {
     String desc;

@@ -49,7 +49,7 @@ public class AdvertController {
         return baseRespVo;
     }
 
-//    文件上传
+    //文件上传
     @RequestMapping("storage/create")
 //    HttpServletRequest request , String name, String filename,
     public BaseRespVo uploadPic(HttpServletRequest request , @RequestParam("file") MultipartFile file) throws IOException {

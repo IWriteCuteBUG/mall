@@ -1,4 +1,4 @@
-package com.cskaoyan.mall.Vo.dhd;
+package com.cskaoyan.mall.vo.dhd;
 
 public class CreateVo {
     String addTime;

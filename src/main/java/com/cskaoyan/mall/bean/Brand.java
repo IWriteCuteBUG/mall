@@ -2,6 +2,8 @@ package com.cskaoyan.mall.bean;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Pattern;
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -40,6 +42,8 @@ public class Brand {
         return result;
     }
 
+
+  @Pattern(regexp ="[0-9]",message ="{brand.id}" )
     private Integer id;
 
     private String name;

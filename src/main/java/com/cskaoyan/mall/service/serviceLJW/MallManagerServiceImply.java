@@ -45,10 +45,10 @@ public class MallManagerServiceImply implements MallManagerService {
         BrandExample brandExample = new BrandExample();
         BrandExample.Criteria criteria = brandExample.createCriteria();
         criteria.andIdIsNotNull();
-        if (id != null) {
+        if (id != null&&!"".equals(id.trim())) {
             criteria.andIdEqualTo(Integer.valueOf(id));
         }
-        if (name != null) {
+        if (name != null&&!"".equals(name.trim())) {
             criteria.andNameLike("%" + name + "%");
         }
         brandExample.setOrderByClause(sort + " " + order);
@@ -77,25 +77,27 @@ public class MallManagerServiceImply implements MallManagerService {
     public BaseRespVo deleteBrand(int id) {
         GoodsExample goodsExample = new GoodsExample();
         GoodsExample.Criteria criteria = goodsExample.createCriteria();
-        criteria.andBrandIdEqualTo(id);
+        criteria.andGoodsSnEqualTo(String.valueOf(id));
         List<Goods> goodsList = goodsMapper.selectByExample(goodsExample);
         //删除品牌所属商品
-        StringBuffer goodsname = new StringBuffer("品牌删除成功-");
+        StringBuilder goodsname =new StringBuilder("");
 
         if (!goodsList.isEmpty()) {
             int goodsnum = goodsList.size();
             goodsname.append("旗下" + goodsnum + "件商品：");
             for (Goods goods : goodsList) {
-                goodsname.append(goodsMapper.deleteByPrimaryKey(goods.getId()) + "  ");
+                goodsname.append(goods.getName() + "  ");
+                goodsMapper.deleteByPrimaryKey(goods.getId());
             }
             goodsname.append("都已删除");
             brandMapper.deleteByPrimaryKey(id);
-
-            return ReturnUtils.ok(null, goodsname.toString());
+            System.out.println(goodsname.toString());
+            return ReturnUtils.ok(null, goodsname+"");
 
         } else {
             goodsname.append("旗下无上架商品");
             brandMapper.deleteByPrimaryKey(id);
+            System.out.println(goodsname.toString());
             return ReturnUtils.ok(null, goodsname.toString());
         }
 
