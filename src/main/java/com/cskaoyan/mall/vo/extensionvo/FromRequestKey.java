@@ -1,10 +1,21 @@
 package com.cskaoyan.mall.vo.extensionvo;
 
+import javax.validation.constraints.Size;
+
 public class FromRequestKey {
     private int page;
     private int limit;
     private String sort;
     private String order;
+    private Integer goodsId;
+
+    public Integer getGoodsId() {
+        return goodsId;
+    }
+
+    public void setGoodsId(Integer goodsId) {
+        this.goodsId = goodsId;
+    }
 
     public int getPage() {
         return page;

@@ -1,15 +1,18 @@
 package com.cskaoyan.mall.service.Impl;
 
 import com.cskaoyan.mall.bean.*;
+import com.cskaoyan.mall.exception.ExtensionCouponDiscountException;
 import com.cskaoyan.mall.mapper.CouponMapper;
 import com.cskaoyan.mall.mapper.CouponUserMapper;
 import com.cskaoyan.mall.service.ExtensionCouponService;
+import com.cskaoyan.mall.utils.ExtensionStringUtils;
 import com.cskaoyan.mall.vo.extensionvo.*;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -22,7 +25,9 @@ public class ExtensionCouponServiceImpl implements ExtensionCouponService {
     CouponUserMapper couponUserMapper;
     @Override
     public BaseRespVo queryCroupons(FromCoupon fromCoupon) {
-        PageHelper.startPage(fromCoupon.getPage(), fromCoupon.getLimit());
+        String order = fromCoupon.getOrder();
+        String orderBy = fromCoupon.getSort() + "  " + order;
+        PageHelper.startPage(fromCoupon.getPage(), fromCoupon.getLimit(), orderBy);
         int type = fromCoupon.getType();
         int status = fromCoupon.getStatus();
         String name = fromCoupon.getName();
@@ -37,18 +42,21 @@ public class ExtensionCouponServiceImpl implements ExtensionCouponService {
             criteria = criteria.andStatusEqualTo((short) status);
         }
 
-        if (name != null) {
+        if (!ExtensionStringUtils.isEmpty(name)) {
             criteria.andNameEqualTo(fromCoupon.getName());
         }
-
         coupons = couponMapper.selectByExample(couponExample);
         PageInfo<Coupon> pageInfo = new PageInfo<>(coupons);
         int total = (int) pageInfo.getTotal();
         return BaseRespVo.baseRespListOk(total,coupons);
     }
 
+    //添加优惠卷
     @Override
-    public BaseRespVo createCroupons(Coupon coupon) {
+    public BaseRespVo createCroupons(Coupon coupon) throws ExtensionCouponDiscountException {
+//        Coupon coupon = ExtensionCouponExceptionUtils.couponDiscount(couponObject);
+        Date date = new Date();
+        coupon.setAddTime(date);
         int i = couponMapper.insertSelective(coupon);
         BaseRespVo baseRespVo = BaseRespVo.baseRespOk(coupon);
         return baseRespVo;
@@ -82,6 +90,8 @@ public class ExtensionCouponServiceImpl implements ExtensionCouponService {
 //  修改优惠卷
     @Override
     public BaseRespVo createUpdate(Coupon coupon) {
+        Date date = new Date();
+        coupon.setUpdateTime(date);
         int update = couponMapper.updateByPrimaryKey(coupon);
         return BaseRespVo.baseRespOk(coupon);
     }

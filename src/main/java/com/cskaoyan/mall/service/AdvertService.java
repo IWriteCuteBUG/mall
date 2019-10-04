@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
 public interface AdvertService {
-    AdvertList queryAdverts(FromAdvert forAdvert);
+    BaseRespVo queryAdverts(FromAdvert forAdvert);
 
     BaseRespVo uploadPic(HttpServletRequest request, MultipartFile myfile) throws IOException;
 

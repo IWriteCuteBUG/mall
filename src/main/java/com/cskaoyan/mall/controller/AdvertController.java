@@ -3,7 +3,6 @@ package com.cskaoyan.mall.controller;
 import com.cskaoyan.mall.bean.Ad;
 import com.cskaoyan.mall.bean.BaseRespVo;
 import com.cskaoyan.mall.service.AdvertService;
-import com.cskaoyan.mall.vo.extensionvo.AdvertList;
 import com.cskaoyan.mall.vo.extensionvo.FromAdvert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,8 +23,7 @@ public class AdvertController {
 //    广告列表显示
     @RequestMapping("ad/list")
     public BaseRespVo AdvertList(FromAdvert forAdvert) {
-        AdvertList advertListVo = advertService.queryAdverts(forAdvert);
-        BaseRespVo baseRespVo = BaseRespVo.baseRespOk(advertListVo);
+        BaseRespVo baseRespVo = advertService.queryAdverts(forAdvert);
         return baseRespVo;
     }
 
@@ -42,6 +40,7 @@ public class AdvertController {
         BaseRespVo baseRespVo = advertService.updateAdvert(ad);
         return baseRespVo;
     }
+
 //    添加广告
     @RequestMapping("ad/create")
     public BaseRespVo AdvertAdd(@RequestBody Ad ad) {

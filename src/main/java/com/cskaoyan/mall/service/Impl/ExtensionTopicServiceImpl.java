@@ -12,17 +12,20 @@ import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
-public class ExtensionTopicControllerImpl implements ExtensionTopicService {
+public class ExtensionTopicServiceImpl implements ExtensionTopicService {
 
     @Autowired
     TopicMapper topicMapper;
 
     @Override
     public BaseRespVo queryCoupon(FromRequestKey fromRequestKey, String title, String subtitle) {
-        PageHelper.startPage(fromRequestKey.getPage(), fromRequestKey.getLimit());
+        String order = fromRequestKey.getOrder();
+        String orderBy = fromRequestKey.getSort() + "  " + order;
+        PageHelper.startPage(fromRequestKey.getPage(), fromRequestKey.getLimit(), orderBy);
         TopicExample topicExample = new TopicExample();
         TopicExample.Criteria criteria = topicExample.createCriteria();
         if (title != null) {
@@ -30,7 +33,7 @@ public class ExtensionTopicControllerImpl implements ExtensionTopicService {
         }
 
         if (subtitle != null) {
-            criteria = criteria.andSubtitleLike("%" + subtitle + "%");
+            criteria.andSubtitleLike("%" + subtitle + "%");
         }
         List<Topic> topics = topicMapper.selectByExample(topicExample);
         PageInfo<Topic> topicPageInfo = new PageInfo<>(topics);
@@ -40,12 +43,16 @@ public class ExtensionTopicControllerImpl implements ExtensionTopicService {
 
     @Override
     public BaseRespVo topicCreate(Topic topic) {
+        Date date = new Date();
+        topic.setAddTime(date);
         int i = topicMapper.insertSelective(topic);
         return BaseRespVo.baseRespOk(topic);
     }
 
     @Override
     public BaseRespVo topicUpdate(Topic topic) {
+        Date date = new Date();
+        topic.setUpdateTime(date);
         int update = topicMapper.updateByPrimaryKey(topic);
         return BaseRespVo.baseRespOk(topic);
     }

@@ -1,11 +1,12 @@
-package com.cskaoyan.mall.bean;
+package com.cskaoyan.mall.vo.extensionvo;
+
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class Coupon {
+public class CouponObject {
     private Integer id;
 
     private String name;
@@ -13,14 +14,14 @@ public class Coupon {
     private String desc;
 
     private String tag;
-
-    private Integer total;
-
-    private BigDecimal discount;
-
-    private BigDecimal min;
-
-    private Short limit;
+//  Integer
+    private String total;
+// BigDecimal
+    private String discount;
+// BigDecimal
+    private String min;
+//Short
+    private String limit;
 
     private Short type;
 
@@ -33,8 +34,8 @@ public class Coupon {
     private String code;
 
     private Short timeType;
-
-    private Short days;
+// Short
+    private String days;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date startTime;
@@ -82,35 +83,36 @@ public class Coupon {
         this.tag = tag == null ? null : tag.trim();
     }
 
-    public Integer getTotal() {
+
+    public String getTotal() {
         return total;
     }
 
-    public void setTotal(Integer total) {
+    public void setTotal(String total) {
         this.total = total;
     }
 
-    public BigDecimal getDiscount() {
+    public String getDiscount() {
         return discount;
     }
 
-    public void setDiscount(BigDecimal discount) {
+    public void setDiscount(String discount) {
         this.discount = discount;
     }
 
-    public BigDecimal getMin() {
+    public String getMin() {
         return min;
     }
 
-    public void setMin(BigDecimal min) {
+    public void setMin(String min) {
         this.min = min;
     }
 
-    public Short getLimit() {
+    public String getLimit() {
         return limit;
     }
 
-    public void setLimit(Short limit) {
+    public void setLimit(String limit) {
         this.limit = limit;
     }
 
@@ -162,11 +164,11 @@ public class Coupon {
         this.timeType = timeType;
     }
 
-    public Short getDays() {
+    public String getDays() {
         return days;
     }
 
-    public void setDays(Short days) {
+    public void setDays(String days) {
         this.days = days;
     }
 
