@@ -3,6 +3,8 @@ package com.cskaoyan.mall.mapper;
 import com.cskaoyan.mall.bean.Admin;
 import com.cskaoyan.mall.bean.AdminExample;
 import java.util.List;
+
+import com.cskaoyan.mall.vo.tvo.ResourceVo;
 import org.apache.ibatis.annotations.Param;
 
 public interface AdminMapper {
@@ -27,5 +29,12 @@ public interface AdminMapper {
     int updateByPrimaryKeySelective(Admin record);
 
     int updateByPrimaryKey(Admin record);
+
+    String queryPasswordByUsername(@Param("password") String principal);
+
+    ResourceVo queryRoleIdsByUsername(@Param("username") String primaryPrincipal);
+
+    void updateByUsername(@Param("newPassword") String newPassword);
+
     List<Admin> selectAdminListByUser(@Param("username") String username);
 }

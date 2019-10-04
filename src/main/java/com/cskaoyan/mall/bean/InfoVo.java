@@ -8,6 +8,9 @@ public class InfoVo {
     private List perms;
     private List roles;
 
+    public InfoVo() {
+    }
+
     public String getAvatar() {
         return avatar;
     }

@@ -1,4 +1,4 @@
-package com.cskaoyan.mall.config.configLJW;
+/*package com.cskaoyan.mall.config.configLJW;
 
 
 import com.cskaoyan.mall.bean.BaseRespVo;
@@ -18,4 +18,4 @@ public class GlobalExceptionHandler {
        return ReturnUtils.fail(null,e.getMessage());
 
     }
-}
+}*/
