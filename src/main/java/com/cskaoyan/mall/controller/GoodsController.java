@@ -7,6 +7,8 @@ import com.cskaoyan.mall.exception.InsertException;
 import com.cskaoyan.mall.service.GoodsService;
 import com.cskaoyan.mall.util.fffUtils.ReturnUtils;
 import com.cskaoyan.mall.vo.goodsmanagervo.*;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -28,6 +30,7 @@ public class GoodsController {
      * @return
      */
     @RequestMapping("admin/goods/create")
+    @RequiresRoles("超级管理员")
     public BaseRespVo addGoods(@RequestBody GoodsDetail goodsDetail){
         try {
            goodsService.addGoods(goodsDetail);
@@ -44,6 +47,7 @@ public class GoodsController {
      * @return
      */
     @RequestMapping("admin/goods/update")
+    @RequiresRoles("超级管理员")
     public BaseRespVo updateGoods(@RequestBody GoodsDetail goodsDetail){
         goodsService.updateGoods(goodsDetail);
         return ReturnUtils.ok(null, "成功");
@@ -54,6 +58,7 @@ public class GoodsController {
      * @return goodsListVoBaseRespVo
      */
     @RequestMapping("admin/goods/list")
+    @RequiresRoles("超级管理员")
     public BaseRespVo<GoodsListVo<Goods>> queryGoodsList( ForQueryGoods forQueryGoods){
         BaseRespVo<GoodsListVo<Goods>> goodsListVoBaseRespVo = goodsService.queryGoodsList(forQueryGoods);
         return goodsListVoBaseRespVo;
@@ -64,6 +69,7 @@ public class GoodsController {
      * @return
      */
     @RequestMapping("admin/comment/list")
+    @RequiresRoles("超级管理员")
     public BaseRespVo<CommentListVo<Comment>> queryCommentList(@Valid ForQueryComments forQueryComments,
                                                                BindingResult bindingResult){
         if(bindingResult.hasErrors()){
@@ -81,6 +87,7 @@ public class GoodsController {
      * @return
      */
     @RequestMapping("admin/comment/delete")
+    @RequiresRoles("超级管理员")
     public BaseRespVo deleteComment(@RequestBody Comment comment){
         int count = goodsService.deleteComment(comment.getId());
         if(count == 1){
@@ -97,6 +104,7 @@ public class GoodsController {
      * @return
      */
     @RequestMapping("admin/goods/delete")
+    @RequiresRoles("超级管理员")
     public BaseRespVo deleteGood(@RequestBody Goods goods){
         goodsService.deleteGood(goods.getId());
         return ReturnUtils.ok(null, "成功");
@@ -108,6 +116,7 @@ public class GoodsController {
      * @return
      */
     @RequestMapping("admin/goods/catAndBrand")
+    @RequiresRoles("超级管理员")
     public BaseRespVo<CatAndBrand> queryCatAndBrand(){
         BaseRespVo<CatAndBrand> baseRespVo = goodsService.queryCatAndBrand();
         return baseRespVo;
@@ -120,6 +129,7 @@ public class GoodsController {
      * @return
      */
     @RequestMapping("admin/goods/detail")
+    @RequiresRoles("超级管理员")
     public BaseRespVo<GoodsDetail> queryGoodsDetail(int id){
         BaseRespVo<GoodsDetail> baseRespVo = goodsService.queryGoodsDetail(id);
         return baseRespVo;
