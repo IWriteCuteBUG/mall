@@ -1,4 +1,4 @@
-package com.cskaoyan.mall.controller.wechatController.tongsong.wechatforgoodscontroller;
+package com.cskaoyan.mall.controller.wechatcontroller.tongsong.wechatforgoodscontroller;
 
 import com.cskaoyan.mall.bean.BaseRespVo;
 import com.cskaoyan.mall.service.adminservice.CountService;
