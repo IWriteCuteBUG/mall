@@ -4,7 +4,6 @@ import com.cskaoyan.mall.bean.System;
 import com.cskaoyan.mall.bean.SystemExample;
 import java.util.List;
 
-import com.cskaoyan.mall.vo.tvo.ConfigerVoExpress;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 

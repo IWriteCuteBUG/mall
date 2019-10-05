@@ -381,7 +381,7 @@
   </update>
 
 
-  <resultMap id="catListMap" type="com.cskaoyan.mall.vo.goodsmanagervo.ForCatList">
+  <resultMap id="catListMap" type="com.cskaoyan.mall.vo.adminvo.goodsmanagervo.ForCatList">
     <result column="id" property="value"/>
     <result column="name" property="label"/>
     <collection property="children" column="id" select="com.cskaoyan.mall.mapper.CategoryMapper.queryChildren"/>
@@ -394,7 +394,7 @@
   <select id="queryChildren" resultMap="childrenMap">
     select id,name from cskaoyan_mall_category where pid = #{id}
   </select>
-  <resultMap id="childrenMap" type="com.cskaoyan.mall.vo.goodsmanagervo.ForCatChildren">
+  <resultMap id="childrenMap" type="com.cskaoyan.mall.vo.adminvo.goodsmanagervo.ForCatChildren">
     <result column="id" property="value"/>
     <result column="name" property="label"/>
   </resultMap>

@@ -1,9 +1,8 @@
 package com.cskaoyan.mall.realm;
 
-import com.cskaoyan.mall.bean.AdminExample;
 import com.cskaoyan.mall.mapper.AdminMapper;
 import com.cskaoyan.mall.mapper.RoleMapper;
-import com.cskaoyan.mall.vo.tvo.ResourceVo;
+import com.cskaoyan.mall.vo.adminvo.tvo.ResourceVo;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -15,7 +14,6 @@ import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Component

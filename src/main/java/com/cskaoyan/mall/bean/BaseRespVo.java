@@ -1,7 +1,7 @@
 package com.cskaoyan.mall.bean;
 
 
-import com.cskaoyan.mall.vo.extensionvo.AdvertList;
+import com.cskaoyan.mall.vo.adminvo.extensionvo.AdvertList;
 
 import java.util.List;
 

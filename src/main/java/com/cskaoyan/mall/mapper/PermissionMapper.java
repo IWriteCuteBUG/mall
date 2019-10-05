@@ -4,9 +4,7 @@ import com.cskaoyan.mall.bean.Permission;
 import com.cskaoyan.mall.bean.PermissionExample;
 import java.util.List;
 
-import com.cskaoyan.mall.bean.System;
-import com.cskaoyan.mall.vo.dhd.util.PermissionsUpdateBean;
-import com.cskaoyan.mall.vo.dhd.util.SystemPermission;
+import com.cskaoyan.mall.vo.adminvo.dhd.util.SystemPermission;
 import org.apache.ibatis.annotations.Param;
 
 public interface PermissionMapper {

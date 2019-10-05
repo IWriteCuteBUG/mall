@@ -295,7 +295,7 @@
   <select id="queryPasswordByUsername" parameterType="string" resultType="string">
     select password from cskaoyan_mall_admin where username = #{password}
   </select>
-  <resultMap id="resourcesMap" type="com.cskaoyan.mall.vo.tvo.ResourceVo">
+  <resultMap id="resourcesMap" type="com.cskaoyan.mall.vo.adminvo.tvo.ResourceVo">
     <result column="role_ids" property="roleIds" typeHandler="com.cskaoyan.mall.handler.String2IntArrayHandler"/>
   </resultMap>
   <select id="queryRoleIdsByUsername" resultMap="resourcesMap" parameterType="string">

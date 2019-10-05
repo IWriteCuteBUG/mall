@@ -5,10 +5,9 @@ import com.cskaoyan.mall.bean.CategoryExample;
 import java.util.List;
 
 
-import com.cskaoyan.mall.vo.goodsmanagervo.ForBrandList;
-import com.cskaoyan.mall.vo.goodsmanagervo.ForCatList;
+import com.cskaoyan.mall.vo.adminvo.goodsmanagervo.ForCatList;
 
-import com.cskaoyan.mall.vo.voLJW.Lable;
+import com.cskaoyan.mall.vo.adminvo.voLJW.Lable;
 
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
