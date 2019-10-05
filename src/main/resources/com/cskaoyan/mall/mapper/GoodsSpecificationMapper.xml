@@ -87,7 +87,7 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from cskaoyan_mall_goods_specification
     where id = #{id,jdbcType=INTEGER}
@@ -103,11 +103,11 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.cskaoyan.mall.bean.GoodsSpecification">
-    insert into cskaoyan_mall_goods_specification (id, goods_id, specification, 
-      value, pic_url, add_time, 
+    insert into cskaoyan_mall_goods_specification (id, goods_id, specification,
+      value, pic_url, add_time,
       update_time, deleted)
-    values (#{id,jdbcType=INTEGER}, #{goodsId,jdbcType=INTEGER}, #{specification,jdbcType=VARCHAR}, 
-      #{value,jdbcType=VARCHAR}, #{picUrl,jdbcType=VARCHAR}, #{addTime,jdbcType=TIMESTAMP}, 
+    values (#{id,jdbcType=INTEGER}, #{goodsId,jdbcType=INTEGER}, #{specification,jdbcType=VARCHAR},
+      #{value,jdbcType=VARCHAR}, #{picUrl,jdbcType=VARCHAR}, #{addTime,jdbcType=TIMESTAMP},
       #{updateTime,jdbcType=TIMESTAMP}, #{deleted,jdbcType=BIT})
   </insert>
   <insert id="insertSelective" parameterType="com.cskaoyan.mall.bean.GoodsSpecification">
@@ -255,4 +255,21 @@
       deleted = #{deleted,jdbcType=BIT}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <resultMap id="goodsInfomationMap" type="com.cskaoyan.mall.vo.wechatvo.tongsong.GoodsInfomationVo">
+    <result column="specification" property="name"/>
+    <collection property="valueList" ofType="com.cskaoyan.mall.bean.GoodsSpecification">
+      <result column="id" property="id"/>
+      <result column="goodsId" property="goodsId"/>
+      <result column="specification" property="specification"/>
+      <result column="value" property="value"/>
+      <result column="picUrl" property="picUrl"/>
+      <result column="addTime" property="addTime"/>
+      <result column="updateTime" property="updateTime"/>
+      <result column="deleted" property="deleted"/>
+    </collection>
+  </resultMap>
+  <select id="queryspecificationList" resultMap="goodsInfomationMap" parameterType="int">
+    select id,goods_id as goodsId,specification,`value`,pic_url as picUrl,add_time as addTime,update_time as updateTime,
+deleted from cskaoyan_mall_goods_specification where goods_id = #{id}
+  </select>
 </mapper>

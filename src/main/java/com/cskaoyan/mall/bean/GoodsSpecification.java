@@ -14,8 +14,10 @@ public class GoodsSpecification {
     private String value;
 
     private String picUrl;
+
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date addTime;
+
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date updateTime;
 

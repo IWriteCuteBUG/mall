@@ -286,4 +286,9 @@
     <result column="name" property="label"/>
   </resultMap>
 
+  <select id="queryBrandByGoodsId" parameterType="int" resultType="com.cskaoyan.mall.bean.Brand">
+    SELECT b.id,b.`name`,b.`desc`,b.pic_url as picUrl,b.sort_order as sortOrder,b.floor_price as floorPrice,b.add_time AS addTime,b.update_time as updateTime, b.deleted
+     from cskaoyan_mall_goods g
+      LEFT JOIN cskaoyan_mall_brand b on g.brand_id = b.id where g.id = #{id}
+  </select>
 </mapper>
