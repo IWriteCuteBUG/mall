@@ -1,6 +1,7 @@
 package com.cskaoyan.mall.controller.admincontroller.controllerLJW;
 
 import com.cskaoyan.mall.bean.BaseRespVo;
+
 import com.cskaoyan.mall.service.adminservice.AdminService;
 import com.cskaoyan.mall.vo.adminvo.tvo.*;
 import org.apache.shiro.SecurityUtils;
@@ -56,6 +57,7 @@ public class AutoController {
     public BaseRespVo updatePassword(@RequestBody PasswordVo passwordVo){
         BaseRespVo baseRespVo = adminService.updatePassword(passwordVo);
         return baseRespVo;
+
     }
 
 }

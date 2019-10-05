@@ -15,4 +15,10 @@ public class SpringConfig {
         dataSourceTransactionManager.setDataSource(dataSource);
         return dataSourceTransactionManager;
     }
+
+
+    public SpringConfig() {
+        System.out.println("springconfig init");
+    }
+
 }

@@ -1,11 +1,13 @@
 /*package com.cskaoyan.mall.config.ljw;
+=======
+package com.cskaoyan.mall.config.ljw;
+>>>>>>> newlijiawe:src/main/java/com/cskaoyan/mall/config/configLJW/GlobalExceptionHandler.java
 
 
 import com.cskaoyan.mall.bean.BaseRespVo;
 import com.cskaoyan.mall.util.utiLJW.ReturnUtils;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

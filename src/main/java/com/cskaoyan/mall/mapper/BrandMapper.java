@@ -5,8 +5,10 @@ import com.cskaoyan.mall.bean.BrandExample;
 import java.util.List;
 
 
+
 import com.cskaoyan.mall.vo.adminvo.goodsmanagervo.ForBrandList;
 import com.cskaoyan.mall.vo.adminvo.voLJW.BrandModify;
+
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
