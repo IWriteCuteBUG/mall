@@ -5,6 +5,7 @@ import com.cskaoyan.mall.bean.GoodsExample;
 import java.util.List;
 
 import com.cskaoyan.mall.bean.Goodss;
+import com.cskaoyan.mall.vo.wechatvo.tongsong.GoodsVoWeChat;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 
@@ -39,5 +40,7 @@ public interface GoodsMapper {
     int updateByPrimaryKey(Goods record);
 
     Goodss queryGoodsContainsGallery(@Param("goodsId") Integer goodsId);
+
+    List<GoodsVoWeChat> queryGoodsForWeChat();
 
 }

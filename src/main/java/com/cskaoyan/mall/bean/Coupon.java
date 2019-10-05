@@ -1,6 +1,5 @@
 package com.cskaoyan.mall.bean;
 
-
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.math.BigDecimal;

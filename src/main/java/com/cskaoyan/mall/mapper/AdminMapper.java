@@ -4,7 +4,7 @@ import com.cskaoyan.mall.bean.Admin;
 import com.cskaoyan.mall.bean.AdminExample;
 import java.util.List;
 
-import com.cskaoyan.mall.vo.tvo.ResourceVo;
+import com.cskaoyan.mall.vo.adminvo.tvo.ResourceVo;
 import org.apache.ibatis.annotations.Param;
 
 public interface AdminMapper {
