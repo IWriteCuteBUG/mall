@@ -1,0 +1,641 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="0ef551ae-1e93-455d-9b25-3b27c80beea8" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__ch_qos_logback_logback_classic_1_2_3.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__ch_qos_logback_logback_core_1_2_3.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_alibaba_druid_1_1_20.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_alibaba_fastjson_1_2_47.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_classmate_1_4_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_annotations_2_9_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_core_2_9_9.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_databind_2_9_9_3.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_datatype_jackson_datatype_jdk8_2_9_9.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_datatype_jackson_datatype_jsr310_2_9_9.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_module_jackson_module_parameter_names_2_9_9.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_github_jsqlparser_jsqlparser_1_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_github_pagehelper_pagehelper_5_1_4.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_github_pagehelper_pagehelper_spring_boot_autoconfigure_1_2_5.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_github_pagehelper_pagehelper_spring_boot_starter_1_2_5.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_github_qcloudsms_qcloudsms_1_0_5.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_jayway_jsonpath_json_path_2_4_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_vaadin_external_google_android_json_0_0_20131108_vaadin1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_zaxxer_HikariCP_3_2_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_codec_commons_codec_1_11.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_fileupload_commons_fileupload_1_3_3.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_io_commons_io_2_2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_logging_commons_logging_api_1_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__javax_annotation_javax_annotation_api_1_3_2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__javax_validation_validation_api_2_0_1_Final.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__junit_junit_4_12.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__log4j_log4j_1_2_12.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__mysql_mysql_connector_java_5_1_47.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__net_bytebuddy_byte_buddy_1_9_16.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__net_bytebuddy_byte_buddy_agent_1_9_16.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__net_minidev_accessors_smart_1_2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__net_minidev_json_smart_2_3.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_httpcomponents_httpclient_4_5_9.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_httpcomponents_httpcore_4_4_12.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_httpcomponents_httpmime_4_5_9.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_logging_log4j_log4j_api_2_11_2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_logging_log4j_log4j_to_slf4j_2_11_2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_tomcat_embed_tomcat_embed_core_9_0_24.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_tomcat_embed_tomcat_embed_el_9_0_24.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_tomcat_embed_tomcat_embed_websocket_9_0_24.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_xbean_xbean_reflect_3_4.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_assertj_assertj_core_3_11_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_hamcrest_hamcrest_core_1_3.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_hamcrest_hamcrest_library_1_3.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_hibernate_validator_hibernate_validator_6_0_17_Final.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_jboss_logging_jboss_logging_3_3_3_Final.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_json_json_20170516.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_mockito_mockito_core_2_23_4.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_mybatis_mybatis_3_5_2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_mybatis_mybatis_spring_2_0_2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_mybatis_spring_boot_mybatis_spring_boot_autoconfigure_2_1_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_mybatis_spring_boot_mybatis_spring_boot_starter_2_1_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_objenesis_objenesis_2_6.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_ow2_asm_asm_5_0_4.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_skyscreamer_jsonassert_1_5_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_slf4j_jul_to_slf4j_1_7_28.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_slf4j_slf4j_api_1_7_28.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_2_1_8_RELEASE.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_autoconfigure_2_1_8_RELEASE.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_2_1_8_RELEASE.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_jdbc_2_1_8_RELEASE.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_json_2_1_8_RELEASE.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_logging_2_1_8_RELEASE.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_test_2_1_8_RELEASE.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_tomcat_2_1_8_RELEASE.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_web_2_1_8_RELEASE.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_test_2_1_8_RELEASE.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_test_autoconfigure_2_1_8_RELEASE.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_aop_5_1_9_RELEASE.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_beans_5_1_9_RELEASE.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_context_5_1_9_RELEASE.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_core_5_1_9_RELEASE.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_expression_5_1_9_RELEASE.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_jcl_5_1_9_RELEASE.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_jdbc_5_1_9_RELEASE.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_test_5_1_9_RELEASE.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_tx_5_1_9_RELEASE.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_web_5_1_9_RELEASE.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_webmvc_5_1_9_RELEASE.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_xmlunit_xmlunit_core_2_6_3.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_yaml_snakeyaml_1_23.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/config/UploadConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/config/configLJW/GlobalExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/config/ljw/GlobalExceptionHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/config/configLJW/ValidatorConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/controller/AdminController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/controller/AdvertController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/controller/ExtensionCouponController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/controller/ExtensionGrouponController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/controller/ExtensionTopicController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/controller/GoodsController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/controller/GrouponsController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/controller/StatController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/controller/controllerLJW/AutoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/controller/admincontroller/controllerLJW/AutoController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/controller/controllerLJW/MallManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/controller/admincontroller/controllerLJW/MallManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/controller/controllerLJW/loginServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/controller/admincontroller/controllerLJW/loginServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/controller/controllerSJB/AddressController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/controller/controllerSJB/CollectController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/controller/controllerSJB/FeedbackController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/controller/controllerSJB/FootprintController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/controller/controllerSJB/SearchHistoryController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/controller/controllerSJB/UserController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/service/AdvertService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/service/ConfigerService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/service/CountService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/service/ExtensionCouponService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/service/ExtensionGrouponService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/service/ExtensionTopicService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/service/GoodsService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/service/GrouponsService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/service/admin/AdminCreateService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/service/admin/AdminCreateServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/service/admin/AdminDeleteService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/service/admin/AdminDeleteServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/service/admin/AdminOptionService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/service/admin/AdminOptionServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/service/admin/AdminService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/service/admin/AdminServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/service/admin/AdminUpdateService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/service/admin/AdminUpdateServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/service/admin/AdvertServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/service/admin/ConfigerServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/service/admin/CountServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/service/admin/CreateService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/service/admin/CreateServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/service/admin/DeleteRoleService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/service/admin/DeleteRoleServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/service/admin/DeleteStorage.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/service/admin/DeleteStorageImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/service/admin/ExtensionCouponServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/service/admin/ExtensionGrouponServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/service/admin/ExtensionTopicControllerImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/service/admin/GoodsServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/service/admin/GrouponsServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/service/admin/ImplSJB/AddressServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/service/admin/ImplSJB/CollectServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/service/admin/ImplSJB/FeedbackServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/service/admin/ImplSJB/FootprintServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/service/admin/ImplSJB/SearchHistoryServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/service/admin/ImplSJB/UserServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/service/admin/LogService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/service/admin/LogServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/service/admin/ReadMe.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/service/admin/RoleService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/service/admin/RoleServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/service/admin/StorageService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/service/admin/StorageServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/service/admin/StorageUpdageService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/service/admin/StorageUpdageServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/service/admin/UpdateService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/service/admin/UpdateServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/service/serviceLJW/MallManagerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/service/adminservice/serviceLJW/MallManagerService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/service/serviceLJW/MallManagerServiceImply.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/service/adminservice/serviceLJW/MallManagerServiceImply.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/service/serviceSJB/AddressService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/service/serviceSJB/CollectService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/service/serviceSJB/FeedbackService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/service/serviceSJB/FootprintService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/service/serviceSJB/SearchHistoryService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/service/serviceSJB/UserService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/util/AdvertUploadUtils.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/util/StringArr2Arr.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/util/fffUtils/ReturnUtils.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/util/utiLJW/HttpClient.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/util/utiLJW/PhotoUploadUtils.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/util/utiLJW/PicDeleteUtil.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/util/utiLJW/ReturnUtils.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/vo/DashBoardDataVo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/vo/DashBoardVo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/vo/dhd/AdminOptionVo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/vo/dhd/AdminVo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/vo/dhd/AllVo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/vo/dhd/CreateVo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/vo/dhd/util/CreateBean.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/vo/dhd/util/Options.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/vo/extensionvo/AdvertList.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/vo/extensionvo/AdvertUploadPic.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/vo/extensionvo/FromAdvert.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/vo/extensionvo/FromCoupon.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/vo/extensionvo/FromRequestKey.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/vo/extensionvo/FromUserCoupon.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/vo/extensionvo/GrouponRulesErr.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/vo/extensionvo/ReturnTotalAndItemArr.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/vo/extensionvo/ToWeb.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/vo/goodsmanagervo/AddAndModifyGoods.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/vo/goodsmanagervo/CatAndBrand.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/vo/goodsmanagervo/CommentListVo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/vo/goodsmanagervo/ForBrandList.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/vo/goodsmanagervo/ForCatChildren.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/vo/goodsmanagervo/ForCatList.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/vo/goodsmanagervo/GoodsDetail.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/vo/goodsmanagervo/GoodsListVo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/vo/tvo/ConfigerVo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/vo/tvo/ConfigerVoExpress.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/vo/tvo/ConfigerVoOrder.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/vo/tvo/ConfigerVoWx.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/vo/tvo/CountVo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/vo/tvo/CountVoDayAndUsers.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/vo/tvo/CountVoGoods.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/vo/tvo/CountVoOrderInfo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/vo/tvo/GrouponsVo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/vo/tvo/GrouponsVoInfo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/vo/tvo/IndexVoInfo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/vo/voLJW/BrandManufacturer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/vo/voLJW/BrandModify.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/vo/voLJW/CategoryandChild.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/vo/voLJW/Lable.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/vo/voLJW/OrderDetail.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/vo/voLJW/OrderGoodss.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/vo/voLJW/ReturnData.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/vo/voLJW/ReturnOrders.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/vo/voLJW/Token.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/vo/voLJW/WxUser.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/vo/voSJB/AddressListAndTotalVo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/vo/voSJB/AddressListVo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/vo/voSJB/CollectListAndTotalVo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/vo/voSJB/CollectListVo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/vo/voSJB/DashBoardVo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/vo/voSJB/DataForAddressListVo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/vo/voSJB/DataForCollectListVo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/vo/voSJB/DataForFeedbackListVo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/vo/voSJB/DataForFootprintListVo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/vo/voSJB/DataForSearchHistoryListVo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/vo/voSJB/DataForUserListVo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/vo/voSJB/FeedbackListAndTotalVo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/vo/voSJB/FeedbackListVo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/vo/voSJB/FeedbackReplaceVo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/vo/voSJB/FootprintListAndTotalVo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/vo/voSJB/FootprintListVo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/vo/voSJB/SearchHistoryListAndTotalVo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/vo/voSJB/SearchHistoryListVo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/vo/voSJB/UserListAndTotalVo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/vo/voSJB/UserListVo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cskaoyan/utils/CountUtil.java" beforeDir="false" />
+    </list>
+    <ignored path="$PROJECT_DIR$/target/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/service/adminservice/serviceLJW/MallManagerServiceImply.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="143">
+              <caret line="81" column="18" lean-forward="true" selection-start-line="81" selection-start-column="18" selection-end-line="81" selection-end-column="18" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/application.yml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-312" />
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/mymessage_zh_CN.properties">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="260">
+              <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/properties/ImgProperties.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="468">
+              <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/MallApplication.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/service/admin/LogServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/service/admin/StorageServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/service/admin/AdminOptionServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/service/admin/StorageUpdageServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/service/admin/AdminServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/vo/dhd/AdminOptionVo.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/service/admin/RoleServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/config/UploadConfig.java" />
+      </list>
+    </option>
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="localRepository" value="D:\apache-maven-3.6.1\repository" />
+        <option name="mavenHome" value="D:/apache-maven-3.6.1" />
+        <option name="userSettingsFile" value="D:\apache-maven-3.6.1\conf\settings.xml" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="-9" />
+    <option name="y" value="-9" />
+    <option name="width" value="1938" />
+    <option name="height" value="1050" />
+  </component>
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="PackagesPane" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="mall7" type="b2602c69:ProjectViewProjectNode" />
+              <item name="mall7" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="mall7" type="b2602c69:ProjectViewProjectNode" />
+              <item name="mall7" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="mall7" type="b2602c69:ProjectViewProjectNode" />
+              <item name="mall7" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="mall7" type="b2602c69:ProjectViewProjectNode" />
+              <item name="mall7" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="mall7" type="b2602c69:ProjectViewProjectNode" />
+              <item name="mall7" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="mall7" type="b2602c69:ProjectViewProjectNode" />
+              <item name="mall7" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="cskaoyan" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="mall7" type="b2602c69:ProjectViewProjectNode" />
+              <item name="mall7" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="cskaoyan" type="462c0819:PsiDirectoryNode" />
+              <item name="mall" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="mall7" type="b2602c69:ProjectViewProjectNode" />
+              <item name="mall7" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1570249238664" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="settings.editor.selected.configurable" value="MavenSettings" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager">
+    <configuration name="MallApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <module name="mall7" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.cskaoyan.mall.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.cskaoyan.mall.MallApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Spring Boot.MallApplication" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="0ef551ae-1e93-455d-9b25-3b27c80beea8" name="Default Changelist" comment="" />
+      <created>1570238581129</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1570238581129</updated>
+      <workItem from="1570238582745" duration="1109000" />
+      <workItem from="1570248358138" duration="1019000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="2128000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-9" y="-9" width="1938" height="1050" extended-state="6" />
+    <layout>
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Designer" order="2" />
+      <window_info id="Image Layers" order="3" />
+      <window_info id="Capture Tool" order="4" />
+      <window_info id="UI Designer" order="5" />
+      <window_info id="Favorites" order="6" side_tool="true" />
+      <window_info id="Web" order="7" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.29784825" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Spring" order="7" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="8" visible="true" weight="0.3295583" />
+      <window_info anchor="bottom" id="Docker" order="9" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
+      <window_info anchor="bottom" id="Messages" order="11" weight="0.3295583" />
+      <window_info anchor="bottom" id="Java Enterprise" order="12" />
+      <window_info anchor="bottom" id="Database Changes" order="13" />
+      <window_info anchor="bottom" id="Version Control" order="14" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Maven" order="3" />
+      <window_info anchor="right" id="Palette" order="4" />
+      <window_info anchor="right" id="Capture Analysis" order="5" />
+      <window_info anchor="right" id="Database" order="6" />
+      <window_info anchor="right" id="Palette&#9;" order="7" />
+      <window_info anchor="right" id="Theme Preview" order="8" />
+      <window_info anchor="right" id="Bean Validation" order="9" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/MallApplication.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="82">
+          <caret line="5" column="78" selection-start-line="5" selection-start-column="78" selection-end-line="5" selection-end-column="78" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/service/admin/LogServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-428">
+          <caret line="24" column="13" selection-start-line="24" selection-start-column="13" selection-end-line="24" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/service/admin/StorageServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="21" column="8" selection-start-line="21" selection-start-column="8" selection-end-line="21" selection-end-column="8" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/service/admin/AdminOptionServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="104">
+          <caret line="2" selection-start-line="2" selection-end-line="2" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/service/admin/StorageUpdageServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="104">
+          <caret line="2" selection-start-line="2" selection-end-line="2" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/vo/dhd/AdminOptionVo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="52">
+          <caret line="1" selection-start-line="1" selection-end-line="1" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/util/utiLJW/HttpClient.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="226">
+          <caret line="153" column="28" selection-start-line="153" selection-start-column="28" selection-end-line="153" selection-end-column="28" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/service/admin/RoleServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="20" column="26" selection-start-line="20" selection-start-column="26" selection-end-line="20" selection-end-column="26" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/service/adminservice/serviceLJW/MallManagerServiceImply.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="143">
+          <caret line="81" column="18" lean-forward="true" selection-start-line="81" selection-start-column="18" selection-end-line="81" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/application.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-312" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/cskaoyan/utils/CountUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="208">
+          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/config/ljw/ValidatorConfig.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="208">
+          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/config/UploadConfig.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="169">
+          <caret line="12" column="13" selection-start-line="12" selection-start-column="5" selection-end-line="12" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/service/admin/AdminServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="283">
+          <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/mymessage_zh_CN.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="260">
+          <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/cskaoyan/mall/properties/ImgProperties.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="468">
+          <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
+        </state>
+      </provider>
+    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ProjectJDKs.UI">
+        <settings>
+          <last-edited>1.8</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
+  </component>
+</project>
