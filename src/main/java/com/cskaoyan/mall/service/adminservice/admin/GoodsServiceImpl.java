@@ -295,14 +295,17 @@ public class GoodsServiceImpl implements GoodsService {
         //querynewgoodsList
         GoodsExample goodsExample = new GoodsExample();
         goodsExample.createCriteria().andIsNewEqualTo(true);
+        PageHelper.startPage(0,5);
         List<Goods> newgoodsList = goodsMapper.selectByExample(goodsExample);
         //querycoupons(优惠券)
         CouponExample couponExample = new CouponExample();
         couponExample.createCriteria().andNameIsNotNull();
+        PageHelper.startPage(0,5);
         List<Coupon> coupons = couponMapper.selectByExample(couponExample);
         //querygoodscategory
         CategoryExample categoryExample = new CategoryExample();
         categoryExample.createCriteria().andNameIsNotNull();
+        PageHelper.startPage(0,5);
         List<Category> categories = categoryMapper.selectByExample(categoryExample);
         //grouponList
         List<GoodsVoWeChat> grouponList = goodsMapper.queryGoodsForWeChat();
@@ -313,14 +316,17 @@ public class GoodsServiceImpl implements GoodsService {
         //brandList
         BrandExample brandExample = new BrandExample();
         brandExample.createCriteria().andNameIsNotNull();
+        PageHelper.startPage(0,5);
         List<Brand> brands = brandMapper.selectByExample(brandExample);
         //hotGoodsList
         GoodsExample goodsExample1 = new GoodsExample();
         goodsExample1.createCriteria().andIsHotEqualTo(true);
+        PageHelper.startPage(0,5);
         List<Goods> hotGoodsList = goodsMapper.selectByExample(goodsExample1);
         //topicList
         TopicExample topicExample = new TopicExample();
         topicExample.createCriteria().andIdIsNotNull();
+        PageHelper.startPage(0,5);
         List<Topic> topicList = topicMapper.selectByExample(topicExample);
         //floorGoodsList categories
         ArrayList<GoodsListOfCategory> floorGoodsList = new ArrayList<>();
