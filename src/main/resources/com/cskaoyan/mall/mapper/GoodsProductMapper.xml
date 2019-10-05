@@ -280,4 +280,19 @@
   <select id="queryProductMumber" resultType="int">
     select count(id) from  cskaoyan_mall_goods_product
   </select>
+
+  <resultMap id="productandgoodsMap" type="com.cskaoyan.mall.bean.GoodsProduct">
+    <result column="id" property="id"/>
+    <result column="goods_id" property="goodsId"/>
+    <result column="specifications" property="specifications" typeHandler="com.cskaoyan.mall.handler.String2ArrayHandler"/>
+    <result column="price" property="price"/>
+    <result column="number" property="number"/>
+    <result column="url" property="url"/>
+    <result column="add_time" property="addTime"/>
+    <result column="update_time" property="updateTime"/>
+    <result column="deleted" property="deleted"/>
+  </resultMap>
+  <select id="queryGoodsProductById" resultMap="productandgoodsMap">
+    select <include refid="Base_Column_List"/> from cskaoyan_mall_goods_product where goods_id = #{id}
+  </select>
 </mapper>

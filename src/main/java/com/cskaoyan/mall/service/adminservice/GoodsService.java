@@ -24,4 +24,6 @@ public interface GoodsService {
     void deleteGood(Integer id);
 
     BaseRespVo queryAllGoodsInfo();
+
+    BaseRespVo queryGoodsDetailInfo(int id);
 }

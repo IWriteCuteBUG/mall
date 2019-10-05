@@ -3,6 +3,8 @@ package com.cskaoyan.mall.mapper;
 import com.cskaoyan.mall.bean.GoodsSpecification;
 import com.cskaoyan.mall.bean.GoodsSpecificationExample;
 import java.util.List;
+
+import com.cskaoyan.mall.vo.wechatvo.tongsong.GoodsInfomationVo;
 import org.apache.ibatis.annotations.Param;
 
 public interface GoodsSpecificationMapper {
@@ -27,4 +29,6 @@ public interface GoodsSpecificationMapper {
     int updateByPrimaryKeySelective(GoodsSpecification record);
 
     int updateByPrimaryKey(GoodsSpecification record);
+
+    List<GoodsInfomationVo> queryspecificationList(@Param("id") int id);
 }

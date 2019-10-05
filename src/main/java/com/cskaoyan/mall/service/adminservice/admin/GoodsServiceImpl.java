@@ -6,9 +6,7 @@ import com.cskaoyan.mall.mapper.*;
 import com.cskaoyan.mall.service.adminservice.GoodsService;
 import com.cskaoyan.mall.util.fffUtils.ReturnUtils;
 import com.cskaoyan.mall.vo.adminvo.goodsmanagervo.*;
-import com.cskaoyan.mall.vo.wechatvo.tongsong.GoodsIndexVo;
-import com.cskaoyan.mall.vo.wechatvo.tongsong.GoodsListOfCategory;
-import com.cskaoyan.mall.vo.wechatvo.tongsong.GoodsVoWeChat;
+import com.cskaoyan.mall.vo.wechatvo.tongsong.*;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,12 +16,16 @@ import org.springframework.transaction.annotation.Transactional;
 import java.lang.System;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 @Service
 public class GoodsServiceImpl implements GoodsService {
     @Autowired
     GoodsMapper goodsMapper;
+
+    @Autowired
+    GoodsSpecificationMapper getGoodsSpecificationMapper;
 
     @Autowired
     CategoryMapper categoryMapper;
@@ -51,6 +53,18 @@ public class GoodsServiceImpl implements GoodsService {
 
     @Autowired
     TopicMapper topicMapper;
+
+    @Autowired
+    GrouponRulesMapper grouponRulesMapper;
+
+    @Autowired
+    IssueMapper issueMapper;
+
+    @Autowired
+    CollectMapper collectMapper;
+
+    @Autowired
+    GoodsAttributeMapper getGoodsAttributeMapper;
 
 
     @Override
@@ -336,5 +350,57 @@ public class GoodsServiceImpl implements GoodsService {
         goodsIndexVoBaseRespVo.setErrno(0);
         goodsIndexVoBaseRespVo.setErrmsg("成功");
         return goodsIndexVoBaseRespVo;
+    }
+
+    @Override
+    public BaseRespVo queryGoodsDetailInfo(int id) {
+        //specificationList
+        List<GoodsInfomationVo> specificationList = goodsSpecificationMapper.queryspecificationList(id);
+        //groupon
+        GrouponRulesExample grouponRulesExample = new GrouponRulesExample();
+        grouponRulesExample.createCriteria().andGoodsIdEqualTo(id);
+        List<GrouponRules> groupon = grouponRulesMapper.selectByExample(grouponRulesExample);
+        //issue
+        IssueExample issueExample = new IssueExample();
+        issueExample.createCriteria().andIdIsNotNull();
+        List<Issue> issue = issueMapper.selectByExample(issueExample);
+        //userHasCollect
+        CollectExample collectExample = new CollectExample();
+        collectExample.createCriteria().andValueIdEqualTo(id);
+        long userHasCollect = collectMapper.countByExample(collectExample);
+        //comments
+        CommentExample commentExample = new CommentExample();
+        commentExample.createCriteria().andValueIdEqualTo(id);
+        List<Comment> comments = commentMapper.selectByExample(commentExample);
+        CommentOfGoodsVo comment = new CommentOfGoodsVo();
+        comment.setCount(comments.size());
+        comment.setDate(comments);
+        //attribute
+        GoodsAttributeExample goodsAttributeExample = new GoodsAttributeExample();
+        goodsAttributeExample.createCriteria().andGoodsIdEqualTo(id);
+        List<GoodsAttribute> attribute = goodsAttributeMapper.selectByExample(goodsAttributeExample);
+        //brand
+        Brand brand = brandMapper.queryBrandByGoodsId(id);
+        //productList
+        List<GoodsProduct> productList = goodsProductMapper.queryGoodsProductById(id);
+        //info
+        Goodss goodss = goodsMapper.queryGoodsContainsGallery(id);
+
+        BaseRespVo<Object> objectBaseRespVo = new BaseRespVo<>();
+
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("specificationList",specificationList);
+        map.put("groupon",groupon);
+        map.put("issue",issue);
+        map.put("userHasCollect",userHasCollect);
+        map.put("comment",comment);
+        map.put("attribute",attribute);
+        map.put("brand",brand);
+        map.put("productList",productList);
+        map.put("info",goodss);
+        objectBaseRespVo.setData(map);
+        objectBaseRespVo.setErrno(0);
+        objectBaseRespVo.setErrmsg("成功");
+        return objectBaseRespVo;
     }
 }
