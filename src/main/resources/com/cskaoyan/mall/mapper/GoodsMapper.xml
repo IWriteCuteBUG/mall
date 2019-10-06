@@ -562,4 +562,21 @@
   <select id="queryGoodsContainsGallery" resultMap="GrouponsResultMap" parameterType="Integer" resultType="com.cskaoyan.mall.bean.Goodss">
     select <include refid="Base_Column_List"/>,<include refid="Blob_Column_List"/> from cskaoyan_mall_goods where id = #{goodsId}
   </select>
+
+  <resultMap id="groupMaps" type="com.cskaoyan.mall.vo.wechatvo.tongsong.GoodsVoWeChat">
+    <result column="groupon_price" property="groupon_price"/>
+    <result column="groupon_member" property="groupon_member"/>
+    <association property="goods" javaType="com.cskaoyan.mall.vo.wechatvo.tongsong.GoodsVoWeChats">
+      <result column="id" property="id"/>
+      <result column="name" property="name"/>
+      <result column="brief" property="brief"/>
+      <result column="picUrl" property="picUrl"/>
+      <result column="counterPrice" property="counterPrice"/>
+      <result column="retailPrice" property="retailPrice"/>
+    </association>
+  </resultMap>
+  <select id="queryGoodsForWeChat" resultMap="groupMaps">
+    select g.retail_price-r.discount as groupon_price,g.id,g.name,g.brief,g.pic_url as picUrl,g.counter_price,g.retail_price,r.discount_member as groupon_member
+from cskaoyan_mall_groupon_rules r LEFT JOIN cskaoyan_mall_goods g on r.goods_id = g.id
+  </select>
 </mapper>

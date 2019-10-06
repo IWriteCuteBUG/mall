@@ -1,5 +1,6 @@
 package com.cskaoyan.mall.service.adminservice.impl;
 
+import com.cskaoyan.mall.bean.BaseRespVo;
 import com.cskaoyan.mall.mapper.*;
 import com.cskaoyan.mall.service.adminservice.CountService;
 import com.cskaoyan.mall.vo.adminvo.tvo.*;
@@ -120,6 +121,13 @@ public class CountServiceImpl implements CountService {
         indexVoInfo.setProductTotal(products);
         indexVoInfo.setUserTotal(users);
         return indexVoInfo;
+    }
+
+    @Override
+    public BaseRespVo countGoodsNumber() {
+        int goodsMumber = goodsProductMapper.queryGoodsMumber();
+        BaseRespVo ok = BaseRespVo.ok(goodsMumber);
+        return ok;
     }
 
 }

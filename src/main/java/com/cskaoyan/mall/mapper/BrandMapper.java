@@ -42,4 +42,5 @@ public interface BrandMapper {
     int updateByPrimaryKey(Brand record);
     List<ForBrandList> queryBrandList();
 
+    Brand queryBrandByGoodsId(@Param("id") int id);
 }

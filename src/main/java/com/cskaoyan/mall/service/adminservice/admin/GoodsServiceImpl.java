@@ -6,6 +6,7 @@ import com.cskaoyan.mall.mapper.*;
 import com.cskaoyan.mall.service.adminservice.GoodsService;
 import com.cskaoyan.mall.util.fffUtils.ReturnUtils;
 import com.cskaoyan.mall.vo.adminvo.goodsmanagervo.*;
+import com.cskaoyan.mall.vo.wechatvo.tongsong.*;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,12 +16,16 @@ import org.springframework.transaction.annotation.Transactional;
 import java.lang.System;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 @Service
 public class GoodsServiceImpl implements GoodsService {
     @Autowired
     GoodsMapper goodsMapper;
+
+    @Autowired
+    GoodsSpecificationMapper getGoodsSpecificationMapper;
 
     @Autowired
     CategoryMapper categoryMapper;
@@ -39,6 +44,27 @@ public class GoodsServiceImpl implements GoodsService {
 
     @Autowired
     BrandMapper brandMapper;
+
+    @Autowired
+    CouponMapper couponMapper;
+
+    @Autowired
+    AdMapper adMapper;
+
+    @Autowired
+    TopicMapper topicMapper;
+
+    @Autowired
+    GrouponRulesMapper grouponRulesMapper;
+
+    @Autowired
+    IssueMapper issueMapper;
+
+    @Autowired
+    CollectMapper collectMapper;
+
+    @Autowired
+    GoodsAttributeMapper getGoodsAttributeMapper;
 
 
     @Override
@@ -262,5 +288,125 @@ public class GoodsServiceImpl implements GoodsService {
         GoodsSpecificationExample.Criteria criteriaS = goodsSpecificationExample.createCriteria();
         criteriaS.andGoodsIdEqualTo(id);
         goodsSpecificationMapper.deleteByExample(goodsSpecificationExample);
+    }
+
+    @Override
+    public BaseRespVo queryAllGoodsInfo() {
+        //querynewgoodsList
+        GoodsExample goodsExample = new GoodsExample();
+        goodsExample.createCriteria().andIsNewEqualTo(true);
+        PageHelper.startPage(0,5);
+        List<Goods> newgoodsList = goodsMapper.selectByExample(goodsExample);
+        //querycoupons(优惠券)
+        CouponExample couponExample = new CouponExample();
+        couponExample.createCriteria().andNameIsNotNull();
+        PageHelper.startPage(0,5);
+        List<Coupon> coupons = couponMapper.selectByExample(couponExample);
+        //querygoodscategory
+        CategoryExample categoryExample = new CategoryExample();
+        categoryExample.createCriteria().andNameIsNotNull();
+        PageHelper.startPage(0,5);
+        List<Category> categories = categoryMapper.selectByExample(categoryExample);
+        //grouponList
+        List<GoodsVoWeChat> grouponList = goodsMapper.queryGoodsForWeChat();
+        //bannerList
+        AdExample adExample = new AdExample();
+        adExample.createCriteria().andNameIsNotNull();
+        List<Ad> banner = adMapper.selectByExample(adExample);
+        //brandList
+        BrandExample brandExample = new BrandExample();
+        brandExample.createCriteria().andNameIsNotNull();
+        PageHelper.startPage(0,5);
+        List<Brand> brands = brandMapper.selectByExample(brandExample);
+        //hotGoodsList
+        GoodsExample goodsExample1 = new GoodsExample();
+        goodsExample1.createCriteria().andIsHotEqualTo(true);
+        PageHelper.startPage(0,5);
+        List<Goods> hotGoodsList = goodsMapper.selectByExample(goodsExample1);
+        //topicList
+        TopicExample topicExample = new TopicExample();
+        topicExample.createCriteria().andIdIsNotNull();
+        PageHelper.startPage(0,5);
+        List<Topic> topicList = topicMapper.selectByExample(topicExample);
+        //floorGoodsList categories
+        ArrayList<GoodsListOfCategory> floorGoodsList = new ArrayList<>();
+        for (Category category : categories) {
+            GoodsListOfCategory goodsListOfCategory = new GoodsListOfCategory();
+            int categoryId = category.getId();
+            goodsListOfCategory.setId(categoryId);
+            goodsListOfCategory.setName(category.getName());
+            GoodsExample goodsExample2 = new GoodsExample();
+            goodsExample2.createCriteria().andCategoryIdEqualTo(categoryId);
+            List<Goods> goods1 = goodsMapper.selectByExample(goodsExample2);
+            goodsListOfCategory.setGoodsList(goods1);
+            floorGoodsList.add(goodsListOfCategory);
+        }
+        GoodsIndexVo goodsIndexVo = new GoodsIndexVo();
+        goodsIndexVo.setNewGoodsList(newgoodsList);
+        goodsIndexVo.setBanner(banner);
+        goodsIndexVo.setBrandList(brands);
+        goodsIndexVo.setCouponList(coupons);
+        goodsIndexVo.setFloorGoodsList(floorGoodsList);
+        goodsIndexVo.setHotGoodsList(hotGoodsList);
+        goodsIndexVo.setTopicList(topicList);
+        goodsIndexVo.setChannel(categories);
+        goodsIndexVo.setGrouponList(grouponList);
+        BaseRespVo<GoodsIndexVo> goodsIndexVoBaseRespVo = new BaseRespVo<>();
+        goodsIndexVoBaseRespVo.setData(goodsIndexVo);
+        goodsIndexVoBaseRespVo.setErrno(0);
+        goodsIndexVoBaseRespVo.setErrmsg("成功");
+        return goodsIndexVoBaseRespVo;
+    }
+
+    @Override
+    public BaseRespVo queryGoodsDetailInfo(int id) {
+        //specificationList
+        List<GoodsInfomationVo> specificationList = goodsSpecificationMapper.queryspecificationList(id);
+        //groupon
+        GrouponRulesExample grouponRulesExample = new GrouponRulesExample();
+        grouponRulesExample.createCriteria().andGoodsIdEqualTo(id);
+        List<GrouponRules> groupon = grouponRulesMapper.selectByExample(grouponRulesExample);
+        //issue
+        IssueExample issueExample = new IssueExample();
+        issueExample.createCriteria().andIdIsNotNull();
+        List<Issue> issue = issueMapper.selectByExample(issueExample);
+        //userHasCollect
+        CollectExample collectExample = new CollectExample();
+        collectExample.createCriteria().andValueIdEqualTo(id);
+        long userHasCollect = collectMapper.countByExample(collectExample);
+        //comments
+        CommentExample commentExample = new CommentExample();
+        commentExample.createCriteria().andValueIdEqualTo(id);
+        List<Comment> comments = commentMapper.selectByExample(commentExample);
+        CommentOfGoodsVo comment = new CommentOfGoodsVo();
+        comment.setCount(comments.size());
+        comment.setDate(comments);
+        //attribute
+        GoodsAttributeExample goodsAttributeExample = new GoodsAttributeExample();
+        goodsAttributeExample.createCriteria().andGoodsIdEqualTo(id);
+        List<GoodsAttribute> attribute = goodsAttributeMapper.selectByExample(goodsAttributeExample);
+        //brand
+        Brand brand = brandMapper.queryBrandByGoodsId(id);
+        //productList
+        List<GoodsProduct> productList = goodsProductMapper.queryGoodsProductById(id);
+        //info
+        Goodss goodss = goodsMapper.queryGoodsContainsGallery(id);
+
+        BaseRespVo<Object> objectBaseRespVo = new BaseRespVo<>();
+
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("specificationList",specificationList);
+        map.put("groupon",groupon);
+        map.put("issue",issue);
+        map.put("userHasCollect",userHasCollect);
+        map.put("comment",comment);
+        map.put("attribute",attribute);
+        map.put("brand",brand);
+        map.put("productList",productList);
+        map.put("info",goodss);
+        objectBaseRespVo.setData(map);
+        objectBaseRespVo.setErrno(0);
+        objectBaseRespVo.setErrmsg("成功");
+        return objectBaseRespVo;
     }
 }

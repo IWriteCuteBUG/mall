@@ -31,4 +31,6 @@ public interface GoodsProductMapper {
     int queryGoodsMumber();
 
     int queryProductMumber();
+
+    List<GoodsProduct> queryGoodsProductById(@Param("id") int id);
 }

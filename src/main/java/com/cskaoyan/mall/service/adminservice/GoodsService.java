@@ -22,4 +22,8 @@ public interface GoodsService {
     void updateGoods(GoodsDetail goodsDetail);
 
     void deleteGood(Integer id);
+
+    BaseRespVo queryAllGoodsInfo();
+
+    BaseRespVo queryGoodsDetailInfo(int id);
 }
