@@ -3,6 +3,7 @@ package com.cskaoyan.mall.service.wechatservice.cly.impl;
 import com.cskaoyan.mall.bean.Order;
 import com.cskaoyan.mall.bean.OrderGoods;
 import com.cskaoyan.mall.bean.OrderGoodsExample;
+import com.cskaoyan.mall.mapper.GoodsProductMapper;
 import com.cskaoyan.mall.mapper.OrderGoodsMapper;
 import com.cskaoyan.mall.mapper.OrderMapper;
 import com.cskaoyan.mall.service.wechatservice.cly.ClyOrderService;
@@ -22,6 +23,9 @@ public class ClyOrderServiceImpl implements ClyOrderService {
 
     @Autowired
     OrderGoodsMapper orderGoodsMapper;
+
+    @Autowired
+    GoodsProductMapper goodsProductMapper;
     @Override
     public ForOrderDetail queryOrderDetail(int orderId) {
         //orderGoods
@@ -53,6 +57,14 @@ public class ClyOrderServiceImpl implements ClyOrderService {
         OrderGoodsExample orderGoodsExample = new OrderGoodsExample();
         OrderGoodsExample.Criteria criteria = orderGoodsExample.createCriteria();
         criteria.andOrderIdEqualTo(orderId);
+        //获取订单中商品的信息，为修改库存做准备
+        List<OrderGoods> orderGoods = orderGoodsMapper.selectByExample(orderGoodsExample);
         int count = orderGoodsMapper.deleteByExample(orderGoodsExample);
+        //修改商品库存
+        for (OrderGoods orderGood : orderGoods) {
+            Integer productId = orderGood.getProductId();
+            Short number = orderGood.getNumber();
+            goodsProductMapper.updateNumber(productId, number);
+        }
     }
 }

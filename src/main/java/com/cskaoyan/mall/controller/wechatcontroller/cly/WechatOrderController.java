@@ -14,12 +14,23 @@ public class WechatOrderController {
     @Autowired
     ClyOrderService clyOrderService;
 
+    /**
+     * 获取指定 ID 订单详情
+     * @param orderId
+     * @return
+     */
     @RequestMapping("detail")
     public BaseRespVo queryOrderDetail(int orderId){
         ForOrderDetail forOrderDetail = clyOrderService.queryOrderDetail(orderId);
         return ReturnUtilCly.back(forOrderDetail,"成功",0);
     }
 
+    /**
+     * 取消指定 ID 订单
+     * 注意修改相关商品库存
+     * @param orderId
+     * @return
+     */
     @RequestMapping("cancel")
     public BaseRespVo cancelOrder(int orderId){
         clyOrderService.cancelOrder(orderId);
