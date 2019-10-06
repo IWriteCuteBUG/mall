@@ -29,13 +29,13 @@ import java.util.*;
  * Date 2019/7/8 Time 20:55
  */
 @RestController
-@RequestMapping("/wx/auth")
+@RequestMapping("/wx")
 public class WxAuthController {
 
 	@Autowired
 	WxAuthService wxAuthService;
 
-	@RequestMapping("login")
+	@RequestMapping("auth/login")
 	@ResponseBody
 //	public Object login(@RequestBody String body, HttpServletRequest request) {
 	public Object login(@RequestBody LoginVo loginVo , HttpServletRequest request) {
@@ -69,7 +69,7 @@ public class WxAuthController {
 //		return BaseRespVo.ok(result);
 	}
 
-	@RequestMapping("logout")
+	@RequestMapping("auth/logout")
 	public BaseRespVo logout(HttpServletRequest request){
 		Subject subject = SecurityUtils.getSubject();
 		request.getSession().setAttribute("userId","");
@@ -77,7 +77,7 @@ public class WxAuthController {
 		return BaseRespVo.baseRespOk("");
 	}
 
-	/*@GetMapping("user/index")
+	@GetMapping("user/index")
 	public BaseRespVo list() {
 		Integer userId = (Integer) SecurityUtils.getSubject().getSession().getAttribute("userId");
 		OrderInfo orderInfo = new OrderInfo();
@@ -96,5 +96,5 @@ public class WxAuthController {
 		HashMap<String, OrderInfo> map = new HashMap<>();
 		map.put("order", orderInfo);
 		return BaseRespVo.ok(map);
-	}*/
+	}
 }
