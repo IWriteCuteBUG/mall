@@ -4,6 +4,7 @@ import com.cskaoyan.mall.bean.User;
 import com.cskaoyan.mall.bean.UserExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 
 public interface UserMapper {
     long countByExample(UserExample example);
@@ -33,4 +34,10 @@ public interface UserMapper {
     int countUsersOfDay(@Param("logindate") String logindate);
 
     int queryUserTotal();
+
+    @Select("select password from cskaoyan_mall_user where username = #{username}")
+    String queryPasswordByUserName(String username);
+
+    @Select("select id from cskaoyan_mall_user where username = #{username}")
+    String queryIdByUsername(String username);
 }

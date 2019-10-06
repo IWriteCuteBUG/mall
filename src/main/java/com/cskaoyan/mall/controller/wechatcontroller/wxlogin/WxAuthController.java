@@ -1,84 +1,100 @@
 package com.cskaoyan.mall.controller.wechatcontroller.wxlogin;
 
-import com.cskaoyan.mall.mallstart.util.UserInfo;
+
+
+import com.cskaoyan.mall.bean.BaseRespVo;
+import com.cskaoyan.mall.bean.Order;
 import com.cskaoyan.mall.mallstart.util.UserTokenManager;
-import com.cskaoyan.mall.mallstart.vo.resp.BaseRespVo;
+import com.cskaoyan.mall.realm.CustomToken;
+import com.cskaoyan.mall.realm.wxtokenvo.OrderInfo;
+import com.cskaoyan.mall.realm.wxtokenvo.UserInfo;
+import com.cskaoyan.mall.realm.wxtokenvo.WxBaseVo;
+import com.cskaoyan.mall.service.wechatservice.zyp.WxAuthService;
+import com.cskaoyan.mall.vo.adminvo.tvo.LoginVo;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.AuthenticationException;
+import org.apache.shiro.session.Session;
+import org.apache.shiro.subject.Subject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import sun.misc.Request;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.HashMap;
-import java.util.Map;
+import java.io.Serializable;
+import java.lang.reflect.Array;
+import java.util.*;
 
 /**
  * Created by little Stone
  * Date 2019/7/8 Time 20:55
  */
 @RestController
-@RequestMapping("/wx")
+@RequestMapping("/wx/auth")
 public class WxAuthController {
 
-	@RequestMapping("/auth/login")
+	@Autowired
+	WxAuthService wxAuthService;
+
+	@RequestMapping("login")
 	@ResponseBody
-	public Object login(@RequestBody String body, HttpServletRequest request) {
+//	public Object login(@RequestBody String body, HttpServletRequest request) {
+	public Object login(@RequestBody LoginVo loginVo , HttpServletRequest request) {
+		String username = loginVo.getUsername();
+		String password = loginVo.getPassword();
+		CustomToken token = new CustomToken(username, password, "wechat");
+		try {
+			SecurityUtils.getSubject().login(token);
+		} catch (AuthenticationException e) {
+			return BaseRespVo.baseRespErr(500,"用户名或密码错误");
+		}
+		Integer userId = wxAuthService.queryIdByUsername(username);
+		request.getSession().setAttribute("userId",userId);
+		Subject subject = SecurityUtils.getSubject();
+		Serializable id = subject.getSession().getId();
+		WxBaseVo wxBaseVo = new WxBaseVo();
 		UserInfo userInfo = new UserInfo();
+		userInfo.setNickName(username);
+		userInfo.setAvatarUrl("");
+		wxBaseVo.setUserInfo(userInfo);
+		wxBaseVo.setToken(id);
+		wxBaseVo.setTokenExpire(new Date());
+		return BaseRespVo.baseRespOk(wxBaseVo);
+		/*UserInfo userInfo = new UserInfo();
 		userInfo.setNickName("wx");
 		userInfo.setAvatarUrl("");
 		Map<Object, Object> result = new HashMap<Object, Object>();
 		result.put("token", "qo0jdbwrja22i2ld5zvws9z6hlin39vh");
 		result.put("tokenExpire", "2019-10-05T08:22:49.604");
-		result.put("userInfo", userInfo);
-		return BaseRespVo.ok(result);
+		result.put("userInfo", userInfo);*/
+//		return BaseRespVo.ok(result);
 	}
 
-	/*@RequestMapping("/auth/login")
-	@ResponseBody
-	public Object login(@RequestBody String body, HttpServletRequest request) {
-		String username = JacksonUtil.parseString(body, "username");
-		String password = JacksonUtil.parseString(body, "password");
+	@RequestMapping("logout")
+	public BaseRespVo logout(HttpServletRequest request){
+		Subject subject = SecurityUtils.getSubject();
+		request.getSession().setAttribute("userId","");
+		subject.logout();
+		return BaseRespVo.baseRespOk("");
+	}
 
-		//*******************************
-		//根据username和password查询user信息
-		//*******************************
-
-		// userInfo
-		UserInfo userInfo = new UserInfo();
-		userInfo.setNickName(username);
-		//userInfo.setAvatarUrl(user.getAvatar());
-
-
-		//********************************
-		//根据获得userid
-		int userId = 1;
-		//********************************
-		// token
-		UserToken userToken = UserTokenManager.generateToken(userId);
-
-		Map<Object, Object> result = new HashMap<Object, Object>();
-		result.put("token", userToken.getToken());
-		result.put("tokenExpire", userToken.getExpireTime().toString());
-		result.put("userInfo", userInfo);
-		return BaseRespVo.ok(result);
+	/*@GetMapping("user/index")
+	public BaseRespVo list() {
+		Integer userId = (Integer) SecurityUtils.getSubject().getSession().getAttribute("userId");
+		OrderInfo orderInfo = new OrderInfo();
+//		未付款 0
+		List<Order> unpaid = wxAuthService.queryOrdersByUserIdAndOrderStatus(userId,0);
+//		待发货
+		List<Order> unship = wxAuthService.queryOrdersByUserIdAndOrderStatus(userId,1);
+//		待收货
+		List<Order> unrecv = wxAuthService.queryOrdersByUserIdAndOrderStatus(userId,2);
+//		待评价
+		List<Order> uncomment = wxAuthService.queryOrdersByUserIdAndOrderStatus(userId,3);
+		orderInfo.setUncomment(uncomment.size());
+		orderInfo.setUnrecv(unrecv.size());
+		orderInfo.setUnpaid(unpaid.size());
+		orderInfo.setUnship(unship.size());
+		HashMap<String, OrderInfo> map = new HashMap<>();
+		map.put("order", orderInfo);
+		return BaseRespVo.ok(map);
 	}*/
-
-	@GetMapping("user/index")
-	public Object list(HttpServletRequest request) {
-		//前端写了一个token放在请求头中
-		//*************************
-		//获得请求头
-		String tokenKey = request.getHeader("X-cskaoyanmall-Admin-Token");
-		Integer userId = UserTokenManager.getUserId(tokenKey);
-		//通过请求头获得userId，进而可以获得一切关于user的信息
-		//**************************
-		if (userId == null) {
-			return BaseRespVo.fail();
-		}
-
-		Map<Object, Object> data = new HashMap<Object, Object>();
-		//***********************************
-		//根据userId查询订单信息
-		data.put("order", null);
-		//***********************************
-
-		return BaseRespVo.ok(data);
-	}
 }

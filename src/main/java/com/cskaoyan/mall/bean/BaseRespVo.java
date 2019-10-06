@@ -7,9 +7,10 @@ import java.util.List;
 
 public class BaseRespVo<T> {
 
+    private int errno;
     private T data;
     private String errmsg;
-    private int errno;
+
 
     public T getData() {
         return data;
@@ -75,6 +76,13 @@ public class BaseRespVo<T> {
         BaseRespVo<Object> baseRespVo = new BaseRespVo<>();
         baseRespVo.setErrno(errno);
         baseRespVo.setErrmsg(errmsg);
+        return baseRespVo;
+    }
+
+    public static BaseRespVo fail() {
+        BaseRespVo baseRespVo = new BaseRespVo();
+        baseRespVo.setErrno(-1);
+        baseRespVo.setErrmsg("错误");
         return baseRespVo;
     }
 }
