@@ -1,4 +1,4 @@
-//package com.cskaoyan.mall.mybatis;
+package com.cskaoyan.mall.mybatis;//package com.cskaoyan.mall.mybatis;
 //
 //
 //import com.fasterxml.jackson.core.JsonProcessingException;

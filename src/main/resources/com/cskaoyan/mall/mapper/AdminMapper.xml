@@ -292,6 +292,7 @@
       role_ids = #{roleIds,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
   <select id="queryPasswordByUsername" parameterType="string" resultType="string">
     select password from cskaoyan_mall_admin where username = #{password}
   </select>
@@ -304,6 +305,7 @@
   <update id="updateByUsername" parameterType="string">
     update cskaoyan_mall_admin set password = #{newPassword} where id = 1
   </update>
+
   <select id="selectAdminListByUser" resultType="com.cskaoyan.mall.bean.Admin">
     select <include refid="Base_Column_List2"/> from cskaoyan_mall_admin
      <where>
@@ -312,4 +314,7 @@
        </if>
      </where>
   </select>
+
 </mapper>
+
+

@@ -3,7 +3,11 @@ package com.cskaoyan.mall.mapper;
 import com.cskaoyan.mall.bean.Cart;
 import com.cskaoyan.mall.bean.CartExample;
 import java.util.List;
+
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 public interface CartMapper {
     long countByExample(CartExample example);
@@ -27,4 +31,15 @@ public interface CartMapper {
     int updateByPrimaryKeySelective(Cart record);
 
     int updateByPrimaryKey(Cart record);
+
+    @Update("update cskaoyan_mall_cart set checked =#{ischecked} where ")
+    void updateChecked(boolean isChecked);
+
+    @Select("select count(id) from  cskaoyan_mall_cart ")
+    int selectCount();
+
+    @Delete("delete from   cskaoyan_mall_cart where product_id=#{productId} and user_id=#{userid}")
+    void deleteByProductIdAndUserId(int productId,int userId);
+@Update("update cskaoyan_mall_cart set number=#{number} where id=#{id}")
+    void updateNumber(Integer id, int number);
 }

@@ -16,4 +16,10 @@ public class WeChatBrandController {
     public BaseRespVo queryBrandList(int page,int size){
         return weChatBrandService.queryBrandList(page, size);
     }
+
+    @RequestMapping("/wx/brand/detail")
+    public BaseRespVo queryBrandInfo(int id){
+        return weChatBrandService.queryBrandInfo(id);
+    }
+
 }
