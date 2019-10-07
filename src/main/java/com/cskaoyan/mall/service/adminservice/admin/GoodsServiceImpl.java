@@ -4,7 +4,7 @@ import com.cskaoyan.mall.bean.*;
 import com.cskaoyan.mall.exception.InsertException;
 import com.cskaoyan.mall.mapper.*;
 import com.cskaoyan.mall.service.adminservice.GoodsService;
-import com.cskaoyan.mall.util.fffUtils.ReturnUtils;
+
 import com.cskaoyan.mall.vo.adminvo.goodsmanagervo.*;
 import com.cskaoyan.mall.vo.wechatvo.tongsong.*;
 import com.github.pagehelper.PageHelper;
@@ -163,7 +163,7 @@ public class GoodsServiceImpl implements GoodsService {
         goodsDetail.setProducts(goodsProducts);
         goodsDetail.setSpecifications(specifications);
 
-        return ReturnUtils.ok(goodsDetail, "成功");
+        return com.cskaoyan.mall.util.utiLJW.ReturnUtils.ok(goodsDetail, "成功");
     }
 
     @Override
@@ -219,7 +219,7 @@ public class GoodsServiceImpl implements GoodsService {
         GoodsListVo<Goods> goodsListVo = new GoodsListVo<>();
         goodsListVo.setItems(goods);
         goodsListVo.setTotal(total);
-        return ReturnUtils.ok(goodsListVo,"成功");
+        return com.cskaoyan.mall.util.utiLJW.ReturnUtils.ok(goodsListVo,"成功");
     }
 
     @Override
@@ -241,7 +241,7 @@ public class GoodsServiceImpl implements GoodsService {
         CommentListVo commentListVo = new CommentListVo();
         commentListVo.setTotal(total);
         commentListVo.setItems(comments);
-        return ReturnUtils.ok(commentListVo, "成功");
+        return com.cskaoyan.mall.util.utiLJW.ReturnUtils.ok(commentListVo, "成功");
     }
 
 
@@ -252,7 +252,7 @@ public class GoodsServiceImpl implements GoodsService {
         CatAndBrand catAndBrand = new CatAndBrand();
         catAndBrand.setCategoryList(forCatLists);
         catAndBrand.setBrandList(forBrandLists);
-        return ReturnUtils.ok(catAndBrand, "成功");
+        return com.cskaoyan.mall.util.utiLJW.ReturnUtils.ok(catAndBrand, "成功");
     }
 
     @Override

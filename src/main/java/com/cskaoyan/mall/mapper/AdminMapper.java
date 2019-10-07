@@ -30,6 +30,7 @@ public interface AdminMapper {
 
     int updateByPrimaryKey(Admin record);
 
+
     String queryPasswordByUsername(@Param("password") String principal);
 
     ResourceVo queryRoleIdsByUsername(@Param("username") String primaryPrincipal);
@@ -38,3 +39,4 @@ public interface AdminMapper {
 
     List<Admin> selectAdminListByUser(@Param("username") String username);
 }
+
