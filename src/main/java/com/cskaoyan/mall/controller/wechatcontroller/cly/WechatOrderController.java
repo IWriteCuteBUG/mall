@@ -5,8 +5,11 @@ import com.cskaoyan.mall.service.wechatservice.cly.ClyOrderService;
 import com.cskaoyan.mall.utils.wechatutils.cly.ReturnUtilCly;
 import com.cskaoyan.mall.vo.wechatvo.cly.ForOrderDetail;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Map;
 
 @RestController
 @RequestMapping("wx/order")
@@ -32,8 +35,8 @@ public class WechatOrderController {
      * @return
      */
     @RequestMapping("cancel")
-    public BaseRespVo cancelOrder(int orderId){
-        clyOrderService.cancelOrder(orderId);
+    public BaseRespVo cancelOrder(@RequestBody Map map){
+        clyOrderService.cancelOrder((Integer) map.get("orderId"));
         return ReturnUtilCly.back(null, "成功", 0);
     }
 }

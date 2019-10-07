@@ -665,6 +665,7 @@
     LEFT JOIN cskaoyan_mall_groupon gr on o.order_sn = gr.order_id
     WHERE o.order_status IN(401,402)
   </select>
+<<<<<<< HEAD
 
   <!--<insert id="submitOrders">
     <selectKey resultType="int" keyProperty="order.id" keyColumn="id">
@@ -681,4 +682,9 @@
     update_time, deleted)
     values ()
   </insert>-->
+=======
+  <update id="updateOrderStatusCly">
+    update cskaoyan_mall_order set order_status=102 where id=#{id}
+  </update>
+>>>>>>> 14af3917a22d87b27149b428e660c64a00fa014e
 </mapper>
