@@ -43,4 +43,5 @@ public interface GoodsMapper {
 
     List<GoodsVoWeChat> queryGoodsForWeChat();
 
+    Goods selectCategoryId(@Param("id") Integer goodsId);
 }

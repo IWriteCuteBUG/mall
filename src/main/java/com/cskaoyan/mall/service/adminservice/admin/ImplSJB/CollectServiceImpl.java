@@ -1,4 +1,4 @@
-package com.cskaoyan.mall.service.adminservice.impl.ImplSJB;
+package com.cskaoyan.mall.service.adminservice.admin.ImplSJB;
 
 import com.cskaoyan.mall.bean.Collect;
 import com.cskaoyan.mall.bean.CollectExample;

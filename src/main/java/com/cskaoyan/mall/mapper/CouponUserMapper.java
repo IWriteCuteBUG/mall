@@ -1,7 +1,10 @@
 package com.cskaoyan.mall.mapper;
 
+import com.cskaoyan.mall.bean.Coupon;
 import com.cskaoyan.mall.bean.CouponUser;
 import com.cskaoyan.mall.bean.CouponUserExample;
+
+import java.util.Date;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
@@ -27,4 +30,6 @@ public interface CouponUserMapper {
     int updateByPrimaryKeySelective(CouponUser record);
 
     int updateByPrimaryKey(CouponUser record);
+
+    void insertChangeCoupon(@Param("coupon") Coupon coupon, @Param("userId") int userId, @Param("mydate") Date date, @Param("del") boolean deleted);
 }

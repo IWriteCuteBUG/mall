@@ -1,4 +1,4 @@
-package com.cskaoyan.mall.service.adminservice.impl.ImplSJB;
+package com.cskaoyan.mall.service.adminservice.admin.ImplSJB;
 
 import com.cskaoyan.mall.bean.User;
 import com.cskaoyan.mall.bean.UserExample;
@@ -24,10 +24,13 @@ public class UserServiceImpl implements UserService {
         String sortOrder = sortcolnum + " " + order;
         example.setOrderByClause(sortOrder);
         List<User> userList = null;
+        UserExample.Criteria criteria = example.createCriteria();
         int total = 0;
-        if(!((username == null || "".equals(username.trim())) && (mobile == null || "".equals(mobile.trim())))){
-            UserExample.Criteria criteria = example.createCriteria();
-            criteria.andUsernameLike("%" + username + "%").andMobileLike("%" + mobile + "%");
+        if(!((username == null || "".equals(username.trim())))){
+            criteria.andUsernameLike("%" + username + "%");
+        }
+        if(!(mobile == null || "".equals(mobile.trim()))){
+            criteria.andMobileLike("%" + mobile + "%");
         }
         userList = userMapper.selectByExample(example);
         total = (int) userMapper.countByExample(example);
