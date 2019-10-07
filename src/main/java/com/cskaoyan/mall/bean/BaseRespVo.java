@@ -9,35 +9,27 @@ import com.cskaoyan.mall.vo.adminvo.extensionvo.AdvertList;
 import java.util.List;
 
 public class BaseRespVo<T> {
-
     private T data;
     private String errmsg;
     private int errno;
-
     public T getData() {
         return data;
     }
-
     public void setData(T data) {
         this.data = data;
     }
-
     public String getErrmsg() {
         return errmsg;
     }
-
     public void setErrmsg(String errmsg) {
         this.errmsg = errmsg;
     }
-
     public int getErrno() {
         return errno;
     }
-
     public void setErrno(int errno) {
         this.errno = errno;
     }
-
     public static BaseRespVo ok(Object s) {
         BaseRespVo baseRespVo = new BaseRespVo<>();
         baseRespVo.setData(s);

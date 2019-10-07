@@ -5,7 +5,7 @@ import com.cskaoyan.mall.bean.Comment;
 import com.cskaoyan.mall.bean.Goods;
 import com.cskaoyan.mall.exception.InsertException;
 import com.cskaoyan.mall.service.adminservice.GoodsService;
-import com.cskaoyan.mall.util.fffUtils.ReturnUtils;
+
 import com.cskaoyan.mall.vo.adminvo.goodsmanagervo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
@@ -33,9 +33,9 @@ public class GoodsController {
            goodsService.addGoods(goodsDetail);
         } catch (InsertException e) {
             e.printStackTrace();
-            return ReturnUtils.fail(null,e.getCustomMsg());
+            return com.cskaoyan.mall.util.utiLJW.ReturnUtils.fail(null,e.getCustomMsg());
         }
-        return ReturnUtils.ok(null, "成功");
+        return com.cskaoyan.mall.util.utiLJW.ReturnUtils.ok(null, "成功");
     }
 
     /**
@@ -46,7 +46,7 @@ public class GoodsController {
     @RequestMapping("admin/goods/update")
     public BaseRespVo updateGoods(@RequestBody GoodsDetail goodsDetail){
         goodsService.updateGoods(goodsDetail);
-        return ReturnUtils.ok(null, "成功");
+        return com.cskaoyan.mall.util.utiLJW.ReturnUtils.ok(null, "成功");
     }
 
     /**
@@ -69,7 +69,7 @@ public class GoodsController {
         if(bindingResult.hasErrors()){
             FieldError fieldError = bindingResult.getFieldError();
             String defaultMessage = fieldError.getDefaultMessage();
-            return ReturnUtils.fail(null,defaultMessage);
+            return com.cskaoyan.mall.util.utiLJW.ReturnUtils.fail(null,defaultMessage);
         }
         BaseRespVo<CommentListVo<Comment>> commentListVoBaseRespVo = goodsService.queryCommentList(forQueryComments);
         return commentListVoBaseRespVo;
@@ -84,9 +84,9 @@ public class GoodsController {
     public BaseRespVo deleteComment(@RequestBody Comment comment){
         int count = goodsService.deleteComment(comment.getId());
         if(count == 1){
-            return ReturnUtils.ok(null, "成功");
+            return com.cskaoyan.mall.util.utiLJW.ReturnUtils.ok(null, "成功");
         }else {
-            return ReturnUtils.fail(null, "删除失败，请确认数据库中是否存在该评论");
+            return com.cskaoyan.mall.util.utiLJW.ReturnUtils.fail(null, "删除失败，请确认数据库中是否存在该评论");
         }
     }
 
@@ -99,7 +99,7 @@ public class GoodsController {
     @RequestMapping("admin/goods/delete")
     public BaseRespVo deleteGood(@RequestBody Goods goods){
         goodsService.deleteGood(goods.getId());
-        return ReturnUtils.ok(null, "成功");
+        return com.cskaoyan.mall.util.utiLJW.ReturnUtils.ok(null, "成功");
     }
 
     /**

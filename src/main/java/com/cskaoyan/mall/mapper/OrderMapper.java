@@ -4,6 +4,7 @@ import com.cskaoyan.mall.bean.Order;
 import com.cskaoyan.mall.bean.OrderExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 
 public interface OrderMapper {
     long countByExample(OrderExample example);
@@ -37,4 +38,6 @@ public interface OrderMapper {
     int countOrderAmountByDate(@Param("amount") String s);
 
     int queryOrdersTotal();
+
+
 }
