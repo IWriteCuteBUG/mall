@@ -13,6 +13,7 @@
     <result column="add_time" jdbcType="TIMESTAMP" property="addTime" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
     <result column="deleted" jdbcType="BIT" property="deleted" />
+    <result column="content" jdbcType="LONGVARCHAR" property="content" />
   </resultMap>
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.cskaoyan.mall.bean.Topic">
     <result column="content" jdbcType="LONGVARCHAR" property="content" />
@@ -374,4 +375,41 @@
       deleted = #{deleted,jdbcType=BIT}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <resultMap id="topicListMap" type="com.cskaoyan.mall.bean.Topic">
+    <result column="id" property="id"/>
+    <result column="pic_url" property="picUrl"/>
+    <result column="price" property="price"/>
+    <result column="read_count" property="readCount"/>
+    <result column="subtitle" property="subtitle"/>
+    <result column="title" property="title"/>
+  </resultMap>
+  <select id="queryTopicList" resultMap="topicListMap">
+    select id,pic_url,price,read_count,subtitle,title from cskaoyan_mall_topic
+  </select>
+  <resultMap id="topicDetailMap" type="com.cskaoyan.mall.bean.Topic">
+    <result column="id" property="id"/>
+    <result column="title" property="title"/>
+    <result column="subtitle" property="subtitle"/>
+    <result column="content" property="content"/>
+    <result column="price" property="price"/>
+    <result column="read_count" property="readCount"/>
+    <result column="pic_url" property="picUrl"/>
+    <result column="sort_order" property="sortOrder"/>
+    <result column="goods" property="goods"/>
+    <result column="add_time" property="addTime"/>
+    <result column="update_time" property="updateTime"/>
+    <result column="deleted" property="deleted"/>
+  </resultMap>
+  <select id="queryTopicDetail" resultMap="topicDetailMap">
+    select id,title,subtitle,content,price,read_count,pic_url,sort_order,goods,add_time,update_time,deleted
+    from cskaoyan_mall_topic
+    where id=#{id}
+  </select>
+  <select id="selectRelatedTopics" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from cskaoyan_mall_topic
+    where id!=#{id}
+    limit 4
+  </select>
 </mapper>

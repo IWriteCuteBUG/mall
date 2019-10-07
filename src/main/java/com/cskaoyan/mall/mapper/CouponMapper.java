@@ -27,4 +27,6 @@ public interface CouponMapper {
     int updateByPrimaryKeySelective(Coupon record);
 
     int updateByPrimaryKey(Coupon record);
+
+    List<Coupon> queryMyCouponList(@Param("status") short status, @Param("userId") int userId);
 }
