@@ -3,6 +3,8 @@ package com.cskaoyan.mall.mapper;
 import com.cskaoyan.mall.bean.Order;
 import com.cskaoyan.mall.bean.OrderExample;
 import java.util.List;
+
+import com.cskaoyan.mall.vo.wechatvo.tongsong.OrderVo;
 import org.apache.ibatis.annotations.Param;
 
 public interface OrderMapper {
@@ -37,4 +39,18 @@ public interface OrderMapper {
     int countOrderAmountByDate(@Param("amount") String s);
 
     int queryOrdersTotal();
+
+    List<OrderVo> queryOrdersList();
+
+    //未付款
+    List<OrderVo> queryOrdersList1();
+
+    //代发货
+    List<OrderVo> queryOrdersList2();
+
+    //已发货
+    List<OrderVo> queryOrdersList3();
+
+    //待评价
+    List<OrderVo> queryOrdersList4();
 }

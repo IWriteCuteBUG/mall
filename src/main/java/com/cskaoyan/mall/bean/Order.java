@@ -1,9 +1,11 @@
 package com.cskaoyan.mall.bean;
 
+import com.cskaoyan.mall.vo.wechatvo.ljw.HandleOption;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 public class Order {
     private Integer id;
@@ -33,8 +35,48 @@ public class Order {
     private BigDecimal grouponPrice;
 
     private BigDecimal orderPrice;
-
+;
     private BigDecimal actualPrice;
+
+    private String orderStatusText;
+
+    private boolean isGroupin;
+
+
+    private HandleOption handleOption;
+    private List<Goods> goodsList;
+
+    public HandleOption getHandleOption() {
+        return handleOption;
+    }
+
+    public void setHandleOption(HandleOption handleOption) {
+        this.handleOption = handleOption;
+    }
+
+    public List<Goods> getGoodsList() {
+        return goodsList;
+    }
+
+    public void setGoodsList(List<Goods> goodsList) {
+        this.goodsList = goodsList;
+    }
+
+    public String getOrderStatusText() {
+        return orderStatusText;
+    }
+
+    public void setOrderStatusText(String orderStatusText) {
+        this.orderStatusText = orderStatusText;
+    }
+
+    public boolean getisGroupin() {
+        return isGroupin;
+    }
+
+    public void setisGroupin(boolean groupin) {
+        isGroupin = groupin;
+    }
 
     private String payId;
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")

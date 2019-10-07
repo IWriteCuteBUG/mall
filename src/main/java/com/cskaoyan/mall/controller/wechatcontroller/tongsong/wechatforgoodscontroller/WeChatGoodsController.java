@@ -40,4 +40,15 @@ public class WeChatGoodsController {
         return baseRespVo;
     }
 
+    @RequestMapping("goods/list")
+    public BaseRespVo queryGoodsListByCategoryId(int categoryId, int page,int size){
+        BaseRespVo baseRespVo =goodsService.queryGoodsListByCategoryId(categoryId,page,size);
+        return baseRespVo;
+    }
+    @RequestMapping("goods/related")
+    public BaseRespVo queryRelatedGoodsListByGoodsId(int id){
+        BaseRespVo baseRespVo =goodsService.queryRelatedGoodsListByGoodsId(id);
+        return baseRespVo;
+    }
+
 }
