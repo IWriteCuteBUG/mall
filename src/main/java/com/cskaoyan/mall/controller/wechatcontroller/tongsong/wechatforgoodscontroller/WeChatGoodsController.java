@@ -45,14 +45,17 @@ public class WeChatGoodsController {
     public BaseRespVo queryGoodsListByCategoryId(GoodsCategoryAndBrand goodsCategoryAndBrand){
         int brandId = goodsCategoryAndBrand.getBrandId();
         int categoryId = goodsCategoryAndBrand.getCategoryId();
+        int keyword = goodsCategoryAndBrand.getKeyword();
         BaseRespVo baseRespVo = null;
         int page = goodsCategoryAndBrand.getPage();
         int size = goodsCategoryAndBrand.getSize();
-        if (brandId == 0){
-            baseRespVo =goodsService.queryGoodsListByCategoryId(categoryId,page,size);
-        }
-        if (categoryId == 0) {
+        if (brandId != 0){
             baseRespVo = goodsService.queryGoodsListByBrandId(brandId,page,size);
+
+        } else if (categoryId != 0) {
+            baseRespVo =goodsService.queryGoodsListByCategoryId(categoryId,page,size);
+        } else if (keyword != 0) {
+
         }
         return baseRespVo;
     }

@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -54,6 +55,13 @@ public class WeChatOrdersServiceImpl implements WeChatOrdersService {
             orderVoList = orderMapper.queryOrdersList3();
         }else if (showType == 4) {
             orderVoList = orderMapper.queryOrdersList4();
+        }
+        if (orderVoList.size() == 0) {
+            HashMap<String, Object> map = new HashMap<>();
+            map.put("data",new ArrayList<>());
+            map.put("count",0);
+            map.put("totalPages",0);
+            return BaseRespVo.ok(map);
         }
         for (OrderVo orderVo : orderVoList) {
             int status = orderVo.getStatus();

@@ -5,6 +5,15 @@ public class GoodsCategoryAndBrand {
     private int brandId;
     private int page;
     private int size;
+    private int keyword;
+
+    public int getKeyword() {
+        return keyword;
+    }
+
+    public void setKeyword(int keyword) {
+        this.keyword = keyword;
+    }
 
     public int getCategoryId() {
         return categoryId;
