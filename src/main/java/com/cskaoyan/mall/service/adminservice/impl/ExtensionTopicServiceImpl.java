@@ -31,7 +31,7 @@ public class ExtensionTopicServiceImpl implements ExtensionTopicService {
         TopicExample topicExample = new TopicExample();
         TopicExample.Criteria criteria = topicExample.createCriteria();
         if (title != null) {
-            criteria = criteria.andTitleEqualTo(title);
+            criteria = criteria.andTitleLike("%" + title + "%");
         }
 
         if (subtitle != null) {
