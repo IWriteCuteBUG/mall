@@ -6,6 +6,7 @@ import com.cskaoyan.mall.bean.Coupon;
 import com.cskaoyan.mall.service.wechatservice.cly.CouponService;
 import com.cskaoyan.mall.utils.wechatutils.cly.ReturnUtilCly;
 import com.cskaoyan.mall.vo.wechatvo.cly.ForMyCouponList;
+import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,7 +31,7 @@ public class WechatDiscountController {
      */
     @RequestMapping("mylist")
     public BaseRespVo<ForMyCouponList> queryMyCouponList(short status, int page, int size){
-        int userId = 1;
+        Integer userId = (Integer) SecurityUtils.getSubject().getSession().getAttribute("userId");
         ForMyCouponList forMyCouponList = couponService.queryMyCouponList(status, page, size, userId);
         return ReturnUtilCly.back(forMyCouponList, "成功", 0);
     }
@@ -43,7 +44,7 @@ public class WechatDiscountController {
      */
     @RequestMapping("exchange")
     public BaseRespVo changeCoupon(@RequestBody Map map){
-        int userId = 1;
+        Integer userId = (Integer) SecurityUtils.getSubject().getSession().getAttribute("userId");
         String code = (String) map.get("code");
         boolean flag = couponService.changeCoupon(userId, code);
         if(flag){
@@ -59,7 +60,7 @@ public class WechatDiscountController {
      */
     @RequestMapping("receive")
     public BaseRespVo receiveCoupon(@RequestBody Map map){
-        int userId = 1;
+        Integer userId = (Integer) SecurityUtils.getSubject().getSession().getAttribute("userId");
         Integer couponId = (Integer) map.get("couponId");
         int flag = couponService.receiveCoupon(userId, couponId);
         if(flag == 0) {
