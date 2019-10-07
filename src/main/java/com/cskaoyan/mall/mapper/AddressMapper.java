@@ -35,4 +35,7 @@ public interface AddressMapper {
     int setDeletedTrue(@Param("id") int id);
 
     List<Address> selectExistByPrimaryKey(@Param("userId") int userId);
+
+    @Update("update cskaoyan_mall_address set is_default = 0 where user_id = #{userId} and id != #{id}")
+    int setDefault(@Param("id") int id, @Param("userId") int userId);
 }

@@ -32,7 +32,9 @@ public class AddressServiceSJBImpl implements AddressServiceSJB {
 
     @Override
     public int updateAddressById(Address address) {
-
+        if(address.getIsDefault()){
+            int count = addressMapper.setDefault(address.getId(), address.getUserId());
+        }
         return addressMapper.updateAddressById(address);
     }
 }

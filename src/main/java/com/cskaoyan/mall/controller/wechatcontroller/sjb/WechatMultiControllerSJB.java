@@ -51,7 +51,7 @@ public class WechatMultiControllerSJB {
     @Autowired
     CommentServiceSJB commentService;
 
-    @RequestMapping("wx/goods/list")
+    //@RequestMapping("wx/goods/list")
     @ResponseBody
     public BaseRespVo goodsList(@Valid GoodsSearchListReqVo reqVo, BindingResult bindingResult){
         if (bindingResult.hasErrors()){
@@ -139,7 +139,10 @@ public class WechatMultiControllerSJB {
     @RequestMapping("wx/address/save")
     @ResponseBody
     public BaseRespVo addressSave(@RequestBody AddressSaveReqVo vo){
+        int userId = Integer.parseInt(String.valueOf(SecurityUtils.getSubject().getSession().getAttribute("userId")));
+        //int userId = 1;
         Address address = new Address();
+        address.setUserId(userId);
         address.setAddress(vo.getAddress());
         address.setProvinceId(vo.getProvinceId());
         address.setAreaId(vo.getAreaId());
