@@ -1,9 +1,14 @@
 package com.cskaoyan.mall.controller.admincontroller.controllerLJW;
 
 import com.cskaoyan.mall.bean.BaseRespVo;
+
+import com.cskaoyan.mall.bean.User;
+import com.cskaoyan.mall.realm.CustomToken;
+
 import com.cskaoyan.mall.service.adminservice.AdminService;
 import com.cskaoyan.mall.vo.adminvo.tvo.*;
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,9 +38,14 @@ public class AutoController {
             stringBaseRespVo.setErrmsg("账号或密码输入错误");
             return stringBaseRespVo;
         }
-        UsernamePasswordToken usernamePasswordToken = new UsernamePasswordToken(username, password);
+//        UsernamePasswordToken token = new UsernamePasswordToken(username, password);
+        CustomToken token = new CustomToken(username, password, "admin");
         Subject subject = SecurityUtils.getSubject();
-        subject.login(usernamePasswordToken);
+        try {
+            subject.login(token);
+        } catch (AuthenticationException e) {
+            return BaseRespVo.baseRespErr(605, "账号或密码输入错误");
+        }
         Serializable id = subject.getSession().getId();
         return BaseRespVo.ok(id);
     }
@@ -56,6 +66,7 @@ public class AutoController {
     public BaseRespVo updatePassword(@RequestBody PasswordVo passwordVo){
         BaseRespVo baseRespVo = adminService.updatePassword(passwordVo);
         return baseRespVo;
+
     }
 
 }

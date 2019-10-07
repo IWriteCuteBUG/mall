@@ -17,7 +17,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
-public class MyRealm extends AuthorizingRealm {
+public class AdminRealm extends AuthorizingRealm {
 
     @Autowired
     AdminMapper adminMapper;
