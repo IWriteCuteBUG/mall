@@ -579,4 +579,7 @@
     select g.retail_price-r.discount as groupon_price,g.id,g.name,g.brief,g.pic_url as picUrl,g.counter_price,g.retail_price,r.discount_member as groupon_member
 from cskaoyan_mall_groupon_rules r LEFT JOIN cskaoyan_mall_goods g on r.goods_id = g.id
   </select>
+  <select id="selectCategoryId" resultType="com.cskaoyan.mall.bean.Goods">
+    select category_id from cskaoyan_mall_goods where id=#{id}
+  </select>
 </mapper>

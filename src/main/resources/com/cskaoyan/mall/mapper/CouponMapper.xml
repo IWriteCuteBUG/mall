@@ -444,4 +444,9 @@
       deleted = #{deleted,jdbcType=BIT}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <select id="queryMyCouponList" resultType="com.cskaoyan.mall.bean.Coupon">
+    select c.id,name,`desc`,tag,discount,min,c.start_time as startTime,c.end_time as endTime
+    from cskaoyan_mall_coupon_user cu right join cskaoyan_mall_coupon c
+    on cu.coupon_id=c.id where cu.user_id=#{userId} and cu.status=#{status}
+  </select>
 </mapper>
