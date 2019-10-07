@@ -30,6 +30,9 @@ public interface OrderGoodsMapper {
     int updateByPrimaryKey(OrderGoods record);
 
     int countGoodsByDate(@Param("date") String s);
+
+    @Select("select number,pic_url,id,goods_name from cskaoyan_mall_order_goods where order_id = #{orderId}")
+    List<OrderGoods> queryOrdersGoodsByOrderId(int orderId);
 //   @Select("select goods_id from cskaoyan_mall_order_goods where orde_id =#{orderid}")
 //    int selectGoodsIdByOrderId(Integer  orderid);
 }

@@ -10,7 +10,11 @@ import com.cskaoyan.mall.realm.wxtokenvo.OrderInfo;
 import com.cskaoyan.mall.realm.wxtokenvo.UserInfo;
 import com.cskaoyan.mall.realm.wxtokenvo.WxBaseVo;
 import com.cskaoyan.mall.service.wechatservice.zyp.WxAuthService;
+import com.cskaoyan.mall.utils.adminutils.ExtensionStringUtils;
 import com.cskaoyan.mall.vo.adminvo.tvo.LoginVo;
+import com.cskaoyan.mall.vo.wechatvo.zyp.UserIndexVo;
+import com.cskaoyan.mall.vo.wechatvo.zyp.WeChatRegisterVo;
+import com.sun.org.apache.xalan.internal.lib.Extensions;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.session.Session;
@@ -38,7 +42,8 @@ public class WxAuthController {
 	@RequestMapping("auth/login")
 	@ResponseBody
 //	public Object login(@RequestBody String body, HttpServletRequest request) {
-	public Object login(@RequestBody LoginVo loginVo , HttpServletRequest request) {
+//	public Object login(@RequestBody LoginVo loginVo , HttpServletRequest request) {
+	public Object login(@RequestBody LoginVo loginVo) {
 		String username = loginVo.getUsername();
 		String password = loginVo.getPassword();
 		CustomToken token = new CustomToken(username, password, "wechat");
@@ -48,8 +53,9 @@ public class WxAuthController {
 			return BaseRespVo.baseRespErr(500,"用户名或密码错误");
 		}
 		Integer userId = wxAuthService.queryIdByUsername(username);
-		request.getSession().setAttribute("userId",userId);
+//		request.getSession().setAttribute("userId",userId);
 		Subject subject = SecurityUtils.getSubject();
+		subject.getSession().setAttribute("userId",userId);
 		Serializable id = subject.getSession().getId();
 		WxBaseVo wxBaseVo = new WxBaseVo();
 		UserInfo userInfo = new UserInfo();
@@ -69,18 +75,51 @@ public class WxAuthController {
 //		return BaseRespVo.ok(result);
 	}
 
+	@RequestMapping("auth/register")
+	public BaseRespVo register(@RequestBody WeChatRegisterVo registerVo){
+		BaseRespVo baseRespVo = wxAuthService.insertUser(registerVo);
+		return baseRespVo;
+//		return BaseRespVo.baseRespOk("");
+	}
+
+//	手机获取验证码
+	@RequestMapping("auth/regCaptcha")
+	public BaseRespVo regCaptcha(@RequestBody Map map){
+		String mobile = (String) map.get("mobile");
+		if (ExtensionStringUtils.isEmpty(mobile)) {
+			return BaseRespVo.baseRespErr(702,"请您输入手机号！");
+		}
+//		随机生成一个验证码
+		int code = (int) ((Math.random()*9+1)*100000);
+		Session session = SecurityUtils.getSubject().getSession();
+		session.setAttribute("code",code);
+		Serializable id = session.getId();
+//		System.out.println(id);
+		wxAuthService.regCaptcha(mobile,code);
+		return BaseRespVo.baseRespOk(id);
+	}
+
 	@RequestMapping("auth/logout")
 	public BaseRespVo logout(HttpServletRequest request){
 		Subject subject = SecurityUtils.getSubject();
 		request.getSession().setAttribute("userId","");
 		subject.logout();
-		return BaseRespVo.baseRespOk("");
+		return BaseRespVo.baseRespOk("退出成功");
 	}
-
+//	个人主页
 	@GetMapping("user/index")
 	public BaseRespVo list() {
-		Integer userId = (Integer) SecurityUtils.getSubject().getSession().getAttribute("userId");
 		OrderInfo orderInfo = new OrderInfo();
+		HashMap<String, OrderInfo> map = new HashMap<>();
+		Integer userId = (Integer) SecurityUtils.getSubject().getSession().getAttribute("userId");
+		if (userId == null) {
+			orderInfo.setUncomment(0);
+			orderInfo.setUnrecv(0);
+			orderInfo.setUnpaid(0);
+			orderInfo.setUnship(0);
+			map.put("order", orderInfo);
+			return BaseRespVo.ok(map);
+		}
 //		未付款 0
 		List<Order> unpaid = wxAuthService.queryOrdersByUserIdAndOrderStatus(userId,0);
 //		待发货
@@ -93,8 +132,16 @@ public class WxAuthController {
 		orderInfo.setUnrecv(unrecv.size());
 		orderInfo.setUnpaid(unpaid.size());
 		orderInfo.setUnship(unship.size());
-		HashMap<String, OrderInfo> map = new HashMap<>();
 		map.put("order", orderInfo);
+		/*UserIndexVo userIndexVo = new UserIndexVo();
+		userIndexVo.setOrder(orderInfo);*/
 		return BaseRespVo.ok(map);
+	}
+
+	//    重置密码
+	@RequestMapping("auth/reset")
+	public BaseRespVo reset(@RequestBody WeChatRegisterVo weChatRegisterVo) {
+		BaseRespVo baseRespVo = wxAuthService.reset(weChatRegisterVo);
+		return baseRespVo;
 	}
 }

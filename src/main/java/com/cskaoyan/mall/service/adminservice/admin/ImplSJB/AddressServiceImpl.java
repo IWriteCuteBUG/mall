@@ -1,4 +1,4 @@
-package com.cskaoyan.mall.service.adminservice.impl.ImplSJB;
+package com.cskaoyan.mall.service.adminservice.admin.ImplSJB;
 
 import com.cskaoyan.mall.bean.Address;
 import com.cskaoyan.mall.bean.AddressExample;
@@ -31,7 +31,8 @@ public class AddressServiceImpl implements AddressService {
         if(uid != 0){
             AddressExample.Criteria criteria = example.createCriteria();
             criteria.andUserIdEqualTo(uid);
-        } else if(!(name == null || "".equals(name.trim()))){
+        }
+        if(!(name == null || "".equals(name.trim()))){
             AddressExample.Criteria criteria = example.createCriteria();
             criteria.andNameLike("%" + name + "%");
         }
