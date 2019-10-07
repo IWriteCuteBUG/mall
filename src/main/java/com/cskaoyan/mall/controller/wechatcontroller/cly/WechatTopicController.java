@@ -5,6 +5,7 @@ import com.cskaoyan.mall.bean.Topic;
 import com.cskaoyan.mall.service.wechatservice.cly.TopicService;
 import com.cskaoyan.mall.utils.wechatutils.cly.ReturnUtilCly;
 import com.cskaoyan.mall.vo.wechatvo.cly.ForTopicDetail;
+import com.cskaoyan.mall.vo.wechatvo.cly.ForTopicList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,7 +28,7 @@ public class WechatTopicController {
 
     @RequestMapping("list")
     public BaseRespVo queryTopicList(int page, int size){
-        List<Topic> topics = topicService.queryTopicList(page, size);
-        return ReturnUtilCly.back(topics, "成功", 0);
+        ForTopicList forTopicList = topicService.queryTopicList(page, size);
+        return ReturnUtilCly.back(forTopicList, "成功", 0);
     }
 }
