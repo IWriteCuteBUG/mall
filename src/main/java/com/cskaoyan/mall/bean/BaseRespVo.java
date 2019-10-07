@@ -9,18 +9,14 @@ import com.cskaoyan.mall.vo.adminvo.extensionvo.AdvertList;
 import java.util.List;
 
 public class BaseRespVo<T> {
-<<<<<<< HEAD
+
 
     private int errno;
     private T data;
     private String errmsg;
 
 
-=======
-    private T data;
-    private String errmsg;
-    private int errno;
->>>>>>> ljw
+
     public T getData() {
         return data;
     }

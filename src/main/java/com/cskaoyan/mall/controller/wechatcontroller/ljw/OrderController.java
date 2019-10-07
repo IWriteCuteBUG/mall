@@ -2,7 +2,7 @@ package com.cskaoyan.mall.controller.wechatcontroller.ljw;
 
 
 import com.cskaoyan.mall.bean.BaseRespVo;
-import com.cskaoyan.mall.service.wechatservice.ljw.OrderService;
+//import com.cskaoyan.mall.service.wechatservice.ljw.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
