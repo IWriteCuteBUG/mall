@@ -9,6 +9,7 @@ import com.cskaoyan.mall.vo.adminvo.goodsmanagervo.*;
 import com.cskaoyan.mall.vo.wechatvo.tongsong.*;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import org.apache.shiro.crypto.hash.Hash;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -448,5 +449,28 @@ public class GoodsServiceImpl implements GoodsService {
         map.put("goodsList",goodsList);
         BaseRespVo ok = BaseRespVo.ok(map);
         return ok;
+    }
+
+    @Override
+    public BaseRespVo queryGoodsListByBrandId(int brandId, int page, int size) {
+        GoodsExample goodsExample = new GoodsExample();
+        goodsExample.createCriteria().andBrandIdEqualTo(brandId);
+        //filterCategoryList
+        PageHelper.startPage(page,size);
+        List<Goods> goodsList = goodsMapper.selectByExample(goodsExample);
+        //filterCategoryList
+        List<Category> filterCategoryList = new ArrayList<>();
+        for (Goods goods : goodsList) {
+            Integer categoryId = goods.getCategoryId();
+            CategoryExample categoryExample = new CategoryExample();
+            categoryExample.createCriteria().andIdEqualTo(categoryId);
+            List<Category> categories1 = categoryMapper.selectByExample(categoryExample);
+            Category category = categories1.get(0);
+            filterCategoryList.add(category);
+        }
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("filterCategoryList",filterCategoryList);
+        map.put("goodsList",goodsList);
+        return BaseRespVo.ok(map);
     }
 }

@@ -38,7 +38,9 @@ public class WeChatBrandServiceImpl implements WeChatBrandService {
         BrandExample brandExample = new BrandExample();
         brandExample.createCriteria().andIdEqualTo(id);
         List<Brand> brands = brandMapper.selectByExample(brandExample);
-        BaseRespVo ok = BaseRespVo.ok(brands.get(0));
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("brand",brands.get(0));
+        BaseRespVo ok = BaseRespVo.ok(map);
         return ok;
     }
 }

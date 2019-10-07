@@ -1,6 +1,7 @@
 package com.cskaoyan.mall.controller.wechatcontroller.tongsong.wechatforgoodscontroller;
 
 import com.cskaoyan.mall.bean.BaseRespVo;
+import com.cskaoyan.mall.bean.GoodsCategoryAndBrand;
 import com.cskaoyan.mall.service.adminservice.CountService;
 import com.cskaoyan.mall.service.adminservice.GoodsService;
 import com.cskaoyan.mall.service.wechatservice.tangsong.WechatCateGoryService;
@@ -41,10 +42,21 @@ public class WeChatGoodsController {
     }
 
     @RequestMapping("goods/list")
-    public BaseRespVo queryGoodsListByCategoryId(int categoryId, int page,int size){
-        BaseRespVo baseRespVo =goodsService.queryGoodsListByCategoryId(categoryId,page,size);
+    public BaseRespVo queryGoodsListByCategoryId(GoodsCategoryAndBrand goodsCategoryAndBrand){
+        int brandId = goodsCategoryAndBrand.getBrandId();
+        int categoryId = goodsCategoryAndBrand.getCategoryId();
+        BaseRespVo baseRespVo = null;
+        int page = goodsCategoryAndBrand.getPage();
+        int size = goodsCategoryAndBrand.getSize();
+        if (brandId == 0){
+            baseRespVo =goodsService.queryGoodsListByCategoryId(categoryId,page,size);
+        }
+        if (categoryId == 0) {
+            baseRespVo = goodsService.queryGoodsListByBrandId(brandId,page,size);
+        }
         return baseRespVo;
     }
+
     @RequestMapping("goods/related")
     public BaseRespVo queryRelatedGoodsListByGoodsId(int id){
         BaseRespVo baseRespVo =goodsService.queryRelatedGoodsListByGoodsId(id);
