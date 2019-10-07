@@ -5,6 +5,7 @@ import com.cskaoyan.mall.bean.Cart;
 import com.cskaoyan.mall.service.wechatservice.ljw.CartService;
 import com.cskaoyan.mall.vo.adminvo.voLJW.wxvoLJW.CheckedCarts;
 import com.cskaoyan.mall.vo.wechatvo.ljw.ProductIds;
+import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,7 +30,8 @@ return cartService.cartIndex(userid);
     //添加商品至购物车
     @RequestMapping("wx/cart/add")
     public  BaseRespVo addCart(@RequestBody Cart cart){
-
+        /*Object userId = SecurityUtils.getSubject().getSession().getAttribute("userId");
+        String s = userId.toString();*/
         return  cartService.addCart(cart);
     }
 

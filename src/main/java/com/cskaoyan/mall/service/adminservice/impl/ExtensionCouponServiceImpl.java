@@ -5,6 +5,7 @@ import com.cskaoyan.mall.exception.ExtensionCouponDiscountException;
 import com.cskaoyan.mall.mapper.CouponMapper;
 import com.cskaoyan.mall.mapper.CouponUserMapper;
 import com.cskaoyan.mall.service.adminservice.ExtensionCouponService;
+import com.cskaoyan.mall.utils.adminutils.ExtensionCouponExceptionUtils;
 import com.cskaoyan.mall.utils.adminutils.ExtensionStringUtils;
 import com.cskaoyan.mall.vo.adminvo.extensionvo.*;
 import com.github.pagehelper.PageHelper;
@@ -53,8 +54,8 @@ public class ExtensionCouponServiceImpl implements ExtensionCouponService {
 
     //添加优惠卷
     @Override
-    public BaseRespVo createCroupons(Coupon coupon) throws ExtensionCouponDiscountException {
-//        Coupon coupon = ExtensionCouponExceptionUtils.couponDiscount(couponObject);
+    public BaseRespVo createCroupons(CouponObject couponObject) throws ExtensionCouponDiscountException {
+        Coupon coupon = ExtensionCouponExceptionUtils.couponDiscount(couponObject);
         Date date = new Date();
         coupon.setAddTime(date);
         int i = couponMapper.insertSelective(coupon);
@@ -89,7 +90,8 @@ public class ExtensionCouponServiceImpl implements ExtensionCouponService {
     }
 //  修改优惠卷
     @Override
-    public BaseRespVo createUpdate(Coupon coupon) {
+    public BaseRespVo createUpdate(CouponObject couponObject) throws ExtensionCouponDiscountException {
+        Coupon coupon = ExtensionCouponExceptionUtils.couponDiscount(couponObject);
         Date date = new Date();
         coupon.setUpdateTime(date);
         int update = couponMapper.updateByPrimaryKey(coupon);

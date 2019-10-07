@@ -25,14 +25,14 @@ public class ExtensionCouponController {
 
 //    创建优惠卷
     @RequestMapping("create")
-    public BaseRespVo couponCreate(@RequestBody Coupon couponObject) throws ExtensionCouponDiscountException {
+    public BaseRespVo couponCreate(@RequestBody CouponObject couponObject) throws ExtensionCouponDiscountException {
         BaseRespVo baseRespVo = couponService.createCroupons(couponObject);
         return baseRespVo;
     }
 //    修改优惠卷
     @RequestMapping("update")
-    public BaseRespVo couponUpdate(@RequestBody Coupon coupon) {
-        BaseRespVo baseRespVo = couponService.createUpdate(coupon);
+    public BaseRespVo couponUpdate(@RequestBody CouponObject couponObject) throws ExtensionCouponDiscountException {
+        BaseRespVo baseRespVo = couponService.createUpdate(couponObject);
         return baseRespVo;
     }
 

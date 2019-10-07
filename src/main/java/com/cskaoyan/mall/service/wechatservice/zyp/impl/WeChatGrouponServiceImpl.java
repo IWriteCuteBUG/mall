@@ -8,6 +8,7 @@ import com.cskaoyan.mall.utils.wechatutils.zyp.OrdersStatusUtils;
 import com.cskaoyan.mall.vo.wechatvo.zyp.*;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,7 +33,9 @@ public class WeChatGrouponServiceImpl implements WechatGrouponService {
 
     @Override
     public BaseRespVo queryGrouponByShowType(int showType) {
-        int userId = 1;
+//        int userId = 1;
+        Integer userId = (Integer) SecurityUtils.getSubject().getSession().getAttribute("userId");
+
         GrouponExample grouponExample = new GrouponExample();
         GrouponExample.Criteria criteria = grouponExample.createCriteria();
         if (showType == 0) {

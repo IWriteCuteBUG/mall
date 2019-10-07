@@ -29,8 +29,11 @@ public class ExtensionCouponExceptionUtils {
 
         try {
 //            coupon.getMin()
-            Long aLong = Long.valueOf(coupon.getMin());
-            couponTrue.setMin(BigDecimal.valueOf(aLong));
+//            Long aLong = Long.valueOf(coupon.getMin());
+//            couponTrue.setMin(BigDecimal.valueOf(aLong));
+            BigDecimal bigDecimal = new BigDecimal(coupon.getMin());
+//            couponTrue.setMin(BigDecimal.valueOf(bigDecimal));
+            couponTrue.setMin(bigDecimal);
         } catch (Exception e) {
             throw new ExtensionCouponDiscountException("最低消费参数输入有误");
         }
@@ -40,8 +43,18 @@ public class ExtensionCouponExceptionUtils {
         } catch (Exception e) {
             throw new ExtensionCouponDiscountException("满减金额参数输入有误");
         }
-
-
+        couponTrue.setId(coupon.getId());
+        couponTrue.setName(coupon.getName());
+        couponTrue.setDesc(coupon.getDesc());
+        couponTrue.setTag(coupon.getTag());
+        couponTrue.setStatus(coupon.getStatus());
+        couponTrue.setType(coupon.getType());
+        couponTrue.setGoodsType(coupon.getGoodsType());
+        couponTrue.setGoodsValue(coupon.getGoodsValue());
+        couponTrue.setCode(coupon.getCode());
+        couponTrue.setStartTime(coupon.getStartTime());
+        couponTrue.setEndTime(coupon.getEndTime());
+        couponTrue.setDeleted(coupon.getDeleted());
         return couponTrue;
     }
 }
