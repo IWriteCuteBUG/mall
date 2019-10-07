@@ -6,6 +6,9 @@ import java.util.List;
 
 import com.cskaoyan.mall.vo.wechatvo.tongsong.OrderVo;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
+import org.springframework.stereotype.Service;
 
 public interface OrderMapper {
     long countByExample(OrderExample example);
@@ -53,4 +56,8 @@ public interface OrderMapper {
 
     //待评价
     List<OrderVo> queryOrdersList4();
+
+    //order状态码更改为已发货
+    @Update("update cskaoyan_mall_order set order_status = 201 where id = #{id}")
+    void updateOrderStatus(@Param("id") int id);
 }
