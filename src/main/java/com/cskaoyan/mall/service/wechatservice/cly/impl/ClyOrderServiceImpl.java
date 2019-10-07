@@ -40,10 +40,14 @@ public class ClyOrderServiceImpl implements ClyOrderService {
 
         //orderInfo
         Order order = orderMapper.selectByPrimaryKey(orderId);
-        WxClyOrderInfo orderInfo = forOrderDetail.getOrderInfo();
-        WxClyHandleOption handleOption = orderInfo.getHandleOption();
+        //WxClyOrderInfo orderInfo = forOrderDetail.getOrderInfo();
+        //WxClyHandleOption handleOption = orderInfo.getHandleOption();
+        WxClyOrderInfo orderInfo = new WxClyOrderInfo();
+        WxClyHandleOption handleOption = new WxClyHandleOption();
 
         SetOrderDetailUtil.setOrderInfo(order, orderInfo, handleOption);
+
+        orderInfo.setHandleOption(handleOption);
 
         forOrderDetail.setOrderGoods(orderGoods);
         forOrderDetail.setOrderInfo(orderInfo);
@@ -53,7 +57,7 @@ public class ClyOrderServiceImpl implements ClyOrderService {
 
     @Override
     public void cancelOrder(int orderId) {
-        orderMapper.deleteByPrimaryKey(orderId);
+        orderMapper.deleteOrderCly(orderId);
         OrderGoodsExample orderGoodsExample = new OrderGoodsExample();
         OrderGoodsExample.Criteria criteria = orderGoodsExample.createCriteria();
         criteria.andOrderIdEqualTo(orderId);
@@ -63,8 +67,10 @@ public class ClyOrderServiceImpl implements ClyOrderService {
         //修改商品库存
         for (OrderGoods orderGood : orderGoods) {
             Integer productId = orderGood.getProductId();
-            Short number = orderGood.getNumber();
-            goodsProductMapper.updateNumber(productId, number);
+            int number = goodsProductMapper.queryProductMumberCly(productId);
+            Short numberOrder = orderGood.getNumber();
+            number += numberOrder;
+            goodsProductMapper.updateNumber(productId, (short)number);
         }
     }
 }

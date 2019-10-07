@@ -35,4 +35,6 @@ public interface GoodsProductMapper {
     List<GoodsProduct> queryGoodsProductById(@Param("id") int id);
 
     void updateNumber(@Param("id") Integer productId,@Param("number") Short number);
+
+    int queryProductMumberCly(@Param("id") Integer productId);
 }

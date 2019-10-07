@@ -665,5 +665,7 @@
     LEFT JOIN cskaoyan_mall_groupon gr on o.order_sn = gr.order_id
     WHERE o.order_status IN(401,402)
   </select>
-
+  <delete id="deleteOrderCly">
+    delete from cskaoyan_mall_order where id=#{orderId}
+  </delete>
 </mapper>

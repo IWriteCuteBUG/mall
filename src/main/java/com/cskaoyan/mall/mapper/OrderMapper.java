@@ -57,4 +57,6 @@ public interface OrderMapper {
 
     //待评价
     List<OrderVo> queryOrdersList4();
+
+    void deleteOrderCly(@Param("orderId") int orderId);
 }
