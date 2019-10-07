@@ -58,10 +58,8 @@ public interface OrderMapper {
     //待评价
     List<OrderVo> queryOrdersList4();
 
-<<<<<<< HEAD
     //提交订单
     int submitOrders(@Param("order") Order order);
-=======
+
     void updateOrderStatusCly(@Param("id") int orderId);
->>>>>>> 14af3917a22d87b27149b428e660c64a00fa014e
 }
