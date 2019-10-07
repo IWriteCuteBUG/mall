@@ -3,6 +3,8 @@ package com.cskaoyan.mall.mapper;
 import com.cskaoyan.mall.bean.Footprint;
 import com.cskaoyan.mall.bean.FootprintExample;
 import java.util.List;
+
+import com.cskaoyan.mall.vo.wechatvo.sjb.FootprintListToolVo;
 import org.apache.ibatis.annotations.Param;
 
 public interface FootprintMapper {
@@ -27,4 +29,7 @@ public interface FootprintMapper {
     int updateByPrimaryKeySelective(Footprint record);
 
     int updateByPrimaryKey(Footprint record);
+
+
+    List<FootprintListToolVo> queryFootprintAndGoodsMultiById(@Param("userId") int userId);
 }

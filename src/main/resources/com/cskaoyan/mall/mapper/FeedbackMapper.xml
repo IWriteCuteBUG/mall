@@ -321,4 +321,17 @@
       deleted = #{deleted,jdbcType=BIT}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <insert id="insertFeedbackWithoutId" parameterType="com.cskaoyan.mall.bean.Feedback">
+    insert into cskaoyan_mall_feedback (user_id, username,
+      mobile, feed_type, content,
+      status, has_picture, pic_urls,
+      add_time, update_time, deleted
+      )
+    values (#{userId,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR},
+      #{mobile,jdbcType=VARCHAR}, #{feedType,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR},
+      #{status,jdbcType=INTEGER}, #{hasPicture,jdbcType=BIT}, #{picUrls,jdbcType=VARCHAR},
+      #{addTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{deleted,jdbcType=BIT}
+      )
+  </insert>
+
 </mapper>
