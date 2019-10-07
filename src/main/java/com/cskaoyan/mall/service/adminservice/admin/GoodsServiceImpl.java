@@ -4,7 +4,7 @@ import com.cskaoyan.mall.bean.*;
 import com.cskaoyan.mall.exception.InsertException;
 import com.cskaoyan.mall.mapper.*;
 import com.cskaoyan.mall.service.adminservice.GoodsService;
-import com.cskaoyan.mall.util.fffUtils.ReturnUtils;
+
 import com.cskaoyan.mall.vo.adminvo.goodsmanagervo.*;
 import com.cskaoyan.mall.vo.wechatvo.tongsong.*;
 import com.github.pagehelper.PageHelper;
@@ -163,7 +163,7 @@ public class GoodsServiceImpl implements GoodsService {
         goodsDetail.setProducts(goodsProducts);
         goodsDetail.setSpecifications(specifications);
 
-        return ReturnUtils.ok(goodsDetail, "成功");
+        return com.cskaoyan.mall.util.utiLJW.ReturnUtils.ok(goodsDetail, "成功");
     }
 
     @Override
@@ -219,7 +219,7 @@ public class GoodsServiceImpl implements GoodsService {
         GoodsListVo<Goods> goodsListVo = new GoodsListVo<>();
         goodsListVo.setItems(goods);
         goodsListVo.setTotal(total);
-        return ReturnUtils.ok(goodsListVo,"成功");
+        return com.cskaoyan.mall.util.utiLJW.ReturnUtils.ok(goodsListVo,"成功");
     }
 
     @Override
@@ -241,7 +241,7 @@ public class GoodsServiceImpl implements GoodsService {
         CommentListVo commentListVo = new CommentListVo();
         commentListVo.setTotal(total);
         commentListVo.setItems(comments);
-        return ReturnUtils.ok(commentListVo, "成功");
+        return com.cskaoyan.mall.util.utiLJW.ReturnUtils.ok(commentListVo, "成功");
     }
 
 
@@ -252,7 +252,7 @@ public class GoodsServiceImpl implements GoodsService {
         CatAndBrand catAndBrand = new CatAndBrand();
         catAndBrand.setCategoryList(forCatLists);
         catAndBrand.setBrandList(forBrandLists);
-        return ReturnUtils.ok(catAndBrand, "成功");
+        return com.cskaoyan.mall.util.utiLJW.ReturnUtils.ok(catAndBrand, "成功");
     }
 
     @Override
@@ -408,5 +408,45 @@ public class GoodsServiceImpl implements GoodsService {
         objectBaseRespVo.setErrno(0);
         objectBaseRespVo.setErrmsg("成功");
         return objectBaseRespVo;
+    }
+
+    @Override
+    public BaseRespVo queryGoodsListByCategoryId(int categoryId, int page, int size) {
+        //goodsList
+        GoodsExample goodsExample = new GoodsExample();
+        goodsExample.createCriteria().andCategoryIdEqualTo(categoryId);
+        PageHelper.startPage(page, size);
+        List<Goods> goods = goodsMapper.selectByExample(goodsExample);
+        //filterCategoryList
+        ArrayList<Category> categories = new ArrayList<>();
+        for (Goods good : goods) {
+            CategoryExample categoryExample = new CategoryExample();
+            categoryExample.createCriteria().andIdEqualTo(good.getCategoryId());
+            List<Category> categories1 = categoryMapper.selectByExample(categoryExample);
+            categories.add(categories1.get(0));
+        }
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("goodsList",goods);
+        map.put("filterCategoryList",categories);
+        map.put("count",goods.size());
+        BaseRespVo ok = BaseRespVo.ok(map);
+        return ok;
+    }
+
+    @Override
+    public BaseRespVo queryRelatedGoodsListByGoodsId(int goodsId) {
+        //goods
+        GoodsExample goodsExample = new GoodsExample();
+        goodsExample.createCriteria().andIdEqualTo(goodsId);
+        List<Goods> goods = goodsMapper.selectByExample(goodsExample);
+        Goods goods1 = goods.get(0);
+        //relatedGoodsList
+        GoodsExample goodsExample1 = new GoodsExample();
+        goodsExample1.createCriteria().andCategoryIdEqualTo(goods1.getCategoryId());
+        List<Goods> goodsList = goodsMapper.selectByExample(goodsExample1);
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("goodsList",goodsList);
+        BaseRespVo ok = BaseRespVo.ok(map);
+        return ok;
     }
 }

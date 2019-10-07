@@ -33,7 +33,10 @@ public class WechatCateGoryServiceImpl implements WechatCateGoryService {
             categoryExample2.createCriteria().andIdEqualTo(pid);
             List<Category> categories = categoryMapper.selectByExample(categoryExample2);
             categoryVo.setCurrentCategory(category);
-            categoryVo.setParentCategory(categories.get(0));
+            if(categories.size() != 0){
+                categoryVo.setParentCategory(categories.get(0));
+                categoryVo.setBrotherCategory(brotherCategory);
+            }
         }
         categoryVoBaseRespVo.setData(categoryVo);
         categoryVoBaseRespVo.setErrno(0);

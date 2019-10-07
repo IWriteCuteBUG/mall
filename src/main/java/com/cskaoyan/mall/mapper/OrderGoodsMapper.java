@@ -4,6 +4,7 @@ import com.cskaoyan.mall.bean.OrderGoods;
 import com.cskaoyan.mall.bean.OrderGoodsExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 
 public interface OrderGoodsMapper {
     long countByExample(OrderGoodsExample example);
@@ -29,4 +30,9 @@ public interface OrderGoodsMapper {
     int updateByPrimaryKey(OrderGoods record);
 
     int countGoodsByDate(@Param("date") String s);
+
+    @Select("select number,pic_url,id,goods_name from cskaoyan_mall_order_goods where order_id = #{orderId}")
+    List<OrderGoods> queryOrdersGoodsByOrderId(int orderId);
+//   @Select("select goods_id from cskaoyan_mall_order_goods where orde_id =#{orderid}")
+//    int selectGoodsIdByOrderId(Integer  orderid);
 }

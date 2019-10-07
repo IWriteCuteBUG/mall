@@ -4,4 +4,6 @@ import com.cskaoyan.mall.bean.BaseRespVo;
 
 public interface WeChatBrandService {
     BaseRespVo queryBrandList(int page, int size);
+
+    BaseRespVo queryBrandInfo(int id);
 }

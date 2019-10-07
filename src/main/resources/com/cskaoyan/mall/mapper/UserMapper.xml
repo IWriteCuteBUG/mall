@@ -125,7 +125,7 @@
       #{status,jdbcType=TINYINT}, #{addTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP},
       #{deleted,jdbcType=BIT})
   </insert>
-  <insert id="insertSelective" parameterType="com.cskaoyan.mall.bean.User">
+  <insert id="insertSelective" parameterType="com.cskaoyan.mall.bean.User"   keyColumn="id" useGeneratedKeys="true" keyProperty="id" >
     insert into cskaoyan_mall_user
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -395,4 +395,7 @@
     select count(id) from  cskaoyan_mall_user
   </select>
 
+  <update id="updateByMobile">
+    update cskaoyan_mall_user set password = #{param1} where mobile = #{param2}
+  </update>
 </mapper>
