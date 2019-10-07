@@ -4,6 +4,7 @@ import com.cskaoyan.mall.bean.Order;
 import com.cskaoyan.mall.bean.OrderExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 
 public interface OrderMapper {
     long countByExample(OrderExample example);
@@ -37,4 +38,7 @@ public interface OrderMapper {
     int countOrderAmountByDate(@Param("amount") String s);
 
     int queryOrdersTotal();
+
+    @Select("select consignee,address,add_time,order_sn,actual_price,mobile,order_status,goods_price,id,freight_price from cskaoyan_mall_order where id = #{id}")
+    Order queryGrouponGoodInfosBy(int id);
 }
