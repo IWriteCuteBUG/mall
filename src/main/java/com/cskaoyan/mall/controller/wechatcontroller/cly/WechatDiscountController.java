@@ -2,6 +2,7 @@ package com.cskaoyan.mall.controller.wechatcontroller.cly;
 
 
 import com.cskaoyan.mall.bean.BaseRespVo;
+import com.cskaoyan.mall.bean.Coupon;
 import com.cskaoyan.mall.service.wechatservice.cly.CouponService;
 import com.cskaoyan.mall.utils.wechatutils.cly.ReturnUtilCly;
 import com.cskaoyan.mall.vo.wechatvo.cly.ForMyCouponList;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -50,6 +52,11 @@ public class WechatDiscountController {
         return ReturnUtilCly.back(null, "优惠券不正确", 742);
     }
 
+    /**
+     * 领取优惠券
+     * @param map
+     * @return
+     */
     @RequestMapping("receive")
     public BaseRespVo receiveCoupon(@RequestBody Map map){
         int userId = 1;
@@ -64,9 +71,21 @@ public class WechatDiscountController {
         }
     }
 
+    /**
+     * 查询所有优惠券
+     * @param page
+     * @param size
+     * @return
+     */
     @RequestMapping("list")
     public BaseRespVo<ForMyCouponList> queryCouponList(int page, int size){
         ForMyCouponList forMyCouponList = couponService.queryCouponList(page, size);
         return ReturnUtilCly.back(forMyCouponList, "成功", 0);
+    }
+
+    @RequestMapping("selectlist")
+    public BaseRespVo queryUsableCoupon(int cartId, int grouponRulesId){
+        List<Coupon> couponList = couponService.queryUsableCoupon(cartId,grouponRulesId);
+        return ReturnUtilCly.back(couponList, "成功", 0);
     }
 }

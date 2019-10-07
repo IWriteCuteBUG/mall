@@ -24,11 +24,15 @@ public class WechatTopicController {
         return ReturnUtilCly.back(forTopicDetail, "成功", 0);
     }
 
-   /* @RequestMapping("related")*/
-
     @RequestMapping("list")
     public BaseRespVo queryTopicList(int page, int size){
         ForTopicList forTopicList = topicService.queryTopicList(page, size);
         return ReturnUtilCly.back(forTopicList, "成功", 0);
+    }
+
+    @RequestMapping("related")
+    public BaseRespVo queryRelatedTopics(int id){
+        List<Topic> topicList = topicService.queryRelatedTopics(id);
+        return ReturnUtilCly.back(topicList, "成功", 0);
     }
 }

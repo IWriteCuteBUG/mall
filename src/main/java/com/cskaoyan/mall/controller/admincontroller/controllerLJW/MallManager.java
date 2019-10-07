@@ -28,7 +28,6 @@ public class MallManager {
       String catalog=  request.getParameter("catalog");
       String result=  PicDeleteUtil.delete(catalog);
       return  result;
-
     }
 
     //获取区域

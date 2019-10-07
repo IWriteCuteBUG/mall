@@ -20,14 +20,15 @@ public class TransferIntegerArrayHandler implements TypeHandler<Integer[]> {
     /*插入数据 由javabean转换为数据库接收的类型*/
     @Override
     public void setParameter(PreparedStatement preparedStatement, int index, Integer[] integers, JdbcType jdbcType) throws SQLException {
-        String s=null;
+        String s = null;
         try {
-             s= objectMapper.writeValueAsString(integers);
-            preparedStatement.setString(index,s);
+            s = objectMapper.writeValueAsString(integers);
+            preparedStatement.setString(index, s);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
     }
+
     //由数据中查询出的结果转换成javabean中的类型
     @Override
     public Integer[] getResult(ResultSet resultSet, String s) throws SQLException {
@@ -38,11 +39,11 @@ public class TransferIntegerArrayHandler implements TypeHandler<Integer[]> {
     private Integer[] parseString2StringArray(String value) {
 
         Integer[] integers = new Integer[0];
-        if (value == null){
+        if (value == null) {
             return integers;
         }
         try {
-            integers= objectMapper.readValue(value, Integer[].class);
+            integers = objectMapper.readValue(value, Integer[].class);
         } catch (IOException e) {
             e.printStackTrace();
         }

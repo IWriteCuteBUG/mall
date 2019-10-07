@@ -1,18 +1,20 @@
 package com.cskaoyan.mall.service.wechatservice.cly.impl;
 
-import com.cskaoyan.mall.bean.Coupon;
-import com.cskaoyan.mall.bean.CouponExample;
-import com.cskaoyan.mall.bean.CouponUser;
-import com.cskaoyan.mall.bean.CouponUserExample;
+import com.cskaoyan.mall.bean.*;
+import com.cskaoyan.mall.mapper.CartMapper;
 import com.cskaoyan.mall.mapper.CouponMapper;
 import com.cskaoyan.mall.mapper.CouponUserMapper;
+import com.cskaoyan.mall.mapper.GoodsMapper;
 import com.cskaoyan.mall.service.wechatservice.cly.CouponService;
+import com.cskaoyan.mall.utils.wechatutils.cly.String2Number;
 import com.cskaoyan.mall.vo.wechatvo.cly.ForMyCouponList;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -24,6 +26,70 @@ public class CouponServiceImpl implements CouponService {
 
     @Autowired
     CouponUserMapper couponUserMapper;
+
+    @Autowired
+    CartMapper cartMapper;
+
+    @Autowired
+    GoodsMapper goodsMapper;
+
+    @Override
+    public List<Coupon> queryUsableCoupon(int cartId, int grouponRulesId) {
+        //获取下单用户 ID
+        Integer userId = cartMapper.selectUserId(cartId);
+        //查询购物车中该用户勾选的所有商品 ID
+        List<Cart> carts = cartMapper.selectGoodsId(userId);
+        //获取预下单中所含的所有商品类目信息
+        List<Integer> categoryIds = new ArrayList<>();
+        List<Integer> goodsIds = new ArrayList<>();
+        for (Cart cart : carts) {
+            Goods goods = goodsMapper.selectCategoryId(cart.getGoodsId());
+            categoryIds.add(goods.getCategoryId());
+            goodsIds.add(goods.getId());
+        }
+        //获取该用户拥有的所有有效的优惠券 ID
+        Date now = new Date();
+        List<Coupon> couponList = new ArrayList<>();
+        CouponUserExample couponUserExample = new CouponUserExample();
+        CouponUserExample.Criteria criteriaCouponUser = couponUserExample.createCriteria();
+        criteriaCouponUser.andUserIdEqualTo(userId);
+        criteriaCouponUser.andStartTimeLessThan(now);
+        criteriaCouponUser.andEndTimeGreaterThan(now);
+        criteriaCouponUser.andStatusEqualTo((short)0);
+        criteriaCouponUser.andDeletedEqualTo(false);
+        List<CouponUser> couponUsers = couponUserMapper.selectByExample(couponUserExample);
+        for (CouponUser couponUser : couponUsers) {
+            Coupon coupon = couponMapper.selectByPrimaryKey(couponUser.getCouponId());
+            couponList.add(coupon);
+        }
+        //判断哪一些优惠券可用
+        for (Coupon coupon : couponList) {
+            if(coupon.getGoodsType() == 0){
+            }
+            else if(coupon.getGoodsType() == 1){
+                String[] goodsValue = coupon.getGoodsValue();
+                List<Integer> integers = String2Number.string2Num(goodsValue);
+                for (Integer categoryId : categoryIds) {
+                    if(integers.contains(categoryId)){
+                    }else {
+                        couponList.remove(coupon);
+                        break;
+                    }
+                }
+            }else if(coupon.getGoodsType() == 2){
+                String[] goodsValue = coupon.getGoodsValue();
+                List<Integer> integers = String2Number.string2Num(goodsValue);
+                for (Integer goodsId : goodsIds) {
+                    if(integers.contains(goodsId)){
+                    }else{
+                        couponList.remove(coupon);
+                        break;
+                    }
+                }
+            }
+        }
+        return couponList;
+    }
 
     @Override
     public ForMyCouponList queryMyCouponList(short status, int page, int size, int userId) {
@@ -42,8 +108,8 @@ public class CouponServiceImpl implements CouponService {
         PageInfo<Coupon> couponPageInfo = new PageInfo<>(coupons);
         long total = couponPageInfo.getTotal();
         ForMyCouponList forMyCouponList = new ForMyCouponList();
-        forMyCouponList.setCount(total);
         forMyCouponList.setData(coupons);
+        forMyCouponList.setCount(total);
         return forMyCouponList;
     }
 
@@ -151,7 +217,6 @@ public class CouponServiceImpl implements CouponService {
         forMyCouponList.setData(coupons);
         return forMyCouponList;
     }
-
 
     private void updateTotal(Coupon coupon, Integer total, int reduce) {
         coupon.setTotal(total - reduce);
