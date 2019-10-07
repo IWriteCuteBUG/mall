@@ -20,7 +20,8 @@ public class CollectionController {
     CollecionListService collecionListService;
     @RequestMapping("/wx/collect/list")
     public BaseRespVo collecionyListInfo(int type, int page, int size){
-        Session session = SecurityUtils.getSubject().getSession();
+        String userId1 =(String)SecurityUtils.getSubject().getSession().getAttribute("userId");
+        int i = Integer.parseInt(userId1);
         int userid=1;
         BaseRespVo baseRespVo=collecionListService.colleciontList(userid,type,page,size);
         return baseRespVo;
@@ -34,4 +35,5 @@ public class CollectionController {
         BaseRespVo baseRespVo=collectAddordeleteSerivce.addordeleteOrAdd(collect);
         return  baseRespVo;
     }
+
 }
