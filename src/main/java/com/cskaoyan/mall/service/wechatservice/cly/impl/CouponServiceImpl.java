@@ -15,8 +15,10 @@ import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 @Service
@@ -36,35 +38,24 @@ public class CouponServiceImpl implements CouponService {
 
     @Override
     public List<Coupon> queryUsableCoupon(int cartId, int grouponRulesId) {
-        if(cartId == 0){
-            int userId = Integer.parseInt(String.valueOf(SecurityUtils.getSubject().getSession().getAttribute("userId")));
-            Date now = new Date();
-            List<Coupon> list = new ArrayList<>();
-            CouponUserExample couponUserExample = new CouponUserExample();
-            CouponUserExample.Criteria criteriaCouponUser = couponUserExample.createCriteria();
-            criteriaCouponUser.andUserIdEqualTo(userId);
-            //criteriaCouponUser.andStartTimeLessThan(now);
-            //criteriaCouponUser.andEndTimeGreaterThan(now);
-            criteriaCouponUser.andStatusEqualTo((short)0);
-            criteriaCouponUser.andDeletedEqualTo(false);
-            List<CouponUser> couponUsers = couponUserMapper.selectByExample(couponUserExample);
-            for (CouponUser couponUser : couponUsers) {
-                Coupon coupon = couponMapper.selectByPrimaryKey(couponUser.getCouponId());
-                list.add(coupon);
-            }
-            return list;
-        }
         //获取下单用户 ID
-        Integer userId = cartMapper.selectUserId(cartId);
+        int userId = Integer.parseInt(String.valueOf(SecurityUtils.getSubject().getSession().getAttribute("userId")));
         //查询购物车中该用户勾选的所有商品 ID
-        List<Cart> carts = cartMapper.selectGoodsId(userId);
+        CartExample cartExample = new CartExample();
+        CartExample.Criteria criteria = cartExample.createCriteria();
+        criteria.andUserIdEqualTo(userId);
+        criteria.andCheckedEqualTo(true);
+        List<Cart> carts = cartMapper.selectByExample(cartExample);
         //获取预下单中所含的所有商品类目信息
         List<Integer> categoryIds = new ArrayList<>();
         List<Integer> goodsIds = new ArrayList<>();
+        //订单总金额
+        double total = 0;
         for (Cart cart : carts) {
-            Goods goods = goodsMapper.selectCategoryId(cart.getGoodsId());
+            Goods goods = goodsMapper.selectByPrimaryKey(cart.getGoodsId());
             categoryIds.add(goods.getCategoryId());
             goodsIds.add(goods.getId());
+            total += goods.getRetailPrice().doubleValue();
         }
         //获取该用户拥有的所有有效的优惠券 ID
         Date now = new Date();
@@ -74,33 +65,47 @@ public class CouponServiceImpl implements CouponService {
         criteriaCouponUser.andUserIdEqualTo(userId);
         //criteriaCouponUser.andStartTimeLessThan(now);
         //criteriaCouponUser.andEndTimeGreaterThan(now);
-        criteriaCouponUser.andStatusEqualTo((short)0);
+        criteriaCouponUser.andStatusEqualTo((short) 0);
         criteriaCouponUser.andDeletedEqualTo(false);
         List<CouponUser> couponUsers = couponUserMapper.selectByExample(couponUserExample);
         for (CouponUser couponUser : couponUsers) {
             Coupon coupon = couponMapper.selectByPrimaryKey(couponUser.getCouponId());
             couponList.add(coupon);
         }
+        //判断满减条件
+        /*for (Coupon coupon : couponList) {
+            BigDecimal min = coupon.getMin();
+            if (total < min.doubleValue()) {
+                couponList.remove(coupon);
+            }
+        }*/
+        Iterator<Coupon> iterator = couponList.iterator();
+        while(iterator.hasNext()){
+            Coupon coupon = iterator.next();
+            double min = coupon.getMin().doubleValue();
+            if (total < min) {
+                iterator.remove();
+            }
+        }
         //判断哪一些优惠券可用
         for (Coupon coupon : couponList) {
-            if(coupon.getGoodsType() == 0){
-            }
-            else if(coupon.getGoodsType() == 1){
+            if (coupon.getGoodsType() == 0) {
+            } else if (coupon.getGoodsType() == 1) {
                 String[] goodsValue = coupon.getGoodsValue();
                 List<Integer> integers = String2Number.string2Num(goodsValue);
                 for (Integer categoryId : categoryIds) {
-                    if(integers.contains(categoryId)){
-                    }else {
+                    if (integers.contains(categoryId)) {
+                    } else {
                         couponList.remove(coupon);
                         break;
                     }
                 }
-            }else if(coupon.getGoodsType() == 2){
+            } else if (coupon.getGoodsType() == 2) {
                 String[] goodsValue = coupon.getGoodsValue();
                 List<Integer> integers = String2Number.string2Num(goodsValue);
                 for (Integer goodsId : goodsIds) {
-                    if(integers.contains(goodsId)){
-                    }else{
+                    if (integers.contains(goodsId)) {
+                    } else {
                         couponList.remove(coupon);
                         break;
                     }
@@ -138,9 +143,9 @@ public class CouponServiceImpl implements CouponService {
         CouponExample.Criteria criteria = couponExample.createCriteria();
         criteria.andCodeEqualTo(code);
         List<Coupon> coupons = couponMapper.selectByExample(couponExample);
-        if(coupons.isEmpty()){
+        if (coupons.isEmpty()) {
             return false;
-        }else{
+        } else {
             Date date = new Date();
             boolean deleted = false;
             for (Coupon coupon : coupons) {
@@ -155,16 +160,16 @@ public class CouponServiceImpl implements CouponService {
         Coupon coupon = couponMapper.selectByPrimaryKey(couponId);
         //首先判断优惠券total
         Integer total = coupon.getTotal();
-        if(total == 0) {
+        if (total == 0) {
             //然后判断优惠券limit字段
             Short limit = coupon.getLimit();
             //limit为0，用户可以领取多张，直接发放
-            if(limit == 0) {
+            if (limit == 0) {
                 Date date = new Date();
                 boolean deleted = false;
-                couponUserMapper.insertChangeCoupon(coupon,userId,date,deleted);
+                couponUserMapper.insertChangeCoupon(coupon, userId, date, deleted);
                 return 0;
-            }else {
+            } else {
                 //limit为1，用户只能有一张此优惠券
                 //判断用户是否已经有此优惠券
                 CouponUserExample couponUserExample = new CouponUserExample();
@@ -173,31 +178,31 @@ public class CouponServiceImpl implements CouponService {
                 criteria.andUserIdEqualTo(userId);
                 List<CouponUser> couponUsers = couponUserMapper.selectByExample(couponUserExample);
                 //若没有则发放，并返回true
-                if(couponUsers.isEmpty()) {
+                if (couponUsers.isEmpty()) {
                     Date date = new Date();
                     boolean deleted = false;
-                    couponUserMapper.insertChangeCoupon(coupon,userId,date,deleted);
+                    couponUserMapper.insertChangeCoupon(coupon, userId, date, deleted);
                     return 0;
                 }
                 return 1;
             }
-        }else if (total == -1){
+        } else if (total == -1) {
             return 2;
-        }else {
+        } else {
             //然后判断优惠券limit字段
             Short limit = coupon.getLimit();
             //limit为0，用户可以领取多张，直接发放
-            if(limit == 0) {
+            if (limit == 0) {
                 Date date = new Date();
                 boolean deleted = false;
-                couponUserMapper.insertChangeCoupon(coupon,userId,date,deleted);
-                if(total == 1) {
+                couponUserMapper.insertChangeCoupon(coupon, userId, date, deleted);
+                if (total == 1) {
                     updateTotal(coupon, total, 2);
-                }else {
+                } else {
                     updateTotal(coupon, total, 1);
                 }
                 return 0;
-            }else {
+            } else {
                 //limit为1，用户只能有一张此优惠券
                 //判断用户是否已经有此优惠券
                 CouponUserExample couponUserExample = new CouponUserExample();
@@ -206,13 +211,13 @@ public class CouponServiceImpl implements CouponService {
                 criteria.andCouponIdEqualTo(couponId);
                 List<CouponUser> couponUsers = couponUserMapper.selectByExample(couponUserExample);
                 //若没有则发放，并返回true
-                if(couponUsers.isEmpty()) {
+                if (couponUsers.isEmpty()) {
                     boolean deleted = false;
                     Date date = new Date();
-                    couponUserMapper.insertChangeCoupon(coupon,userId,date,deleted);
-                    if(total != 1) {
+                    couponUserMapper.insertChangeCoupon(coupon, userId, date, deleted);
+                    if (total != 1) {
                         updateTotal(coupon, total, 1);
-                    }else {
+                    } else {
                         updateTotal(coupon, total, 2);
                     }
                     return 0;
