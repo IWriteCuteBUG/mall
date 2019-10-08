@@ -34,4 +34,7 @@ public interface GrouponMapper {
 
     @Select("select count(id) from cskaoyan_mall_groupon where rules_id = #{ruleId}")
     int selectJoinerCountByRuleId(int ruleId);
+
+    @Select("SELECT max(groupon_id) FROM `cskaoyan_mall_groupon` where rules_id = #{rulesId}")
+    int queryMaxGrouponIdByRuleId(Integer rulesId);
 }
