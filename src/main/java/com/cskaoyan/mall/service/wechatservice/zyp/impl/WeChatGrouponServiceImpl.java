@@ -33,8 +33,8 @@ public class WeChatGrouponServiceImpl implements WechatGrouponService {
 
     @Override
     public BaseRespVo queryGrouponByShowType(int showType) {
-//        int userId = 1;
-        Integer userId = (Integer) SecurityUtils.getSubject().getSession().getAttribute("userId");
+        int userId = 1;
+//        Integer userId = (Integer) SecurityUtils.getSubject().getSession().getAttribute("userId");
 
         GrouponExample grouponExample = new GrouponExample();
         GrouponExample.Criteria criteria = grouponExample.createCriteria();
@@ -67,6 +67,9 @@ public class WeChatGrouponServiceImpl implements WechatGrouponService {
             OrderGoodsExample orderGoodsExample = new OrderGoodsExample();
             orderGoodsExample.createCriteria().andOrderIdEqualTo(orderId);
             List<OrderGoods> orderGoods = orderGoodsMapper.selectByExample(orderGoodsExample);
+            /*List<GrouponGoodsListVo> orderGoods = new ArrayList<>();
+            GrouponGoodsListVo grouponListGoodVo = new GrouponGoodsListVo();
+            orderGoods.add(grouponListGoodVo);*/
             myGrounpVo.setGoodsList(orderGoods);
 //            团购规则
             GrouponRules grouponRules = grouponRulesMapper.selectByPrimaryKey(groupon.getRulesId());

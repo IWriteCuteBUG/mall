@@ -3,11 +3,16 @@ package com.cskaoyan.mall.service.wechatservice.zyp.impl;
 import com.aliyun.oss.OSSClient;
 import com.aliyun.oss.model.PutObjectRequest;
 import com.cskaoyan.mall.bean.BaseRespVo;
+import com.cskaoyan.mall.bean.Cart;
+import com.cskaoyan.mall.bean.CartExample;
 import com.cskaoyan.mall.bean.Storage;
 import com.cskaoyan.mall.config.AliyunConfig;
 import com.cskaoyan.mall.config.MallOssConfig;
+import com.cskaoyan.mall.mapper.CartMapper;
 import com.cskaoyan.mall.mapper.StorageMapper;
+import com.cskaoyan.mall.mapper.UserMapper;
 import com.cskaoyan.mall.service.wechatservice.zyp.WeChatStorageUploadService;
+import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -15,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -25,6 +31,8 @@ public class WeChatStorageUploadServiceImpl implements WeChatStorageUploadServic
     MallOssConfig ossConfig;
     @Autowired
     StorageMapper storageMapper;
+    @Autowired
+    CartMapper cartMapper;
     @Override
     public BaseRespVo fileupload(MultipartFile myfile) throws IOException {
         InputStream inputStream = myfile.getInputStream();
@@ -55,7 +63,15 @@ public class WeChatStorageUploadServiceImpl implements WeChatStorageUploadServic
 
     @Override
     public BaseRespVo goodsCount(Integer id) {
-
-        return BaseRespVo.ok(1);
+//        int userId = 1;
+        Integer userId = (Integer) SecurityUtils.getSubject().getSession().getAttribute("userId");
+        if (userId == null) {
+            return BaseRespVo.ok(0);
+        }
+        CartExample cartExample = new CartExample();
+        cartExample.createCriteria().andUserIdEqualTo(userId);
+        List<Cart> carts = cartMapper.selectByExample(cartExample);
+        int size = carts.size();
+        return BaseRespVo.ok(size);
     }
 }

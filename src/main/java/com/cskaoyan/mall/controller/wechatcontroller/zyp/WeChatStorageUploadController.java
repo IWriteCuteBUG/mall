@@ -26,10 +26,10 @@ public class WeChatStorageUploadController {
         BaseRespVo baseRespVo = weChatStorageUploadService.fileupload(file);
         return baseRespVo;
     }
-//    goodscount不知道有啥用的接口
+//    goodscount显示购物车的数量
     @RequestMapping("wx/cart/goodscount")
     public BaseRespVo goodsCount() throws IOException {
-        Integer id = 1;
+        Integer id = 100;
         BaseRespVo baseRespVo = weChatStorageUploadService.goodsCount(id);
         return baseRespVo;
     }
