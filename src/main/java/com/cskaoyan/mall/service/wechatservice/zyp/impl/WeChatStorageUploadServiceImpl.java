@@ -53,9 +53,11 @@ public class WeChatStorageUploadServiceImpl implements WeChatStorageUploadServic
         return BaseRespVo.baseRespOk(storage);
     }
 
+
     @Override
     public BaseRespVo goodsCount(Integer id) {
 
         return BaseRespVo.ok(1);
     }
+
 }

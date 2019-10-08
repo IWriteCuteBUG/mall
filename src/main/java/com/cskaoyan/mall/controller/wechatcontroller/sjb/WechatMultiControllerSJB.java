@@ -51,7 +51,9 @@ public class WechatMultiControllerSJB {
     @Autowired
     CommentServiceSJB commentService;
 
+
 //    @RequestMapping("wx/goods/list")
+
     @ResponseBody
     public BaseRespVo goodsList(@Valid GoodsSearchListReqVo reqVo, BindingResult bindingResult){
         if (bindingResult.hasErrors()){
@@ -61,6 +63,7 @@ public class WechatMultiControllerSJB {
             return BaseRespVo.baseRespErr(106, field + ": " + defaultMessage);
         }
         String keyword = reqVo.getKeyword();
+        int userId = Integer.parseInt(String.valueOf(SecurityUtils.getSubject().getSession().getAttribute("userId")));
         List<Goods> goodsList = goodsService.queryGoodsByPage(keyword, reqVo.getPage(), reqVo.getSize(), reqVo.getSort(), reqVo.getOrder(), reqVo.getCategoryId());
         List<Category> categoryList = new ArrayList<>();
         for (Goods goods : goodsList) {
@@ -69,15 +72,13 @@ public class WechatMultiControllerSJB {
                 categoryList.add(category);
             }
         }
-        Session session = SecurityUtils.getSubject().getSession();
-        List<String> historyKeywordList = (List<String>) session.getAttribute("historyKeywordList");
-        if(historyKeywordList == null){
-            historyKeywordList = new ArrayList<>();
-            session.setAttribute("historyKeywordList", historyKeywordList);
-        }
-        if(!historyKeywordList.contains(keyword)){
-            historyKeywordList.add(keyword);
-        }
+        SearchHistory searchHistory = new SearchHistory();
+        searchHistory.setKeyword(keyword);
+        searchHistory.setUserId(userId);
+        searchHistory.setAddTime(new Date());
+        searchHistory.setUpdateTime(new Date());
+        searchHistory.setFrom(null);
+        int count = searchHistoryService.addSearchHistory(searchHistory);
         int size = goodsList.size();
         return BaseRespVo.baseRespOk(new GoodsListAndCategoryListVo(goodsList, size, categoryList));
     }
@@ -152,11 +153,17 @@ public class WechatMultiControllerSJB {
         address.setMobile(vo.getMobile());
         address.setName(vo.getName());
         address.setUpdateTime(new Date());
-        int count = addressService.updateAddressById(address);
+        int count = 0;
+        if(vo.getId() != 0){
+            count = addressService.updateAddressById(address);
+        }
+        if(vo.getId() == 0){
+            count = addressService.addAddress(address);
+        }
         if(count == 1){
             return BaseRespVo.baseRespOk(vo.getId());
         } else {
-            return BaseRespVo.baseRespErr(1, "修改错误");
+            return BaseRespVo.baseRespErr(1, "错误");
         }
     }
 

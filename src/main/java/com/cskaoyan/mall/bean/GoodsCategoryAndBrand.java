@@ -5,13 +5,57 @@ public class GoodsCategoryAndBrand {
     private int brandId;
     private int page;
     private int size;
-    private int keyword;
+    private String keyword;
+    private String sort;
+    private String order;
 
-    public int getKeyword() {
+    @Override
+    public String toString() {
+        return "GoodsCategoryAndBrand{" +
+                "categoryId=" + categoryId +
+                ", brandId=" + brandId +
+                ", page=" + page +
+                ", size=" + size +
+                ", keyword=" + keyword +
+                ", sort='" + sort + '\'' +
+                ", order='" + order + '\'' +
+                '}';
+    }
+
+    public GoodsCategoryAndBrand(int categoryId, int brandId, int page, int size, String keyword, String sort, String order) {
+        this.categoryId = categoryId;
+        this.brandId = brandId;
+        this.page = page;
+        this.size = size;
+        this.keyword = keyword;
+        this.sort = sort;
+        this.order = order;
+    }
+
+    public GoodsCategoryAndBrand() {
+    }
+
+    public String getSort() {
+        return sort;
+    }
+
+    public void setSort(String sort) {
+        this.sort = sort;
+    }
+
+    public String getOrder() {
+        return order;
+    }
+
+    public void setOrder(String order) {
+        this.order = order;
+    }
+
+    public String getKeyword() {
         return keyword;
     }
 
-    public void setKeyword(int keyword) {
+    public void setKeyword(String keyword) {
         this.keyword = keyword;
     }
 
