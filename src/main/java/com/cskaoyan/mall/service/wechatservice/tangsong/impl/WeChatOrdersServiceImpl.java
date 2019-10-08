@@ -129,11 +129,11 @@ public class WeChatOrdersServiceImpl implements WeChatOrdersService {
         }
 
         //获取团购减免
-        int grouponRulesI = submitOrders.getGrouponRulesI();
+        int grouponRulesI = submitOrders.getGrouponRulesId();
         BigDecimal grouponDescount;
         if (grouponRulesI != 0) {
             GrouponRulesExample grouponRulesExample = new GrouponRulesExample();
-            grouponRulesExample.createCriteria().andGoodsIdEqualTo(submitOrders.getGrouponRulesI());
+            grouponRulesExample.createCriteria().andGoodsIdEqualTo(submitOrders.getGrouponRulesId());
             List<GrouponRules> grouponRules = grouponRulesMapper.selectByExample(grouponRulesExample);
             grouponDescount = grouponRules.get(0).getDiscount();
         }else {
@@ -146,7 +146,8 @@ public class WeChatOrdersServiceImpl implements WeChatOrdersService {
         String orderId = dateString.substring(4);
 
         //判斷
-        if (addressId != 0) {
+        int cartId = submitOrders.getCartId();
+        if (cartId != 0) {
             //从购物车取到商品数量
             CartExample cartExample = new CartExample();
             cartExample.createCriteria().andIdEqualTo(submitOrders.getCartId());
@@ -171,10 +172,10 @@ public class WeChatOrdersServiceImpl implements WeChatOrdersService {
             goodsProduct.setUpdateTime(parse);
             GoodsProductExample goodsProductExample = new GoodsProductExample();
             goodsProductExample.createCriteria().andGoodsIdEqualTo(goodsId).andSpecificationsEqualTo(specifications);
-            /*List<GoodsProduct> productList1 = goodsProductMapper.selectByExample(goodsProductExample);
+            List<GoodsProduct> productList1 = goodsProductMapper.selectByExample(goodsProductExample);
             GoodsProduct goodsProduct2 = productList1.get(0);
-            Integer id1 = goodsProduct2.getId();
-            goodsProduct.setId(id1);*/
+            Integer number1 = goodsProduct2.getNumber();
+            goodsProduct.setNumber(number1 - number);
             goodsProductMapper.updateByExampleSelective(goodsProduct,goodsProductExample);
             //提交订单
             Order order = new Order();
@@ -264,6 +265,11 @@ public class WeChatOrdersServiceImpl implements WeChatOrdersService {
                 goodsProduct.setUpdateTime(parse);
                 GoodsProductExample goodsProductExample = new GoodsProductExample();
                 goodsProductExample.createCriteria().andGoodsIdEqualTo(goodsId).andSpecificationsEqualTo(specifications);
+                List<GoodsProduct> productList1 = goodsProductMapper.selectByExample(goodsProductExample);
+                GoodsProduct goodsProduct2 = productList1.get(0);
+                Integer number1 = goodsProduct2.getNumber();
+                goodsProduct.setNumber(number1 - number);
+                goodsProductMapper.updateByExampleSelective(goodsProduct,goodsProductExample);
                 goodsProductMapper.updateByExampleSelective(goodsProduct,goodsProductExample);
                 //提交订单
                 Order order = new Order();

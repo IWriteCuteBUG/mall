@@ -5,7 +5,7 @@ public class SubmitOrders {
     private int cartId;
     private int couponId;
     private int grouponLinkId;
-    private int grouponRulesI;
+    private int grouponRulesId;
     private String message;
 
     public int getAddressId() {
@@ -40,12 +40,12 @@ public class SubmitOrders {
         this.grouponLinkId = grouponLinkId;
     }
 
-    public int getGrouponRulesI() {
-        return grouponRulesI;
+    public int getGrouponRulesId() {
+        return grouponRulesId;
     }
 
-    public void setGrouponRulesI(int grouponRulesI) {
-        this.grouponRulesI = grouponRulesI;
+    public void setGrouponRulesId(int grouponRulesId) {
+        this.grouponRulesId = grouponRulesId;
     }
 
     public String getMessage() {
