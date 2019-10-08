@@ -178,7 +178,7 @@ public class CartServiceImply implements CartService {
         checkoutBean.setGrouponPrice(grouponPrice);
 
 
-        double couponPrice = couponId == 0 ? 0 : couponMapper.selectDiscountById(couponId);
+        double couponPrice = couponId <= 0 ? 0 : couponMapper.selectDiscountById(couponId);
         checkoutBean.setCouponPrice(couponPrice);
         if (cartId != 0) {
             Cart cart = cartMapper.selectByPrimaryKey(cartId);

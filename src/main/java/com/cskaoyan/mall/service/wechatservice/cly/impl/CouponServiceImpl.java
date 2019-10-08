@@ -11,6 +11,7 @@ import com.cskaoyan.mall.vo.wechatvo.cly.ForMyCouponList;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.apache.logging.log4j.util.Strings;
+import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,6 +36,24 @@ public class CouponServiceImpl implements CouponService {
 
     @Override
     public List<Coupon> queryUsableCoupon(int cartId, int grouponRulesId) {
+        if(cartId == 0){
+            int userId = Integer.parseInt(String.valueOf(SecurityUtils.getSubject().getSession().getAttribute("userId")));
+            Date now = new Date();
+            List<Coupon> list = new ArrayList<>();
+            CouponUserExample couponUserExample = new CouponUserExample();
+            CouponUserExample.Criteria criteriaCouponUser = couponUserExample.createCriteria();
+            criteriaCouponUser.andUserIdEqualTo(userId);
+            //criteriaCouponUser.andStartTimeLessThan(now);
+            //criteriaCouponUser.andEndTimeGreaterThan(now);
+            criteriaCouponUser.andStatusEqualTo((short)0);
+            criteriaCouponUser.andDeletedEqualTo(false);
+            List<CouponUser> couponUsers = couponUserMapper.selectByExample(couponUserExample);
+            for (CouponUser couponUser : couponUsers) {
+                Coupon coupon = couponMapper.selectByPrimaryKey(couponUser.getCouponId());
+                list.add(coupon);
+            }
+            return list;
+        }
         //获取下单用户 ID
         Integer userId = cartMapper.selectUserId(cartId);
         //查询购物车中该用户勾选的所有商品 ID
@@ -53,8 +72,8 @@ public class CouponServiceImpl implements CouponService {
         CouponUserExample couponUserExample = new CouponUserExample();
         CouponUserExample.Criteria criteriaCouponUser = couponUserExample.createCriteria();
         criteriaCouponUser.andUserIdEqualTo(userId);
-        criteriaCouponUser.andStartTimeLessThan(now);
-        criteriaCouponUser.andEndTimeGreaterThan(now);
+        //criteriaCouponUser.andStartTimeLessThan(now);
+        //criteriaCouponUser.andEndTimeGreaterThan(now);
         criteriaCouponUser.andStatusEqualTo((short)0);
         criteriaCouponUser.andDeletedEqualTo(false);
         List<CouponUser> couponUsers = couponUserMapper.selectByExample(couponUserExample);
