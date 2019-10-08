@@ -7,6 +7,7 @@ import com.cskaoyan.mall.service.wechatservice.sjb.SearchHistoryServiceSJB;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -25,5 +26,11 @@ public class SearchHistoryServiceSJBImpl implements SearchHistoryServiceSJB {
     @Override
     public int addSearchHistory(SearchHistory searchHistory) {
         return searchHistoryMapper.addSearchHistory(searchHistory);
+    }
+
+    @Override
+    public int updateSearchhistoryUpdatetimeByKeyword(String keyword, Date updatetime) {
+        int count = searchHistoryMapper.updateSearchhistoryUpdatetimeByKeyword(keyword, updatetime);
+        return 0;
     }
 }

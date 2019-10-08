@@ -69,6 +69,6 @@ public interface OrderMapper {
     int submitOrders(@Param("order") Order order);
 
     void updateOrderStatusCly(@Param("id") String orderId);
-
-
+   @Update("update cskaoyan_mall_order set order_status = 203 where id = #{id}")
+    void updateOrderStatus2Refound(@Param("id") int id);
 }

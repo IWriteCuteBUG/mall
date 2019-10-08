@@ -2,6 +2,8 @@ package com.cskaoyan.mall.mapper;
 
 import com.cskaoyan.mall.bean.SearchHistory;
 import com.cskaoyan.mall.bean.SearchHistoryExample;
+
+import java.util.Date;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
@@ -29,4 +31,6 @@ public interface SearchHistoryMapper {
     int updateByPrimaryKey(SearchHistory record);
 
     int addSearchHistory(@Param("searchHistory") SearchHistory searchHistory);
+
+    int updateSearchhistoryUpdatetimeByKeyword(@Param("keyword") String keyword, @Param("updatetime") Date updatetime);
 }
