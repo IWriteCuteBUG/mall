@@ -136,7 +136,6 @@ public class WeChatOrdersServiceImpl implements WeChatOrdersService {
         }
 
         //获取团购减免
-
         int grouponRulesId = submitOrders.getGrouponRulesId();
 
         BigDecimal grouponDescount;
@@ -429,7 +428,9 @@ public class WeChatOrdersServiceImpl implements WeChatOrdersService {
                 cartMapper.deleteByPrimaryKey(submitOrders.getCartId());
 
             }
-            BaseRespVo ok = BaseRespVo.ok(orderId);
+            HashMap<String, Object> map = new HashMap<>();
+            map.put("orderId",orderId);
+            BaseRespVo ok = BaseRespVo.ok(map);
             return ok;
         }
     }

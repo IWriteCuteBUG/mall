@@ -14,7 +14,8 @@ public class OrderPrepayController {
     @Autowired
     OrderPrepayService orderPrepayService;
     @RequestMapping("/wx/order/prepay")
-    public BaseRespVo OrderPrePayInfo(@RequestBody String orderId){
+    public BaseRespVo OrderPrePayInfo(@RequestBody HashMap hashMap){
+        String orderId = (String) hashMap.get("orderId");
         BaseRespVo baseRespVo = orderPrepayService.changeOrder_Status(orderId);
         return baseRespVo;
     }
