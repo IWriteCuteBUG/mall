@@ -60,7 +60,9 @@ public class WeChatGoodsController {
 
     @RequestMapping("goods/detail")
     public BaseRespVo queryGoodsDetailInfo(int id){
-        int userId = Integer.parseInt(String.valueOf(SecurityUtils.getSubject().getSession().getAttribute("userId")));
+        //int userId = Integer.parseInt(String.valueOf(SecurityUtils.getSubject().getSession().getAttribute("userId")));
+        Object userIds = SecurityUtils.getSubject().getSession().getAttribute("userId");
+        int userId = (int) userIds;
         BaseRespVo baseRespVo =goodsService.queryGoodsDetailInfo(id);
         Footprint footprint = new Footprint();
         footprint.setUserId(userId);
