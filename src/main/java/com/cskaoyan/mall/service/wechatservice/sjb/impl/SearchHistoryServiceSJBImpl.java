@@ -30,7 +30,11 @@ public class SearchHistoryServiceSJBImpl implements SearchHistoryServiceSJB {
 
     @Override
     public int updateSearchhistoryUpdatetimeByKeyword(String keyword, Date updatetime) {
-        int count = searchHistoryMapper.updateSearchhistoryUpdatetimeByKeyword(keyword, updatetime);
-        return 0;
+        return searchHistoryMapper.updateSearchhistoryUpdatetimeByKeyword(keyword, updatetime);
+    }
+
+    @Override
+    public int setAllDeletedByUserId(int userId) {
+        return searchHistoryMapper.setAllDeletedByUserId(userId);
     }
 }

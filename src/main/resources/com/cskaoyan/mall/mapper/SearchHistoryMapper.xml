@@ -245,11 +245,15 @@
     values (#{searchHistory.userId,jdbcType=INTEGER}, #{searchHistory.keyword,jdbcType=VARCHAR},
       #{searchHistory.from,jdbcType=VARCHAR}, #{searchHistory.addTime,jdbcType=TIMESTAMP}, #{searchHistory.updateTime,jdbcType=TIMESTAMP})
   </insert>
-
   <update id="updateSearchhistoryUpdatetimeByKeyword">
     update cskaoyan_mall_search_history
     set update_time = #{updatetime}
     where keyword = #{keyword}
+  </update>
+  <update id="setAllDeletedByUserId">
+    update cskaoyan_mall_search_history
+    set deleted = true
+    where user_id = #{userId}
   </update>
 
 
