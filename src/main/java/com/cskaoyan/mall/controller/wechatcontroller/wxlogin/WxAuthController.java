@@ -4,6 +4,7 @@ package com.cskaoyan.mall.controller.wechatcontroller.wxlogin;
 
 import com.cskaoyan.mall.bean.BaseRespVo;
 import com.cskaoyan.mall.bean.Order;
+import com.cskaoyan.mall.bean.User;
 import com.cskaoyan.mall.mallstart.util.UserTokenManager;
 import com.cskaoyan.mall.realm.CustomToken;
 import com.cskaoyan.mall.realm.wxtokenvo.OrderInfo;
@@ -53,6 +54,7 @@ public class WxAuthController {
 			return BaseRespVo.baseRespErr(500,"用户名或密码错误");
 		}
 		Integer userId = wxAuthService.queryIdByUsername(username);
+		User user = wxAuthService.queryUserById(userId);
 //		request.getSession().setAttribute("userId",userId);
 		Subject subject = SecurityUtils.getSubject();
 		subject.getSession().setAttribute("userId",userId);
@@ -60,7 +62,7 @@ public class WxAuthController {
 		WxBaseVo wxBaseVo = new WxBaseVo();
 		UserInfo userInfo = new UserInfo();
 		userInfo.setNickName(username);
-		userInfo.setAvatarUrl("");
+		userInfo.setAvatarUrl(user.getAvatar());
 		wxBaseVo.setUserInfo(userInfo);
 		wxBaseVo.setToken(id);
 		wxBaseVo.setTokenExpire(new Date());

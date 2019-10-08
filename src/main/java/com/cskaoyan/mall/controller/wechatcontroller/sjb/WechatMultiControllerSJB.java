@@ -53,7 +53,6 @@ public class WechatMultiControllerSJB {
 
 
 //    @RequestMapping("wx/goods/list")
-
     @ResponseBody
     public BaseRespVo goodsList(@Valid GoodsSearchListReqVo reqVo, BindingResult bindingResult){
         if (bindingResult.hasErrors()){
@@ -189,7 +188,6 @@ public class WechatMultiControllerSJB {
         FootprintAndGoodsDataToolVo<FootprintListToolVo> dataToolVo= new FootprintAndGoodsDataToolVo<>(footprintList, totalPages);
         return BaseRespVo.baseRespOk(dataToolVo);
     }
-
 
     @RequestMapping("wx/feedback/submit")
     @ResponseBody
