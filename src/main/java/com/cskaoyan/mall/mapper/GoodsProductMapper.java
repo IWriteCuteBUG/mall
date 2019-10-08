@@ -66,6 +66,9 @@ public interface GoodsProductMapper {
     @Select("select number from  cskaoyan_mall_goods_product where id=#{productId} ")
     boolean selectNumber(int productId);
 
+    @Update("update cskaoyan_mall_goods_product set number=number+#{number} where id=#{productId}")
+    void changeNumberById(Integer productId, Short number);
+
 
 //
 //    @Update("update cskaoyan_mall_goods_product set number=number-#{number} where id=#{productId}")
