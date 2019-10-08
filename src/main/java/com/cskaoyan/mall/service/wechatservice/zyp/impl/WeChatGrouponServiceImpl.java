@@ -73,6 +73,9 @@ public class WeChatGrouponServiceImpl implements WechatGrouponService {
             OrderGoodsExample orderGoodsExample = new OrderGoodsExample();
             orderGoodsExample.createCriteria().andOrderIdEqualTo(orderId);
             List<OrderGoods> orderGoods = orderGoodsMapper.selectByExample(orderGoodsExample);
+            /*List<GrouponGoodsListVo> orderGoods = new ArrayList<>();
+            GrouponGoodsListVo grouponListGoodVo = new GrouponGoodsListVo();
+            orderGoods.add(grouponListGoodVo);*/
             myGrounpVo.setGoodsList(orderGoods);
 //            团购规则
             GrouponRules grouponRules = grouponRulesMapper.selectByPrimaryKey(groupon.getRulesId());
