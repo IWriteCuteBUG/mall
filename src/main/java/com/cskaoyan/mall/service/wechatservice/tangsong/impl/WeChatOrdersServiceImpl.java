@@ -7,6 +7,7 @@ import com.cskaoyan.mall.utils.wechatutils.ljw.AssignUtils;
 import com.cskaoyan.mall.utils.wechatutils.tangsong.OptionUtils;
 import com.cskaoyan.mall.vo.wechatvo.tongsong.OrderVo;
 import com.cskaoyan.mall.vo.wechatvo.tongsong.OrderVoForReturn;
+import org.apache.shiro.crypto.hash.Hash;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
@@ -141,7 +142,9 @@ public class WeChatOrdersServiceImpl implements WeChatOrdersService {
         //生成訂單編號
         SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHHmmss");
         Date date = new Date();
-        String orderId = format.format(date);
+        String dateString = format.format(date);
+        String orderId = dateString.substring(4);
+
         //判斷
         if (addressId != 0) {
             //从购物车取到商品数量
@@ -168,7 +171,11 @@ public class WeChatOrdersServiceImpl implements WeChatOrdersService {
             goodsProduct.setUpdateTime(parse);
             GoodsProductExample goodsProductExample = new GoodsProductExample();
             goodsProductExample.createCriteria().andGoodsIdEqualTo(goodsId).andSpecificationsEqualTo(specifications);
-            goodsProductMapper.updateByExample(goodsProduct, goodsProductExample);
+            /*List<GoodsProduct> productList1 = goodsProductMapper.selectByExample(goodsProductExample);
+            GoodsProduct goodsProduct2 = productList1.get(0);
+            Integer id1 = goodsProduct2.getId();
+            goodsProduct.setId(id1);*/
+            goodsProductMapper.updateByExampleSelective(goodsProduct,goodsProductExample);
             //提交订单
             Order order = new Order();
             order.setOrderSn(orderId);
@@ -204,22 +211,33 @@ public class WeChatOrdersServiceImpl implements WeChatOrdersService {
             order.setOrderPrice(orderPrice);
             orderMapper.insert(order);
             //插入GoodsAndORDER表
-
-            GoodsProduct goodsProduct1 = new GoodsProduct();
-            int number1 = cart.getNumber();
-            goodsProduct1.setNumber(number1);
-            goodsProduct1.setUpdateTime(parse);
-            goodsProduct1.setAddTime(parse);
-            goodsProduct1.setPrice(actualPrice);
-            goodsProduct1.setUrl(cart.getPicUrl());
+            OrderGoods orderGoods = new OrderGoods();
+            orderGoods.setAddTime(parse);
+            orderGoods.setComment(0);
+            int i = Integer.parseInt(orderId);
+            orderGoods.setOrderId(i);
+            orderGoods.setGoodsName(goods.getName());
+            orderGoods.setGoodsId(goodsId);
+            String s = String.valueOf(goodsId);
+            orderGoods.setGoodsSn(s);
+            orderGoods.setNumber(cart.getNumber());
+            GoodsProductExample goodsProductExample1 = new GoodsProductExample();
+            goodsProductExample1.createCriteria().andSpecificationsEqualTo(specifications).andGoodsIdEqualTo(goodsId);
+            List<GoodsProduct> productList = goodsProductMapper.selectByExample(goodsProductExample1);
+            GoodsProduct goodsProduct1 = productList.get(0);
+            Integer id = goodsProduct1.getId();
+            orderGoods.setProductId(id);
             String[] strings = new String[]{specifications};
-            goodsProduct1.setSpecifications(strings);
-            goodsProduct1.setDeleted(false);
-            goodsProduct1.setGoodsId(goodsId);
-            goodsProductMapper.insert(goodsProduct1);
+            orderGoods.setSpecifications(strings);
+            orderGoods.setPrice(cart.getPrice());
+            orderGoods.setPicUrl(cart.getPicUrl());
+            orderGoods.setAddTime(parse);
+            orderGoods.setUpdateTime(parse);
             //删除购物车
             cartMapper.deleteByPrimaryKey(submitOrders.getCartId());
-            BaseRespVo ok = BaseRespVo.ok(orderId);
+            HashMap<String, Object> map = new HashMap<>();
+            map.put("orderId",orderId);
+            BaseRespVo ok = BaseRespVo.ok(map);
             return ok;
         } else {
             //設置訂單編號
@@ -246,7 +264,7 @@ public class WeChatOrdersServiceImpl implements WeChatOrdersService {
                 goodsProduct.setUpdateTime(parse);
                 GoodsProductExample goodsProductExample = new GoodsProductExample();
                 goodsProductExample.createCriteria().andGoodsIdEqualTo(goodsId).andSpecificationsEqualTo(specifications);
-                goodsProductMapper.updateByExample(goodsProduct, goodsProductExample);
+                goodsProductMapper.updateByExampleSelective(goodsProduct,goodsProductExample);
                 //提交订单
                 Order order = new Order();
                 order.setOrderSn(orderId);
@@ -283,7 +301,7 @@ public class WeChatOrdersServiceImpl implements WeChatOrdersService {
                 orderMapper.insert(order);
                 //插入GoodsAndORDER表
 
-                GoodsProduct goodsProduct1 = new GoodsProduct();
+                /*GoodsProduct goodsProduct1 = new GoodsProduct();
                 int number1 = cart.getNumber();
                 goodsProduct1.setNumber(number1);
                 goodsProduct1.setUpdateTime(parse);
@@ -294,7 +312,29 @@ public class WeChatOrdersServiceImpl implements WeChatOrdersService {
                 goodsProduct1.setSpecifications(strings);
                 goodsProduct1.setDeleted(false);
                 goodsProduct1.setGoodsId(goodsId);
-                goodsProductMapper.insert(goodsProduct1);
+                goodsProductMapper.insert(goodsProduct1);*/
+                OrderGoods orderGoods = new OrderGoods();
+                orderGoods.setAddTime(parse);
+                orderGoods.setComment(0);
+                int i = Integer.parseInt(orderId);
+                orderGoods.setOrderId(i);
+                orderGoods.setGoodsName(goods.getName());
+                orderGoods.setGoodsId(goodsId);
+                String s = String.valueOf(goodsId);
+                orderGoods.setGoodsSn(s);
+                orderGoods.setNumber(cart.getNumber());
+                GoodsProductExample goodsProductExample1 = new GoodsProductExample();
+                goodsProductExample1.createCriteria().andSpecificationsEqualTo(specifications).andGoodsIdEqualTo(goodsId);
+                List<GoodsProduct> productList = goodsProductMapper.selectByExample(goodsProductExample1);
+                GoodsProduct goodsProduct1 = productList.get(0);
+                Integer id = goodsProduct1.getId();
+                orderGoods.setProductId(id);
+                String[] strings = new String[]{specifications};
+                orderGoods.setSpecifications(strings);
+                orderGoods.setPrice(cart.getPrice());
+                orderGoods.setPicUrl(cart.getPicUrl());
+                orderGoods.setAddTime(parse);
+                orderGoods.setUpdateTime(parse);
                 //删除购物车
                 cartMapper.deleteByPrimaryKey(submitOrders.getCartId());
 
