@@ -1,6 +1,7 @@
 package com.cskaoyan.mall.bean;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import org.apache.ibatis.annotations.Select;
 
 import java.util.Date;
 
@@ -74,4 +75,6 @@ public class GoodsAttribute {
     public void setDeleted(Boolean deleted) {
         this.deleted = deleted;
     }
+
+
 }

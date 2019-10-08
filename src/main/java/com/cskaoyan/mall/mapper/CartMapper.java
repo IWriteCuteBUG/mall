@@ -38,7 +38,7 @@ public interface CartMapper {
     List<Cart> selectGoodsId(@Param("userId") Integer userId);
 
 
-    @Update("update cskaoyan_mall_cart set checked =#{ischecked} where id=#{cartId}")
+    @Update("update cskaoyan_mall_cart set checked =#{isChecked} where id=#{cartId}")
     void updateChecked(boolean isChecked, int cartId);
 
 
