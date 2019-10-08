@@ -4,6 +4,7 @@ import com.cskaoyan.mall.bean.GoodsAttribute;
 import com.cskaoyan.mall.bean.GoodsAttributeExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 public interface GoodsAttributeMapper {
@@ -31,4 +32,8 @@ public interface GoodsAttributeMapper {
 
     @Update("update cskaoyan_mall_goods_attribute set deleted=#{flag} where goods_id=#{goodsId}")
     void deleteByLogic(@Param("goodsId") Integer id, @Param("flag") boolean b);
+
+
+    @Select("select value from cskaoyan_mall_goods_attribute where goods_Id=#{goodsId} and attribute=#{attribute}")
+    String selectValue(Integer goodsId, String attribute);
 }
