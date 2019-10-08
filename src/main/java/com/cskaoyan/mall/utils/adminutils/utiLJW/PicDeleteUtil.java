@@ -39,7 +39,7 @@ public class PicDeleteUtil {
 
 
     public  static String delete(String catalog){
-        catalog="e\\5\\b\\8\\b\\4\\d\\d/07b3f49d-96e1-44e7-b1ea-e097246f5f25-9.jpg";
+        System.out.println(catalog);
         File file=new File("C:/static/img/"+catalog);
 
         for (int i=0;i<9;i++){

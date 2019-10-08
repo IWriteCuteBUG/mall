@@ -67,8 +67,12 @@ public class WechatDiscountController {
             return ReturnUtilCly.back(null, "成功", 0);
         }else if (flag == 1){
             return ReturnUtilCly.back(null, "优惠券已经领取过", 740);
-        }else {
+        }else if(flag == 2){
             return ReturnUtilCly.back(null, "优惠券已领完", 740);
+        }else if(flag == 3){
+            return ReturnUtilCly.back(null, "限新用户领取", 740);
+        }else{
+            return ReturnUtilCly.back(null, "优惠券兑换码兑换", 740);
         }
     }
 

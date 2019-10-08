@@ -177,6 +177,7 @@ public class GoodsServiceImpl implements GoodsService {
         List<GoodsSpecification> specifications = goodsDetail.getSpecifications();
         if(!(specifications.isEmpty())){
             for (GoodsSpecification specification : specifications) {
+                specification.setId(null);
                 specification.setUpdateTime(date);
                 goodsSpecificationMapper.insertSelective(specification);
             }
@@ -186,6 +187,7 @@ public class GoodsServiceImpl implements GoodsService {
         List<GoodsAttribute> goodsAttributes = goodsDetail.getAttributes();
         if(!(goodsAttributes.isEmpty())){
             for (GoodsAttribute goodsAttribute : goodsAttributes) {
+                goodsAttribute.setId(null);
                 goodsAttribute.setUpdateTime(date);
                 goodsAttributeMapper.insertSelective(goodsAttribute);
             }
@@ -195,6 +197,7 @@ public class GoodsServiceImpl implements GoodsService {
         List<GoodsProduct> goodsProducts = goodsDetail.getProducts();
         if(!(goodsProducts.isEmpty())){
             for (GoodsProduct goodsProduct : goodsProducts) {
+                goodsProduct.setId(null);
                 goodsProduct.setUpdateTime(date);
                 goodsProductMapper.insertSelective(goodsProduct);
             }

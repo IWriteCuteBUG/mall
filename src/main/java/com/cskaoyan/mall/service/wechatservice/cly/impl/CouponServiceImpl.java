@@ -158,6 +158,12 @@ public class CouponServiceImpl implements CouponService {
     @Override
     public int receiveCoupon(int userId, Integer couponId) {
         Coupon coupon = couponMapper.selectByPrimaryKey(couponId);
+        if(coupon.getType() == 0){}
+        else if(coupon.getType() == 1){
+            return 3;
+        }else if(coupon.getType() == 2){
+            return 4;
+        }
         //首先判断优惠券total
         Integer total = coupon.getTotal();
         if (total == 0) {
