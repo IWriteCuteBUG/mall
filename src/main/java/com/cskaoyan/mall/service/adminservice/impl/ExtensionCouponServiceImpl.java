@@ -44,7 +44,7 @@ public class ExtensionCouponServiceImpl implements ExtensionCouponService {
         }
 
         if (!ExtensionStringUtils.isEmpty(name)) {
-            criteria.andNameEqualTo(fromCoupon.getName());
+            criteria.andNameLike("%" + fromCoupon.getName() + "%");
         }
         coupons = couponMapper.selectByExample(couponExample);
         PageInfo<Coupon> pageInfo = new PageInfo<>(coupons);

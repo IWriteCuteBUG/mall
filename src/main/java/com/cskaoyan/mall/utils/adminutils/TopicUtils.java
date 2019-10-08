@@ -19,11 +19,20 @@ public class TopicUtils {
         } catch (Exception e) {
             throw new ExtensionCouponDiscountException("商品低价参数输入有误");
         }
+        int i = topic.getPrice().compareTo(BigDecimal.ZERO);
+        if (i == -1) {
+            throw new ExtensionCouponDiscountException("商品低价必须大于等于0");
+        }
+        BigDecimal bigDecimal = null;
         try {
             String readCount = topicNotKnow.getReadCount();
-            BigDecimal bigDecimal = new BigDecimal(readCount);
+            bigDecimal = new BigDecimal(readCount);
         } catch (Exception e) {
             throw new ExtensionCouponDiscountException("阅读量参数输入有误");
+        }
+        int i1 = bigDecimal.compareTo(BigDecimal.ZERO);
+        if (i1 == -1) {
+            throw new ExtensionCouponDiscountException("阅读量必须大于等于0");
         }
         topic.setSortOrder(topic.getSortOrder());
         topic.setId(topicNotKnow.getId());
