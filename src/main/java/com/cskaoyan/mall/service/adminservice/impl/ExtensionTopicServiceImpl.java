@@ -3,9 +3,12 @@ package com.cskaoyan.mall.service.adminservice.impl;
 import com.cskaoyan.mall.bean.BaseRespVo;
 import com.cskaoyan.mall.bean.Topic;
 import com.cskaoyan.mall.bean.TopicExample;
+import com.cskaoyan.mall.exception.ExtensionCouponDiscountException;
 import com.cskaoyan.mall.mapper.TopicMapper;
 import com.cskaoyan.mall.service.adminservice.ExtensionTopicService;
+import com.cskaoyan.mall.utils.adminutils.TopicUtils;
 import com.cskaoyan.mall.vo.adminvo.extensionvo.FromRequestKey;
+import com.cskaoyan.mall.vo.adminvo.extensionvo.TopicNotKnow;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +31,7 @@ public class ExtensionTopicServiceImpl implements ExtensionTopicService {
         TopicExample topicExample = new TopicExample();
         TopicExample.Criteria criteria = topicExample.createCriteria();
         if (title != null) {
-            criteria = criteria.andTitleEqualTo(title);
+            criteria = criteria.andTitleLike("%" + title + "%");
         }
 
         if (subtitle != null) {
@@ -41,7 +44,11 @@ public class ExtensionTopicServiceImpl implements ExtensionTopicService {
     }
 
     @Override
-    public BaseRespVo topicCreate(Topic topic) {
+    public BaseRespVo topicCreate(TopicNotKnow topicNotKnow) throws ExtensionCouponDiscountException {
+        Topic topic = TopicUtils.topic(topicNotKnow);
+        /*String picUrl = topic.getPicUrl();
+        String content = "<p><img src=\"" + picUrl + "\" alt=\"\" width=\"500\" height=\"329\" /></p>";
+        topic.setContent(content);*/
         Date date = new Date();
         topic.setAddTime(date);
         int i = topicMapper.insertSelective(topic);
@@ -49,9 +56,13 @@ public class ExtensionTopicServiceImpl implements ExtensionTopicService {
     }
 
     @Override
-    public BaseRespVo topicUpdate(Topic topic) {
+    public BaseRespVo topicUpdate(TopicNotKnow topicNotKnow) throws ExtensionCouponDiscountException {
+        Topic topic = TopicUtils.topic(topicNotKnow);
         Date date = new Date();
         topic.setUpdateTime(date);
+        /*String picUrl = topic.getPicUrl();
+        String content = "<p><img src=\"" + picUrl + "\" alt=\"\" width=\"500\" height=\"329\" /></p>";
+        topic.setContent(content);*/
         int update = topicMapper.updateByPrimaryKey(topic);
         return BaseRespVo.baseRespOk(topic);
     }

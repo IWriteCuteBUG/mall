@@ -2,8 +2,10 @@ package com.cskaoyan.mall.controller.admincontroller.controllerZYP;
 
 import com.cskaoyan.mall.bean.BaseRespVo;
 import com.cskaoyan.mall.bean.GrouponRules;
+import com.cskaoyan.mall.exception.ExtensionCouponDiscountException;
 import com.cskaoyan.mall.service.adminservice.ExtensionGrouponService;
 import com.cskaoyan.mall.vo.adminvo.extensionvo.FromRequestKey;
+import com.cskaoyan.mall.vo.adminvo.extensionvo.GrouponRulesNotKnow;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,8 +29,8 @@ public class ExtensionGrouponController {
     }
 
     @RequestMapping("create")
-    public BaseRespVo grouponCreate(@RequestBody GrouponRules grouponRules) {
-        BaseRespVo baseRespVo = extensionGrouponService.queryGrouponCreate(grouponRules);
+    public BaseRespVo grouponCreate(@RequestBody GrouponRulesNotKnow grouponRulesNotKnow) throws ExtensionCouponDiscountException {
+        BaseRespVo baseRespVo = extensionGrouponService.queryGrouponCreate(grouponRulesNotKnow);
         return baseRespVo;
     }
 
@@ -39,17 +41,8 @@ public class ExtensionGrouponController {
     }
 
     @RequestMapping("update")
-    public BaseRespVo grouponUpdate(@RequestBody GrouponRules grouponRules) {
-        /*Object discountMember = grouponRules.getDiscountMember();
-        Object discount = grouponRules.getDiscount();*/
-//        if()
-        /*if (discountMember == null) {
-            return BaseRespVo.baseRespErr(402, "团购人数不能为空");
-        }
-        if (discountMember instanceof String) {
-            return BaseRespVo.baseRespErr(402, "团购人数应该输入整数");
-        }*/
-        BaseRespVo baseRespVo = extensionGrouponService.queryGrouponUpdate(grouponRules);
+    public BaseRespVo grouponUpdate(@RequestBody GrouponRulesNotKnow grouponRulesNotKnow) throws ExtensionCouponDiscountException {
+        BaseRespVo baseRespVo = extensionGrouponService.queryGrouponUpdate(grouponRulesNotKnow);
         return baseRespVo;
     }
 

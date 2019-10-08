@@ -9,13 +9,13 @@ public interface ExtensionCouponService {
 
     BaseRespVo queryCroupons(FromCoupon fromCoupon);
 
-    BaseRespVo createCroupons(Coupon couponObject) throws ExtensionCouponDiscountException;
+    BaseRespVo createCroupons(CouponObject couponObject) throws ExtensionCouponDiscountException;
 
     BaseRespVo selectCouponById(int id);
 
     BaseRespVo selectCouponUserListByCouponId(FromRequestKey fromRequestKey, FromUserCoupon fromUserCoupon);
 
-    BaseRespVo createUpdate(Coupon coupon);
+    BaseRespVo createUpdate(CouponObject couponObject) throws ExtensionCouponDiscountException;
 
     BaseRespVo deleteCoupon(Coupon coupon);
 }

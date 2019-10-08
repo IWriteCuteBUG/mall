@@ -11,10 +11,12 @@ import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.handler.SimpleMappingExceptionResolver;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.Properties;
 
 @Configuration
 public class ShirosConfig {
@@ -58,7 +60,7 @@ public class ShirosConfig {
         filterChainDefinitionMap.put("wx/groupon/list","anon");
         filterChainDefinitionMap.put("wx/coupon/list","anon");
         filterChainDefinitionMap.put("wx/comment/list","anon");
-        filterChainDefinitionMap.put("wx/cart/**","authc");
+//        filterChainDefinitionMap.put("wx/cart/add","authc");
         filterChainDefinitionMap.put("wx/collect/**","authc");
         filterChainDefinitionMap.put("wx/address/**","authc");
         filterChainDefinitionMap.put("wx/express/query","authc");
@@ -70,9 +72,10 @@ public class ShirosConfig {
         filterChainDefinitionMap.put("wx/storage/upload","authc");
         filterChainDefinitionMap.put("wx/user/index","authc");
         filterChainDefinitionMap.put("admin/**", "authc");
+        filterChainDefinitionMap.put("wx/cart/**","perms[*]");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
         shiroFilterFactoryBean.setLoginUrl("admin/auth/login");
-        shiroFilterFactoryBean.setLoginUrl("wx/auth/logout");
+        shiroFilterFactoryBean.setLoginUrl("wx/auth/login");
         return shiroFilterFactoryBean;
     }
 
@@ -88,13 +91,14 @@ public class ShirosConfig {
         MySessionManager mySessionManager = new MySessionManager();
         return mySessionManager;
     }
-    /*@Bean
+    @Bean
     public SimpleMappingExceptionResolver simpleMappingExceptionResolver(){
         SimpleMappingExceptionResolver simpleMappingExceptionResolver = new SimpleMappingExceptionResolver();
         Properties mappings = new Properties();
-        mappings.setProperty("org.apache.shiro.authz.AuthorizationException","admin/auth/login");
+        mappings.setProperty("org.apache.shiro.authz.AuthorizationException","wx/auth/login");
+        mappings.setProperty("java.lang.NullPointerException","wx/auth/login");
         simpleMappingExceptionResolver.setExceptionMappings(mappings);
         return simpleMappingExceptionResolver;
-    }*/
+    }
 
 }

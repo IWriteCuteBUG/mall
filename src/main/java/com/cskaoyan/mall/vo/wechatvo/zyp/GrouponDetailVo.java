@@ -10,7 +10,7 @@ import java.util.List;
 public class GrouponDetailVo {
     private Creator creator;
     private Groupon groupon;
-    private Joiners joiners;
+    private List<Joiners> joiners;
     private GrouponGoodInfo orderInfo;
     private List<OrderGoods> orderGoods;
     private GrouponRules rules;
@@ -32,11 +32,11 @@ public class GrouponDetailVo {
         this.groupon = groupon;
     }
 
-    public Joiners getJoiners() {
+    public List<Joiners> getJoiners() {
         return joiners;
     }
 
-    public void setJoiners(Joiners joiners) {
+    public void setJoiners(List<Joiners> joiners) {
         this.joiners = joiners;
     }
 
