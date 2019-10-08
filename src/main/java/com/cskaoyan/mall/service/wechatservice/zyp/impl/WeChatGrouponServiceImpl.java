@@ -36,8 +36,8 @@ public class WeChatGrouponServiceImpl implements WechatGrouponService {
     @Override
     public BaseRespVo queryGrouponByShowType(int showType) {
 
-        int userId = 1;
-//        Integer userId = (Integer) SecurityUtils.getSubject().getSession().getAttribute("userId");
+//        int userId = 1;
+        Integer userId = (Integer) SecurityUtils.getSubject().getSession().getAttribute("userId");
 
 
         GrouponExample grouponExample = new GrouponExample();
