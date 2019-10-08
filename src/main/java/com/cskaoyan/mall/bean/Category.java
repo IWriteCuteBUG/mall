@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 public class Category {
 
@@ -34,6 +35,31 @@ public class Category {
     private Date updateTime;
 
     private Boolean deleted;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Category category = (Category) o;
+        return Objects.equals(childrens, category.childrens) &&
+                Objects.equals(id, category.id) &&
+                Objects.equals(name, category.name) &&
+                Objects.equals(keywords, category.keywords) &&
+                Objects.equals(desc, category.desc) &&
+                Objects.equals(pid, category.pid) &&
+                Objects.equals(iconUrl, category.iconUrl) &&
+                Objects.equals(picUrl, category.picUrl) &&
+                Objects.equals(level, category.level) &&
+                Objects.equals(sortOrder, category.sortOrder) &&
+                Objects.equals(addTime, category.addTime) &&
+                Objects.equals(updateTime, category.updateTime) &&
+                Objects.equals(deleted, category.deleted);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(childrens, id, name, keywords, desc, pid, iconUrl, picUrl, level, sortOrder, addTime, updateTime, deleted);
+    }
 
     public List<Category> getChildrens() {
         return childrens;
