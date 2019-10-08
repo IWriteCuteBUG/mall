@@ -6,6 +6,7 @@ import com.cskaoyan.mall.exception.ExtensionCouponDiscountException;
 import com.cskaoyan.mall.vo.adminvo.extensionvo.CouponObject;
 
 import java.math.BigDecimal;
+import java.util.Date;
 
 public class ExtensionCouponExceptionUtils {
 
@@ -40,8 +41,15 @@ public class ExtensionCouponExceptionUtils {
         }
         if (coupon.getStartTime() != null) {
             if (!coupon.getStartTime().before(coupon.getEndTime())) {
-                throw new ExtensionCouponDiscountException("优惠卷生效时间必须早于优惠卷事项时间");
+                throw new ExtensionCouponDiscountException("优惠卷生效时间必须早于优惠卷失效时间");
             }
+        }
+        Date date = new Date();
+        if (!date.before(coupon.getStartTime())) {
+            throw new ExtensionCouponDiscountException("优惠卷生效时间必须晚于或等于当前时间");
+        }
+        if (!date.before(coupon.getEndTime())) {
+            throw new ExtensionCouponDiscountException("优惠卷失效时间必须晚于当前时间");
         }
 
         try {
