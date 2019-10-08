@@ -22,6 +22,7 @@ public class PicDeleteUtil {
         Map map = new HashMap();
         map.put("catalog",catalog);
       //发送带文件目录（catalog）的get请求
+        System.out.println("get请求");
        try {
            String str=restTemplate.getForObject("http://"+ip+":80/deletepic?catalog={catalog}",String.class,map);
 

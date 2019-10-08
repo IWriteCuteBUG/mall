@@ -27,12 +27,12 @@ public class CollectAddordeleteServiceImpl implements CollectAddordeleteService{
         if (collects.size()==0){
             collectMapper.insert(collect);
             HashMap<String, String> stringStringHashMap = new HashMap<>();
-            stringStringHashMap.put("type","delete");
+            stringStringHashMap.put("type","add");
              ok = BaseRespVo.ok(stringStringHashMap);
         }else{
              collectMapper.deleteByUserIdAndValueId(collect.getUserId(),collect.getValueId());
             HashMap<String, String> stringStringHashMap = new HashMap<>();
-            stringStringHashMap.put("type","add");
+            stringStringHashMap.put("type","delete");
              ok = BaseRespVo.ok(stringStringHashMap);
         }
            return ok;

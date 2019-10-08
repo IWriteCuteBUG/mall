@@ -109,7 +109,7 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.cskaoyan.mall.bean.OrderGoods">
+  <insert id="insert"  useGeneratedKeys="true" keyProperty="id" parameterType="com.cskaoyan.mall.bean.OrderGoods">
     insert into cskaoyan_mall_order_goods (id, order_id, goods_id,
       goods_name, goods_sn, product_id,
       number, price, specifications,

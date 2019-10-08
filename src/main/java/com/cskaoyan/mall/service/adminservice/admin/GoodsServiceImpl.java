@@ -1,5 +1,5 @@
 package com.cskaoyan.mall.service.adminservice.admin;
-
+import com.cskaoyan.mall.util.utiLJW.PicDeleteUtil;
 import com.cskaoyan.mall.bean.*;
 import com.cskaoyan.mall.exception.InsertException;
 import com.cskaoyan.mall.mapper.*;
@@ -9,6 +9,7 @@ import com.cskaoyan.mall.vo.adminvo.goodsmanagervo.*;
 import com.cskaoyan.mall.vo.wechatvo.tongsong.*;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -267,7 +268,15 @@ public class GoodsServiceImpl implements GoodsService {
     @Override
     @Transactional
     public void deleteGood(Integer id) {
+        //获取商品信息
+     Goods goods= goodsMapper.selectByPrimaryKey(id);
+     //跨域删除图片
+        PicDeleteUtil.redict(goods.getPicUrl());
+
+
         goodsMapper.deleteByPrimaryKey(id);
+
+
 
         CommentExample commentExample = new CommentExample();
         CommentExample.Criteria criteria = commentExample.createCriteria();
@@ -448,5 +457,28 @@ public class GoodsServiceImpl implements GoodsService {
         map.put("goodsList",goodsList);
         BaseRespVo ok = BaseRespVo.ok(map);
         return ok;
+    }
+
+    @Override
+    public BaseRespVo queryGoodsListByBrandId(int brandId, int page, int size) {
+        GoodsExample goodsExample = new GoodsExample();
+        goodsExample.createCriteria().andBrandIdEqualTo(brandId);
+        //filterCategoryList
+        PageHelper.startPage(page,size);
+        List<Goods> goodsList = goodsMapper.selectByExample(goodsExample);
+        //filterCategoryList
+        List<Category> filterCategoryList = new ArrayList<>();
+        for (Goods goods : goodsList) {
+            Integer categoryId = goods.getCategoryId();
+            CategoryExample categoryExample = new CategoryExample();
+            categoryExample.createCriteria().andIdEqualTo(categoryId);
+            List<Category> categories1 = categoryMapper.selectByExample(categoryExample);
+            Category category = categories1.get(0);
+            filterCategoryList.add(category);
+        }
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("filterCategoryList",filterCategoryList);
+        map.put("goodsList",goodsList);
+        return BaseRespVo.ok(map);
     }
 }

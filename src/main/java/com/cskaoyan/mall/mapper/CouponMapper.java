@@ -4,6 +4,7 @@ import com.cskaoyan.mall.bean.Coupon;
 import com.cskaoyan.mall.bean.CouponExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 
 public interface CouponMapper {
     long countByExample(CouponExample example);
@@ -28,5 +29,11 @@ public interface CouponMapper {
 
     int updateByPrimaryKey(Coupon record);
 
+
     List<Coupon> queryMyCouponList(@Param("status") short status, @Param("userId") int userId);
+
+
+    @Select("select discount from cskaoyan_mall_coupon where id=#{couponId}")
+    double selectDiscountById(int couponId);
+
 }
