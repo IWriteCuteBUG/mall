@@ -2,6 +2,7 @@ package com.cskaoyan.mall.service.adminservice.admin;
 
 import com.cskaoyan.mall.bean.BaseRespVo;
 import com.cskaoyan.mall.mapper.PermissionMapper;
+import com.cskaoyan.mall.mapper.Permission_DetailsMapper;
 import com.cskaoyan.mall.vo.adminvo.dhd.PermissionsVo;
 import com.cskaoyan.mall.vo.adminvo.dhd.util.SystemPermission;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,9 +13,17 @@ import java.util.List;
 public class AdminPermissionsServiceImpl implements AdminPermissionsService {
     @Autowired
     PermissionMapper permissionMapper;
+    @Autowired
+    Permission_DetailsMapper permission_detailsMapper;
     @Override
     public BaseRespVo permissionList(int roleId) {
-        String[] strings = permissionMapper.selectPermissionByRoleId(roleId);
+         String[] strings;
+        if(roleId==1){
+            strings = permission_detailsMapper.selectId();
+        }
+        else {
+            strings = permissionMapper.selectPermissionByRoleId(roleId);
+        }
         List<SystemPermission> systemPermissions = permissionMapper.selectAdminPermission_detailsParent();
         for (SystemPermission systemPermission : systemPermissions) {
             List<SystemPermission> systemPermissions1 = permissionMapper.selectAdminPermission_details(systemPermission.getPid());

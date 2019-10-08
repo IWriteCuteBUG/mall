@@ -4,5 +4,5 @@ import com.cskaoyan.mall.bean.BaseRespVo;
 import com.cskaoyan.mall.bean.Role;
 
 public interface DeleteRoleService {
-    BaseRespVo deleteRole(Role role);
+    Object deleteRole(Role role);
 }
