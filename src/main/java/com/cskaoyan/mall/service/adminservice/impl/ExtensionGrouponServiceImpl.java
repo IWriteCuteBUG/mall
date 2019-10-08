@@ -1,11 +1,14 @@
 package com.cskaoyan.mall.service.adminservice.impl;
 
 import com.cskaoyan.mall.bean.*;
+import com.cskaoyan.mall.exception.ExtensionCouponDiscountException;
 import com.cskaoyan.mall.mapper.GoodsMapper;
 import com.cskaoyan.mall.mapper.GrouponRulesMapper;
 import com.cskaoyan.mall.service.adminservice.ExtensionGrouponService;
 import com.cskaoyan.mall.vo.adminvo.extensionvo.AdvertList;
 import com.cskaoyan.mall.vo.adminvo.extensionvo.FromRequestKey;
+import com.cskaoyan.mall.vo.adminvo.extensionvo.GrouponRulesNotKnow;
+import com.cskaoyan.mall.vo.wechatvo.zyp.GrouponGoodInfo;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,11 +46,12 @@ public class ExtensionGrouponServiceImpl implements ExtensionGrouponService {
     }
 
     @Override
-    public BaseRespVo queryGrouponCreate(GrouponRules grouponRules) {
+    public BaseRespVo queryGrouponCreate(GrouponRulesNotKnow grouponRulesNotKnow) throws ExtensionCouponDiscountException {
+        GrouponRules grouponRules = GrouponRulesUtils.grouponRulesIstrue(grouponRulesNotKnow);
         Goods goods = getGrouponByGoodsId(grouponRules);
         BaseRespVo baseRespVo = null;
         if (goods == null) {
-            baseRespVo = BaseRespVo.baseRespErr(402, "参数错误");
+            baseRespVo = BaseRespVo.baseRespErr(402, "仓库中找不到该商品哦，请输入正确的商品ID");
         }
         if (goods != null) {
             grouponRules.setGoodsName(goods.getName());
@@ -76,10 +80,11 @@ public class ExtensionGrouponServiceImpl implements ExtensionGrouponService {
     }
 
     @Override
-    public BaseRespVo queryGrouponUpdate(GrouponRules grouponRules) {
+    public BaseRespVo queryGrouponUpdate(GrouponRulesNotKnow grouponRulesNotKnow) throws ExtensionCouponDiscountException {
+        GrouponRules grouponRules = GrouponRulesUtils.grouponRulesIstrue(grouponRulesNotKnow);
         Goods goods = getGrouponByGoodsId(grouponRules);
         if (goods == null) {
-            return BaseRespVo.baseRespErr(402, "参数值不对");
+            return BaseRespVo.baseRespErr(402, "仓库中找不到该商品哦，请小可爱输入正确的商品ID");
         }
         Date date = new Date();
         grouponRules.setUpdateTime(date);
