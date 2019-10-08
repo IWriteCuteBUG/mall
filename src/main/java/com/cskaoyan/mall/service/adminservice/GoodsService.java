@@ -26,4 +26,10 @@ public interface GoodsService {
     BaseRespVo queryAllGoodsInfo();
 
     BaseRespVo queryGoodsDetailInfo(int id);
+
+    BaseRespVo queryGoodsListByCategoryId(int categoryId, int page, int size);
+
+    BaseRespVo queryRelatedGoodsListByGoodsId(int goodsId);
+
+    BaseRespVo queryGoodsListByBrandId(int brandId, int page, int size);
 }

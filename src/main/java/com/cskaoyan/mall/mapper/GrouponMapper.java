@@ -3,7 +3,11 @@ package com.cskaoyan.mall.mapper;
 import com.cskaoyan.mall.bean.Groupon;
 import com.cskaoyan.mall.bean.GrouponExample;
 import java.util.List;
+
+import com.cskaoyan.mall.bean.Order;
+import com.cskaoyan.mall.vo.wechatvo.zyp.GrouponGoodInfo;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 
 public interface GrouponMapper {
     long countByExample(GrouponExample example);
@@ -27,4 +31,7 @@ public interface GrouponMapper {
     int updateByPrimaryKeySelective(Groupon record);
 
     int updateByPrimaryKey(Groupon record);
+
+    @Select("select count(id) from cskaoyan_mall_groupon where rules_id = #{ruleId}")
+    int selectJoinerCountByRuleId(int ruleId);
 }

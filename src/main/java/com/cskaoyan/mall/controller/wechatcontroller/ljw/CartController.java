@@ -33,6 +33,11 @@ return cartService.cartIndex(userid);
 int userid=1;
         return  cartService.addCart(cart,userid);
     }
+//    @RequestMapping("wx/address/list")
+//    public  BaseRespVo addressList(){
+//        int userid=1;
+//        return  cartService.addressList(userid);
+//    }
 
 //立即购买快速添加进购物车
     @RequestMapping("wx/cart/fastadd")

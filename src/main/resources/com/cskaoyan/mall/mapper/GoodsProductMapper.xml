@@ -295,4 +295,10 @@
   <select id="queryGoodsProductById" resultMap="productandgoodsMap">
     select <include refid="Base_Column_List"/> from cskaoyan_mall_goods_product where goods_id = #{id}
   </select>
+  <update id="updateNumber">
+    update cskaoyan_mall_goods_product set `number`=#{number} where id=#{id}
+  </update>
+  <select id="queryProductMumberCly" resultType="int">
+    select number from cskaoyan_mall_goods_product where id=#{id}
+  </select>
 </mapper>

@@ -32,4 +32,15 @@ public class WeChatBrandServiceImpl implements WeChatBrandService {
         BaseRespVo ok = BaseRespVo.ok(map);
         return ok;
     }
+
+    @Override
+    public BaseRespVo queryBrandInfo(int id) {
+        BrandExample brandExample = new BrandExample();
+        brandExample.createCriteria().andIdEqualTo(id);
+        List<Brand> brands = brandMapper.selectByExample(brandExample);
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("brand",brands.get(0));
+        BaseRespVo ok = BaseRespVo.ok(map);
+        return ok;
+    }
 }

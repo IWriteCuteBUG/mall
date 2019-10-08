@@ -303,5 +303,17 @@
       deleted = #{deleted,jdbcType=BIT}
     where id = #{id,jdbcType=INTEGER}
   </update>
-
+  <insert id="insertCommentWithoutId" parameterType="com.cskaoyan.mall.bean.Comment">
+    <selectKey resultType="int" keyProperty="comment.id" keyColumn="id" order="AFTER">
+      select last_insert_id()
+    </selectKey>
+    insert into cskaoyan_mall_comment (value_id, `type`,
+      content, user_id, has_picture,
+      pic_urls, star, add_time,
+      update_time)
+    values (#{comment.valueId,jdbcType=INTEGER}, #{comment.type,jdbcType=TINYINT},
+      #{comment.content,jdbcType=VARCHAR}, #{comment.userId,jdbcType=INTEGER}, #{comment.hasPicture,jdbcType=BIT},
+      #{comment.picUrls,jdbcType=VARCHAR}, #{comment.star,jdbcType=SMALLINT}, #{comment.addTime,jdbcType=TIMESTAMP},
+      #{comment.updateTime,jdbcType=TIMESTAMP})
+  </insert>
 </mapper>

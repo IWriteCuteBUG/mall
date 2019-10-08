@@ -9,6 +9,7 @@ import com.cskaoyan.mall.vo.adminvo.goodsmanagervo.*;
 import com.cskaoyan.mall.vo.wechatvo.tongsong.*;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -416,5 +417,68 @@ public class GoodsServiceImpl implements GoodsService {
         objectBaseRespVo.setErrno(0);
         objectBaseRespVo.setErrmsg("成功");
         return objectBaseRespVo;
+    }
+
+    @Override
+    public BaseRespVo queryGoodsListByCategoryId(int categoryId, int page, int size) {
+        //goodsList
+        GoodsExample goodsExample = new GoodsExample();
+        goodsExample.createCriteria().andCategoryIdEqualTo(categoryId);
+        PageHelper.startPage(page, size);
+        List<Goods> goods = goodsMapper.selectByExample(goodsExample);
+        //filterCategoryList
+        ArrayList<Category> categories = new ArrayList<>();
+        for (Goods good : goods) {
+            CategoryExample categoryExample = new CategoryExample();
+            categoryExample.createCriteria().andIdEqualTo(good.getCategoryId());
+            List<Category> categories1 = categoryMapper.selectByExample(categoryExample);
+            categories.add(categories1.get(0));
+        }
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("goodsList",goods);
+        map.put("filterCategoryList",categories);
+        map.put("count",goods.size());
+        BaseRespVo ok = BaseRespVo.ok(map);
+        return ok;
+    }
+
+    @Override
+    public BaseRespVo queryRelatedGoodsListByGoodsId(int goodsId) {
+        //goods
+        GoodsExample goodsExample = new GoodsExample();
+        goodsExample.createCriteria().andIdEqualTo(goodsId);
+        List<Goods> goods = goodsMapper.selectByExample(goodsExample);
+        Goods goods1 = goods.get(0);
+        //relatedGoodsList
+        GoodsExample goodsExample1 = new GoodsExample();
+        goodsExample1.createCriteria().andCategoryIdEqualTo(goods1.getCategoryId());
+        List<Goods> goodsList = goodsMapper.selectByExample(goodsExample1);
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("goodsList",goodsList);
+        BaseRespVo ok = BaseRespVo.ok(map);
+        return ok;
+    }
+
+    @Override
+    public BaseRespVo queryGoodsListByBrandId(int brandId, int page, int size) {
+        GoodsExample goodsExample = new GoodsExample();
+        goodsExample.createCriteria().andBrandIdEqualTo(brandId);
+        //filterCategoryList
+        PageHelper.startPage(page,size);
+        List<Goods> goodsList = goodsMapper.selectByExample(goodsExample);
+        //filterCategoryList
+        List<Category> filterCategoryList = new ArrayList<>();
+        for (Goods goods : goodsList) {
+            Integer categoryId = goods.getCategoryId();
+            CategoryExample categoryExample = new CategoryExample();
+            categoryExample.createCriteria().andIdEqualTo(categoryId);
+            List<Category> categories1 = categoryMapper.selectByExample(categoryExample);
+            Category category = categories1.get(0);
+            filterCategoryList.add(category);
+        }
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("filterCategoryList",filterCategoryList);
+        map.put("goodsList",goodsList);
+        return BaseRespVo.ok(map);
     }
 }

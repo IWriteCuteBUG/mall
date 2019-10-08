@@ -5,6 +5,7 @@ import com.cskaoyan.mall.bean.UserExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.springframework.stereotype.Service;
 
 public interface UserMapper {
     long countByExample(UserExample example);
@@ -41,8 +42,15 @@ public interface UserMapper {
     @Select("select id from cskaoyan_mall_user where username = #{username}")
     String queryIdByUsername(String username);
 
+
+    @Select("select count(id) from cskaoyan_mall_user where mobile = #{mobile}")
+    int queryIdCountByMobile(String mobile);
+
+    int updateByMobile(String password, String mobile);
+
     @Select("select  username from  cskaoyan_mall_user where id=#{userid}")
     String queryNameById(int userid);
     @Select("select  mobile from  cskaoyan_mall_user where id=#{userid}")
     String queryMobileById(int userid);
+
 }

@@ -30,6 +30,10 @@ public interface CouponMapper {
     int updateByPrimaryKey(Coupon record);
 
 
+    List<Coupon> queryMyCouponList(@Param("status") short status, @Param("userId") int userId);
+
+
     @Select("select discount from cskaoyan_mall_coupon where id=#{couponId}")
     double selectDiscountById(int couponId);
+
 }

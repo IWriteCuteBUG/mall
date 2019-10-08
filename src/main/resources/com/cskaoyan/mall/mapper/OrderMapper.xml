@@ -561,4 +561,127 @@
     select count(id) from  cskaoyan_mall_order
   </select>
 
+  <resultMap id="queryOrdersListByStatusMap" type="com.cskaoyan.mall.vo.wechatvo.tongsong.OrderVo">
+    <result column="isGroupin" property="isGroupin"/>
+    <result column="orderSn" property="orderSn"/>
+    <result column="actualPrice" property="actualPrice"/>
+    <result column="orderId" property="id"/>
+    <result column="status" property="status"/>
+    <collection property="goodsList" ofType="com.cskaoyan.mall.vo.wechatvo.tongsong.goodssssVo" >
+      <result column="number" property="number"/>
+      <result column="picUrl" property="picUrl"/>
+      <result column="id" property="id"/>
+      <result column="goodsName" property="goodsName"/>
+    </collection>
+  </resultMap>
+  <select id="queryOrdersList" resultMap="queryOrdersListByStatusMap">
+    SELECT o.id as orderId,gr.id AS isGroupin,o.order_status as status,o.order_sn as orderSn,o.actual_price as actualPrice,g.goods_id as id,g.goods_name as goodsName,g.number,g.pic_url as picUrl
+    from cskaoyan_mall_order o
+    LEFT JOIN cskaoyan_mall_order_goods g ON o.order_sn = g.order_id
+    LEFT JOIN cskaoyan_mall_groupon gr on o.order_sn = gr.order_id
+    WHERE order_status IN(301,203,402,102,101,202,401,103,201)
+  </select>
+
+  <resultMap id="queryOrdersListByStatusMap1" type="com.cskaoyan.mall.vo.wechatvo.tongsong.OrderVo">
+    <result column="isGroupin" property="isGroupin"/>
+    <result column="orderSn" property="orderSn"/>
+    <result column="actualPrice" property="actualPrice"/>
+    <result column="orderId" property="id"/>
+    <result column="status" property="status"/>
+    <collection property="goodsList" ofType="com.cskaoyan.mall.vo.wechatvo.tongsong.goodssssVo" >
+      <result column="number" property="number"/>
+      <result column="picUrl" property="picUrl"/>
+      <result column="id" property="id"/>
+      <result column="goodsName" property="goodsName"/>
+    </collection>
+  </resultMap>
+  <select id="queryOrdersList1" resultMap="queryOrdersListByStatusMap1">
+    SELECT o.id as orderId,gr.id AS isGroupin,o.order_status as status,o.order_sn as orderSn,o.actual_price as actualPrice,g.goods_id as id,g.goods_name as goodsName,g.number,g.pic_url as picUrl
+    from cskaoyan_mall_order o
+    LEFT JOIN cskaoyan_mall_order_goods g ON o.order_sn = g.order_id
+    LEFT JOIN cskaoyan_mall_groupon gr on o.order_sn = gr.order_id
+    WHERE o.order_status IN(101)
+  </select>
+
+  <resultMap id="queryOrdersListByStatusMap2" type="com.cskaoyan.mall.vo.wechatvo.tongsong.OrderVo">
+    <result column="isGroupin" property="isGroupin"/>
+    <result column="orderSn" property="orderSn"/>
+    <result column="actualPrice" property="actualPrice"/>
+    <result column="orderId" property="id"/>
+    <result column="status" property="status"/>
+    <collection property="goodsList" ofType="com.cskaoyan.mall.vo.wechatvo.tongsong.goodssssVo" >
+      <result column="number" property="number"/>
+      <result column="picUrl" property="picUrl"/>
+      <result column="id" property="id"/>
+      <result column="goodsName" property="goodsName"/>
+    </collection>
+  </resultMap>
+  <select id="queryOrdersList2" resultMap="queryOrdersListByStatusMap2">
+    SELECT o.id as orderId,gr.id AS isGroupin,o.order_status as status,o.order_sn as orderSn,o.actual_price as actualPrice,g.goods_id as id,g.goods_name as goodsName,g.number,g.pic_url as picUrl
+    from cskaoyan_mall_order o
+    LEFT JOIN cskaoyan_mall_order_goods g ON o.order_sn = g.order_id
+    LEFT JOIN cskaoyan_mall_groupon gr on o.order_sn = gr.order_id
+    WHERE o.order_status IN(201)
+  </select>
+
+  <resultMap id="queryOrdersListByStatusMap3" type="com.cskaoyan.mall.vo.wechatvo.tongsong.OrderVo">
+    <result column="isGroupin" property="isGroupin"/>
+    <result column="orderSn" property="orderSn"/>
+    <result column="actualPrice" property="actualPrice"/>
+    <result column="orderId" property="id"/>
+    <result column="status" property="status"/>
+    <collection property="goodsList" ofType="com.cskaoyan.mall.vo.wechatvo.tongsong.goodssssVo" >
+      <result column="number" property="number"/>
+      <result column="picUrl" property="picUrl"/>
+      <result column="id" property="id"/>
+      <result column="goodsName" property="goodsName"/>
+    </collection>
+  </resultMap>
+  <select id="queryOrdersList3" resultMap="queryOrdersListByStatusMap3">
+    SELECT o.id as orderId,gr.id AS isGroupin,o.order_status as status,o.order_sn as orderSn,o.actual_price as actualPrice,g.goods_id as id,g.goods_name as goodsName,g.number,g.pic_url as picUrl
+    from cskaoyan_mall_order o
+    LEFT JOIN cskaoyan_mall_order_goods g ON o.order_sn = g.order_id
+    LEFT JOIN cskaoyan_mall_groupon gr on o.order_sn = gr.order_id
+    WHERE o.order_status IN(301)
+  </select>
+
+  <resultMap id="queryOrdersListByStatusMap4" type="com.cskaoyan.mall.vo.wechatvo.tongsong.OrderVo">
+    <result column="isGroupin" property="isGroupin"/>
+    <result column="orderSn" property="orderSn"/>
+    <result column="actualPrice" property="actualPrice"/>
+    <result column="orderId" property="id"/>
+    <result column="status" property="status"/>
+    <collection property="goodsList" ofType="com.cskaoyan.mall.vo.wechatvo.tongsong.goodssssVo" >
+      <result column="number" property="number"/>
+      <result column="picUrl" property="picUrl"/>
+      <result column="id" property="id"/>
+      <result column="goodsName" property="goodsName"/>
+    </collection>
+  </resultMap>
+  <select id="queryOrdersList4" resultMap="queryOrdersListByStatusMap4">
+    SELECT o.id as orderId,gr.id AS isGroupin,o.order_status as status,o.order_sn as orderSn,o.actual_price as actualPrice,g.goods_id as id,g.goods_name as goodsName,g.number,g.pic_url as picUrl
+    from cskaoyan_mall_order o
+    LEFT JOIN cskaoyan_mall_order_goods g ON o.order_sn = g.order_id
+    LEFT JOIN cskaoyan_mall_groupon gr on o.order_sn = gr.order_id
+    WHERE o.order_status IN(401,402)
+  </select>
+
+  <!--<insert id="submitOrders">
+    <selectKey resultType="int" keyProperty="order.id" keyColumn="id">
+      select order_sn as id from cskaoyan_mall_order
+    </selectKey>
+    insert into cskaoyan_mall_order(user_id, order_sn,
+    order_status, consignee, mobile,
+    address, message, goods_price,
+    freight_price, coupon_price, integral_price,
+    groupon_price, order_price, actual_price,
+    pay_id, pay_time, ship_sn,
+    ship_channel, ship_time, confirm_time,
+    comments, end_time, add_time,
+    update_time, deleted)
+    values ()
+  </insert>-->
+  <update id="updateOrderStatusCly">
+    update cskaoyan_mall_order set order_status=102 where id=#{id}
+  </update>
 </mapper>

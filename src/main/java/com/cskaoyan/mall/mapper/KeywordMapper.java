@@ -4,6 +4,7 @@ import com.cskaoyan.mall.bean.Keyword;
 import com.cskaoyan.mall.bean.KeywordExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 
 public interface KeywordMapper {
     long countByExample(KeywordExample example);
@@ -27,4 +28,9 @@ public interface KeywordMapper {
     int updateByPrimaryKeySelective(Keyword record);
 
     int updateByPrimaryKey(Keyword record);
+
+    @Select("select * from cskaoyan_mall_keyword where is_default = 1")
+    Keyword queryDefaultKeyword();
+    @Select("select * from cskaoyan_mall_keyword where is_hot = 1")
+    List<Keyword> queryHotKeywordList();
 }

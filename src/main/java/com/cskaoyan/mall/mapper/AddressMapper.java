@@ -4,6 +4,7 @@ import com.cskaoyan.mall.bean.Address;
 import com.cskaoyan.mall.bean.AddressExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Update;
 
 public interface AddressMapper {
     long countByExample(AddressExample example);
@@ -27,4 +28,14 @@ public interface AddressMapper {
     int updateByPrimaryKeySelective(Address record);
 
     int updateByPrimaryKey(Address record);
+
+    int updateAddressById(@Param("address") Address address);
+
+    @Update("update cskaoyan_mall_address set deleted = 1 where id = #{id}")
+    int setDeletedTrue(@Param("id") int id);
+
+    List<Address> selectExistByPrimaryKey(@Param("userId") int userId);
+
+    @Update("update cskaoyan_mall_address set is_default = 0 where user_id = #{userId} and id != #{id}")
+    int setDefault(@Param("id") int id, @Param("userId") int userId);
 }

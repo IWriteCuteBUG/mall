@@ -1,5 +1,6 @@
 server:
   port: 80
+  address: 0.0.0.0
 spring:
   datasource:
     password: 123456
@@ -16,10 +17,18 @@ logging:
       cskaoyan:
         mall:
           mapper: debug
-
 pagehelper:
   helper-dialect: mysql
 mybatis:
   type-handlers-package: com.cskaoyan.mall.mybatis
-
-
+mall:
+  aliyun:
+    access-key-id: LTAI4Fr5gfYhcVjLMqeRGbuT
+    access-secret: IrkcHu6dZyrjPZRushgO76P5392HJ1
+    oss:
+      bucket: cskaoyan
+      end-point: oss-cn-beijing.aliyuncs.com
+    sms:
+      region-id: cn-hangzhou
+      template-code: SMS_173765187
+      sign-name: 王道训练营
