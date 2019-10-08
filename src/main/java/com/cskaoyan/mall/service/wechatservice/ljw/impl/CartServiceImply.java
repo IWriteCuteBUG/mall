@@ -52,27 +52,26 @@ public class CartServiceImply implements CartService {
         CartTotal cartTotal = (CartTotal) map.get("cartTotal");
         List<Cart> carts = (List<Cart>) map.get("cartList");
         //更新数据库购物车中的checked字段
-        for (int prductsid : checkedCarts.getProductIds()) {
-            for (Cart cart : carts) {
-                if (cart.getProductId() == prductsid) {
-                    boolean checked = checkedCarts.getIsChecked() == 1;
-                    //更改bean的check字段
-                    cart.setChecked(checked);
-                    //更改数据库中的check字段
-                    cartMapper.updateChecked(checked, cart.getId());
-                }
-            }
-        }
-        //获取新的cartTotal
-        CartTotal newcartTotal = getCartTotal(carts);
-        //将新的cartTotal传进Date（map）
-        map.put("cartTotal", newcartTotal);
-        return ReturnUtils.ok(map, "获取成功");
-    }
+     for (int  prductsid:checkedCarts.getProductIds()){
+         for (Cart cart:carts){
+             if (cart.getProductId()==prductsid){
+             boolean checked=    checkedCarts.getIsChecked()==1;
+             //更改bean的check字段
+                 cart.setChecked(checked);
+                 //更改数据库中的check字段
+                 cartMapper.updateChecked(checked, cart.getId());
+             }
+         }
+     }
+     //获取新的cartTotal
+       CartTotal newcartTotal=  getCartTotal(carts);
+     //将新的cartTotal传进Date（map）
+        map.put("cartTotal",newcartTotal);
+          return  ReturnUtils.ok(map,"获取成功");
+          }
 
-    @Autowired
-    GoodsMapper goodsMapper;
-
+          @Autowired
+          GoodsMapper goodsMapper;
     //添加购物车
     @Override
     public BaseRespVo addCart(Cart cart, int userid) {
@@ -130,7 +129,7 @@ public class CartServiceImply implements CartService {
     }
 
     @Override
-    public BaseRespVo fastadd(Cart cart) {
+    public BaseRespVo fastadd (Cart cart) {
         int userid = 1;
         Goods goods = goodsMapper.selectByPrimaryKey(cart.getGoodsId());
         cart.setAddTime(new Date());
@@ -139,8 +138,10 @@ public class CartServiceImply implements CartService {
         newcart.setGoodsName(goods.getName());
         newcart.setUserId(userid);
         newcart.setChecked(true);
+
         //设置价格
         newcart.setPrice(goods.getCounterPrice());
+        newcart.setSpecifications(goodsProductMapper.selectSpec(cart.getProductId()));
         cartMapper.insert(newcart);
         System.out.println("id是" + newcart.getId());
         return ReturnUtils.ok(newcart.getId(), "fanstadd成功");
@@ -291,6 +292,15 @@ public class CartServiceImply implements CartService {
         System.out.println(checkoutBean);
         System.out.println(111);
         return ReturnUtils.ok(checkoutBean, "ok");
+    }
+
+    @Override
+    public BaseRespVo addressList(int userid) {
+        AddressExample addressExample=new AddressExample();
+        AddressExample.Criteria criteria=addressExample.createCriteria();
+        criteria.andUserIdEqualTo(userid);
+     List<Address> address=   addressMapper.selectByExample(addressExample);
+        return ReturnUtils.ok(address,"ok");
     }
 
 

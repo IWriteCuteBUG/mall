@@ -1,5 +1,6 @@
 server:
   port: 80
+  address: 0.0.0.0
 spring:
   datasource:
     password: 123456
@@ -16,7 +17,6 @@ logging:
       cskaoyan:
         mall:
           mapper: debug
-
 pagehelper:
   helper-dialect: mysql
 mybatis:

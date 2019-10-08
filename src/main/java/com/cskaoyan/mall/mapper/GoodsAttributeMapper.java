@@ -4,6 +4,7 @@ import com.cskaoyan.mall.bean.GoodsAttribute;
 import com.cskaoyan.mall.bean.GoodsAttributeExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Update;
 
 public interface GoodsAttributeMapper {
     long countByExample(GoodsAttributeExample example);
@@ -27,4 +28,7 @@ public interface GoodsAttributeMapper {
     int updateByPrimaryKeySelective(GoodsAttribute record);
 
     int updateByPrimaryKey(GoodsAttribute record);
+
+    @Update("update cskaoyan_mall_goods_attribute set deleted=#{flag} where goods_id=#{goodsId}")
+    void deleteByLogic(@Param("goodsId") Integer id, @Param("flag") boolean b);
 }

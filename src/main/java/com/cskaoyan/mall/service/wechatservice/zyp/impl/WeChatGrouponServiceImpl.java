@@ -8,7 +8,9 @@ import com.cskaoyan.mall.utils.wechatutils.zyp.OrdersStatusUtils;
 import com.cskaoyan.mall.vo.wechatvo.zyp.*;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+
 import org.apache.shiro.SecurityUtils;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -33,8 +35,10 @@ public class WeChatGrouponServiceImpl implements WechatGrouponService {
 
     @Override
     public BaseRespVo queryGrouponByShowType(int showType) {
+
 //        int userId = 1;
         Integer userId = (Integer) SecurityUtils.getSubject().getSession().getAttribute("userId");
+
 
         GrouponExample grouponExample = new GrouponExample();
         GrouponExample.Criteria criteria = grouponExample.createCriteria();
@@ -62,7 +66,9 @@ public class WeChatGrouponServiceImpl implements WechatGrouponService {
             myGrounpVo.setActualPrice(order.getActualPrice());
 //            参与团购的人数
             int joinerCount = grouponMapper.selectJoinerCountByRuleId(groupon.getRulesId());
+
             myGrounpVo.setJoinerCount(joinerCount);
+
 //            商品列表
             OrderGoodsExample orderGoodsExample = new OrderGoodsExample();
             orderGoodsExample.createCriteria().andOrderIdEqualTo(orderId);
@@ -74,10 +80,12 @@ public class WeChatGrouponServiceImpl implements WechatGrouponService {
 //            id
             myGrounpVo.setId(groupon.getId());
             if (showType == 0) {
+
                 myGrounpVo.setIsCreator(true);
             }
             if (showType == 1) {
                 myGrounpVo.setIsCreator(false);
+
             }
 //            未完成
             HandleOption handleOption = HandleOptionUtils.getHandleOption();
@@ -103,6 +111,7 @@ public class WeChatGrouponServiceImpl implements WechatGrouponService {
         grouponDetailVo.setCreator(creator);
         grouponDetailVo.setGroupon(groupon);
 //      团购者信息
+
         GrouponExample grouponExample = new GrouponExample();
         grouponExample.createCriteria().andGrouponIdEqualTo(groupon.getGrouponId()).andRulesIdEqualTo(groupon.getRulesId());
         List<Groupon> groupons = grouponMapper.selectByExample(grouponExample);
@@ -121,6 +130,7 @@ public class WeChatGrouponServiceImpl implements WechatGrouponService {
         GrouponGoodInfo grouponGoodInfo = new GrouponGoodInfo();
         Order order = orderMapper.selectByPrimaryKey(groupon.getOrderId());
 //        Order order = orderMapper.queryGrouponGoodInfosBy(groupon.getOrderId());
+
         grouponGoodInfo.setOrderSn(order.getOrderSn());
         grouponGoodInfo.setConsignee(order.getConsignee());
         grouponGoodInfo.setAddress(order.getAddress());
@@ -135,10 +145,12 @@ public class WeChatGrouponServiceImpl implements WechatGrouponService {
         grouponDetailVo.setOrderInfo(grouponGoodInfo);
 
 //      商品详情
+
 //        List<OrderGoods> orderGoods = orderGoodsMapper.queryOrdersGoodsByOrderId(groupon.getOrderId());
         OrderGoodsExample orderGoodsExample = new OrderGoodsExample();
         orderGoodsExample.createCriteria().andOrderIdEqualTo(groupon.getOrderId());
         List<OrderGoods> orderGoods = orderGoodsMapper.selectByExample(orderGoodsExample);
+
         grouponDetailVo.setOrderGoods(orderGoods);
 
 //      团购规则

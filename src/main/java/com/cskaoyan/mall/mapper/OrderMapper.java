@@ -60,6 +60,7 @@ public interface OrderMapper {
     List<OrderVo> queryOrdersList4();
 
 
+
     //order状态码更改为已发货
     @Update("update cskaoyan_mall_order set order_status = 201 where id = #{id}")
     void updateOrderStatus(@Param("id") int id);
@@ -68,5 +69,6 @@ public interface OrderMapper {
     int submitOrders(@Param("order") Order order);
 
     void updateOrderStatusCly(@Param("id") int orderId);
+
 
 }
