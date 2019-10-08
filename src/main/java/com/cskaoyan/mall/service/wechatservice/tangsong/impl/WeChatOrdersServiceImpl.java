@@ -136,10 +136,6 @@ public class WeChatOrdersServiceImpl implements WeChatOrdersService {
         }
 
         //获取团购减免
-<<<<<<< HEAD
-
-=======
->>>>>>> 56a98824edaf4eaad72f5ff5ad77ca216b246aba
         int grouponRulesId = submitOrders.getGrouponRulesId();
 
         BigDecimal grouponDescount;
@@ -229,12 +225,6 @@ public class WeChatOrdersServiceImpl implements WeChatOrdersService {
         }
 
 //        以上为赵宇鹏的代码
-
-
-
-
-
-
         //判斷
         int cartId = submitOrders.getCartId();
         if (cartId != 0) {
