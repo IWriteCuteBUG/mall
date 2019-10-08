@@ -1,5 +1,5 @@
 package com.cskaoyan.mall.service.adminservice.admin;
-
+import com.cskaoyan.mall.util.utiLJW.PicDeleteUtil;
 import com.cskaoyan.mall.bean.*;
 import com.cskaoyan.mall.exception.InsertException;
 import com.cskaoyan.mall.mapper.*;
@@ -267,7 +267,15 @@ public class GoodsServiceImpl implements GoodsService {
     @Override
     @Transactional
     public void deleteGood(Integer id) {
+        //获取商品信息
+     Goods goods= goodsMapper.selectByPrimaryKey(id);
+     //跨域删除图片
+        PicDeleteUtil.redict(goods.getPicUrl());
+
+
         goodsMapper.deleteByPrimaryKey(id);
+
+
 
         CommentExample commentExample = new CommentExample();
         CommentExample.Criteria criteria = commentExample.createCriteria();

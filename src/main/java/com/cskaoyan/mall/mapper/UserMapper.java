@@ -40,4 +40,9 @@ public interface UserMapper {
 
     @Select("select id from cskaoyan_mall_user where username = #{username}")
     String queryIdByUsername(String username);
+
+    @Select("select  username from  cskaoyan_mall_user where id=#{userid}")
+    String queryNameById(int userid);
+    @Select("select  mobile from  cskaoyan_mall_user where id=#{userid}")
+    String queryMobileById(int userid);
 }

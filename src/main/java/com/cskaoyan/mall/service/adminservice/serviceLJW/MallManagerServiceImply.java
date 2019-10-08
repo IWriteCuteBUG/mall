@@ -66,8 +66,28 @@ public class MallManagerServiceImply implements MallManagerService {
         if (brandEqual(putbrand, brand)) {
             return null;
         }
-        brandMapper.updateByPrimaryKey(putbrand);
+        brandMapper.updateByPrimaryKeySelective(putbrand);
         return brand;
+    }
+    //处理退款申请
+
+
+
+
+  //系统发货
+    @Override
+    public BaseRespVo shipOrder(Ship ship) {
+        Order order=new Order();
+        order.setId(ship.getOrderId());
+        order.setOrderStatus(Short.valueOf("301"));
+        order.setShipSn(ship.getShipSn());
+        order.setShipChannel(ship.getShipChannel());
+        order.setShipTime(new Date());
+
+        orderMapper.updateByPrimaryKeySelective(order);
+
+
+        return ReturnUtils.ok(orderMapper.selectByPrimaryKey(ship.getOrderId()),"发货成功");
     }
 
     @Autowired
@@ -247,7 +267,7 @@ public class MallManagerServiceImply implements MallManagerService {
     @Override
     public Issue updateIssue(Issue issue) {
         issue.setUpdateTime(new Date());
-        issueMapper.updateByPrimaryKey(issue);
+        issueMapper.updateByPrimaryKeySelective(issue);
 
         return issue;
     }
@@ -302,7 +322,7 @@ public class MallManagerServiceImply implements MallManagerService {
 
     @Override
     public Keyword updateKeyword(Keyword keyword) {
-        keywordMapper.updateByPrimaryKey(keyword);
+        keywordMapper.updateByPrimaryKeySelective(keyword);
         return keyword;
     }
 
@@ -317,7 +337,7 @@ public class MallManagerServiceImply implements MallManagerService {
     @Override
     public Category updateCategory(Category category) {
         category.setUpdateTime(new Date());
-        categoryMapper.updateByPrimaryKey(category);
+        categoryMapper.updateByPrimaryKeySelective(category);
         return category;
     }
 
@@ -343,5 +363,15 @@ public class MallManagerServiceImply implements MallManagerService {
 
 
         return new OrderDetail(orderGoods, user, order);
+    }
+
+//处理退款申请
+    public BaseRespVo orderRefund(Refund refund) {
+        Order order=new Order();
+        order.setId(refund.getOrderId());
+        order.setOrderStatus(Short.valueOf("203"));
+        orderMapper.updateByPrimaryKeySelective(order);
+        return ReturnUtils.ok(orderMapper.selectByPrimaryKey(refund.getOrderId()),"退款成功");
+
     }
 }

@@ -3,9 +3,7 @@ package com.cskaoyan.mall.controller.admincontroller.controllerLJW;
 import com.cskaoyan.mall.bean.*;
 
 import com.cskaoyan.mall.util.utiLJW.PicDeleteUtil;
-import com.cskaoyan.mall.vo.adminvo.voLJW.BrandManufacturer;
-import com.cskaoyan.mall.vo.adminvo.voLJW.OrderDetail;
-import com.cskaoyan.mall.vo.adminvo.voLJW.ReturnData;
+import com.cskaoyan.mall.vo.adminvo.voLJW.*;
 import com.cskaoyan.mall.service.adminservice.serviceLJW.MallManagerServiceImply;
 import com.cskaoyan.mall.util.utiLJW.ReturnUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -138,8 +136,20 @@ public class MallManager {
     public BaseRespVo getOrderDetail(int id) {
         OrderDetail orderDetail = mallManager.getOrderDetail(id);
         return ReturnUtils.ok(orderDetail, "成功");
+
+    }
+    //系统发货
+    @RequestMapping("admin/order/ship")
+    public  BaseRespVo shipOrder(@RequestBody Ship ship){
+      return   mallManager.shipOrder(ship);
     }
 
+//处理退款申请
+    @RequestMapping("admin/order/refund")
+    public  BaseRespVo orderRefund(@RequestBody Refund refund){
+     return    mallManager.orderRefund(refund);
+
+    }
 
     //获取通用问题
     @RequestMapping("admin/issue/list")
