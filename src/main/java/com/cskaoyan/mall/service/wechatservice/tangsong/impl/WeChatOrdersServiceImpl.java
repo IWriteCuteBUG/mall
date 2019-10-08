@@ -226,12 +226,6 @@ public class WeChatOrdersServiceImpl implements WeChatOrdersService {
         }
 
 //        以上为赵宇鹏的代码
-
-
-
-
-
-
         //判斷
         int cartId = submitOrders.getCartId();
         if (cartId != 0) {
