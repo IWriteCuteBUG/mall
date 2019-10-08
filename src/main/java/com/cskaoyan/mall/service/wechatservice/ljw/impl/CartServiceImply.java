@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.cskaoyan.mall.util.utiLJW.ReturnUtils;
 
+import java.lang.System;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.HashMap;
@@ -59,7 +60,7 @@ public class CartServiceImply implements CartService {
              //更改bean的check字段
                  cart.setChecked(checked);
                  //更改数据库中的check字段
-                 cartMapper.updateChecked(checked);
+                 cartMapper.updateChecked(checked, cart.getId());
              }
          }
      }
