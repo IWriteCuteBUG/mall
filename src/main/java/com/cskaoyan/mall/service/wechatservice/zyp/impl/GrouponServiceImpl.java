@@ -27,11 +27,11 @@ public class GrouponServiceImpl {
 ////        int grouponLinkId = 0;
 //        if (grouponRulesId != 0) {
 //
-//<<<<<<< HEAD
+
 //            *//*GrouponRulesExample grouponRulesExample = new GrouponRulesExample();
 //            grouponRulesExample.createCriteria().andIdEqualTo(grouponRulesId);
 //            List<GrouponRules> grouponRules = grouponRulesMapper.selectByExample(grouponRulesExample);*//*
-//=======
+//
 //            /*GrouponRulesExample grouponRulesExample = new GrouponRulesExample();
 //            grouponRulesExample.createCriteria().andIdEqualTo(grouponRulesId);
 //            List<GrouponRules> grouponRules = grouponRulesMapper.selectByExample(grouponRulesExample);*/
