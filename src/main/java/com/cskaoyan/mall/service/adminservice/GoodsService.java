@@ -6,6 +6,8 @@ import com.cskaoyan.mall.bean.Goods;
 import com.cskaoyan.mall.exception.InsertException;
 import com.cskaoyan.mall.vo.adminvo.goodsmanagervo.*;
 
+import java.util.List;
+
 public interface GoodsService {
     BaseRespVo<GoodsListVo<Goods>> queryGoodsList(ForQueryGoods forQueryGoods);
 
@@ -32,4 +34,6 @@ public interface GoodsService {
     BaseRespVo queryRelatedGoodsListByGoodsId(int goodsId);
 
     BaseRespVo queryGoodsListByBrandId(int brandId, int page, int size);
+
+    List<Goods> queryGoodsByPage(String keyword, int page, int size, String sort, String order, int categoryId);
 }

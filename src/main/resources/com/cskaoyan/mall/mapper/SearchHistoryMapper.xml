@@ -240,4 +240,10 @@
       deleted = #{deleted,jdbcType=BIT}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <insert id="addSearchHistory" parameterType="com.cskaoyan.mall.bean.SearchHistory">
+    insert into cskaoyan_mall_search_history (user_id, keyword, `from`, add_time, update_time)
+    values (#{searchHistory.userId,jdbcType=INTEGER}, #{searchHistory.keyword,jdbcType=VARCHAR},
+      #{searchHistory.from,jdbcType=VARCHAR}, #{searchHistory.addTime,jdbcType=TIMESTAMP}, #{searchHistory.updateTime,jdbcType=TIMESTAMP})
+  </insert>
 </mapper>

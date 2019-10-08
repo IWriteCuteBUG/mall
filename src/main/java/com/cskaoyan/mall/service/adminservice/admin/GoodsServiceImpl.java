@@ -481,4 +481,19 @@ public class GoodsServiceImpl implements GoodsService {
         map.put("goodsList",goodsList);
         return BaseRespVo.ok(map);
     }
+
+    @Override
+    public List<Goods> queryGoodsByPage(String keyword, int page, int size, String sort, String order, int categoryId) {
+        PageHelper.startPage(page, size);
+        GoodsExample example = new GoodsExample();
+        String sortOrder = sort + " " + order;
+        example.setOrderByClause(sortOrder);
+        List<Goods> goodsList = null;
+        if(!(keyword == null || "".equals(keyword.trim()))){
+            GoodsExample.Criteria criteria = example.createCriteria();
+            criteria.andNameLike("%" + keyword + "%");
+        }
+        goodsList = goodsMapper.selectByExample(example);
+        return goodsList;
+    }
 }
