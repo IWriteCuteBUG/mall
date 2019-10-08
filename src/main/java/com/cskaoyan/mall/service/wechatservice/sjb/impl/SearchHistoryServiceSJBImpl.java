@@ -21,4 +21,9 @@ public class SearchHistoryServiceSJBImpl implements SearchHistoryServiceSJB {
         criteria.andUserIdEqualTo(userId);
         return searchHistoryMapper.selectByExample(example);
     }
+
+    @Override
+    public int addSearchHistory(SearchHistory searchHistory) {
+        return searchHistoryMapper.addSearchHistory(searchHistory);
+    }
 }

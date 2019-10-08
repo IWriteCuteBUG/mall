@@ -305,6 +305,6 @@
   </update>
   <insert id="insertChangeCoupon">
     insert into cskaoyan_mall_coupon_user (user_id,coupon_id,status,start_time,end_time,add_time,update_time,deleted)
-    values (userId,coupon.id,coupon.status,coupon.startTime,coupon.endTime,mydate,mydate,del)
+    values (#{userId},#{coupon.id},#{coupon.status},#{coupon.startTime},#{coupon.endTime},#{mydate},#{mydate},#{del})
   </insert>
 </mapper>

@@ -57,7 +57,8 @@ public class ClyOrderServiceImpl implements ClyOrderService {
 
     @Override
     public void cancelOrder(int orderId) {
-        orderMapper.updateOrderStatusCly(orderId);
+        String s = String.valueOf(orderId);
+        orderMapper.updateOrderStatusCly(s);
         OrderGoodsExample orderGoodsExample = new OrderGoodsExample();
         OrderGoodsExample.Criteria criteria = orderGoodsExample.createCriteria();
         criteria.andOrderIdEqualTo(orderId);

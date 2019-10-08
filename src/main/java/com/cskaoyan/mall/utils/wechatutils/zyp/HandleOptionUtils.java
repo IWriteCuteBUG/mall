@@ -6,9 +6,11 @@ public class HandleOptionUtils {
 
     public static HandleOption getHandleOption() {
         HandleOption handleOption = new HandleOption();
+
 //        订单是否完成
         handleOption.setCancel(false);
 //
+
         handleOption.setDelete(false);
         handleOption.setPay(true);
         handleOption.setComment(false);

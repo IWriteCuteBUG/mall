@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -23,7 +25,8 @@ public class WeChatOrdersController {
     }
 
     @RequestMapping("order/submit")
-    public BaseRespVo submitOrder(SubmitOrders submitOrders){
-        return weChatOrdersService.submitOrder(submitOrders);
+    public BaseRespVo submitOrder(@RequestBody SubmitOrders submitOrders){
+        BaseRespVo baseRespVo = weChatOrdersService.submitOrder(submitOrders);
+        return baseRespVo;
     }
 }

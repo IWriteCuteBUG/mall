@@ -61,6 +61,7 @@ public class WeChatStorageUploadServiceImpl implements WeChatStorageUploadServic
         return BaseRespVo.baseRespOk(storage);
     }
 
+
     @Override
     public BaseRespVo goodsCount(Integer id) {
 //        int userId = 1;
@@ -74,4 +75,5 @@ public class WeChatStorageUploadServiceImpl implements WeChatStorageUploadServic
         int size = carts.size();
         return BaseRespVo.ok(size);
     }
+
 }

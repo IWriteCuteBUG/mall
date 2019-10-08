@@ -27,4 +27,6 @@ public interface SearchHistoryMapper {
     int updateByPrimaryKeySelective(SearchHistory record);
 
     int updateByPrimaryKey(SearchHistory record);
+
+    int addSearchHistory(@Param("searchHistory") SearchHistory searchHistory);
 }

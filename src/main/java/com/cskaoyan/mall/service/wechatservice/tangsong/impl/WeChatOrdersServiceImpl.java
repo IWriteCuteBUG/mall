@@ -3,9 +3,11 @@ package com.cskaoyan.mall.service.wechatservice.tangsong.impl;
 import com.cskaoyan.mall.bean.*;
 import com.cskaoyan.mall.mapper.*;
 import com.cskaoyan.mall.service.wechatservice.tangsong.WeChatOrdersService;
+import com.cskaoyan.mall.utils.wechatutils.ljw.AssignUtils;
 import com.cskaoyan.mall.utils.wechatutils.tangsong.OptionUtils;
 import com.cskaoyan.mall.vo.wechatvo.tongsong.OrderVo;
 import com.cskaoyan.mall.vo.wechatvo.tongsong.OrderVoForReturn;
+import org.apache.shiro.crypto.hash.Hash;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
@@ -40,6 +42,12 @@ public class WeChatOrdersServiceImpl implements WeChatOrdersService {
 
     @Autowired
     GoodsProductMapper goodsProductMapper;
+
+    @Autowired
+    UserMapper userMapper;
+
+    @Autowired
+    GoodsMapper goodsMapper;
 
     @Override
     public BaseRespVo queryOrdersList(int showType,int page,int size) {
@@ -100,79 +108,239 @@ public class WeChatOrdersServiceImpl implements WeChatOrdersService {
     @Transactional(propagation = Propagation.REQUIRED,isolation = Isolation.DEFAULT)
     @Override
     public BaseRespVo submitOrder(SubmitOrders submitOrders) {
-        //先取得地址
+        //先取得地址id
         int addressId = submitOrders.getAddressId();
         AddressExample addressExample = new AddressExample();
-        addressExample.createCriteria().andAreaIdEqualTo(submitOrders.getAddressId());
+        addressExample.createCriteria().andIdEqualTo(addressId);
         List<Address> addresses = addressMapper.selectByExample(addressExample);
+        //獲取到地址
         String address = addresses.get(0).getAddress();
         //获取优惠券减免
-        CouponExample couponExample = new CouponExample();
-        couponExample.createCriteria().andIdEqualTo(submitOrders.getCouponId());
-        List<Coupon> coupons = couponMapper.selectByExample(couponExample);
-        BigDecimal discount = coupons.get(0).getDiscount();
-        //获取团购减免
-        GrouponRulesExample grouponRulesExample = new GrouponRulesExample();
-        grouponRulesExample.createCriteria().andGoodsIdEqualTo(submitOrders.getGrouponRulesI());
-        List<GrouponRules> grouponRules = grouponRulesMapper.selectByExample(grouponRulesExample);
-        BigDecimal grouponDescount = grouponRules.get(0).getDiscount();
-        //从购物车取到商品数量
-        CartExample cartExample = new CartExample();
-        cartExample.createCriteria().andGoodsIdEqualTo(submitOrders.getCartId());
-        List<Cart> carts = cartMapper.selectByExample(cartExample);
-        Cart cart = carts.get(0);
-        int number = cart.getNumber();
-        String specifications = cart.getSpecifications();
-        Integer goodsId = cart.getGoodsId();
-        //减去库存
-        GoodsProduct goodsProduct = new GoodsProduct();
-        SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String addTime = format1.format(new Date());
-        Date parse =null;
-        try {
-            parse = format1.parse(addTime);
-        } catch (ParseException e) {
-            e.printStackTrace();
+        //先判斷是否有優惠券
+        int couponId = submitOrders.getCouponId();
+        BigDecimal discount;
+        if (couponId != 0) {
+            CouponExample couponExample = new CouponExample();
+            couponExample.createCriteria().andIdEqualTo(submitOrders.getCouponId());
+            List<Coupon> coupons = couponMapper.selectByExample(couponExample);
+            discount = coupons.get(0).getDiscount();
+        }else {
+            discount = BigDecimal.valueOf(0);
         }
-        goodsProduct.setAddTime(parse);
-        goodsProduct.setDeleted(false);
-        goodsProduct.setNumber(number);
-        goodsProduct.setUpdateTime(parse);
-        GoodsProductExample goodsProductExample = new GoodsProductExample();
-        goodsProductExample.createCriteria().andGoodsIdEqualTo(goodsId).andSpecificationsEqualTo(specifications);
-        goodsProductMapper.updateByExample(goodsProduct, goodsProductExample);
-        //提交订单
+
+        //获取团购减免
+        int grouponRulesI = submitOrders.getGrouponRulesI();
+        BigDecimal grouponDescount;
+        if (grouponRulesI != 0) {
+            GrouponRulesExample grouponRulesExample = new GrouponRulesExample();
+            grouponRulesExample.createCriteria().andGoodsIdEqualTo(submitOrders.getGrouponRulesI());
+            List<GrouponRules> grouponRules = grouponRulesMapper.selectByExample(grouponRulesExample);
+            grouponDescount = grouponRules.get(0).getDiscount();
+        }else {
+            grouponDescount = BigDecimal.valueOf(0);
+        }
+        //生成訂單編號
         SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHHmmss");
         Date date = new Date();
-        String orderId = format.format(date);
-        Order order = new Order();
-        order.setOrderSn(orderId);
-        order.setAddress(address);
-        order.setAddTime(parse);
-        order.setUpdateTime(parse);
-        order.setMessage(submitOrders.getMessage());
-        order.setGrouponPrice(grouponDescount);
-        order.setCouponPrice(discount);
-        order.setOrderStatus((short) 101);
-        BigDecimal price = cart.getPrice();
-        BigDecimal actualPrice = price.subtract(discount).subtract(grouponDescount);
-        order.setActualPrice(actualPrice);
-        orderMapper.insert(order);
-        //插入GoodsAndORDER表
-        //查询商品信息
-        GoodsProduct goodsProduct1 = new GoodsProduct();
-        int number1 = cart.getNumber();
-        goodsProduct1.setNumber(number1);
-        goodsProduct1.setUpdateTime(parse);
-        goodsProduct1.setAddTime(parse);
-        goodsProduct1.setPrice(actualPrice);
-        goodsProduct1.setUrl(cart.getPicUrl());
-        String[] strings = new String[]{specifications};
-        goodsProduct1.setSpecifications(strings);
-        goodsProduct1.setDeleted(false);
-        goodsProductMapper.insert(goodsProduct1);
-        //删除购物车
-        cartMapper.deleteByPrimaryKey(submitOrders.getCartId());
-        return BaseRespVo.ok(orderId);
+        String dateString = format.format(date);
+        String orderId = dateString.substring(4);
+
+        //判斷
+        if (addressId != 0) {
+            //从购物车取到商品数量
+            CartExample cartExample = new CartExample();
+            cartExample.createCriteria().andIdEqualTo(submitOrders.getCartId());
+            List<Cart> carts = cartMapper.selectByExample(cartExample);
+            Cart cart = carts.get(0);
+            int number = cart.getNumber();
+            String specifications = cart.getSpecifications();
+            Integer goodsId = cart.getGoodsId();
+            //减去库存
+            GoodsProduct goodsProduct = new GoodsProduct();
+            SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            String addTime = format1.format(new Date());
+            Date parse = null;
+            try {
+                parse = format1.parse(addTime);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            goodsProduct.setAddTime(parse);
+            goodsProduct.setDeleted(false);
+            goodsProduct.setNumber(number);
+            goodsProduct.setUpdateTime(parse);
+            GoodsProductExample goodsProductExample = new GoodsProductExample();
+            goodsProductExample.createCriteria().andGoodsIdEqualTo(goodsId).andSpecificationsEqualTo(specifications);
+            /*List<GoodsProduct> productList1 = goodsProductMapper.selectByExample(goodsProductExample);
+            GoodsProduct goodsProduct2 = productList1.get(0);
+            Integer id1 = goodsProduct2.getId();
+            goodsProduct.setId(id1);*/
+            goodsProductMapper.updateByExampleSelective(goodsProduct,goodsProductExample);
+            //提交订单
+            Order order = new Order();
+            order.setOrderSn(orderId);
+            order.setAddress(address);
+            order.setAddTime(parse);
+            order.setUpdateTime(parse);
+            order.setMessage(submitOrders.getMessage());
+            order.setGrouponPrice(grouponDescount);
+            order.setCouponPrice(discount);
+            order.setOrderStatus((short) 101);
+            Integer userId = cart.getUserId();
+            UserExample userExample = new UserExample();
+            userExample.createCriteria().andIdEqualTo(userId);
+            List<User> users = userMapper.selectByExample(userExample);
+            User user = users.get(0);
+            order.setUserId(userId);
+            order.setConsignee(user.getUsername());
+            order.setMobile(user.getMobile());
+            //查詢商品信息
+
+            BigDecimal price = cart.getPrice();
+            BigDecimal actualPrice = price.subtract(discount).subtract(grouponDescount);
+            order.setActualPrice(actualPrice);
+            GoodsExample goodsExample = new GoodsExample();
+            goodsExample.createCriteria().andIdEqualTo(goodsId);
+            List<Goods> goodsList = goodsMapper.selectByExample(goodsExample);
+            //查询商品信息
+            Goods goods = goodsList.get(0);
+            order.setGoodsPrice(goods.getCounterPrice());
+            order.setFreightPrice(BigDecimal.valueOf(0));
+            order.setIntegralPrice(BigDecimal.valueOf(0));
+            BigDecimal orderPrice = cart.getPrice().add(grouponDescount).add(discount);
+            order.setOrderPrice(orderPrice);
+            orderMapper.insert(order);
+            //插入GoodsAndORDER表
+            OrderGoods orderGoods = new OrderGoods();
+            orderGoods.setAddTime(parse);
+            orderGoods.setComment(0);
+            int i = Integer.parseInt(orderId);
+            orderGoods.setOrderId(i);
+            orderGoods.setGoodsName(goods.getName());
+            orderGoods.setGoodsId(goodsId);
+            String s = String.valueOf(goodsId);
+            orderGoods.setGoodsSn(s);
+            orderGoods.setNumber(cart.getNumber());
+            GoodsProductExample goodsProductExample1 = new GoodsProductExample();
+            goodsProductExample1.createCriteria().andSpecificationsEqualTo(specifications).andGoodsIdEqualTo(goodsId);
+            List<GoodsProduct> productList = goodsProductMapper.selectByExample(goodsProductExample1);
+            GoodsProduct goodsProduct1 = productList.get(0);
+            Integer id = goodsProduct1.getId();
+            orderGoods.setProductId(id);
+            String[] strings = new String[]{specifications};
+            orderGoods.setSpecifications(strings);
+            orderGoods.setPrice(cart.getPrice());
+            orderGoods.setPicUrl(cart.getPicUrl());
+            orderGoods.setAddTime(parse);
+            orderGoods.setUpdateTime(parse);
+            //删除购物车
+            cartMapper.deleteByPrimaryKey(submitOrders.getCartId());
+            HashMap<String, Object> map = new HashMap<>();
+            map.put("orderId",orderId);
+            BaseRespVo ok = BaseRespVo.ok(map);
+            return ok;
+        } else {
+            //設置訂單編號
+            CartExample cartExample = new CartExample();
+            cartExample.createCriteria().andCheckedEqualTo(true);
+            List<Cart> carts = cartMapper.selectByExample(cartExample);
+            for (Cart cart : carts) {
+                int number = cart.getNumber();
+                String specifications = cart.getSpecifications();
+                Integer goodsId = cart.getGoodsId();
+                //减去库存
+                GoodsProduct goodsProduct = new GoodsProduct();
+                SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                String addTime = format1.format(new Date());
+                Date parse = null;
+                try {
+                    parse = format1.parse(addTime);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                goodsProduct.setAddTime(parse);
+                goodsProduct.setDeleted(false);
+                goodsProduct.setNumber(number);
+                goodsProduct.setUpdateTime(parse);
+                GoodsProductExample goodsProductExample = new GoodsProductExample();
+                goodsProductExample.createCriteria().andGoodsIdEqualTo(goodsId).andSpecificationsEqualTo(specifications);
+                goodsProductMapper.updateByExampleSelective(goodsProduct,goodsProductExample);
+                //提交订单
+                Order order = new Order();
+                order.setOrderSn(orderId);
+                order.setAddress(address);
+                order.setAddTime(parse);
+                order.setUpdateTime(parse);
+                order.setMessage(submitOrders.getMessage());
+                order.setGrouponPrice(grouponDescount);
+                order.setCouponPrice(discount);
+                order.setOrderStatus((short) 101);
+                Integer userId = cart.getUserId();
+                UserExample userExample = new UserExample();
+                userExample.createCriteria().andIdEqualTo(userId);
+                List<User> users = userMapper.selectByExample(userExample);
+                User user = users.get(0);
+                order.setUserId(userId);
+                order.setConsignee(user.getUsername());
+                order.setMobile(user.getMobile());
+                //查詢商品信息
+
+                BigDecimal price = cart.getPrice();
+                BigDecimal actualPrice = price.subtract(discount).subtract(grouponDescount);
+                order.setActualPrice(actualPrice);
+                GoodsExample goodsExample = new GoodsExample();
+                goodsExample.createCriteria().andIdEqualTo(goodsId);
+                List<Goods> goodsList = goodsMapper.selectByExample(goodsExample);
+                //查询商品信息
+                Goods goods = goodsList.get(0);
+                order.setGoodsPrice(goods.getCounterPrice());
+                order.setFreightPrice(BigDecimal.valueOf(0));
+                order.setIntegralPrice(BigDecimal.valueOf(0));
+                BigDecimal orderPrice = cart.getPrice().add(grouponDescount).add(discount);
+                order.setOrderPrice(orderPrice);
+                orderMapper.insert(order);
+                //插入GoodsAndORDER表
+
+                /*GoodsProduct goodsProduct1 = new GoodsProduct();
+                int number1 = cart.getNumber();
+                goodsProduct1.setNumber(number1);
+                goodsProduct1.setUpdateTime(parse);
+                goodsProduct1.setAddTime(parse);
+                goodsProduct1.setPrice(actualPrice);
+                goodsProduct1.setUrl(cart.getPicUrl());
+                String[] strings = new String[]{specifications};
+                goodsProduct1.setSpecifications(strings);
+                goodsProduct1.setDeleted(false);
+                goodsProduct1.setGoodsId(goodsId);
+                goodsProductMapper.insert(goodsProduct1);*/
+                OrderGoods orderGoods = new OrderGoods();
+                orderGoods.setAddTime(parse);
+                orderGoods.setComment(0);
+                int i = Integer.parseInt(orderId);
+                orderGoods.setOrderId(i);
+                orderGoods.setGoodsName(goods.getName());
+                orderGoods.setGoodsId(goodsId);
+                String s = String.valueOf(goodsId);
+                orderGoods.setGoodsSn(s);
+                orderGoods.setNumber(cart.getNumber());
+                GoodsProductExample goodsProductExample1 = new GoodsProductExample();
+                goodsProductExample1.createCriteria().andSpecificationsEqualTo(specifications).andGoodsIdEqualTo(goodsId);
+                List<GoodsProduct> productList = goodsProductMapper.selectByExample(goodsProductExample1);
+                GoodsProduct goodsProduct1 = productList.get(0);
+                Integer id = goodsProduct1.getId();
+                orderGoods.setProductId(id);
+                String[] strings = new String[]{specifications};
+                orderGoods.setSpecifications(strings);
+                orderGoods.setPrice(cart.getPrice());
+                orderGoods.setPicUrl(cart.getPicUrl());
+                orderGoods.setAddTime(parse);
+                orderGoods.setUpdateTime(parse);
+                //删除购物车
+                cartMapper.deleteByPrimaryKey(submitOrders.getCartId());
+
+            }
+            BaseRespVo ok = BaseRespVo.ok(orderId);
+            return ok;
+        }
     }
 }

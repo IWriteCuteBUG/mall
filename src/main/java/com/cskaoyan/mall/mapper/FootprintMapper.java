@@ -32,4 +32,6 @@ public interface FootprintMapper {
 
 
     List<FootprintListToolVo> queryFootprintAndGoodsMultiById(@Param("userId") int userId);
+
+    int addFootprintWithoutId(@Param("footprint") Footprint footprint);
 }

@@ -59,7 +59,10 @@ public class loginServlet {
             request.setAttribute("user", user);
             System.out.println("微信用户信息：" + user);
             System.out.println(user);
-            response.sendRedirect("http://localhost:9528/#/dashboard");
+            if ("o_4rV1JjYgyw2aLD-nbwx0bd0T5Q".equals(user.getOpenid())){
+                response.sendRedirect("http://localhost:9528/#/dashboard");
+
+            }
 
 
         } catch (Exception e) {
