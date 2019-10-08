@@ -7,4 +7,6 @@ public interface WeChatOrdersService {
     BaseRespVo queryOrdersList(int showType,int page,int size);
 
     BaseRespVo submitOrder(SubmitOrders submitOrders);
+
+    BaseRespVo confirmOrder(int orderId);
 }
