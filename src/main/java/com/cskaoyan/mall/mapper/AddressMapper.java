@@ -38,4 +38,6 @@ public interface AddressMapper {
 
     @Update("update cskaoyan_mall_address set is_default = 0 where user_id = #{userId} and id != #{id}")
     int setDefault(@Param("id") int id, @Param("userId") int userId);
+
+    int insertAddressSJB(@Param("address") Address address);
 }

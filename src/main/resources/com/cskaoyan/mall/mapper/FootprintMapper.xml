@@ -230,4 +230,13 @@
     from cskaoyan_mall_footprint f left join cskaoyan_mall_goods g on f.goods_id = g.id
     where f.user_id = #{userId}
   </select>
+  <insert id="addFootprintWithoutId" parameterType="com.cskaoyan.mall.bean.Footprint">
+    insert into cskaoyan_mall_footprint (user_id, goods_id,
+      add_time, update_time, deleted
+      )
+    values (#{footprint.userId,jdbcType=INTEGER}, #{footprint.goodsId,jdbcType=INTEGER},
+      #{footprint.addTime,jdbcType=TIMESTAMP}, #{footprint.updateTime,jdbcType=TIMESTAMP}, #{footprint.deleted,jdbcType=BIT}
+      )
+  </insert>
+
 </mapper>

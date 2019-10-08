@@ -22,7 +22,7 @@ public class FootprintServiceSJBImpl implements FootprintServiceSJB {
 
     @Override
     public List<FootprintListToolVo> queryFootprintAndGoodsMultiById(int page, int size, int userId) {
-        PageHelper.startPage(page, size);
+        PageHelper.startPage(page, size, "f.update_time desc");
         return footprintMapper.queryFootprintAndGoodsMultiById(userId);
     }
 
@@ -33,5 +33,10 @@ public class FootprintServiceSJBImpl implements FootprintServiceSJB {
         FootprintExample.Criteria criteria = example.createCriteria();
         criteria.andUserIdEqualTo(userId);
         return (int) footprintMapper.countByExample(example);
+    }
+
+    @Override
+    public int addFootprintWithoutId(Footprint footprint) {
+        return footprintMapper.addFootprintWithoutId(footprint);
     }
 }

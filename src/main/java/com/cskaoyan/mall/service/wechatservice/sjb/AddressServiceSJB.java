@@ -12,4 +12,6 @@ public interface AddressServiceSJB {
     int addressDelete(int i);
 
     int updateAddressById(Address address);
+
+    int addAddress(Address address);
 }
