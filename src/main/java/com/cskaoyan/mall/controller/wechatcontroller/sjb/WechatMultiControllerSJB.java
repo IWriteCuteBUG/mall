@@ -51,7 +51,7 @@ public class WechatMultiControllerSJB {
     @Autowired
     CommentServiceSJB commentService;
 
-    //@RequestMapping("wx/goods/list")
+//    @RequestMapping("wx/goods/list")
     @ResponseBody
     public BaseRespVo goodsList(@Valid GoodsSearchListReqVo reqVo, BindingResult bindingResult){
         if (bindingResult.hasErrors()){

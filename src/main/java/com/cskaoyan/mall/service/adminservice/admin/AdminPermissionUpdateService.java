@@ -5,5 +5,5 @@ import com.cskaoyan.mall.vo.adminvo.dhd.util.PermissionsUpdateBean;
 
 
 public interface AdminPermissionUpdateService {
-    BaseRespVo updateRolePermission(PermissionsUpdateBean permissionsUpdateBean);
+    Object updateRolePermission(PermissionsUpdateBean permissionsUpdateBean);
 }
