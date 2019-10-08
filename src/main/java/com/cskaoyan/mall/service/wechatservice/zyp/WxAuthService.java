@@ -2,6 +2,7 @@ package com.cskaoyan.mall.service.wechatservice.zyp;
 
 import com.cskaoyan.mall.bean.BaseRespVo;
 import com.cskaoyan.mall.bean.Order;
+import com.cskaoyan.mall.bean.User;
 import com.cskaoyan.mall.vo.wechatvo.zyp.WeChatRegisterVo;
 
 import java.util.List;
@@ -18,4 +19,5 @@ public interface WxAuthService {
 
     BaseRespVo reset(WeChatRegisterVo weChatRegisterVo);
 
+    User queryUserById(Integer userId);
 }

@@ -348,6 +348,8 @@ public class MallManagerServiceImply implements MallManagerService {
 
 
     //获取订单详情
+    @Autowired
+    GoodsProductMapper goodsProductMapper;
     @Override
     public OrderDetail getOrderDetail(int orderid) {
         //获取订单商品列表
@@ -368,9 +370,23 @@ public class MallManagerServiceImply implements MallManagerService {
 //处理退款申请
     public BaseRespVo orderRefund(Refund refund) {
         Order order=new Order();
-        order.setId(refund.getOrderId());
+        int orderId = refund.getOrderId();
+        order.setId(orderId);
         order.setOrderStatus(Short.valueOf("203"));
         orderMapper.updateByPrimaryKeySelective(order);
+        //更新库存
+
+   OrderGoodsExample orderGoodsExample=new OrderGoodsExample();
+   OrderGoodsExample.Criteria criteria=orderGoodsExample.createCriteria();
+   criteria.andOrderIdEqualTo(orderId);
+     List<OrderGoods> orderGoodsList=orderGoodsMapper.selectByExample(orderGoodsExample);
+    //对订单中的每个种类的商品都返回库存
+     for (OrderGoods orderGoods:orderGoodsList){
+         Integer productId = orderGoods.getProductId();
+         Short number = orderGoods.getNumber();
+         goodsProductMapper.changeNumberById(productId,number);
+     }
+
         return ReturnUtils.ok(orderMapper.selectByPrimaryKey(refund.getOrderId()),"退款成功");
 
     }

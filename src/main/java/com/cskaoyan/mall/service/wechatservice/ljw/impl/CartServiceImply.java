@@ -44,8 +44,8 @@ public class CartServiceImply implements CartService {
 
     //根据check标签更新购物车信息
     @Override
-    public BaseRespVo checkedCarts(CheckedCarts checkedCarts) {
-        int userid = 1;
+    public BaseRespVo checkedCarts(CheckedCarts checkedCarts,int userid) {
+
         BaseRespVo baseRespVo = cartIndex(1);
         Map map = (HashMap) baseRespVo.getData();
         //获取所有的购物车清单
@@ -73,39 +73,58 @@ public class CartServiceImply implements CartService {
           @Autowired
           GoodsMapper goodsMapper;
     //添加购物车
+    @Autowired
+    GoodsAttributeMapper goodsAttributeMapper;
     @Override
     public BaseRespVo addCart(Cart cart, int userid) {
-        CartExample cartExample = new CartExample();
-        CartExample.Criteria criteria = cartExample.createCriteria();
-        criteria.andUserIdEqualTo(userid).andProductIdEqualTo(cart.getProductId());
-        List<Cart> oldcarts = cartMapper.selectByExample(cartExample);
 
-        if (oldcarts.size() != 0) {
-            //相同用户id和productid的cart只会存在一个
-            //取第一个
-            Cart oldcart = oldcarts.get(0);
-            oldcart.setNumber(Short.valueOf((String.valueOf(oldcart.getNumber() + 1))));
-            //number+1 插入
-            cartMapper.updateByPrimaryKeySelective(oldcart);
+        //如果库存不足
+     int    productId=cart.getProductId();
+     String.valueOf(goodsProductMapper.selectNumber(productId));
+     if (Integer.valueOf( String.valueOf(goodsProductMapper.selectNumber(productId)))<cart.getNumber()){
+                  return  ReturnUtils.fail(null,"对不起，商品库存不足啦！");
+
         }
-        //如果数据库中没有则重新插入新数据
         else {
-            cart.setUserId(userid);
-            Goods goods = goodsMapper.selectByPrimaryKey(cart.getGoodsId());
-            cart.setGoodsName(goods.getName());
-            cart.setPrice(goods.getCounterPrice());
-            cart.setGoodsSn(goods.getGoodsSn());
-            cart.setAddTime(new Date());
-            cart.setUpdateTime(new Date());
-            cart.setPicUrl(goods.getPicUrl());
-            cart.setChecked(true);
-            cart.setSpecifications(goodsProductMapper.selectSpec(cart.getProductId()));
-            cartMapper.insert(cart);
+            CartExample cartExample = new CartExample();
+            CartExample.Criteria criteria = cartExample.createCriteria();
+            criteria.andUserIdEqualTo(userid).andProductIdEqualTo(cart.getProductId());
+            List<Cart> oldcarts = cartMapper.selectByExample(cartExample);
 
+            if (oldcarts.size() != 0) {
+                //相同用户id和productid的cart只会存在一个
+                //取第一个
+                Cart oldcart = oldcarts.get(0);
+                oldcart.setNumber(Short.valueOf((String.valueOf(oldcart.getNumber() + 1))));
+                //number+1 插入
+                cartMapper.updateByPrimaryKeySelective(oldcart);
+            }
+            //如果数据库中没有则重新插入新数据
+            else {
+                cart.setUserId(userid);
+                Goods goods = goodsMapper.selectByPrimaryKey(cart.getGoodsId());
+                cart.setGoodsName(goods.getName());
+                cart.setPrice(goods.getCounterPrice());
+                cart.setGoodsSn(goods.getGoodsSn());
+                cart.setAddTime(new Date());
+                cart.setUpdateTime(new Date());
+                cart.setPicUrl(goods.getPicUrl());
+                cart.setChecked(true);
+                //插入规格
+//                String attribute=goodsProductMapper.selectSpec(productId);
+//                cart.setSpecifications(goodsAttributeMapper.selectValue(cart.getGoodsId(),attribute));
+          String spec=   goodsProductMapper.selectSpec(cart.getProductId());
+          cart.setSpecifications(spec);
+
+                cartMapper.insert(cart);
+
+            }
+
+            int count = cartMapper.selectCount();
+            return com.cskaoyan.mall.util.utiLJW.ReturnUtils.ok(count, "添加成功");
         }
 
-        int count = cartMapper.selectCount();
-        return com.cskaoyan.mall.util.utiLJW.ReturnUtils.ok(count, "添加成功");
+
     }
 
     //删除购物车
@@ -130,19 +149,23 @@ public class CartServiceImply implements CartService {
     }
 
     @Override
-    public BaseRespVo fastadd (Cart cart) {
-        int userid = 1;
+    public BaseRespVo fastadd (Cart cart,int userId) {
+
         Goods goods = goodsMapper.selectByPrimaryKey(cart.getGoodsId());
         cart.setAddTime(new Date());
         //利用工具类进行同名字段的自动赋值,1赋值给2 ，返回2
         Cart newcart = (Cart) AssignUtils.assign(goods, cart);
         newcart.setGoodsName(goods.getName());
-        newcart.setUserId(userid);
+        newcart.setUserId(userId);
         newcart.setChecked(true);
 
         //设置价格
         newcart.setPrice(goods.getCounterPrice());
-        newcart.setSpecifications(goodsProductMapper.selectSpec(cart.getProductId()));
+        //插入规格
+//        String attribute=goodsProductMapper.selectSpec(cart.getProductId());
+//        cart.setSpecifications(goodsAttributeMapper.selectValue(cart.getGoodsId(),attribute));
+        String spec=   goodsProductMapper.selectSpec(cart.getProductId());
+        cart.setSpecifications(spec);
         cartMapper.insert(newcart);
         System.out.println("id是" + newcart.getId());
         return ReturnUtils.ok(newcart.getId(), "fanstadd成功");
@@ -181,8 +204,10 @@ public class CartServiceImply implements CartService {
         checkoutBean.setGrouponPrice(grouponPrice);
 
 
-        double couponPrice = couponId == 0 ? 0 : couponMapper.selectDiscountById(couponId);
-        checkoutBean.setCouponPrice(couponPrice);
+//        double couponPrice = couponId == 0 ? 0 : couponMapper.selectDiscountById(couponId);
+        double couponPrice = 0;
+
+        checkoutBean.setCouponPrice(0);
         if (cartId != 0) {
             Cart cart = cartMapper.selectByPrimaryKey(cartId);
             //商品总价

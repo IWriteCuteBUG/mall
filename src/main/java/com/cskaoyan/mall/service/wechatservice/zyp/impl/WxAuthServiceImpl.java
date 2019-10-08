@@ -184,4 +184,10 @@ public class WxAuthServiceImpl implements WxAuthService {
         return BaseRespVo.ok("密码重置成功！");
     }
 
+    @Override
+    public User queryUserById(Integer userId) {
+        return userMapper.selectByPrimaryKey(userId);
+    }
+
+
 }

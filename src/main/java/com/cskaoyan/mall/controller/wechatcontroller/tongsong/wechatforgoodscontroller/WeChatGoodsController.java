@@ -101,7 +101,16 @@ public class WeChatGoodsController {
             searchHistory.setAddTime(new Date());
             searchHistory.setUpdateTime(new Date());
             searchHistory.setFrom("");
-            int count = searchHistoryService.addSearchHistory(searchHistory);
+            List<String> searchHistoryKeywordList = new ArrayList<>();
+            List<SearchHistory> searchHistoryList = searchHistoryService.querySearchHistoryByUserId(userId);
+            for (SearchHistory history : searchHistoryList) {
+                searchHistoryKeywordList.add(history.getKeyword());
+            }
+            if(!searchHistoryKeywordList.contains(keyword)){
+                int count = searchHistoryService.addSearchHistory(searchHistory);
+            } else {
+                int count = searchHistoryService.updateSearchhistoryUpdatetimeByKeyword(keyword, new Date());
+            }
             int size1 = goodsList.size();
             return BaseRespVo.baseRespOk(new GoodsListAndCategoryListVo(goodsList, size1, categoryList));
         }

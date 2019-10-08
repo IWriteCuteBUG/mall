@@ -53,7 +53,10 @@ public class WeChatGrouponServiceImpl implements WechatGrouponService {
         for (Groupon groupon : groupons) {
             MyGrounpVo myGrounpVo = new MyGrounpVo();
             Integer orderId = groupon.getOrderId();
-            Order order = orderMapper.selectByPrimaryKey(orderId);
+            OrderExample orderExample = new OrderExample();
+            orderExample.createCriteria().andOrderSnEqualTo(orderId.toString());
+            List<Order> orderList = orderMapper.selectByExample(orderExample);
+            Order order = orderList.get(0);
 //            订单状态
             String orderStatusText = OrdersStatusUtils.statusId4Status(order.getOrderStatus());
             myGrounpVo.setOrderStatusText(orderStatusText);
@@ -92,7 +95,7 @@ public class WeChatGrouponServiceImpl implements WechatGrouponService {
                 myGrounpVo.setIsCreator(true);
             }
 //            未完成
-            HandleOption handleOption = HandleOptionUtils.getHandleOption();
+            HandleOption handleOption = HandleOptionUtils.getHandleOption(groupon);
             myGrounpVo.setHandleOption(handleOption);
             myGrounpVos.add(myGrounpVo);
         }
@@ -145,7 +148,7 @@ public class WeChatGrouponServiceImpl implements WechatGrouponService {
         grouponGoodInfo.setFreightPrice(order.getFreightPrice());
         grouponGoodInfo.setOrderStatusText(OrdersStatusUtils.statusId4Status(order.getOrderStatus()));
         grouponGoodInfo.setId(order.getId());
-        grouponGoodInfo.setHandleOption(HandleOptionUtils.getHandleOption());
+        grouponGoodInfo.setHandleOption(HandleOptionUtils.getHandleOption(order));
         grouponDetailVo.setOrderInfo(grouponGoodInfo);
 
 //      商品详情

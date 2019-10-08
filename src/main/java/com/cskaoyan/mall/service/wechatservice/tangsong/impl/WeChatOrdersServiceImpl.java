@@ -136,6 +136,12 @@ public class WeChatOrdersServiceImpl implements WeChatOrdersService {
         }
 
         //获取团购减免
+<<<<<<< HEAD
+=======
+
+        int grouponRulesId = submitOrders.getGrouponRulesId();
+
+>>>>>>> 315a3f980ed06c8d65f866f965642d76f932df1c
 
         int grouponRulesId = submitOrders.getGrouponRulesId();
 
@@ -155,6 +161,83 @@ public class WeChatOrdersServiceImpl implements WeChatOrdersService {
         String dateString = format.format(date);
         String orderId = dateString.substring(4);
 
+
+
+        //         以下为赵宇鹏的代码
+        int userId1 = 1;
+//        Integer userId1 = (Integer) SecurityUtils.getSubject().getSession().getAttribute("userId");
+//        int grouponRulesId = 0;
+//        int grouponLinkId = 0;
+
+        if (grouponRulesId != 0) {
+
+            /*GrouponRulesExample grouponRulesExample = new GrouponRulesExample();
+            grouponRulesExample.createCriteria().andIdEqualTo(grouponRulesId);
+            List<GrouponRules> grouponRules = grouponRulesMapper.selectByExample(grouponRulesExample);*/
+//            查询团购规则的信息
+            GrouponRules grouponRules = grouponRulesMapper.selectByPrimaryKey(grouponRulesId);
+
+//            查询当前团购的数量
+            GrouponExample grouponExample = new GrouponExample();
+//            grouponExample.createCriteria().andRulesIdEqualTo(grouponRulesId).andGrouponIdEqualTo(grouponLinkId);
+
+//            不使用grouponLinkId
+            grouponExample.createCriteria().andRulesIdEqualTo(grouponRulesId);
+            List<Groupon> groupons = grouponMapper.selectByExample(grouponExample);
+
+//            在团购规则中取出团购人数需要几人
+            Integer discountMember = grouponRules.getDiscountMember();
+//            当前团购的数量
+            int size = groupons.size();
+//            当前团购数量小于团购人数时，加入他人的团购
+            Groupon groupon = new Groupon();
+            groupon.setOrderId(Integer.valueOf(orderId));//需要修改
+            Integer rulesId = grouponRules.getId();
+            groupon.setRulesId(rulesId);
+            groupon.setUserId(userId1);
+            Date date1 = new Date();
+            groupon.setAddTime(date1);
+            groupon.setPayed(true);
+            groupon.setDeleted(false);
+//            是否能整除,不需要整除
+//            int i = size / discountMember;
+//            取余
+            int i1 = size % discountMember;
+            Integer grouponId = grouponMapper.queryMaxGrouponIdByRuleId(rulesId);
+            if (grouponId == null) {
+                grouponId = 1;
+            }
+            if (i1 != 0) {
+//                获取当前要参加的他人创建的团购的信息
+                Groupon groupon1 = groupons.get(0);
+
+//                设置团购规则下的团购id
+//                Integer grouponId = groupon1.getGrouponId();
+                groupon.setGrouponId(grouponId);
+
+//               设置当前团购规则下的创建人Id
+                Integer userId2 = groupon1.getUserId();
+                groupon.setCreatorUserId(userId2);
+
+//                进行数据库的插入操作
+                grouponMapper.insertSelective(groupon);
+            }
+//            当当前团购为0或团购已满时，作为创建者加入团购
+            if (i1 == 0) {
+                groupon.setGrouponId(grouponId + 1);
+                groupon.setCreatorUserId(userId1);
+                grouponMapper.insertSelective(groupon);
+            }
+
+        }
+
+//        以上为赵宇鹏的代码
+
+
+
+
+
+
         //判斷
         int cartId = submitOrders.getCartId();
         if (cartId != 0) {
@@ -164,7 +247,8 @@ public class WeChatOrdersServiceImpl implements WeChatOrdersService {
             List<Cart> carts = cartMapper.selectByExample(cartExample);
             Cart cart = carts.get(0);
             int number = cart.getNumber();
-            String specifications = cart.getSpecifications();
+//            String specifications = cart.getSpecifications();
+            String specifications = "[\"标准\"]";
             Integer goodsId = cart.getGoodsId();
             //减去库存
             GoodsProduct goodsProduct = new GoodsProduct();
