@@ -4,6 +4,7 @@ import com.cskaoyan.mall.bean.GoodsProduct;
 import com.cskaoyan.mall.bean.GoodsProductExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Update;
 
 public interface GoodsProductMapper {
     long countByExample(GoodsProductExample example);
@@ -37,4 +38,7 @@ public interface GoodsProductMapper {
     void updateNumber(@Param("id") Integer productId,@Param("number") Short number);
 
     int queryProductMumberCly(@Param("id") Integer productId);
+
+    @Update("update cskaoyan_mall_goods_product set deleted=#{flag} where goods_id=#{goodsId}")
+    void deleteByLogic(@Param("goodsId") Integer id, @Param("flag") boolean deleted);
 }
