@@ -134,7 +134,7 @@ public class WeChatOrdersServiceImpl implements WeChatOrdersService {
 
         //获取团购减免
 
-        int grouponRulesI = submitOrders.getGrouponRulesId();
+        int grouponRulesId = submitOrders.getGrouponRulesId();
 
         BigDecimal grouponDescount;
         if (grouponRulesId != 0) {
