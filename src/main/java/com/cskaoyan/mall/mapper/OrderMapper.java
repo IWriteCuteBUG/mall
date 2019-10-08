@@ -63,12 +63,12 @@ public interface OrderMapper {
 
     //order状态码更改为已发货
     @Update("update cskaoyan_mall_order set order_status = 201 where id = #{id}")
-    void updateOrderStatus(@Param("id") int id);
+    void updateOrderStatus(@Param("id") String id);
 
     //提交订单
     int submitOrders(@Param("order") Order order);
 
-    void updateOrderStatusCly(@Param("id") int orderId);
+    void updateOrderStatusCly(@Param("id") String orderId);
 
 
 }

@@ -13,10 +13,10 @@ public class OrderPrepayServiceImpl implements OrderPrepayService{
     @Autowired
     OrderMapper  orderMapper;
     @Override
-    public HashMap<String, Object> changeOrder_Status(Integer orderId) {
+    public HashMap<String, Object> changeOrder_Status(String orderId) {
         orderMapper.updateOrderStatus(orderId);
         HashMap<String, Object> stringStringHashMap = new HashMap<>();
-        stringStringHashMap.put("errmsg","支付成功");
+        stringStringHashMap.put("errmsg","成功");
         stringStringHashMap.put("errno",0);
         return stringStringHashMap;
 
