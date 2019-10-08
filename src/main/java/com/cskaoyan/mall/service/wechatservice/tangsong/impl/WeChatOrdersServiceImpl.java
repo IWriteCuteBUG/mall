@@ -136,11 +136,10 @@ public class WeChatOrdersServiceImpl implements WeChatOrdersService {
 
         int grouponRulesId = submitOrders.getGrouponRulesId();
 
-
         BigDecimal grouponDescount;
         if (grouponRulesId != 0) {
             GrouponRulesExample grouponRulesExample = new GrouponRulesExample();
-            grouponRulesExample.createCriteria().andGoodsIdEqualTo(submitOrders.getGrouponRulesId());
+            grouponRulesExample.createCriteria().andIdEqualTo(submitOrders.getGrouponRulesId());
             List<GrouponRules> grouponRules = grouponRulesMapper.selectByExample(grouponRulesExample);
             grouponDescount = grouponRules.get(0).getDiscount();
         }else {
