@@ -109,7 +109,9 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.cskaoyan.mall.bean.Cart">
+
+  <insert id="insert"   useGeneratedKeys="true" keyProperty="id" parameterType="com.cskaoyan.mall.bean.Cart">
+
     insert into cskaoyan_mall_cart (id, user_id, goods_id,
       goods_sn, goods_name, product_id,
       price, number, specifications,
@@ -350,10 +352,12 @@
       deleted = #{deleted,jdbcType=BIT}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
   <select id="selectUserId" resultType="int">
     select user_id from cskaoyan_mall_cart where id=#{cartId}
   </select>
   <select id="selectGoodsId" resultType="com.cskaoyan.mall.bean.Cart">
     select goods_id from cskaoyan_mall_cart where user_id=#{userId}
   </select>
+
 </mapper>
