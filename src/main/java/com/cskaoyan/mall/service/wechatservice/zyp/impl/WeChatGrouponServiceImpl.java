@@ -36,14 +36,14 @@ public class WeChatGrouponServiceImpl implements WechatGrouponService {
     @Override
     public BaseRespVo queryGrouponByShowType(int showType) {
 
-//        int userId = 1;
-        Integer userId = (Integer) SecurityUtils.getSubject().getSession().getAttribute("userId");
+        int userId = 1;
+//        Integer userId = (Integer) SecurityUtils.getSubject().getSession().getAttribute("userId");
 
 
         GrouponExample grouponExample = new GrouponExample();
         GrouponExample.Criteria criteria = grouponExample.createCriteria();
         if (showType == 0) {
-            criteria.andCreatorUserIdEqualTo(userId);
+            criteria.andCreatorUserIdEqualTo(userId).andUserIdEqualTo(userId);
         }
         if (showType == 1) {
             criteria.andUserIdEqualTo(userId);
@@ -83,12 +83,13 @@ public class WeChatGrouponServiceImpl implements WechatGrouponService {
 //            id
             myGrounpVo.setId(groupon.getId());
             if (showType == 0) {
-
                 myGrounpVo.setIsCreator(true);
             }
-            if (showType == 1) {
+            if (showType == 1 && groupon.getCreatorUserId() != groupon.getUserId()) {
                 myGrounpVo.setIsCreator(false);
-
+            }
+            if (showType == 1 && groupon.getCreatorUserId() == groupon.getUserId()) {
+                myGrounpVo.setIsCreator(true);
             }
 //            未完成
             HandleOption handleOption = HandleOptionUtils.getHandleOption();
