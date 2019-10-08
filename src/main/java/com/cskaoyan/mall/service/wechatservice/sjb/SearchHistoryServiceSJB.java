@@ -11,4 +11,6 @@ public interface SearchHistoryServiceSJB {
     int addSearchHistory(SearchHistory searchHistory);
 
     int updateSearchhistoryUpdatetimeByKeyword(String keyword, Date updatetime);
+
+    int setAllDeletedByUserId(int userId);
 }

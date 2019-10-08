@@ -33,4 +33,6 @@ public interface SearchHistoryMapper {
     int addSearchHistory(@Param("searchHistory") SearchHistory searchHistory);
 
     int updateSearchhistoryUpdatetimeByKeyword(@Param("keyword") String keyword, @Param("updatetime") Date updatetime);
+
+    int setAllDeletedByUserId(@Param("userId") int userId);
 }

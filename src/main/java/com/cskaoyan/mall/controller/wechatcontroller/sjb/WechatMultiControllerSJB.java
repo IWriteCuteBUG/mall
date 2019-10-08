@@ -257,4 +257,13 @@ public class WechatMultiControllerSJB {
         data.setData(commentAndUserInfoVoList);
         return BaseRespVo.baseRespOk(data);
     }
+
+    @RequestMapping("wx/search/clearhistory")
+    @ResponseBody
+    public BaseRespRepVo searchClearhistory(CommentListReqVo vo){
+        int userId = Integer.parseInt(String.valueOf(SecurityUtils.getSubject().getSession().getAttribute("userId")));
+        int count = searchHistoryService.setAllDeletedByUserId(userId);
+        return new BaseRespRepVo("成功", 0);
+    }
+
 }
