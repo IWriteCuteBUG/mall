@@ -99,6 +99,7 @@ public class CartServiceImply implements CartService {
             cart.setUpdateTime(new Date());
             cart.setPicUrl(goods.getPicUrl());
             cart.setChecked(true);
+            cart.setSpecifications(goodsProductMapper.selectSpec(cart.getProductId()));
             cartMapper.insert(cart);
 
         }
