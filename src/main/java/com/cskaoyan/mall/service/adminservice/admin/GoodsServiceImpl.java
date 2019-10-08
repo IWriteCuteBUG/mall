@@ -268,6 +268,12 @@ public class GoodsServiceImpl implements GoodsService {
     @Override
     @Transactional
     public void deleteGood(Integer id) {
+        Goods goods = new Goods();
+        goods.setId(id);
+        goods.setDeleted(true);
+        goodsMapper.updateByPrimaryKeySelective(goods);
+
+        /*CommentExample commentExample = new CommentExample();
         //获取商品信息
      Goods goods= goodsMapper.selectByPrimaryKey(id);
      //跨域删除图片
@@ -281,9 +287,9 @@ public class GoodsServiceImpl implements GoodsService {
         CommentExample commentExample = new CommentExample();
         CommentExample.Criteria criteria = commentExample.createCriteria();
         criteria.andValueIdEqualTo(id);
-        commentMapper.selectByExample(commentExample);
+        commentMapper.selectByExample(commentExample);*/
 
-        GoodsProductExample goodsProductExample = new GoodsProductExample();
+        /*GoodsProductExample goodsProductExample = new GoodsProductExample();
         GoodsProductExample.Criteria criteriaP = goodsProductExample.createCriteria();
         criteriaP.andGoodsIdEqualTo(id);
         goodsProductMapper.deleteByExample(goodsProductExample);
@@ -296,7 +302,11 @@ public class GoodsServiceImpl implements GoodsService {
         GoodsSpecificationExample goodsSpecificationExample = new GoodsSpecificationExample();
         GoodsSpecificationExample.Criteria criteriaS = goodsSpecificationExample.createCriteria();
         criteriaS.andGoodsIdEqualTo(id);
-        goodsSpecificationMapper.deleteByExample(goodsSpecificationExample);
+        goodsSpecificationMapper.deleteByExample(goodsSpecificationExample);*/
+        /*commentMapper.deleteByLogic(id, true);*/
+        goodsProductMapper.deleteByLogic(id, true);
+        goodsAttributeMapper.deleteByLogic(id, true);
+        goodsSpecificationMapper.deleteByLogic(id, true);
     }
 
     @Override

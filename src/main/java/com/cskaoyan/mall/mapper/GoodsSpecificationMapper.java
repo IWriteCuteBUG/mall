@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.cskaoyan.mall.vo.wechatvo.tongsong.GoodsInfomationVo;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Update;
 
 public interface GoodsSpecificationMapper {
     long countByExample(GoodsSpecificationExample example);
@@ -31,4 +32,7 @@ public interface GoodsSpecificationMapper {
     int updateByPrimaryKey(GoodsSpecification record);
 
     List<GoodsInfomationVo> queryspecificationList(@Param("id") int id);
+
+    @Update("update cskaoyan_mall_goods_specification set deleted=#{flag} where goods_id=#{goodsId}")
+    void deleteByLogic(@Param("goodsId") Integer id, @Param("flag") boolean b);
 }

@@ -6,6 +6,7 @@ import com.cskaoyan.mall.service.wechatservice.ljw.CartService;
 import com.cskaoyan.mall.vo.adminvo.voLJW.wxvoLJW.CheckedCarts;
 import com.cskaoyan.mall.vo.wechatvo.ljw.CheckOut;
 import com.cskaoyan.mall.vo.wechatvo.ljw.ProductIds;
+import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,9 +31,15 @@ return cartService.cartIndex(userid);
     //添加商品至购物车
     @RequestMapping("wx/cart/add")
     public  BaseRespVo addCart(@RequestBody Cart cart){
-int userid=1;
+        int userid=1;
+//        Integer userId = (Integer) SecurityUtils.getSubject().getSession().getAttribute("userId");
         return  cartService.addCart(cart,userid);
     }
+//    @RequestMapping("wx/address/list")
+//    public  BaseRespVo addressList(){
+//        int userid=1;
+//        return  cartService.addressList(userid);
+//    }
 
 //立即购买快速添加进购物车
     @RequestMapping("wx/cart/fastadd")

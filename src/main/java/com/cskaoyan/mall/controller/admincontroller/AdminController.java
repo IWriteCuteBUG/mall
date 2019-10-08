@@ -52,9 +52,9 @@ public class AdminController {
     @Autowired
     DeleteRoleService deleteRoleService;
     @RequestMapping("/admin/role/delete")
-    public BaseRespVo deletInfo(@RequestBody Role role){
-        BaseRespVo baseRespVo=deleteRoleService.deleteRole(role);
-        return  baseRespVo;
+    public Object deletInfo(@RequestBody Role role){
+        Object object=deleteRoleService.deleteRole(role);
+        return  object;
     }
     @Autowired
     StorageService storageService;
@@ -115,8 +115,8 @@ public class AdminController {
     @Autowired
     AdminPermissionUpdateService adminPermissionUpdateService;
     @RequestMapping(value = "/admin/role/permissions",method = RequestMethod.POST)
-    public BaseRespVo adminPermissionUpdateInfo(@RequestBody PermissionsUpdateBean permissionsUpdateBean){
-        BaseRespVo baseRespVo=adminPermissionUpdateService.updateRolePermission( permissionsUpdateBean);
-         return baseRespVo;
+    public Object adminPermissionUpdateInfo(@RequestBody PermissionsUpdateBean permissionsUpdateBean){
+        Object o = adminPermissionUpdateService.updateRolePermission(permissionsUpdateBean);
+        return o;
     }
 }

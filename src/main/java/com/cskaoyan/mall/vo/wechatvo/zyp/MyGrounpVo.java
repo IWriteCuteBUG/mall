@@ -16,7 +16,9 @@ public class MyGrounpVo {
     private Integer orderId;
     private String orderSn;
     private BigDecimal actualPrice;
-    private Integer joinerPrice;
+
+    private Integer joinerCount;
+
     private List<OrderGoods> goodsList;
     private GrouponRules rules;
     private Integer id;
@@ -35,17 +37,6 @@ public class MyGrounpVo {
         return creator;
     }
 
-    public void setCreator(Boolean creator) {
-        isCreator = creator;
-    }
-
-    public HandleOption getHandleOption() {
-        return handleOption;
-    }
-
-    public void setHandleOption(HandleOption handleOption) {
-        this.handleOption = handleOption;
-    }
 
     public void setCreator(String creator) {
         this.creator = creator;
@@ -83,12 +74,14 @@ public class MyGrounpVo {
         this.actualPrice = actualPrice;
     }
 
-    public Integer getJoinerPrice() {
-        return joinerPrice;
+
+    public Integer getJoinerCount() {
+        return joinerCount;
     }
 
-    public void setJoinerPrice(Integer joinerPrice) {
-        this.joinerPrice = joinerPrice;
+    public void setJoinerCount(Integer joinerCount) {
+        this.joinerCount = joinerCount;
+
     }
 
     public List<OrderGoods> getGoodsList() {
@@ -115,5 +108,22 @@ public class MyGrounpVo {
         this.id = id;
     }
 
+
+    public Boolean getIsCreator() {
+        return isCreator;
+    }
+
+    public void setIsCreator(Boolean isCreator) {
+        this.isCreator = isCreator;
+    }
+
+
+    public HandleOption getHandleOption() {
+        return handleOption;
+    }
+
+    public void setHandleOption(HandleOption handleOption) {
+        this.handleOption = handleOption;
+    }
 
 }

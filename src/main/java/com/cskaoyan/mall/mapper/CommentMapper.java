@@ -4,6 +4,7 @@ import com.cskaoyan.mall.bean.Comment;
 import com.cskaoyan.mall.bean.CommentExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Update;
 
 public interface CommentMapper {
     long countByExample(CommentExample example);

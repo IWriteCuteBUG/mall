@@ -7,4 +7,8 @@ import java.io.IOException;
 
 public interface WeChatStorageUploadService {
     BaseRespVo fileupload(MultipartFile myfile) throws IOException;
+
+
+    BaseRespVo goodsCount(Integer id);
+
 }

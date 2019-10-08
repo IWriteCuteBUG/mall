@@ -52,4 +52,12 @@ public class WeChatStorageUploadServiceImpl implements WeChatStorageUploadServic
         storageMapper.insertSelective(storage);
         return BaseRespVo.baseRespOk(storage);
     }
+
+
+    @Override
+    public BaseRespVo goodsCount(Integer id) {
+
+        return BaseRespVo.ok(1);
+    }
+
 }
