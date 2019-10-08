@@ -53,6 +53,9 @@ public class WeChatOrdersServiceImpl implements WeChatOrdersService {
     @Autowired
     GrouponMapper grouponMapper;
 
+    @Autowired
+    OrderGoodsMapper orderGoodsMapper;
+
     @Override
     public BaseRespVo queryOrdersList(int showType,int page,int size) {
         List<OrderVo> orderVoList = null;
@@ -84,7 +87,7 @@ public class WeChatOrdersServiceImpl implements WeChatOrdersService {
             }else if (status == 203) {
                 orderVo.setOrderStatusText("已退款");
             }else if (status == 402) {
-                orderVo.setOrderStatusText("已退款");
+                orderVo.setOrderStatusText("收货(系统)");
             }else if (status == 102) {
                 orderVo.setOrderStatusText("已取消(用户)");
             }else if (status == 101) {
@@ -133,10 +136,11 @@ public class WeChatOrdersServiceImpl implements WeChatOrdersService {
         }
 
         //获取团购减免
+<<<<<<< HEAD
 
+=======
+>>>>>>> 56a98824edaf4eaad72f5ff5ad77ca216b246aba
         int grouponRulesId = submitOrders.getGrouponRulesId();
-
-
 
         BigDecimal grouponDescount;
         if (grouponRulesId != 0) {
@@ -321,6 +325,7 @@ public class WeChatOrdersServiceImpl implements WeChatOrdersService {
             orderGoods.setPicUrl(cart.getPicUrl());
             orderGoods.setAddTime(parse);
             orderGoods.setUpdateTime(parse);
+            int insert = orderGoodsMapper.insert(orderGoods);
             //删除购物车
             cartMapper.deleteByPrimaryKey(submitOrders.getCartId());
             HashMap<String, Object> map = new HashMap<>();
@@ -428,6 +433,7 @@ public class WeChatOrdersServiceImpl implements WeChatOrdersService {
                 orderGoods.setPicUrl(cart.getPicUrl());
                 orderGoods.setAddTime(parse);
                 orderGoods.setUpdateTime(parse);
+                int insert = orderGoodsMapper.insert(orderGoods);
                 //删除购物车
                 cartMapper.deleteByPrimaryKey(submitOrders.getCartId());
 
@@ -435,5 +441,19 @@ public class WeChatOrdersServiceImpl implements WeChatOrdersService {
             BaseRespVo ok = BaseRespVo.ok(orderId);
             return ok;
         }
+    }
+
+    @Override
+    public BaseRespVo confirmOrder(int orderId) {
+        OrderExample orderExample = new OrderExample();
+        orderExample.createCriteria().andIdEqualTo(orderId);
+        Order order = new Order();
+        order.setOrderStatus((short) 401);
+        orderMapper.updateByExampleSelective(order,orderExample);
+        BaseRespVo<Object> objectBaseRespVo = new BaseRespVo<>();
+        objectBaseRespVo.setErrmsg("成功");
+        objectBaseRespVo.setData("success");
+        objectBaseRespVo.setErrno(0);
+        return objectBaseRespVo;
     }
 }

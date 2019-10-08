@@ -111,8 +111,11 @@ public class CartServiceImply implements CartService {
                 cart.setPicUrl(goods.getPicUrl());
                 cart.setChecked(true);
                 //插入规格
-                String attribute=goodsProductMapper.selectSpec(productId);
-                cart.setSpecifications(goodsAttributeMapper.selectValue(cart.getGoodsId(),attribute));
+//                String attribute=goodsProductMapper.selectSpec(productId);
+//                cart.setSpecifications(goodsAttributeMapper.selectValue(cart.getGoodsId(),attribute));
+          String spec=   goodsProductMapper.selectSpec(cart.getProductId());
+          cart.setSpecifications(spec);
+
                 cartMapper.insert(cart);
 
             }
@@ -159,9 +162,10 @@ public class CartServiceImply implements CartService {
         //设置价格
         newcart.setPrice(goods.getCounterPrice());
         //插入规格
-        String attribute=goodsProductMapper.selectSpec(cart.getProductId());
-        cart.setSpecifications(goodsAttributeMapper.selectValue(cart.getGoodsId(),attribute));
-
+//        String attribute=goodsProductMapper.selectSpec(cart.getProductId());
+//        cart.setSpecifications(goodsAttributeMapper.selectValue(cart.getGoodsId(),attribute));
+        String spec=   goodsProductMapper.selectSpec(cart.getProductId());
+        cart.setSpecifications(spec);
         cartMapper.insert(newcart);
         System.out.println("id是" + newcart.getId());
         return ReturnUtils.ok(newcart.getId(), "fanstadd成功");
@@ -200,8 +204,10 @@ public class CartServiceImply implements CartService {
         checkoutBean.setGrouponPrice(grouponPrice);
 
 
-        double couponPrice = couponId == 0 ? 0 : couponMapper.selectDiscountById(couponId);
-        checkoutBean.setCouponPrice(couponPrice);
+//        double couponPrice = couponId == 0 ? 0 : couponMapper.selectDiscountById(couponId);
+        double couponPrice = 0;
+
+        checkoutBean.setCouponPrice(0);
         if (cartId != 0) {
             Cart cart = cartMapper.selectByPrimaryKey(cartId);
             //商品总价

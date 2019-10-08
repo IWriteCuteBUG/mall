@@ -90,7 +90,8 @@ public class WeChatGoodsController {
             List<Goods> goodsList = goodsService.queryGoodsByPage(keyword, goodsCategoryAndBrand.getPage(), goodsCategoryAndBrand.getSize(), goodsCategoryAndBrand.getSort(), goodsCategoryAndBrand.getOrder(), goodsCategoryAndBrand.getCategoryId());
             List<Category> categoryList = new ArrayList<>();
             for (Goods goods : goodsList) {
-                Category category = categoryService.queryCategoryById(goods.getCategoryId());
+                int categoryId1 = goods.getCategoryId();
+                Category category = categoryService.queryCategoryById(categoryId1);
                 if(!categoryList.contains(category)) {
                     categoryList.add(category);
                 }
