@@ -15,6 +15,8 @@ public interface MallManagerService {
     BrandManufacturer getBrandManufacturer(int page, int limit, String sort, String order, String id, String name);
 
     Brand updateBrand(Brand brand);
+    //订单发货
+    BaseRespVo  shipOrder(Ship ship);
 
 
 

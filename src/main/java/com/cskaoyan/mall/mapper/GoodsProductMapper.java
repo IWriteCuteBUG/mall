@@ -2,8 +2,10 @@ package com.cskaoyan.mall.mapper;
 
 import com.cskaoyan.mall.bean.GoodsProduct;
 import com.cskaoyan.mall.bean.GoodsProductExample;
+import java.math.BigDecimal;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 public interface GoodsProductMapper {
@@ -35,10 +37,17 @@ public interface GoodsProductMapper {
 
     List<GoodsProduct> queryGoodsProductById(@Param("id") int id);
 
+
     void updateNumber(@Param("id") Integer productId,@Param("number") Short number);
 
     int queryProductMumberCly(@Param("id") Integer productId);
 
     @Update("update cskaoyan_mall_goods_product set deleted=#{flag} where goods_id=#{goodsId}")
     void deleteByLogic(@Param("goodsId") Integer id, @Param("flag") boolean deleted);
+
+    @Select("select price from  cskaoyan_mall_goods_product where id=#{productId}")
+    BigDecimal selectPriceById(Integer productId);
+//
+//    @Update("update cskaoyan_mall_goods_product set number=number-#{number} where id=#{productId}")
+//    void updateNumber(Short number, Integer productId);
 }

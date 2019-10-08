@@ -42,7 +42,7 @@ public interface CartMapper {
     @Select("select count(id) from  cskaoyan_mall_cart ")
     int selectCount();
 
-    @Delete("delete from   cskaoyan_mall_cart where product_id=#{productId} and user_id=#{userid}")
+    @Delete("delete from   cskaoyan_mall_cart where product_id=#{productId} and user_id=#{userId}")
     void deleteByProductIdAndUserId(int productId,int userId);
 
     @Update("update cskaoyan_mall_cart set number=#{number} where id=#{id}")

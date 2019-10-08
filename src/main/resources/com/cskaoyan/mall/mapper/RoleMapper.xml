@@ -103,7 +103,7 @@
   </delete>
   <insert id="insert" parameterType="com.cskaoyan.mall.bean.Role">
 
-    insert into cskaoyan_mall_role (id, name, desc,
+    insert into cskaoyan_mall_role (`id`, `name`, `desc`,
       enabled, add_time, update_time,
       deleted)
     values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{desc,jdbcType=VARCHAR},

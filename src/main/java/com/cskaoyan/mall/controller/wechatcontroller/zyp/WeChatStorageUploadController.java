@@ -20,10 +20,18 @@ import java.util.UUID;
 public class WeChatStorageUploadController {
     @Autowired
     WeChatStorageUploadService weChatStorageUploadService;
-
+//  前台的文件上传，用了白嫖的阿里云
     @RequestMapping("wx/storage/upload")
     public BaseRespVo fileUpload(@RequestParam("file") MultipartFile file) throws IOException {
         BaseRespVo baseRespVo = weChatStorageUploadService.fileupload(file);
         return baseRespVo;
     }
+//    goodscount不知道有啥用的接口
+    @RequestMapping("wx/cart/goodscount")
+    public BaseRespVo goodsCount() throws IOException {
+        Integer id = 1;
+        BaseRespVo baseRespVo = weChatStorageUploadService.goodsCount(id);
+        return baseRespVo;
+    }
+
 }

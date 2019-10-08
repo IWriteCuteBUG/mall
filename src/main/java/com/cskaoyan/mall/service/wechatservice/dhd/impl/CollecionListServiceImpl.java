@@ -26,14 +26,14 @@ public class CollecionListServiceImpl implements CollecionListService {
 
         CollectExample collectExample = new CollectExample();
         collectExample.createCriteria().andUserIdEqualTo(userid);
-        List<Collect> collects = collectMapper.selectByExample(collectExample);
-        ArrayList<Goods> goods = new ArrayList<>();
         PageHelper.startPage(page,size);
+        List<Collect> collects = collectMapper.selectByExample(collectExample);
+        PageInfo<Collect> goodsPageInfo = new PageInfo<>(collects);
+        ArrayList<Goods> goods = new ArrayList<>();
         for (Collect collect : collects) {
             Goods goods1 = goodsMapper.selectByPrimaryKey(collect.getValueId());
             goods.add(goods1);
         }
-        PageInfo<Goods> goodsPageInfo = new PageInfo<>(goods);
 
         long total = goodsPageInfo.getTotal();
         double ceil = Math.ceil((total /(double) size));

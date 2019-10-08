@@ -4,7 +4,9 @@ import com.cskaoyan.mall.bean.BaseRespVo;
 import com.cskaoyan.mall.bean.Cart;
 import com.cskaoyan.mall.service.wechatservice.ljw.CartService;
 import com.cskaoyan.mall.vo.adminvo.voLJW.wxvoLJW.CheckedCarts;
+import com.cskaoyan.mall.vo.wechatvo.ljw.CheckOut;
 import com.cskaoyan.mall.vo.wechatvo.ljw.ProductIds;
+import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,18 +31,33 @@ return cartService.cartIndex(userid);
     //添加商品至购物车
     @RequestMapping("wx/cart/add")
     public  BaseRespVo addCart(@RequestBody Cart cart){
-
-        return  cartService.addCart(cart);
+        int userid=1;
+//        Integer userId = (Integer) SecurityUtils.getSubject().getSession().getAttribute("userId");
+        return  cartService.addCart(cart,userid);
     }
 
+//立即购买快速添加进购物车
+    @RequestMapping("wx/cart/fastadd")
+    public  BaseRespVo fastadd(@RequestBody Cart cart){
 
+  return    cartService.fastadd(cart);
+
+    }
+
+ //wx/cart/checkout
+    @RequestMapping("wx/cart/checkout")
+    public  BaseRespVo checkOut(int cartId,int addressId,int couponId,int grouponRulesId){
+        int userid=1;
+        return  cartService.checkOut( cartId, addressId, couponId, grouponRulesId,userid);
+    }
 
 
     //删除购物车
     @RequestMapping("wx/cart/delete")
 
     public  BaseRespVo deleteCart(@RequestBody ProductIds productIds){
-        return  cartService.deleteCart(productIds);
+        int userid=1;
+        return  cartService.deleteCart(productIds,userid);
     }
 
  @RequestMapping("wx/cart/update")
