@@ -62,7 +62,7 @@ public interface OrderMapper {
 
 
     //order状态码更改为已发货
-    @Update("update cskaoyan_mall_order set order_status = 201 where id = #{id}")
+    @Update("update cskaoyan_mall_order set order_status = 201 where order_sn = #{id}")
     void updateOrderStatus(@Param("id") String id);
 
     //提交订单

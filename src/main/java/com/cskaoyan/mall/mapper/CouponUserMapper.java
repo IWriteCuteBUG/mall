@@ -7,6 +7,7 @@ import com.cskaoyan.mall.bean.CouponUserExample;
 import java.util.Date;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 
 public interface CouponUserMapper {
     long countByExample(CouponUserExample example);
@@ -32,4 +33,6 @@ public interface CouponUserMapper {
     int updateByPrimaryKey(CouponUser record);
 
     void insertChangeCoupon(@Param("coupon") Coupon coupon, @Param("userId") int userId, @Param("mydate") Date date, @Param("del") boolean deleted);
+
+    List<Coupon> selectUsableCoupon(@Param("userId") Integer userId);
 }
