@@ -53,7 +53,10 @@ public class WeChatGrouponServiceImpl implements WechatGrouponService {
         for (Groupon groupon : groupons) {
             MyGrounpVo myGrounpVo = new MyGrounpVo();
             Integer orderId = groupon.getOrderId();
-            Order order = orderMapper.selectByPrimaryKey(orderId);
+            OrderExample orderExample = new OrderExample();
+            orderExample.createCriteria().andOrderSnEqualTo(orderId.toString());
+            List<Order> orderList = orderMapper.selectByExample(orderExample);
+            Order order = orderList.get(0);
 //            订单状态
             String orderStatusText = OrdersStatusUtils.statusId4Status(order.getOrderStatus());
             myGrounpVo.setOrderStatusText(orderStatusText);
