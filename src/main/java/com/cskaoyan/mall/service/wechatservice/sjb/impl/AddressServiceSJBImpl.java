@@ -37,4 +37,12 @@ public class AddressServiceSJBImpl implements AddressServiceSJB {
         }
         return addressMapper.updateAddressById(address);
     }
+
+    @Override
+    public int addAddress(Address address) {
+        if(address.getIsDefault()){
+            int count = addressMapper.setDefault(address.getId(), address.getUserId());
+        }
+        return addressMapper.insertAddressSJB(address);
+    }
 }

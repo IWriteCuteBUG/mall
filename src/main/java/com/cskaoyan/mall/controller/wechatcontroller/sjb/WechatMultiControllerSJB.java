@@ -151,11 +151,17 @@ public class WechatMultiControllerSJB {
         address.setMobile(vo.getMobile());
         address.setName(vo.getName());
         address.setUpdateTime(new Date());
-        int count = addressService.updateAddressById(address);
+        int count = 0;
+        if(vo.getId() != 0){
+            count = addressService.updateAddressById(address);
+        }
+        if(vo.getId() == 0){
+            count = addressService.addAddress(address);
+        }
         if(count == 1){
             return BaseRespVo.baseRespOk(vo.getId());
         } else {
-            return BaseRespVo.baseRespErr(1, "修改错误");
+            return BaseRespVo.baseRespErr(1, "错误");
         }
     }
 

@@ -3,7 +3,9 @@ package com.cskaoyan.mall.controller.wechatcontroller.tongsong.wechatforgoodscon
 import com.cskaoyan.mall.bean.*;
 import com.cskaoyan.mall.service.adminservice.CountService;
 import com.cskaoyan.mall.service.adminservice.GoodsService;
+import com.cskaoyan.mall.service.adminservice.serviceSJB.FootprintService;
 import com.cskaoyan.mall.service.wechatservice.sjb.CategoryServiceSJB;
+import com.cskaoyan.mall.service.wechatservice.sjb.FootprintServiceSJB;
 import com.cskaoyan.mall.service.wechatservice.sjb.GoodsServiceSJB;
 import com.cskaoyan.mall.service.wechatservice.sjb.SearchHistoryServiceSJB;
 import com.cskaoyan.mall.service.wechatservice.tangsong.WechatCateGoryService;
@@ -34,6 +36,9 @@ public class WeChatGoodsController {
     @Autowired
     CategoryServiceSJB categoryService;
 
+    @Autowired
+    FootprintServiceSJB footprintService;
+
 //    @Autowired
 //    GoodsServiceSJB goodsService;
 
@@ -55,7 +60,15 @@ public class WeChatGoodsController {
 
     @RequestMapping("goods/detail")
     public BaseRespVo queryGoodsDetailInfo(int id){
+        int userId = Integer.parseInt(String.valueOf(SecurityUtils.getSubject().getSession().getAttribute("userId")));
         BaseRespVo baseRespVo =goodsService.queryGoodsDetailInfo(id);
+        Footprint footprint = new Footprint();
+        footprint.setUserId(userId);
+        footprint.setGoodsId(id);
+        footprint.setAddTime(new Date());
+        footprint.setUpdateTime(new Date());
+        footprint.setDeleted(false);
+        int count = footprintService.addFootprintWithoutId(footprint);
         return baseRespVo;
     }
 
