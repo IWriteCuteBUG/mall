@@ -46,12 +46,17 @@ public interface GoodsProductMapper {
 
     @Select("select price from  cskaoyan_mall_goods_product where id=#{productId}")
     BigDecimal selectPriceById(Integer productId);
+//
+//    @Update("update cskaoyan_mall_goods_product set number=number-#{number} where id=#{productId}")
+//    void updateNumber(Short number, Integer productId);
+
 
     @Select("select specifications from cskaoyan_mall_goods_product where id=#{productId}")
     String selectSpec(Integer productId);
 //
 //    @Update("update cskaoyan_mall_goods_product set number=number-#{number} where id=#{productId}")
 //    void updateNumber(Short number, Integer productId);
+
 
 
 }

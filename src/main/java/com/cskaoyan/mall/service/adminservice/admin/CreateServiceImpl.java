@@ -23,7 +23,7 @@ public class CreateServiceImpl implements  CreateService{
         role.setDeleted(null);
         role.setAddTime(date);
         role.setUpdateTime(date);
-        roleMapper.insert(role);
+        roleMapper.insertSelective(role);
         BaseRespVo ok = BaseRespVo.ok(role);
         return ok;
     }
