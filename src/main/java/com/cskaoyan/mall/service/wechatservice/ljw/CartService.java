@@ -21,9 +21,11 @@ public interface CartService {
     BaseRespVo updateCart(Cart cart);
 
 
-    BaseRespVo fastadd(Cart cart);
+    BaseRespVo  fastadd(Cart cart);
 
 
 
     BaseRespVo checkOut(int cartId, int addressId, int couponId, int grouponRulesId,int userid);
+
+    BaseRespVo addressList(int userid);
 }

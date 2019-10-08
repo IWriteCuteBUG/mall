@@ -40,13 +40,30 @@ public interface GoodsProductMapper {
 
     void updateNumber(@Param("id") Integer productId,@Param("number") Short number);
 
+
     int queryProductMumberCly(@Param("id") Integer productId);
+
+
+    @Select("select price from  cskaoyan_mall_goods_product where id=#{productId}")
+    BigDecimal selectPriceById(Integer productId);
+//
+//    @Update("update cskaoyan_mall_goods_product set number=number-#{number} where id=#{productId}")
+//    void updateNumber(Short number, Integer productId);
+
+
+    @Select("select specifications from cskaoyan_mall_goods_product where id=#{productId}")
+    String selectSpec(Integer productId);
+//
+//    @Update("update cskaoyan_mall_goods_product set number=number-#{number} where id=#{productId}")
+//    void updateNumber(Short number, Integer productId);
+
+
+
 
     @Update("update cskaoyan_mall_goods_product set deleted=#{flag} where goods_id=#{goodsId}")
     void deleteByLogic(@Param("goodsId") Integer id, @Param("flag") boolean deleted);
 
-    @Select("select price from  cskaoyan_mall_goods_product where id=#{productId}")
-    BigDecimal selectPriceById(Integer productId);
+
 //
 //    @Update("update cskaoyan_mall_goods_product set number=number-#{number} where id=#{productId}")
 //    void updateNumber(Short number, Integer productId);

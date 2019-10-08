@@ -129,7 +129,7 @@ public class CartServiceImply implements CartService {
     }
 
     @Override
-    public BaseRespVo fastadd(Cart cart) {
+    public BaseRespVo fastadd (Cart cart) {
         int userid = 1;
         Goods goods = goodsMapper.selectByPrimaryKey(cart.getGoodsId());
         cart.setAddTime(new Date());
@@ -138,8 +138,10 @@ public class CartServiceImply implements CartService {
         newcart.setGoodsName(goods.getName());
         newcart.setUserId(userid);
         newcart.setChecked(true);
+
         //设置价格
         newcart.setPrice(goods.getCounterPrice());
+        newcart.setSpecifications(goodsProductMapper.selectSpec(cart.getProductId()));
         cartMapper.insert(newcart);
         System.out.println("id是" + newcart.getId());
         return ReturnUtils.ok(newcart.getId(), "fanstadd成功");
@@ -290,6 +292,15 @@ public class CartServiceImply implements CartService {
         System.out.println(checkoutBean);
         System.out.println(111);
         return ReturnUtils.ok(checkoutBean, "ok");
+    }
+
+    @Override
+    public BaseRespVo addressList(int userid) {
+        AddressExample addressExample=new AddressExample();
+        AddressExample.Criteria criteria=addressExample.createCriteria();
+        criteria.andUserIdEqualTo(userid);
+     List<Address> address=   addressMapper.selectByExample(addressExample);
+        return ReturnUtils.ok(address,"ok");
     }
 
 
