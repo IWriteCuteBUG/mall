@@ -19,21 +19,23 @@ CartService cartService;
     //获取购物车详情
     @RequestMapping("wx/cart/index")
     public BaseRespVo cartIndex(){
-int userid=1;
-return cartService.cartIndex(userid);
+        int userId = Integer.parseInt(String.valueOf(SecurityUtils.getSubject().getSession().getAttribute("userId")));
+return cartService.cartIndex(userId);
     }
 
   //获取被check的购物车信息
     @RequestMapping("wx/cart/checked")
     public BaseRespVo checkedCarts(@RequestBody CheckedCarts checkedCarts){
-    return    cartService.checkedCarts(checkedCarts);
+        int userid=1;
+    return    cartService.checkedCarts(checkedCarts,userid);
     }
     //添加商品至购物车
     @RequestMapping("wx/cart/add")
     public  BaseRespVo addCart(@RequestBody Cart cart){
-        int userid=1;
+        int userId = Integer.parseInt(String.valueOf(SecurityUtils.getSubject().getSession().getAttribute("userId")));
+
 //        Integer userId = (Integer) SecurityUtils.getSubject().getSession().getAttribute("userId");
-        return  cartService.addCart(cart,userid);
+        return  cartService.addCart(cart,userId);
     }
 //    @RequestMapping("wx/address/list")
 //    public  BaseRespVo addressList(){
@@ -44,16 +46,18 @@ return cartService.cartIndex(userid);
 //立即购买快速添加进购物车
     @RequestMapping("wx/cart/fastadd")
     public  BaseRespVo fastadd(@RequestBody Cart cart){
+        int userId = Integer.parseInt(String.valueOf(SecurityUtils.getSubject().getSession().getAttribute("userId")));
 
-  return    cartService.fastadd(cart);
+  return    cartService.fastadd(cart,userId);
 
     }
 
  //wx/cart/checkout
     @RequestMapping("wx/cart/checkout")
     public  BaseRespVo checkOut(int cartId,int addressId,int couponId,int grouponRulesId){
-        int userid=1;
-        return  cartService.checkOut( cartId, addressId, couponId, grouponRulesId,userid);
+        int userId = Integer.parseInt(String.valueOf(SecurityUtils.getSubject().getSession().getAttribute("userId")));
+
+        return  cartService.checkOut( cartId, addressId, couponId, grouponRulesId,userId);
     }
 
 
@@ -61,8 +65,9 @@ return cartService.cartIndex(userid);
     @RequestMapping("wx/cart/delete")
 
     public  BaseRespVo deleteCart(@RequestBody ProductIds productIds){
-        int userid=1;
-        return  cartService.deleteCart(productIds,userid);
+        int userId = Integer.parseInt(String.valueOf(SecurityUtils.getSubject().getSession().getAttribute("userId")));
+
+        return  cartService.deleteCart(productIds,userId);
     }
 
  @RequestMapping("wx/cart/update")

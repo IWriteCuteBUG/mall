@@ -63,6 +63,9 @@ public interface GoodsProductMapper {
     @Update("update cskaoyan_mall_goods_product set deleted=#{flag} where goods_id=#{goodsId}")
     void deleteByLogic(@Param("goodsId") Integer id, @Param("flag") boolean deleted);
 
+    @Select("select number from  cskaoyan_mall_goods_product where id=#{productId} ")
+    boolean selectNumber(int productId);
+
 
 //
 //    @Update("update cskaoyan_mall_goods_product set number=number-#{number} where id=#{productId}")

@@ -11,7 +11,7 @@ public interface CartService {
 
     BaseRespVo cartIndex(int userid);
 
-    BaseRespVo checkedCarts(CheckedCarts checkedCarts);
+    BaseRespVo checkedCarts(CheckedCarts checkedCarts,int userid);
 
 
     BaseRespVo addCart(Cart cart,int userid);
@@ -21,7 +21,7 @@ public interface CartService {
     BaseRespVo updateCart(Cart cart);
 
 
-    BaseRespVo  fastadd(Cart cart);
+    BaseRespVo  fastadd(Cart cart,int userId);
 
 
 
