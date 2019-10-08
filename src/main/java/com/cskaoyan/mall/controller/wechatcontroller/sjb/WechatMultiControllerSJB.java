@@ -6,7 +6,6 @@ import com.cskaoyan.mall.service.wechatservice.sjb.*;
 
 import com.cskaoyan.mall.vo.wechatvo.sjb.*;
 import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.session.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;

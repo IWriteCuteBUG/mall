@@ -357,7 +357,7 @@
     select user_id from cskaoyan_mall_cart where id=#{cartId}
   </select>
   <select id="selectGoodsId" resultType="com.cskaoyan.mall.bean.Cart">
-    select goods_id from cskaoyan_mall_cart where user_id=#{userId}
+    select goods_id from cskaoyan_mall_cart where user_id=#{userId} and checked=#{flag}
   </select>
 
 </mapper>
