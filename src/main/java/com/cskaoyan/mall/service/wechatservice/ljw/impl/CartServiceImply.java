@@ -158,6 +158,8 @@ public class CartServiceImply implements CartService {
     CouponMapper couponMapper;
     @Autowired
     UserMapper userMapper;
+    @Autowired
+    GrouponMapper grouponMapper;
 
     @Override
     public BaseRespVo checkOut(int cartId, int addressId, int couponId, int grouponRulesId, int userid) {

@@ -7,6 +7,7 @@ import com.cskaoyan.mall.utils.wechatutils.ljw.AssignUtils;
 import com.cskaoyan.mall.utils.wechatutils.tangsong.OptionUtils;
 import com.cskaoyan.mall.vo.wechatvo.tongsong.OrderVo;
 import com.cskaoyan.mall.vo.wechatvo.tongsong.OrderVoForReturn;
+import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.crypto.hash.Hash;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -48,6 +49,9 @@ public class WeChatOrdersServiceImpl implements WeChatOrdersService {
 
     @Autowired
     GoodsMapper goodsMapper;
+
+    @Autowired
+    GrouponMapper grouponMapper;
 
     @Override
     public BaseRespVo queryOrdersList(int showType,int page,int size) {
@@ -129,16 +133,20 @@ public class WeChatOrdersServiceImpl implements WeChatOrdersService {
         }
 
         //获取团购减免
-        int grouponRulesI = submitOrders.getGrouponRulesI();
+        int grouponRulesId = submitOrders.getGrouponRulesId();
+
+
+
         BigDecimal grouponDescount;
-        if (grouponRulesI != 0) {
+        if (grouponRulesId != 0) {
             GrouponRulesExample grouponRulesExample = new GrouponRulesExample();
-            grouponRulesExample.createCriteria().andGoodsIdEqualTo(submitOrders.getGrouponRulesI());
+            grouponRulesExample.createCriteria().andGoodsIdEqualTo(submitOrders.getGrouponRulesId());
             List<GrouponRules> grouponRules = grouponRulesMapper.selectByExample(grouponRulesExample);
             grouponDescount = grouponRules.get(0).getDiscount();
         }else {
             grouponDescount = BigDecimal.valueOf(0);
         }
+
         //生成訂單編號
         SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHHmmss");
         Date date = new Date();
