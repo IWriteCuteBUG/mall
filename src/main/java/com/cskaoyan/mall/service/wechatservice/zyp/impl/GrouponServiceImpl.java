@@ -78,7 +78,7 @@ public class GrouponServiceImpl {
 //                Integer userId1 = groupon1.getUserId();
 //                groupon.setCreatorUserId(userId1);
 //
-////                进行数据库的插入操作
+//               进行数据库的插入操作
 //                grouponMapper.insertSelective(groupon);
 //            }
 ////            当当前团购为0或团购已满时，作为创建者加入团购

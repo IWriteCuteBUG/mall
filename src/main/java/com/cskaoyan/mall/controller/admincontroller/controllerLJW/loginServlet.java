@@ -1,14 +1,18 @@
 package com.cskaoyan.mall.controller.admincontroller.controllerLJW;
+
 import com.alibaba.fastjson.JSON;
 import com.cskaoyan.mall.util.utiLJW.HttpClient;
 import com.cskaoyan.mall.vo.adminvo.voLJW.Token;
 import com.cskaoyan.mall.vo.adminvo.voLJW.WxUser;
 
+import com.cskaoyan.mall.vo.wechatvo.ljw.Login;
+import org.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.client.RestTemplate;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 
 
 @Controller
@@ -53,15 +57,16 @@ public class loginServlet {
             WxUser user = JSON.parseObject(user_content, WxUser.class);
 
 
-
-
             // 跳转到项目的首页
             request.setAttribute("user", user);
             System.out.println("微信用户信息：" + user);
             System.out.println(user);
-            if ("o_4rV1JjYgyw2aLD-nbwx0bd0T5Q".equals(user.getOpenid())){
-                response.sendRedirect("http://localhost:9528/#/dashboard");
+            if ("o_4rV1JjYgyw2aLD-nbwx0bd0T5Q".equals(user.getOpenid())) {
+                response.sendRedirect("http://192.168.3.50:9528/#/dashboard");
 
+
+            } else {
+                response.sendRedirect("http://192.168.3.50:80/404.html");
             }
 
 

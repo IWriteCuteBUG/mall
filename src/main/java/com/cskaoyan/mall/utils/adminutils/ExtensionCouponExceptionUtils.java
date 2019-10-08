@@ -45,12 +45,15 @@ public class ExtensionCouponExceptionUtils {
             }
         }
         Date date = new Date();
-        if (!date.before(coupon.getStartTime())) {
-            throw new ExtensionCouponDiscountException("优惠卷生效时间必须晚于或等于当前时间");
-        }
-        if (!date.before(coupon.getEndTime())) {
-            throw new ExtensionCouponDiscountException("优惠卷失效时间必须晚于当前时间");
-        }
+       if(coupon.getStartTime()!=null){
+           if (!date.before(coupon.getStartTime())) {
+               throw new ExtensionCouponDiscountException("优惠卷生效时间必须晚于或等于当前时间");
+           }
+           if (!date.before(coupon.getEndTime())) {
+               throw new ExtensionCouponDiscountException("优惠卷失效时间必须晚于当前时间");
+           }
+       }
+
 
         try {
             couponTrue.setLimit(Short.valueOf(coupon.getLimit()));

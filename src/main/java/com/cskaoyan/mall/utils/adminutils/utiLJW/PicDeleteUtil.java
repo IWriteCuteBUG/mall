@@ -1,5 +1,6 @@
 package com.cskaoyan.mall.util.utiLJW;
 
+import org.json.JSONObject;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.File;
@@ -25,6 +26,10 @@ public class PicDeleteUtil {
         System.out.println("get请求");
        try {
            String str=restTemplate.getForObject("http://"+ip+":80/deletepic?catalog={catalog}",String.class,map);
+
+
+
+
 
        }
        catch (Exception e){
