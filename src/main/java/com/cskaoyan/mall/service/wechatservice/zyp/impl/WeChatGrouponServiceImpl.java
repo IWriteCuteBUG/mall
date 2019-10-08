@@ -92,7 +92,7 @@ public class WeChatGrouponServiceImpl implements WechatGrouponService {
                 myGrounpVo.setIsCreator(true);
             }
 //            未完成
-            HandleOption handleOption = HandleOptionUtils.getHandleOption();
+            HandleOption handleOption = HandleOptionUtils.getHandleOption(groupon);
             myGrounpVo.setHandleOption(handleOption);
             myGrounpVos.add(myGrounpVo);
         }
@@ -145,7 +145,7 @@ public class WeChatGrouponServiceImpl implements WechatGrouponService {
         grouponGoodInfo.setFreightPrice(order.getFreightPrice());
         grouponGoodInfo.setOrderStatusText(OrdersStatusUtils.statusId4Status(order.getOrderStatus()));
         grouponGoodInfo.setId(order.getId());
-        grouponGoodInfo.setHandleOption(HandleOptionUtils.getHandleOption());
+        grouponGoodInfo.setHandleOption(HandleOptionUtils.getHandleOption(order));
         grouponDetailVo.setOrderInfo(grouponGoodInfo);
 
 //      商品详情
