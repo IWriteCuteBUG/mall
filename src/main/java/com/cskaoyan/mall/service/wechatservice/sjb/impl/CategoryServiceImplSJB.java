@@ -14,6 +14,6 @@ public class CategoryServiceImplSJB implements CategoryServiceSJB {
 
     @Override
     public Category queryCategoryById(Integer categoryId) {
-        return categoryMapper.selectIds(categoryId);
+        return categoryMapper.selectByPrimaryKey(categoryId);
     }
 }
